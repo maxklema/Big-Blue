@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import timedelta
 
+app = Flask(__name__)
+
 app.secret_key = "max"
 app.permanent_session_lifetime = timedelta(minutes=60)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
@@ -19,8 +21,6 @@ class users(db.Model):
         self.name = name
         self.email = email
         self.rank = rank
-
-app = Flask(__name__)
 
 @app.route("/")
 def index():
