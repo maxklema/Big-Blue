@@ -8,8 +8,8 @@
     height: 55px;
     width: 100%;
     top: 0;
-    position: absolute;
     left: 0;
+    position: absolute;
     right: 0;
    
 
@@ -24,7 +24,7 @@
     margin-top: 2px;
 }
 
-#login {
+#about {
     width: 80px;
     height: 35px;
     border-radius: 10px;
@@ -35,12 +35,13 @@
     margin-top: 10px;
     border: none;
     font-family: bigBlueBold;
+    cursor: pointer;
 }
     
     
 
 
-#about {
+#login {
     width: 80px;
     height: 35px;
     border-radius: 10px;
@@ -51,5 +52,40 @@
     margin-top: 10px;
     border: none;
     font-family: bigBlueBold;
+    cursor: pointer;
+
   
 }
+
+.footer {
+    background-color: rgba(5, 20, 39, 0.699);
+    height: 45px;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+#logofooter {
+    height: auto; 
+    width: auto; 
+    max-width: 100px; 
+    max-height: 100px;
+    padding-left: 10%;
+    margin-top: 7px;
+    display: inline-block;
+}
+
+#textfooter {
+    font-family: bigBlueBold;
+    font-size: 10px;
+    color: #F0F0FF;
+    display: inline-block;
+    position: absolute;
+    bottom: 5px;
+    margin-left: 2%;
+
+
+}
+
