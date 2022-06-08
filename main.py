@@ -32,9 +32,33 @@ class users(db.Model):
         self.bio = bio
         self.team = team
 
+class course(db.Model):
+    _id = db.Column("id", db.Integer, primary_key=True)
+    course_name = db.Column(db.String(50))
+    pars_of_holes = db.Column(db.String)
+    course_stats = db.Column(db.String(1000))
+
+    def __init__(self, course_name, pars_of_holes, course_stats):
+        self.course_name = course_name
+        self.pars_of_holes = pars_of_holes
+        self.course_stats = course_stats
+
+#this is not yet completed
+class match(db.Model):
+    _id = db.Column("id", db.Integer, primary_key=True)
+    match_name = db.Column(db.String(50))
+    match_course = db.Column(db.String(50))
+    start_time = db.Column(db.String(25))
+    end_time = db.Column(db.String(25))
+    participating_teams = None
+
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/error/<msg>")
+def error(msg):
+    return render_template("error.html", message=msg)
 
 
 @app.route("/login", methods=["POST", "GET"])

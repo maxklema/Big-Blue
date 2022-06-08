@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Big Blue | Home</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+        
+    
+    </head>
+    <body>
+        <div class="mainheader">
+            <img id="logo" src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" alt="">
+            <a href="/about"><button id="about" >About</button></a>
+            <a href="/login"><button id="login" >Login</button></a>
+
+
+        </div>
+        <div>
+            <h1>Sorry there was an error!</h1>
+            <p><b>Error message:</b> {{message}}</p>
+        </div>
+
+       
+
+
+
+        <div class="footer">
+            <img id="logofooter" src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" alt="">
+            <p id="textfooter">Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+
+        </div>
+    </body>
+</html>
