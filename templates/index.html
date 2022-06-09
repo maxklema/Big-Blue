@@ -1,31 +1,69 @@
 <!DOCTYPE html>
+
+
 <html>
+
     <head>
-        <title>Big Blue | Home</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-        
-    
+
+
     </head>
+
     <body>
-        <div class="mainheader">
-            <img id="logo" src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" alt="">
-            <a href="/about"><button id="about" >About</button></a>
-            <a href="/login"><button id="login" >Login</button></a>
+
+        <header>
+            <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logo">
+            <ul class="navigation">
+                <li><a href="#">Login</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
 
 
+        </header>
+
+
+        <div id="container">
+            <div class="main">
+                {% for i in range(3) %}
+                    <div style="height: 200px; width: 400px; background-color: blue;">{{i}}</div>
+                {% endfor %}
+            </div>
+            
+            <footer>
+            <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
+            <div class="footertext">
+                <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+            </div>
+
+
+
+        </footer>
         </div>
-        <div>
-            <p>Don't have an account? Create one here --> <a href="/create_account">Explore Golf</a></p>
-        </div>
-
-       
 
 
+    
+        
 
-        <div class="footer">
-            <img id="logofooter" src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" alt="">
-            <p id="textfooter">Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
 
-        </div>
+
+
+
+
+
+
+
+
     </body>
+
+
+
+
+
+
+
+
+
 </html>
+
