@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, inspect
 from datetime import timedelta
 
 app = Flask(__name__)
@@ -60,6 +60,10 @@ class match(db.Model):
         self.participating_teams = participating_teams
         self.scores_file = scores_file
 
+def object_as_dict(obj):
+    return {c.key: getattr(obj, c.key)
+            for c in inspect(obj).mapper.column_attrs}
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -107,8 +111,11 @@ def create_account():
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):
     if password == "123":
-        print(users.query.all())
-        return '',200
+        list_of_users = users.query.all()
+        dict_to_send = {}
+        for item in list_of_users:
+            dict_to_send[item._id] = object_as_dict(item)
+        return dict_to_send,200
     else:
         return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
 
