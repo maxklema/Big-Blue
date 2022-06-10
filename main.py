@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import timedelta
 
@@ -99,6 +99,14 @@ def create_account():
         return render_template('create_account.html', message="Account created sucessfully!")
 
     return render_template('create_account.html')
+
+@app.route("/return_user_data/<password>", methods=['GET'])
+def return_user_data(password):
+    if password == "123":
+        print(users.query.all())
+        return '',200
+    else:
+        return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
 
 db.create_all()
 app.run('0.0.0.0', port=8000, debug=True)
