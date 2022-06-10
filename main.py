@@ -64,7 +64,7 @@ class match(db.Model):
 def index():
     return render_template("index.html")
 
-@app.route("/header")
+@app.route("/header", methods=['GET'])
 def header():
     return render_template("header.html")
 
