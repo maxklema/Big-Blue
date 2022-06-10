@@ -3,92 +3,534 @@
     src: url(Montserrat-Bold.ttf);
 }
 
-.mainheader{
-    background-color: #2176E8;
-    height: 55px;
-    width: 100%;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: BigBlueBold;
+}
+
+header {
     top: 0;
     left: 0;
-    position: relative;
-    right: 0;
-   
-
-}
-
-#logo {
-    height: auto; 
-    width: auto; 
-    max-width: 170px; 
-    max-height: 170px;
-    padding-left: 10%;
-    margin-top: 2px;
-}
-
-#about {
-    width: 80px;
-    height: 35px;
-    border-radius: 10px;
-    color: #1B63C2;
-    background-color: #F0F0FF;
-    float: right;
-    margin-right: 10%;
-    margin-top: 10px;
-    border: none;
-    font-family: bigBlueBold;
-    cursor: pointer;
-}
-    
-    
-
-
-#login {
-    width: 80px;
-    height: 35px;
-    border-radius: 10px;
-    color: #1B63C2;
-    background-color: #F0F0FF;
-    float: right;
-    margin-right: 2%;
-    margin-top: 10px;
-    border: none;
-    font-family: bigBlueBold;
-    cursor: pointer;
-
-  
-}
-
-.footer {
-    background-color: rgba(5, 20, 39, 0.699);
-    height: 45px;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
-    bottom: 0;
-    position: absolute;
-    left: 0;
-    right: 0;
+    align-items: center;
+    background-color: #2176e8;
+    z-index: 10;
+    padding: 4px 100px;
 }
 
-#logofooter {
-    height: auto; 
-    width: auto; 
-    max-width: 100px; 
-    max-height: 100px;
-    padding-left: 10%;
-    margin-top: 7px;
-    display: inline-block;
+header .logo {
+    max-width: 200px;
+    max-height: 200px;
+    position: relative;
 }
 
-#textfooter {
-    font-family: bigBlueBold;
-    font-size: 10px;
+header .navigation {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0px 30px;
+}
+
+header .navigation li {
+    list-style: none;
+    margin: 0px 15px;
+}
+
+header .navigation li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    
+
+}
+
+header .navigation li a:hover {
     color: #F0F0FF;
-    display: inline-block;
+    
+
+}
+
+
+footer  {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-color: rgba(5, 20, 39, 0.699);
+    width: 100%;
+    z-index: 9;
+    padding: 5px 100px;
+
+}
+
+footer .logofooter {
+    max-width: 150px;
+    max-height: 150px;
+    position: relative;
+    padding: 2px 20px;
+
+}
+
+footer .footertext {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px 5px;
+}
+
+footer .footertext p{
+   color: white;
+   font-size: .7em;
+}
+
+footer .footertext p:hover{
+    color: #F0F0FF;
+    cursor: pointer;
+ }
+
+
+html, body {
+    height: 100%;
+}
+
+#container {
+    position: relative;
+    min-height: 100%;
+
+}
+
+.main {
+    overflow: auto;
+    padding-top: 90px;
+    padding-bottom: 100px;
+}
+
+footer  {
     position: absolute;
-    bottom: 5px;
-    margin-left: 2%;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-color: rgba(5, 20, 39, 0.699);
+    width: 100%;
+    z-index: -1;
+    padding: 5px 100px;
+    clear: both;
+
+
+    
+    
+
+}
+
+#recentmatchesheader {
+    padding-bottom: 20px;
+
+}
+
+.recentmatches {
+    background-color: #F0F0FF;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    padding: 10px 50px;
+    width: 1300px;
+    box-shadow: 2px 2px 2px 2px #888888;
+}
+
+.importantinfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px;
+}
+
+.recentmatches .importantinfo h1 {
+    color: black;
+    font-size: 2em;
+}
+
+.recentmatches ul {
+    list-style: none;
+}
+
+.recentmatches h6 {
+    padding: 10px 0px;
+}
+    
+.login {
+    width: 500px;
+    height: 400px;
+    background:#1B63C2;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px #134383;
 
 
 }
 
-body {
-    font-family: bigBlueBold;
+#addgraphic {
+    height: 150px;
+    width: 150px;
+    background-color: #F0F0FF;
+    box-shadow: 0px 0px 0px 2px #c9c9d6;
+    border-radius: 100%;
+    margin: auto;
+    margin-top: -50px;
+    
+}
+
+#addgraphic img {
+    height: 100px;
+    width: 100px;
+    transform: translate(0px, 25px);
+    
+}
+
+.login {
+    text-align: center;
+}
+
+.logintext {
+    text-align: center;
+    margin-top: 15px;
+    padding: 0px 8px;
+    color: #F0F0FF;
+}
+
+.logintext h2 {
+    font-size: 1.8em;
+}
+
+.logintext h6 {
+    font-size: 1.0em;
+    margin-top: 5px;
+}
+
+#creatematch {
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 20px;
+    font-size: 2.1em;
+}
+
+#creatematch:hover {
+    cursor: pointer;
+    background-color: #dbdbdf;
+}
+
+.joincode {
+    text-align: center;
+}
+
+
+
+.joincode {
+    width: 500px;
+    height: 400px;
+    background:#1B63C2;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px #134383;
+}
+
+#codetextbox {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 20px;
+    font-size: 1.6em;
+    text-align: center;
+
+}
+
+#codetextbox:focus {
+    outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number]{
+    -moz-appearance: textfield;
+}
+
+.sidebars {
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+    display: flex;
+    padding: 0px 400px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+
+}
+
+
+.matchresults {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    padding: 0px 400px;
+    margin-bottom: 30px;
+}
+
+.results {
+    height: 300px;
+    width: 100%;
+    background-color: #F0F0FF;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px #c9c9d6;
+    
+}
+
+.resultcontainer {
+    padding: 40px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#courseicon {
+    max-height: auto;
+    max-width: auto;
+    max-height: 270px;
+    max-width: 270px;
+}
+
+.scores {
+    margin-top: 20px;
+}
+
+#matchdetails {
+    transform: translateY(100%);
+}
+
+
+#results {
+    padding: 0px 400px;
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    margin-top: 30px;
+    
+}
+
+@media (max-width: 1134px){
+    .logintext h6 {
+        padding: 0px 100px;
+    }
+    #creatematch {
+        padding: 10px 200px;
+        font-size: 2em;
+    
+    }
+    #codetextbox {
+        padding: 10px 100px;
+    }
+
+
+}
+
+
+
+@media (max-width: 915px){
+    .logintext h6 {
+        padding: 0px 20px;
+    }
+    #creatematch {
+        padding: 10px 100px;
+    
+    }
+    #codetextbox {
+        padding: 10px 50px;
+    }
+}
+
+@media (max-width: 658px){
+    .logintext h6 {
+        padding: 0px 20px;
+    }
+    #creatematch {
+        padding: 10px 30px;
+        font-size: 1.3em;
+    
+    }
+    #codetextbox {
+        padding: 10px 0px;
+    }
+
+}
+
+
+@media (max-width: 1900px){
+    .sidebars {
+        padding: 0px 300px;
+    }
+    .matchresults {
+        padding: 0px 300px;
+    }
+    #results {
+        padding: 0px 300px;
+        
+    }
+}
+
+@media (max-width: 1668px){
+    .sidebars {
+        padding: 0px 150px;
+    }
+    .matchresults {
+        padding: 0px 150px;
+    }
+    #results {
+        padding: 0px 150px;
+        
+    }
+}
+
+@media (max-width: 1334px){
+    .sidebars {
+        padding: 0px 50px;
+    }
+    .matchresults {
+        padding: 0px 50px;
+    }
+    #results {
+        padding: 0px 50px;
+        
+    }
+}
+
+@media (max-width: 1134px){
+    .sidebars {
+        padding: 0px 50px;
+        flex-direction: column-reverse;
+    }
+    .login {
+        margin-top: 20px;
+        width: 100%;
+    }
+    .joincode {
+        width: 100%;
+        margin-bottom: 50px;
+    }
+    .matchresults {
+        padding: 0px 50px;
+    }
+}
+
+
+@media (max-width: 500px){
+    .sidebars {
+        padding: 0px 50px;
+        flex-direction: column-reverse;
+    }
+    .login {
+        margin-top: 20px;
+        width: 400px;
+    }
+    .joincode {
+        width: 400px;
+    }
+    .matchresults {
+        padding: 0px 50px;
+        
+    }
+
+    .results {
+        width: 400px;
+    }
+}
+
+@media (max-width: 1000px){
+    .maincontent {
+        flex-direction: column-reverse;
+    }
+}
+
+@media (max-width: 723px){
+    header {
+        padding: 4px 15px;
+        flex-direction: row;
+    }
+
+    header .logo {
+        padding: 8px 20px;
+    }
+}
+
+@media (max-width: 500px){
+    header {
+        padding: 4px 15px;
+        flex-direction: column;
+    }
+
+    .main {
+        padding-top: 110px;
+    }
+
+    header .logo {
+        max-width: 200px;
+        max-height: 200px;
+        position: relative;
+        padding: 2px 10px;
+    }
+}
+
+@media (max-width: 781px){
+    footer {
+        padding: 4px 15px;
+        flex-direction: column; 
+    }
+}
+
+@media (max-width: 300px){
+    .main {
+        padding-top: 130px;
+    }
+}
+
+@media (max-width: 1000px){
+    footer {
+        padding: 4px 10px;
+
+    }
+}
+
+@media (max-width: 216px){
+    header .logo {
+       max-width: 100px;
+       max-height: 100px;
+    }
+}
+
+@media (max-width: 178px){
+    header .logo {
+       max-width: 75px;
+       max-height: 75px;
+    } 
+
+
+}
+
+@media (max-width: 1090px){
+    .matchresults {
+        flex-direction: column;
+    }
+    #courseicon {
+        max-height: auto;
+        max-width: auto;
+        max-height: 130px;
+        max-width: 130px;
+    }
+
 }
