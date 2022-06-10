@@ -16,7 +16,7 @@
         <header>
             <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logo">
             <ul class="navigation">
-                <li><a href="#">Login</a></li>
+                <li><a href="/login">Login</a></li>
                 <li><a href="#">About</a></li>
             </ul>
 
@@ -26,9 +26,50 @@
 
         <div id="container">
             <div class="main">
-                {% for i in range(3) %}
-                    <div style="height: 200px; width: 400px; background-color: blue;">{{i}}</div>
-                {% endfor %}
+                   
+                    <div class="sidebars">
+                        <div class="login">
+                            <div id="addgraphic">
+                                <img src="{{ url_for('static', filename='logo graphics/whistle.png') }}">
+                            </div>
+                            <div class="logintext">
+                                <h2>Want to Create an Event?</h2>
+                                <h6>Coaches/Organizers, we offer stroke play and match play formats. Just hit the create button below to get started!</h1>
+                            </div>
+                            <button id="creatematch">Create an Event</button>
+
+                        </div>
+                        
+                        <div class="joincode">
+                            <div id="addgraphic">
+                                <img src="{{ url_for('static', filename='logo graphics/plussign.png') }}">
+                            </div>
+                            <h2 class="logintext">Enter Your Code Here!</h2>
+                            <input type="number"  maxlength="6" id="codetextbox">
+                            <button id="creatematch">Join Event</button>
+
+                        </div>
+                    </div>
+                    <h1 id="results">Recent Events</h1>
+                    {% for i in range(10) %}
+                    
+                    <div class="matchresults"> 
+                        <div class="results">
+                            <div class="resultcontainer">
+                                <div>
+                                    <h1>Carrol at Homestead</h1>
+                                    <h2>6/9/22</h2>
+                                    <div class="scores">
+                                        <h3>Varsity Score: 154 - 156 (Carrol)</h3>
+                                        <h3>Junior Varsity Score: 188 - 198 (Homestead)</h3>
+                                    </div>
+                                    <h6 id="matchdetails">See Match Details</h6>
+                                </div>
+                                <img src="{{ url_for('static', filename='logo graphics/golfcoursegrey.png') }}" id="courseicon">
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
             </div>
             
             <footer>
