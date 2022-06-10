@@ -64,6 +64,10 @@ class match(db.Model):
 def index():
     return render_template("index.html")
 
+@app.route("/header")
+def header():
+    return render_template("header.html")
+
 @app.route("/error/<msg>")
 def error(msg):
     return render_template("error.html", message=msg)
