@@ -1,16 +1,19 @@
+
 <!DOCTYPE html>
+
 
 <html>
 
     <head>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles/headerstyle.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+
 
     </head>
 
     <body>
-        
+
         <header>
             <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logo">
             <ul class="navigation">
@@ -19,7 +22,18 @@
             </ul>
 
 
-        </header>
+        </header>-->
+
+
+        {% block content %}
+            
+        {% endblock %}
+
+    
+        
+
+
+
 
 
 
@@ -30,4 +44,12 @@
     </body>
 
 
+
+
+
+
+
+
+
 </html>
+
