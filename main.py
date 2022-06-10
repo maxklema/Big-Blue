@@ -43,14 +43,22 @@ class course(db.Model):
         self.pars_of_holes = pars_of_holes
         self.course_stats = course_stats
 
-#this is not yet completed
 class match(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     match_name = db.Column(db.String(50))
     match_course = db.Column(db.String(50))
     start_time = db.Column(db.String(25))
     end_time = db.Column(db.String(25))
-    participating_teams = None
+    participating_teams = (db.String(500))
+    scores_file = (db.String(50))
+
+    def __init__(self, match_name, match_course, start_time, end_time, participating_teams, scores_file):
+        self.match_name = match_name
+        self.match_course = match_course
+        self.start_time = start_time
+        self.end_time = end_time
+        self.participating_teams = participating_teams
+        self.scores_file = scores_file
 
 @app.route("/")
 def index():
