@@ -140,12 +140,13 @@ footer  {
 
 .form {
     width: 500px;
-    height: 200px;
+    height: 500px;
     background:#1B63C2;
     border-radius: 10px;
     box-shadow: 2px 2px 2px 2px #134383;
     padding: 20px 20px;
     text-align: center;
+    color: #F0F0FF;
     
 
 }
@@ -161,9 +162,87 @@ footer  {
     
 }
 
+.username {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.password {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.password h3 {
+    font-size: 1.3em;
+    text-align: left;
+    padding: 0 20px;
+}
+
+.username h3 {
+    font-size: 1.3em;
+    text-align: left;
+    padding: 0 20px;
+}
+
+.password input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.6em;
+}
+
+.username input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.6em;
+}
+
+.username input:focus {
+    outline: none;
+}
+
+.password input:focus {
+    outline: none;
+}
+
+#submit {
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 20px;
+    font-size: 2.1em;
+}
+
+#error {
+    font-size: 1.3em;
+    text-align: left;
+    padding: 0 20px;
+    color: rgb(216, 235, 109);
+}
+
+#forgotpassword{
+    text-decoration: none;
+    color: white;
+    font-size: 0.8em;
+    text-align: left;
+    padding: 10px -40px;
+}
+#submit:hover {
+    background-color: #cfcfdb;
+    cursor: pointer;
+}
+
+form h1 {
+    font-size: 2.5em;
+    margin-top: 10px;
+}
+
 #addgraphic img {
     height: 100px;
-    width: 100px;
+    width: 60px;
     transform: translate(0px, 25px);
     
 }

@@ -13,13 +13,25 @@
                     <div class="form-container">
                         <form action="#" method="post" class="form">
                             <div id="addgraphic">
-                                <img src="{{ url_for('static', filename='logo graphics/whistle.png') }}">
+                                <img src="{{ url_for('static', filename='logo graphics/golfer.png') }}">
                             </div>
-                            <h1>Login to BigBlue</h1>
-                            Username: <input type="text" name="username"><br>
-                            Password: <input type="password" name="password"><br>
-                            <input type="submit">
+                            <h1>Login to Big Blue</h1>
+                            <div class="username">
+                                {% if message %}
+                                    <h3 id="error">{{message}}</h3>
+                                {% else %}
+                                    <h3>Username</h3>
+                                {% endif %}
+                                <input type="text" name="username">
+                            </div>
+                            <div class="password">
+                                <h3>Password</h3>
+                                <input type="password" name="password">
+                                <a id="forgotpassword" href="#">Forgot Password?</a>
+                            </div>
+                            <input type="submit" value="Login" id="submit">
                         </form>
+
 
 
                     </div>
