@@ -106,10 +106,13 @@ def create_account():
         for item in request.form:
             if request.form[item] == "" or sanitize_inputs(request.form[item]):
                 return redirect(url_for('error', msg="Your value was either blank or inapropriate. Please input all correct values. The problem is with the field: " + request.form[item]))
-    
-        new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'])
-        db.session.add(new_user)
-        db.session.commit()
+
+        try: 
+            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'])
+            db.session.add(new_user)
+            db.session.commit()
+        except:
+            return redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
 
         return render_template('create_account.html', message="Account created sucessfully!")
 
