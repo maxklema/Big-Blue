@@ -10,12 +10,19 @@
         <div id="container">
             <div class="main">
                 <body>
-                    <form action="#" method="post" class="form">
-                        <h1>Login to BigBlue</h1>
-                        Username: <input type="text" name="username"><br>
-                        Password: <input type="password" name="password"><br>
-                        <input type="submit">
-                    </form>
+                    <div class="form-container">
+                        <form action="#" method="post" class="form">
+                            <div id="addgraphic">
+                                <img src="{{ url_for('static', filename='logo graphics/whistle.png') }}">
+                            </div>
+                            <h1>Login to BigBlue</h1>
+                            Username: <input type="text" name="username"><br>
+                            Password: <input type="password" name="password"><br>
+                            <input type="submit">
+                        </form>
+
+
+                    </div>
                 </body>
             <footer>
                 <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
