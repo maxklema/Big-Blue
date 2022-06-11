@@ -1,14 +1,30 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Login to BigBlue</title>
-    </head>
-    <body>
-        <h1>Login to BigBlue</h1>
-        <form action="#" method="post">
-            Username: <input type="text" name="username"><br>
-            Password: <input type="password" name="password"><br>
-            <input type="submit">
-        </form>
-    </body>
-</html>
+{% extends "indexcontent.html" %}
+{% block content %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Big Blue | Login</title>
+            <link rel="stylesheet" href="{{ url_for('static', filename='styles/stylelogin.css') }}">
+
+        </head>
+        <div id="container">
+            <div class="main">
+                <body>
+                    <form action="#" method="post" class="form">
+                        <h1>Login to BigBlue</h1>
+                        Username: <input type="text" name="username"><br>
+                        Password: <input type="password" name="password"><br>
+                        <input type="submit">
+                    </form>
+                </body>
+            <footer>
+                <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
+                <div class="footertext">
+                    <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+                </div>
+    
+    
+    
+            </footer>
+        </div>
+{% endblock %}
