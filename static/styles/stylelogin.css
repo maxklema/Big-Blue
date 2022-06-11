@@ -140,7 +140,7 @@ footer  {
 
 .form {
     width: 500px;
-    height: 500px;
+    max-height: 600px;
     background:#1B63C2;
     border-radius: 10px;
     box-shadow: 2px 2px 2px 2px #134383;
@@ -178,6 +178,13 @@ footer  {
     padding: 0 20px;
 }
 
+#usernametext {
+    font-size: 1.3em;
+    text-align: left;
+    padding: 0 20px;
+    margin-top: 5px;
+}
+
 .username h3 {
     font-size: 1.3em;
     text-align: left;
@@ -212,24 +219,30 @@ footer  {
     padding: 10px 30px;
     border-radius: 20px;
     border: none;
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: 2.1em;
 }
 
 #error {
-    font-size: 1.3em;
+    font-size: 1.1em;
     text-align: left;
     padding: 0 20px;
-    color: rgb(216, 235, 109);
+    color: rgb(248, 250, 115)
 }
 
-#forgotpassword{
+#forgotpassword {
     text-decoration: none;
     color: white;
     font-size: 0.8em;
     text-align: left;
-    padding: 10px -40px;
+    padding: 0 20px;
+    margin-top: 3px;
 }
+
+.password a {
+    text-decoration: none;
+}
+
 #submit:hover {
     background-color: #cfcfdb;
     cursor: pointer;
@@ -256,6 +269,44 @@ form h1 {
     header .logo {
         padding: 8px 20px;
     }
+}
+
+.createaccountcontainer {
+    display: flex;
+    justify-content: center;
+}
+
+.createaccount {
+    height: 160px;
+    width: 500px;
+    margin-top: 10px;
+    background:#1B63C2;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px #134383;
+    padding: 20px 20px;
+    text-align: center;
+    color: #F0F0FF;
+    
+}
+
+.createaccount a button {
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 15px;
+    font-size: 2.1em;
+}
+
+.createaccount a button:hover {
+    background-color: #cfcfdb;
+    cursor: pointer;
+}
+
+#or {
+    font-size: .8em;
+    text-align: center;
+    color: grey;
+    margin-top: 10px;
 }
 
 @media (max-width: 500px){

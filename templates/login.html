@@ -19,6 +19,7 @@
                             <div class="username">
                                 {% if message %}
                                     <h3 id="error">{{message}}</h3>
+                                    <h3 id="usernametext">Username</h3>
                                 {% else %}
                                     <h3>Username</h3>
                                 {% endif %}
@@ -27,10 +28,21 @@
                             <div class="password">
                                 <h3>Password</h3>
                                 <input type="password" name="password">
-                                <a id="forgotpassword" href="#">Forgot Password?</a>
+                                <a href="#"><p id="forgotpassword">Forgot Password?</p></a>
                             </div>
-                            <input type="submit" value="Login" id="submit">
+                                <input type="submit" value="Login" id="submit">
+                            </div>
                         </form>
+                    
+                        <h1 id="or">━━━━━━━━━━━━ OR ━━━━━━━━━━━━</h1>
+
+                        <div class="createaccountcontainer">
+                            <div class="createaccount">
+                                <h1>Don't have an Account?</h1>
+                               <a href="/create_account"><button>Create One!</button></a>
+                            </div>
+                        </div>
+                        
 
 
 
