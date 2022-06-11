@@ -104,8 +104,8 @@ def create_account():
     if request.method == "POST":
 
         for item in request.form:
-            if request.form[item] == "":
-                return "<p>Please input all correct values.</p>"
+            if request.form[item] == "" or sanitize_inputs(request.form[item]):
+                return "<p>Your value was ither blank or inapropriate. Please input all correct values.</p>"
     
         new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'])
         db.session.add(new_user)
