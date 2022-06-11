@@ -95,7 +95,7 @@ def login():
         if found_user and found_user.username == username_input and found_user.password == password_input:
             return "<p>Working.</p>"
         else:
-            return render_template("login.html", message="Username and password were incorect! Please try again.")
+            return render_template("login.html", message="Username and password were incorrect! Please try again.")
 
     return render_template("login.html")
 
