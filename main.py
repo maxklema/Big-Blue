@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy, inspect
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 app = Flask(__name__)
 
@@ -83,7 +83,7 @@ def header():
 def error(msg):
     return render_template("error.html", message=msg)
 
-
+#needs to render a message when password is incorect. 
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
@@ -95,7 +95,7 @@ def login():
         if found_user and found_user.username == username_input and found_user.password == password_input:
             return "<p>Working.</p>"
         else:
-            return "<p>Sorry. That is incorect.</p>"
+            return render_template("login.html", message="Username and password were incorect! Please try again.")
 
     return render_template("login.html")
 
@@ -106,10 +106,18 @@ def create_account():
         for item in request.form:
             if request.form[item] == "" or sanitize_inputs(request.form[item]):
                 return redirect(url_for('error', msg="Your value was either blank or inapropriate. Please input all correct values. The problem is with the field: " + request.form[item]))
-    
-        new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'])
-        db.session.add(new_user)
-        db.session.commit()
+
+        found_username = users.query.filter_by(username=request.form['username']).first()
+        found_email = users.query.filter_by(email=request.form['email']).first()
+        if found_username or found_email:
+            return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.")
+
+        try: 
+            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'])
+            db.session.add(new_user)
+            db.session.commit()
+        except:
+            return redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
 
         return render_template('create_account.html', message="Account created sucessfully!")
 
