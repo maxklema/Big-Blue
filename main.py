@@ -83,7 +83,7 @@ def header():
 def error(msg):
     return render_template("error.html", message=msg)
 
-
+#needs to render a message when password is incorect. 
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
@@ -95,7 +95,7 @@ def login():
         if found_user and found_user.username == username_input and found_user.password == password_input:
             return "<p>Working.</p>"
         else:
-            return "<p>Sorry. That is incorect.</p>"
+            return render_template("login.html", message="Username and password were incorect! Please try again.")
 
     return render_template("login.html")
 
