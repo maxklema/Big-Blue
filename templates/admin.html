@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+
+<html>
+
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+		<title>Admin Console</title>
+
+
+    </head>
+
+    <body>
+
+        <header>
+            <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logo">
+            <ul class="navigation">
+                <li><a href="#">Login</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+
+
+        </header>
+
+
+        <div id="container">
+            <div class="main">
+				<div id = "allusers">
+				
+				</div>
+            </div>
+            
+        <footer>
+            <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
+            <div class="footertext">
+                <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+            </div>
+		<script>
+			var info = ["This", "Is", "User", "Info"];
+			for (let i = 0; i < 4; i++){
+				var div = document.createElement("div");
+				div.classList.add('matchview');
+				
+				var para = document.createElement("p");
+				for (let k = 0; k < info.length; k++){
+					var text = document.createTextNode(info[k]);
+					para.appendChild(text);
+					para.appendChild(document.createElement("br"));
+				}
+				
+				
+				div.appendChild(para);
+				document.getElementById("allusers").appendChild(div);
+			}
+		</script>
+
+
+
+        </footer>
+        </div>
+</html>
