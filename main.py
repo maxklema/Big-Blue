@@ -123,6 +123,10 @@ def create_account():
 
     return render_template('create_account.html')
 
+@app.route("/admin")
+def admin():
+    return render_template("admin.html")
+
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):
     if password == "123":
