@@ -99,6 +99,10 @@ def login():
 
     return render_template("login.html")
 
+@app.route("/admin", methods=["GET"])
+def admin():
+    return render_template("admin.html")
+
 @app.route("/create_account", methods=['POST', 'GET'])
 def create_account():
     if request.method == "POST":
