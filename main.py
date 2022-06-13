@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy, inspect
 from datetime import timedelta, datetime
+import json
 
 app = Flask(__name__)
 
@@ -51,14 +52,46 @@ class match(db.Model):
     end_time = db.Column(db.String(25))
     participating_teams = (db.String(500))
     scores_file = (db.String(50))
+    match_code = db.Column(db.Integer)
+    match_password = db.Column(db.String())
 
-    def __init__(self, match_name, match_course, start_time, end_time, participating_teams, scores_file):
+    def __init__(self, match_name, match_course, start_time, end_time, participating_teams, scores_file, match_code, match_password):
         self.match_name = match_name
         self.match_course = match_course
         self.start_time = start_time
         self.end_time = end_time
         self.participating_teams = participating_teams
         self.scores_file = scores_file
+        self.match_code = match_code
+        self.match_password = match_password
+
+class edit_score_files():
+    def __init__(self, score_file_name):
+        self.score_file_name = score_file_name
+        
+    def return_all_scores(self):
+        with open("static/score_files/" + self.score_file_name) as file:
+            data = json.load(file)
+            return data
+
+    def return_team(self, team):
+        with open("static/score_files/" + self.score_file_name) as file:
+            data = json.load(file)
+            for item in data:
+                if item == team:
+                    return data[item]
+            return "Error, team not found."
+
+    def sum_team_score(self, team):
+        with open("static/score_files/" + self.score_file_name) as file:
+            team_score = 0
+            data = json.load(file)
+            for item in data:
+                if item == team:
+                    for player in data[item]:
+                        team_score = team_score + data[item][player]
+                    return team_score
+            return "Error, team not found."
 
 def object_as_dict(obj):
     return {c.key: getattr(obj, c.key)
@@ -138,5 +171,6 @@ def return_user_data(password):
     else:
         return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
 
-db.create_all()
-app.run('0.0.0.0', port=8000, debug=True)
+if __name__ == "__main__":
+    db.create_all()
+    app.run('0.0.0.0', port=8000, debug=True)
