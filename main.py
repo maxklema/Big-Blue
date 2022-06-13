@@ -68,6 +68,7 @@ class match(db.Model):
 class edit_score_files():
     def __init__(self, score_file_name):
         self.score_file_name = score_file_name
+        self.error_msg = "Error, input not found!"
         
     def return_all_scores(self):
         with open("static/score_files/" + self.score_file_name) as file:
@@ -80,7 +81,7 @@ class edit_score_files():
             for item in data:
                 if item == team:
                     return data[item]
-            return "Error, team not found."
+            return self.error_msg
 
     def sum_team_score(self, team):
         with open("static/score_files/" + self.score_file_name) as file:
@@ -91,7 +92,20 @@ class edit_score_files():
                     for player in data[item]:
                         team_score = team_score + data[item][player]
                     return team_score
-            return "Error, team not found."
+            return self.error_msg
+
+    #working but needs to be shortened up...
+    def edit_player_score(self, team, player, new_score):
+        with open("static/score_files/" + self.score_file_name) as file:
+            data = json.load(file)
+            for item in data:
+                if item == team:
+                    for person in data[item]:
+                        print(person)
+                        if person == player:
+                            data[item][person] = new_score
+        with open("static/score_files/" + self.score_file_name, "w") as file:
+            json.dump(data, file, indent=3)
 
 def object_as_dict(obj):
     return {c.key: getattr(obj, c.key)
