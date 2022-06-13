@@ -146,9 +146,14 @@ def login():
 
     return render_template("login.html")
 
-@app.route("/admin", methods=["GET"])
-def admin():
-    return render_template("admin.html")
+@app.route("/create_match")
+def create_match():
+    return render_template("create_match.html")
+
+@app.route("/match_dashboard", methods=['GET'])
+def match_dashboard():
+    return render_template("match_dashboard.html")
+
 
 @app.route("/create_account", methods=['POST', 'GET'])
 def create_account():
