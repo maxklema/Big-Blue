@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy, inspect
 from datetime import timedelta, datetime
+import json
 
 app = Flask(__name__)
 
@@ -51,14 +52,60 @@ class match(db.Model):
     end_time = db.Column(db.String(25))
     participating_teams = (db.String(500))
     scores_file = (db.String(50))
+    match_code = db.Column(db.Integer)
+    match_password = db.Column(db.String())
 
-    def __init__(self, match_name, match_course, start_time, end_time, participating_teams, scores_file):
+    def __init__(self, match_name, match_course, start_time, end_time, participating_teams, scores_file, match_code, match_password):
         self.match_name = match_name
         self.match_course = match_course
         self.start_time = start_time
         self.end_time = end_time
         self.participating_teams = participating_teams
         self.scores_file = scores_file
+        self.match_code = match_code
+        self.match_password = match_password
+
+class edit_score_files():
+    def __init__(self, score_file_name):
+        self.score_file_name = score_file_name
+        self.error_msg = "Error, input not found!"
+        
+    def return_all_scores(self):
+        with open("static/score_files/" + self.score_file_name) as file:
+            data = json.load(file)
+            return data
+
+    def return_team(self, team):
+        with open("static/score_files/" + self.score_file_name) as file:
+            data = json.load(file)
+            for item in data:
+                if item == team:
+                    return data[item]
+            return self.error_msg
+
+    def sum_team_score(self, team):
+        with open("static/score_files/" + self.score_file_name) as file:
+            team_score = 0
+            data = json.load(file)
+            for item in data:
+                if item == team:
+                    for player in data[item]:
+                        team_score = team_score + data[item][player]
+                    return team_score
+            return self.error_msg
+
+    #working but needs to be shortened up...
+    def edit_player_score(self, team, player, new_score):
+        with open("static/score_files/" + self.score_file_name) as file:
+            data = json.load(file)
+            for item in data:
+                if item == team:
+                    for person in data[item]:
+                        print(person)
+                        if person == player:
+                            data[item][person] = new_score
+        with open("static/score_files/" + self.score_file_name, "w") as file:
+            json.dump(data, file, indent=3)
 
 def object_as_dict(obj):
     return {c.key: getattr(obj, c.key)
@@ -99,6 +146,15 @@ def login():
 
     return render_template("login.html")
 
+@app.route("/create_match")
+def create_match():
+    return render_template("create_match.html")
+
+@app.route("/match_dashboard", methods=['GET'])
+def match_dashboard():
+    return render_template("match_dashboard.html")
+
+
 @app.route("/create_account", methods=['POST', 'GET'])
 def create_account():
     if request.method == "POST":
@@ -123,6 +179,10 @@ def create_account():
 
     return render_template('create_account.html')
 
+@app.route("/admin")
+def admin():
+    return render_template("admin.html")
+
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):
     if password == "123":
@@ -134,5 +194,6 @@ def return_user_data(password):
     else:
         return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
 
-db.create_all()
-app.run('0.0.0.0', port=8000, debug=True)
+if __name__ == "__main__":
+    db.create_all()
+    app.run('0.0.0.0', port=8000, debug=True)

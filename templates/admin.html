@@ -1,0 +1,70 @@
+{% extends "indexcontent.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+	<title>Admin Console</title>
+
+
+    </head>
+
+    
+
+        
+
+
+        <div id="container">
+            <div class="main">
+                <h1>All Users</h1>
+				<div id = "allusers">
+				
+				</div>
+            </div>
+            
+        <footer>
+            <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
+            <div class="footertext">
+                <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+            </div>
+		<script>
+			var info = [];
+            var dbCall = new XMLHttpRequest();
+            dbCall.open("GET", "/return_user_data/123",false);
+            dbCall.send(null)
+            var users = dbCall.responseText;
+            var i = 0;
+            var temp = ["","","",""];
+            while(true){
+                try {
+                    if (!(users[i]["username"] == null)){
+                        temp = ["","","",""];
+                        temp[0] = "Username: " + users[i]["username"];
+                        temp[1] = "Name: " + users[i]["name"];
+                        temp[2] = "Rank: " + users[i]["rank"];
+                        temp[3] = "Password: " + users[i]["password"];
+                        var div = document.createElement("div");
+                        div.classList.add('matchview');
+                        for (let u = 0; u<temp.length;u++){
+                            var text = document.createTextNode(temp[u]);
+                            var para = document.createElement("p");
+                            para.appendChild(text);
+                            para.appendChild(document.createElement("br"));
+                            div.appendChild(para);
+                        }
+                        
+                        
+                        document.getElementById("allusers").appendChild(div);
+                    }
+                } catch {
+                    break;
+                }
+                i++;
+            }
+				
+				
+			
+		</script>
+
+
+
+        </footer>
+        </div>
+{% endblock %}

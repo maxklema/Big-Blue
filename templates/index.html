@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">        
     <div id="container">
             <div class="main">
+                <a href="/admin">ADMIN PAGE (Temporary link)</a>
                 <div class="sidebars">
                     <div class="login">
                         <div id="addgraphic">
@@ -14,7 +15,7 @@
                             <h2>Want to Create an Event?</h2>
                             <h6>Coaches/Organizers, we offer stroke play and match play formats. Just hit the create button below to get started!</h1>
                         </div>
-                        <button id="creatematch">Create an Event</button>
+                        <a href="/create_match"><button id="creatematch">Create an Event</button></a>
 
                     </div>
                     
@@ -53,6 +54,7 @@
             <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
             <div class="footertext">
                 <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+                
             </div>
 
 
