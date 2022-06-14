@@ -1,48 +1,60 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Big Blue | Create Account</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-        
-    
-    </head>
-    <body>
-        <div class="mainheader">
-            <img id="logo" src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" alt="">
-            <a href="/about"><button id="about" >About</button></a>
-            <a href="/login"><button id="login" >Login</button></a>
+{% extends "indexcontent.html" %}
+{% block content %}
+
+    <html>
+        <head>
+            <title>Big Blue | Login</title>
+            <link rel="stylesheet" href="{{ url_for('static', filename='styles/stylesignup.css') }}">
 
 
+    <div id="container">
+        <div class="main">
+            <body>
+                <div class="form-container">
+                    <form action="#" method="post">
+                        <div id="addgraphic">
+                            <img src="{{ url_for('static', filename='logo graphics/newaccount.png') }}">
+                        </div>
+                        <h1>Create your Big Blue Account!</h1>
+              
+                        <p>Please input the following information if you are a coach. If you are a player, the coach will add you to his team.:<br></p>
+                        <h2 style="color: red;">
+                            {% if message %}
+                                {{message}}
+                            {% endif %}
+                        </h2>
+                        <h3>Name</h3>
+                        <input type="text" name="name">
+                        <h3>Username</h3>
+                        <input type="text" name="username">
+                        <h3>Password</h3>
+                        <input type="password" name="password">
+                        <h3>Email</h3>
+                        <input type="text" name="email">
+                        <h3>Gender</h3>
+                        <input type="text" name="gender">
+                        
+                        <h3>Tell Us About Yourself</h3>
+                        <input type="text" name="bio">
+                        <h3>Affiliated Team</h3>
+                        <input type="text" name="team">
+                        <h3>Account Type</h3>
+                        <b>Coach</b> <input type="radio" name="rank" value="c">  <b>Player</b> <input type="radio" name="rank" value="p"><br>
+                        <input type="submit">
+                    </form>
+                </div>
+ 
+            </body>
+            <footer>
+                <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
+                <div class="footertext">
+                    <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+                </div>
+
+
+
+            </footer>
         </div>
-        <h1>Create your Big Blue Account!</h1>
-        <p>
-            <p>Please input the following information if you are a coach. If you are a player, the coach will add you to his team.:<br></p>
-            <h2 style="color: red;">
-                {% if message %}
-                    {{message}}
-                {% endif %}
-            </h2>
-            <form action="#" method="post">
-                Name: <input type="text" name="name"><br>
-                Username: <input type="text" name="username"><br>
-                Password: <input type="password" name="password"><br>
-                Email: <input type="text" name="email"><br>
-                Gender: <input type="text" name="gender"><br>
-                About yourself (500 chtrs max): <input type="text" name="bio"><br>
-                Affiliated team: <input type="text" name="team"><br>
-                Are you a <b>Coach</b> <input type="radio" name="rank" value="c"> or <b>Player</b> <input type="radio" name="rank" value="p">?<br>
-                <input type="submit">
-            </form>
-        </p>
-
-       
-
-
-
-        <div class="footer">
-            <img id="logofooter" src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" alt="">
-            <p id="textfooter">Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
-
-        </div>
-    </body>
-</html>
+    </div>
+{% endblock %}
