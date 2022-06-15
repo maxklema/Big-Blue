@@ -103,7 +103,53 @@ form {
     color: #F0F0FF;
 }
 
+.name {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
 
+.namename {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-right: 15px;
+}
+
+.namename input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.4em;
+    max-width: 280px;
+}
+
+.namename h3 {
+    font-size: 1.3em;
+    text-align: left;
+}
+
+.nameusername {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.nameusername input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.4em;
+    max-width: 280px;
+}
+
+.nameusername h3 {
+    font-size: 1.3em;
+    text-align: left;
+}
 
 
 footer  {
