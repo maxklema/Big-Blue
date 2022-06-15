@@ -617,3 +617,106 @@ footer  {
     }
 
 }
+
+@media (max-width: 530px ){
+    form {
+        width: 400px;
+    }
+    .name {
+        flex-direction: column;
+        justify-content: center;
+    }
+    .namename {
+        justify-content: left;
+        margin-left: 30px;
+
+    }
+    
+    .nameusername {
+        justify-content: center;
+        margin-top: 20px;
+        margin-left: 30px;
+        
+    }
+    .namename h3 {
+        text-align: left;
+    }
+    .namename input {
+        max-width: 400px;
+    }
+    .nameusername input {
+        max-width: 400px;
+    }
+
+    .password {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .passwordfirst  {
+        justify-content: left;
+        margin-left: 30px;
+    }
+
+    .passwordfirst input {
+        max-width: 400px;
+    }
+
+    .passwordsecond  {
+        justify-content: left;
+        margin-left: 30px;
+        margin-top: 20px;
+    }
+
+    .passwordsecond input {
+        max-width: 400px;
+    }
+
+    .personalinfo {
+        flex-direction: column;
+    }
+
+    .email {
+        margin-left: 30px;
+    }
+
+    .email input {
+        max-width: 400px;
+    }
+
+    .gender {
+        margin-left: 30px;
+        margin-top: 20px;
+    }
+
+    .gender input {
+        max-width: 400px;
+    }
+
+    .accountinfo {
+        flex-direction: column;
+    }
+
+    .team {
+        margin-left: 10px;
+    }
+
+    .team input {
+        max-width: 400px;
+    }
+
+    .accounttype {
+        margin-left: 10px;
+        margin-top: 20px;
+    }
+
+    .aboutyouinner {
+        margin-left: 0px;
+    }
+
+    .aboutyouinner textarea {
+        width: 300px;
+    }
+
+}
+
