@@ -4,12 +4,10 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
 <div class = "main">
     <h1>Create a Match:</h1>
-    <form>
-        Event type: singles <input type="radio" name="eventtype" value="i"> teams <input type="radio" name="eventtype" value="t"> <br>
-        Match type: strokeplay <input type="radio" name="matchtype" value="s"> matchplay <input type="radio" name="matchtype" value="m"> <br>
-        Number of players competing: <input type = "number" name="players"> <br>
-        Location: <input type="text" name="location"><br>
-
+    <form action="/match_dashboard" method="get">
+        Event type: <br><input type="radio" name="eventtype" value="i"> Singles <br><input type="radio" name="eventtype" value="t"> Teams <br>
+        Match type: <br><input type="radio" name="matchtype" value="s"> Strokeplay <br> <input type="radio" name="matchtype" value="m"> Matchplay  <br>
+        <input type="submit">
     </form>
 </div>
 {% endblock %}

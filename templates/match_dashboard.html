@@ -1,0 +1,20 @@
+{% extends "indexcontent.html" %}
+{% block content %}
+
+<title>Big Blue | Match Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <div id="container">
+        <div id="joinshow">
+            <h3>Match Join Code</h3>
+            
+            <h1 id="joincode"><br>123456</h1>
+        </div>
+        <footer>
+            <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
+            <div class="footertext">
+                <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+                
+            </div>
+        </footer>
+    </div>
+{% endblock %}
