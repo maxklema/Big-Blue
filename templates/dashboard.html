@@ -1,0 +1,7 @@
+{% extends "indexcontent.html" %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <title>{{ name }}'s Dashboard</title>
+    <h1>Hello {{ name }}</h1>
+    <h2>Your recent matches:</h2>
+{% endblock %}

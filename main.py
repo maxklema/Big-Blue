@@ -124,7 +124,9 @@ def index():
 
 @app.route("/header", methods=['GET'])
 def header():
-    return render_template("header.html")
+    if 'active_user' in session:
+        return render_template("header.html")
+    return render_template("error.html", message="Sorry, you do not have access to this page.")
 
 @app.route("/error/<msg>")
 def error(msg):
@@ -140,7 +142,8 @@ def login():
         found_user = users.query.filter_by(username=username_input).first()
         
         if found_user and found_user.username == username_input and found_user.password == password_input:
-            return "<p>Working.</p>"
+            session['active_user'] = [found_user.username, found_user.name]
+            return redirect(url_for('dashboard'))
         else:
             return render_template("login.html", message="Username and password were incorrect! Please try again.")
 
@@ -148,11 +151,15 @@ def login():
 
 @app.route("/create_match")
 def create_match():
-    return render_template("create_match.html")
+    if 'active_user' in session:
+        return render_template("create_match.html")
+    return redirect(url_for('error', msg='Sorry, you do not have access to this page.'))
 
-@app.route("/match_dashboard", methods=['GET'])
-def match_dashboard():
-    return render_template("match_dashboard.html")
+@app.route("/dashboard", methods=['GET'])
+def dashboard():
+    if 'active_user' in session:
+        return render_template("dashboard.html", name=session['active_user'][1])
+    return redirect(url_for('error', msg="Sorry, you do not have access to this page."))
 
 
 @app.route("/create_account", methods=['POST', 'GET'])
@@ -178,6 +185,12 @@ def create_account():
         return render_template('create_account.html', message="Account created sucessfully!")
 
     return render_template('create_account.html')
+
+@app.route("/logout")
+def logout():
+    if 'active_user' in session: 
+        session.pop('active_user')
+    return redirect(url_for('error', msg="How can you log out... if you are not logged in?"))
 
 @app.route("/admin")
 def admin():
