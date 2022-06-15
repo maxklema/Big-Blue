@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy, inspect
 from datetime import timedelta, datetime
 import json
+import os
 
 app = Flask(__name__)
 
@@ -107,6 +108,19 @@ class edit_score_files():
         with open("static/score_files/" + self.score_file_name, "w") as file:
             json.dump(data, file, indent=3)
 
+#The code XCRunner 2022 pulls out every file for the main page!
+def look_for_match(user):
+    matches = []
+    for file in os.listdir("static/score_files"):
+        with open("static/score_files/" + file) as scanner:
+            data = json.load(scanner)
+            if data['match_data']['created_by'] == user:
+                matches.append((file.strip('.json').replace('_', ' ').capitalize(), data))
+            #pulls every match out
+            elif user == "XCRunner2022":
+                matches.append((file.strip('.json').replace('_', ' ').capitalize(), data))
+    return matches
+
 def object_as_dict(obj):
     return {c.key: getattr(obj, c.key)
             for c in inspect(obj).mapper.column_attrs}
@@ -120,11 +134,13 @@ def sanitize_inputs(string_to_analize):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", matches=look_for_match("XCRunner2022"))
 
 @app.route("/header", methods=['GET'])
 def header():
-    return render_template("header.html")
+    if 'active_user' in session:
+        return render_template("header.html")
+    return render_template("error.html", message="Sorry, you do not have access to this page.")
 
 @app.route("/error/<msg>")
 def error(msg):
@@ -140,20 +156,24 @@ def login():
         found_user = users.query.filter_by(username=username_input).first()
         
         if found_user and found_user.username == username_input and found_user.password == password_input:
-            return "<p>Working.</p>"
+            session['active_user'] = [found_user.username, found_user.name]
+            return redirect(url_for('dashboard'))
         else:
             return render_template("login.html", message="Username and password were incorrect! Please try again.")
 
     return render_template("login.html")
 
+@app.route("/dashboard", methods=['GET'])
+def dashboard():
+    if 'active_user' in session:
+        return render_template("dashboard.html", name=session['active_user'][1], matches=look_for_match(session['active_user'][0]))
+    return redirect(url_for('error', msg="Sorry, you do not have access to this page."))
+
 @app.route("/create_match")
 def create_match():
-    return render_template("create_match.html")
-
-@app.route("/match_dashboard", methods=['GET'])
-def match_dashboard():
-    return render_template("match_dashboard.html")
-
+    if 'active_user' in session:
+        return render_template("create_match.html")
+    return redirect(url_for('error', msg='Sorry, you do not have access to this page.'))
 
 @app.route("/create_account", methods=['POST', 'GET'])
 def create_account():
@@ -178,6 +198,13 @@ def create_account():
         return render_template('create_account.html', message="Account created sucessfully!")
 
     return render_template('create_account.html')
+
+@app.route("/logout")
+def logout():
+    if 'active_user' in session: 
+        session.pop('active_user')
+        return redirect(url_for('index'))
+    return redirect(url_for('error', msg="How can you log out... if you are not logged in?"))
 
 @app.route("/admin")
 def admin():

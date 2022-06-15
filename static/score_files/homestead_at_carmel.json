@@ -1,0 +1,17 @@
+{
+    "Homestead": {
+       "Grayson Welch": 1,
+       "Max Klema": 55,
+       "Dom Deluca": 3333
+    },
+    "Carmel": {
+       "Bill": 5,
+       "Bob": 7,
+       "Boby": 3
+    },
+    "match_data":{
+       "created_by":"maxklema",
+       "start":"6/13/22",
+       "end":"6/14/22"
+    }
+ }

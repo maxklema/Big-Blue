@@ -30,17 +30,17 @@
                     </div>
                 </div>
                 <h1 id="results">Recent Events</h1>
-                {% for i in range(0) %}
-                
+
+            {% for match in matches %}
                 <div class="matchresults"> 
                     <div class="results">
                         <div class="resultcontainer">
                             <div>
-                                <h1>Carrol at Homestead</h1>
-                                <h2>6/9/22</h2>
+                                <h1>{{ match[0] }}</h1>
+                                <h2>{{ match[1]['match_data']['start'] }} - {{ match[1]['match_data']['end'] }}</h2>
                                 <div class="scores">
-                                    <h3>Varsity Score: 154 - 156 (Carrol)</h3>
-                                    <h3>Junior Varsity Score: 188 - 198 (Homestead)</h3>
+                                    <h3>Varsity Score: Comming Soon</h3>
+                                    <h3>Junior Varsity Score: Comming Soon</h3>
                                 </div>
                                 <h6 id="matchdetails">See Match Details</h6>
                             </div>
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+            {% endfor %}
         </div>
         <footer>
             <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
