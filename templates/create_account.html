@@ -4,7 +4,7 @@
 
     <html>
         <head>
-            <title>Big Blue | Login</title>
+            <title>Big Blue | Create Account</title>
             <link rel="stylesheet" href="{{ url_for('static', filename='styles/stylesignup.css') }}">
 
 
@@ -19,7 +19,7 @@
                         <h1>Create your Big Blue Account!</h1>
               
                         <p><i>Players are not forced to make accounts. It is only reccomended when they wish to save results.</i></p>
-                        <h2 style="color: red;">
+                        <h2 style="color: rgb(248, 250, 115); margin-top: 10px; font-size: 1.2em;">
                             {% if message %}
                                 {{message}}
                             {% endif %}
@@ -35,22 +35,60 @@
                             </div>
                            
                         </div>
-                        <h3>Password</h3>
-                        <input type="password" name="password">
-                        <h3>Confirm Password</h3>
-                        <input type="password">
-                        <h3>Email</h3>
-                        <input type="text" name="email">
-                        <h3>Gender</h3>
-                        <input type="text" name="gender">
+                        <div class="password">
+                            <div class="passwordfirst">
+                                <h3>Create Password</h3>
+                                <input type="password" name="password">
+                            </div>
+                            <div class="passwordsecond">
+                                <h3>Confirm Password</h3>
+                                <input type="password">
+                            </div>
+                        </div>
+                       
+                       <div class="personalinfo">
+                            <div class="email">
+                                <h3>Email</h3>
+                                <input type="text" name="email">
+                            </div>
+
+                            <div class="gender">
+                                <h3>Gender</h3>
+                                <input type="text" name="gender">
+                            </div>
+
+                       </div>
+                       
+                       <div class="accountinfo">
+                            <div class="team">
+                                <h3>Affiliated Team</h3>
+                                <input type="text" name="team">
+                            </div>
+
+                            <div class="accounttype">
+                                <h3>Account Type</h3>
+                                <div class="radiobuttonone">
+                                    <input type="radio" name="rank" id="coach" value="c">
+                                    <label for="coach">Coach</label>
+                                </div>
+                                <div class="radiobuttontwo">
+                                    <input type="radio" name="rank" id="player" value="p">
+                                    <label for="player">Player</label>
+                                </div>
+            
+                            </div>
+                       </div>
                         
-                        <h3>Tell Us About Yourself</h3>
-                        <input type="text" name="bio">
-                        <h3>Affiliated Team</h3>
-                        <input type="text" name="team">
-                        <h3>Account Type</h3>
-                        <b>Coach</b> <input type="radio" name="rank" value="c">  <b>Player</b> <input type="radio" name="rank" value="p"><br>
-                        <input type="submit">
+                       <div class="aboutyou">
+                           <div class="aboutyouinner">
+                                <h3>Tell Us About Yourself</h3>
+                                <textarea placeholder="This will show up in your profile bio" rows = "5" cols = "60" type="text" name="bio"></textarea>
+                           </div>
+                       </div>
+                        
+                        
+                        
+                        <input id="createaccountbutton" type="submit" value="Create Account">
                     </form>
                 </div>
  

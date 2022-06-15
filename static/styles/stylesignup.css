@@ -94,7 +94,7 @@ header .navigation li a:hover {
 
 form {
     width: 650px;
-    max-height: 1200px;
+    max-height: 3000px;
     background:#1B63C2;
     border-radius: 10px;
     box-shadow: 2px 2px 2px 2px #134383;
@@ -126,6 +126,10 @@ form {
     max-width: 280px;
 }
 
+.namename input:focus {
+    outline: none;
+}
+
 .namename h3 {
     font-size: 1.3em;
     text-align: left;
@@ -146,11 +150,249 @@ form {
     max-width: 280px;
 }
 
+.nameusername input:focus {
+    outline: none;
+}
+
 .nameusername h3 {
     font-size: 1.3em;
     text-align: left;
 }
 
+.password {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.passwordfirst {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-right: 15px;
+}
+
+.passwordfirst input:focus {
+    outline: none;
+}
+
+.passwordfirst input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.4em;
+    max-width: 280px;
+}
+
+.passwordfirst h3 {
+    font-size: 1.3em;
+    text-align: left;
+}
+
+.passwordsecond {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.passwordsecond input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.4em;
+    max-width: 280px;
+}
+
+.passwordsecond input:focus {
+    outline: none;
+}
+
+
+.passwordsecond h3 {
+    font-size: 1.3em;
+    text-align: left;
+}
+
+.personalinfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.email {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-right: 15px;
+}
+
+.email input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.4em;
+    max-width: 280px;
+}
+
+.email input:focus {
+    outline: none;
+}
+
+.email h3 {
+    font-size: 1.3em;
+    text-align: left;
+}
+
+.gender {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.gender input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.4em;
+    max-width: 280px;
+}
+
+.gender input:focus {
+    outline: none;
+}
+
+
+.gender h3 {
+    font-size: 1.3em;
+    text-align: left;
+}
+
+.accountinfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+
+.team {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-right: 15px;
+}
+
+.team input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.4em;
+    max-width: 280px;
+}
+
+.team input:focus {
+    outline: none;
+}
+
+.team h3 {
+    font-size: 1.3em;
+    text-align: left;
+}
+
+.accounttype {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.accounttype label {
+    text-align: left;
+}
+
+
+.accounttype h3 {
+    font-size: 1.3em;
+    text-align: left;
+}
+
+.radiobuttonone {
+    text-align: left;
+}
+
+.radiobuttonone label{
+  font-size: 1.0em;
+}
+
+.radiobuttontwo {
+   text-align: left;
+   margin-top: 0;
+}
+
+.radiobuttontwo label{
+    font-size: 1.0em;
+  }
+
+.aboutyou {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.aboutyouinner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.aboutyouinner h3{
+    font-size: 1.3em;
+    text-align: left;
+}
+
+.aboutyouinner textarea {
+    padding: 4px 6px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 0.9em;
+    width: 570px;
+    height: 100px;
+    resize: none;
+}
+
+.aboutyouinner textarea:focus {
+    outline: none;
+}
+
+
+
+#createaccountbutton {
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 20px;
+    font-size: 1.5em;
+}
+
+#createaccountbutton:hover {
+    cursor: pointer;
+    background-color: #cfcfdb;
+}
+
+
+
+form h1 {
+    margin-top: 10px;
+}
 
 footer  {
     position: fixed;
