@@ -146,7 +146,7 @@ footer  {
     max-height: 30000px;
     background:#1B63C2;
     border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px #134383;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     padding: 20px 20px;
     text-align: center;
     color: #F0F0FF;

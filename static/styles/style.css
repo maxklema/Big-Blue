@@ -157,7 +157,7 @@ footer  {
     border-radius: 10px;
     padding: 10px 50px;
     width: 1300px;
-    box-shadow: 2px 2px 2px 2px #888888;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .importantinfo {
@@ -185,7 +185,7 @@ footer  {
     height: 400px;
     background:#1B63C2;
     border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px #134383;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
 
 }
@@ -252,7 +252,7 @@ footer  {
     height: 400px;
     background:#1B63C2;
     border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px #134383;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 #codetextbox {
@@ -304,7 +304,7 @@ input[type=number]{
     width: 100%;
     background-color: #F0F0FF;
     border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px #c9c9d6;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     
 }
 
