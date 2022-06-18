@@ -1,32 +1,46 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Big Blue | Home</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+{% extends "indexcontent.html" %}
+{% block content %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Big Blue | Home</title>
+            <link rel="stylesheet" href="{{ url_for('static', filename='styles/styleerrorpage.css') }}">
+            
         
-    
-    </head>
-    <body>
-        <div class="mainheader">
-            <img id="logo" src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" alt="">
-            <a href="/about"><button id="about" >About</button></a>
-            <a href="/login"><button id="login" >Login</button></a>
+        </head>
 
+        <div id="container">
+            <div class="main">
+                <body>
+                    
+                    <div class="errorcontainer">
+                        <div class="errormessage">
+                            <div id="addgraphic">
+                                <img src="{{ url_for('static', filename='logo graphics/error.png') }}">
+                            </div>
+                            <h1>Uh oh! An Error Occured</h1>
+                            <p>{{message}}</p>
+                        </div>
+                    </div>
+        
+                
+        
+        
+        
+                  
+                </body>
+                <footer>
+                    <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
+                    <div class="footertext">
+                        <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+                    </div>
+        
+        
+        
+                </footer>
 
+            </div>
         </div>
-        <div>
-            <h1>Sorry there was an error!</h1>
-            <p><b>Error message:</b> {{message}}</p>
-        </div>
-
-       
-
-
-
-        <div class="footer">
-            <img id="logofooter" src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" alt="">
-            <p id="textfooter">Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
-
-        </div>
-    </body>
-</html>
+        
+    </html>
+{% endblock %}
