@@ -27,11 +27,11 @@
                             <div class="eventtype">
                                 <h2>Event Type</h2>
                                 <div class="radiobuttonone">
-                                    <input type="radio" name="eventtype" id="singles" value="s">
+                                    <input type="radio" name="eventtype" onclick="doSomethingTwo();" id="singles" value="s">
                                     <label for="singles">Singles</label>
                                 </div>
                                 <div class="radiobuttontwo">
-                                    <input type="radio" name="eventtype" id="teams" value="t">
+                                    <input type="radio" name="eventtype" onclick="doSomething();" id="teams" value="t">
                                     <label for="teams">Teams</label>
                                 </div>
                             </div>
@@ -65,8 +65,8 @@
 
                         <div class="players">
                             <div class="playerstext">
-                                <h3>Number of Spots</h3>
-                                <p><i>Note: input the number of spots, not players. Spots consist of two players: one from each team.</i></p>
+                                <h3 id="playertextone">Number of Players</h3>
+                                <p id="playertexttwo"><i>Note: input the number of players, not spots. Spots are only used for team matches.</i></p>
                             </div>
 
                             <div class="playersinput">
@@ -111,5 +111,26 @@
             </footer>
         </div>
     </div>
+
+
+        <script>
+
+            function doSomething()
+            {
+                document.getElementById("playertextone").innerHTML = "Number of Spots";
+                document.getElementById("playertexttwo").innerHTML = "Note: input the number of spots, not players. Spots consist of two players: one from each team.";
+            }
+
+            function doSomethingTwo()
+            {
+                document.getElementById("playertextone").innerHTML = "Number of Players";
+                document.getElementById("playertexttwo").innerHTML = "Note: input the number of players, not spots. Spots are only used for team matches";
+            }
+
+
+
+        </script>
     </html>
+
+    
 {% endblock %}
