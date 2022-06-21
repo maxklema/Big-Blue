@@ -225,19 +225,19 @@ input[type=number]{
     align-items: center;
 }
 
-.hometeam {
-    display: flex;
+#hometeam {
+    display: none;
     flex-direction: column;
     justify-content: left;
     margin-top: 20px;
 }
 
-.hometeam p {
+#hometeam p {
     text-align: left;
     font-size: 1.4em;
 }
 
-.hometeam input {
+#hometeam input {
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
@@ -246,19 +246,19 @@ input[type=number]{
     max-width: 240px;
 }
 
-.awayteam {
-    display: flex;
+#awayteam {
+    display: none;
     flex-direction: column;
     justify-content: left;
     margin-top: 20px;
 }
 
-.awayteam p {
+#awayteam p {
     text-align: left;
     font-size: 1.4em;
 }
 
-.awayteam input {
+#awayteam input {
     padding: 10px 20px;
     border-radius: 5px;
     border: none;

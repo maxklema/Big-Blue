@@ -50,12 +50,12 @@
 
                         
                         <div class="teams">
-                            <div class="hometeam">
+                            <div id="hometeam">
                                 <p>Home Team</p>
                                 <input type="text" name="hometeam">
                             </div>
                             
-                            <div class="awayteam">
+                            <div id="awayteam">
                                 <p>Away Team</p>
                                 <input type="text" name="awayteam">
                             </div>
@@ -115,16 +115,32 @@
 
         <script>
 
+            var x = document.getElementById("hometeam");
+            var y = document.getElementById("awayteam");
+
             function doSomething()
             {
                 document.getElementById("playertextone").innerHTML = "Number of Spots";
                 document.getElementById("playertexttwo").innerHTML = "Note: input the number of spots, not players. Spots consist of two players: one from each team.";
+                if (x.style.display === "none") {
+                    x.style.display = "flex";
+                } else {
+                    x.style.display = "none";
+                }
+
+                if (y.style.display === "none") {
+                    y.style.display = "flex";
+                } else {
+                    y.style.display = "none";
+                }
             }
 
             function doSomethingTwo()
             {
                 document.getElementById("playertextone").innerHTML = "Number of Players";
                 document.getElementById("playertexttwo").innerHTML = "Note: input the number of players, not spots. Spots are only used for team matches";
+                x.style.display = "none";
+                y.style.display = "none";
             }
 
 
