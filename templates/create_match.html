@@ -1,15 +1,115 @@
+
 {% extends "indexcontent.html" %}
 {% block content %}
-<title>Big Blue | Create a Match</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-<div class = "main">
-    <h1>Create a Match:</h1>
-    <form>
-        Event type: singles <input type="radio" name="eventtype" value="i"> teams <input type="radio" name="eventtype" value="t"> <br>
-        Match type: strokeplay <input type="radio" name="matchtype" value="s"> matchplay <input type="radio" name="matchtype" value="m"> <br>
-        Number of players competing: <input type = "number" name="players"> <br>
-        Location: <input type="text" name="location"><br>
 
-    </form>
-</div>
+    <html>
+        <head>
+            <title>Big Blue | Create Match</title>
+            <link rel="stylesheet" href="{{ url_for('static', filename='styles/creatematch.css') }}">
+
+
+    <div id="container">
+        <div class="main">
+            <body>
+                <div class="creatematch-container">
+                    <form>
+                        <div id="addgraphic">
+                            <img src="{{ url_for('static', filename='logo graphics/golferreadingputt.png') }}">
+                        </div>
+                        <h1>Create a Match</h1>
+                        <h2 style="color: rgb(248, 250, 115); margin-top: 10px; font-size: 1.2em;">
+                            {% if message %}
+                                {{message}}
+                            {% endif %}
+                        </h2>
+
+                        <div class="basicmatchinfo">
+                            <div class="eventtype">
+                                <h2>Event Type</h2>
+                                <div class="radiobuttonone">
+                                    <input type="radio" name="eventtype" id="singles" value="s">
+                                    <label for="singles">Singles</label>
+                                </div>
+                                <div class="radiobuttontwo">
+                                    <input type="radio" name="eventtype" id="teams" value="t">
+                                    <label for="teams">Teams</label>
+                                </div>
+                            </div>
+                            <div class="matchtype">
+                                <h2>Match Type</h2>
+                                <div class="radiobuttonthree">
+                                    <input type="radio" name="matchtype" id="strokeplay" value="strokeplay">
+                                    <label for="strokeplay">Stroke Play</label>
+                                </div>
+                                <div class="radiobuttonfour">
+                                    <input type="radio" name="matchtype" id="matchplay" value="matchplay">
+                                    <label for="matchplay">Match Play</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="teams">
+                            <div class="hometeam">
+                                <p>Home Team</p>
+                                <input type="text" name="hometeam">
+                            </div>
+                            
+                            <div class="awayteam">
+                                <p>Away Team</p>
+                                <input type="text" name="awayteam">
+                            </div>
+
+                        </div>
+
+
+                        <div class="players">
+                            <div class="playerstext">
+                                <h3>Number of Spots</h3>
+                                <p><i>Note: input the number of spots, not players. Spots consist of two players: one from each team.</i></p>
+                            </div>
+
+                            <div class="playersinput">
+                                <input type="number" name="numberofplayers">
+
+                            </div>
+
+                        </div>
+
+                        <div class="matchcourse">
+                            <div class="coursetext">
+                                <h3>Name of Course</h3>
+                            </div>
+
+                            <div class="courseinput">
+                                <input type="text" name="coursename">
+
+                            </div>
+                        </div>
+
+                        <input id="creatematchbutton" type="submit" value="Create Match">
+
+                       
+                        
+
+
+
+
+
+                        
+                    </form>
+                </div>
+            </body>
+            <footer>
+                <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
+                <div class="footertext">
+                    <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+                </div>
+
+
+
+            </footer>
+        </div>
+    </div>
+    </html>
 {% endblock %}
