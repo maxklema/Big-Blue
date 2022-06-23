@@ -1,29 +1,97 @@
 {% extends "indexcontent.html" %}
 {% block content %}
 
-<title>Big Blue | Match Dashboard</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-    <div id="container">
-        <div id="joinshow">
-            <h3>Match Join Code</h3>
-            
-            <h1 id="joincode"><br>123456</h1>
-        </div>
-        <div id="matchinfo">
-            <h3>Event Type</h3><h3><b>Singles</b></h3>
-            <h3>Match Type</h3><h3><b>Strokeplay</b></h3>
-            <h3>Number of Teams</h3><h3><b>N/A</b></h3>
-            <h3>Players/PlayersPerTeam</h3><h3><b>25</b></h3>
-            <h3>Players Joined</h3><h3><b>23</b></h3>
+<html>
+        <head>
+            <title>Big Blue | Match Dashboard</title>
+            <link rel="stylesheet" href="{{ url_for('static', filename='styles/matchdashboard.css') }}">
+        </head>
 
-            <button value="Start Scoring">
+    <div id="container">
+        <div class="main">
+            <body>
+                <div class="joincode-container">
+                    <div class="joincode">
+                        <div class="joinimage">
+                            <img src="{{ url_for('static', filename='logo graphics/joinicon.png') }}">
+                        </div>
+                        <div class="joininfo">
+                            <h4>Match Join Code</h4>
+                            <h1>123456</h1>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="matchdetail-container">
+                    <div class="matchdetail">
+                        
+
+                        <div class="matchcontent-container">
+                            <div class="matchcontent">
+                                <div class="header-container">
+                                    <h1>Match Details</h1>
+                                    <img src="{{ url_for('static', filename='logo graphics/pencilicon.png') }}">
+                                </div>
+                                <div class="eventtype-container">
+                                    <h2>Event Type</h2>
+                                    <h4>Singles</h4>
+                                </div>
+        
+                                <div class="matchttype-container">
+                                    <h2>Match Type</h2>
+                                    <h4>Strokeplay</h4>
+                                </div>
+
+                                <div class="hometeam-container">
+                                    <h2>Home Team</h2>
+                                    <h4>N/A</h4>
+                                </div>
+
+                                <div class="awayteam-container">
+                                    <h2>Away Team</h2>
+                                    <h4>N/A</h4>
+                                </div>
+
+                                <div class="total-container">
+                                    <h2>Total Players/Spots</h2>
+                                    <h4>25</h4>
+                                </div>
+                                
+                                <div class="joined-container">
+                                    <h2>Players Joined</h2>
+                                    <h4>14</h4>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+
+                        <input id="creatematchbutton" type="submit" value="Start Live Scoring">
+                      
+                        
+
+
+
+                    </div>
+
+
+                </div>
+
+
+
+            </body>
+            
+            <footer>
+                <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
+                <div class="footertext">
+                    <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+                </div>
+
+
+
+            </footer>
         </div>
-        <footer>
-            <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
-            <div class="footertext">
-                <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
-                
-            </div>
-        </footer>
     </div>
 {% endblock %}
