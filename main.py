@@ -210,6 +210,10 @@ def logout():
 def admin():
     return render_template("admin.html")
 
+@app.route("/match_dashboard")
+def match_dashboard():
+    return render_template("match_dashboard.html")
+
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):
     if password == "123":
