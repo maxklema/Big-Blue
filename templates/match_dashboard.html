@@ -1,0 +1,29 @@
+{% extends "indexcontent.html" %}
+{% block content %}
+
+<title>Big Blue | Match Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <div id="container">
+        <div id="joinshow">
+            <h3>Match Join Code</h3>
+            
+            <h1 id="joincode"><br>123456</h1>
+        </div>
+        <div id="matchinfo">
+            <h3>Event Type</h3><h3><b>Singles</b></h3>
+            <h3>Match Type</h3><h3><b>Strokeplay</b></h3>
+            <h3>Number of Teams</h3><h3><b>N/A</b></h3>
+            <h3>Players/PlayersPerTeam</h3><h3><b>25</b></h3>
+            <h3>Players Joined</h3><h3><b>23</b></h3>
+
+            <button value="Start Scoring">
+        </div>
+        <footer>
+            <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
+            <div class="footertext">
+                <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+                
+            </div>
+        </footer>
+    </div>
+{% endblock %}
