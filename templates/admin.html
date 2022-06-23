@@ -18,13 +18,14 @@
 				
 				</div>
             </div>
-            
+        </div>
         <footer>
             <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
             <div class="footertext">
                 <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
             </div>
-		<script>
+        </footer>
+        <script>
 			var info = [];
             var dbCall = new XMLHttpRequest();
             dbCall.open("GET", "/return_user_data/123",false);
@@ -62,9 +63,4 @@
 				
 			
 		</script>
-
-
-
-        </footer>
-        </div>
 {% endblock %}
