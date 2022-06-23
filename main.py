@@ -167,13 +167,13 @@ def login():
 def dashboard():
     if 'active_user' in session:
         return render_template("dashboard.html", name=session['active_user'][1], matches=look_for_match(session['active_user'][0]))
-    return redirect(url_for('error', msg="Sorry, you do not have access to this page."))
+    return redirect(url_for('error', msg="You must login to access this page."))
 
 @app.route("/create_match")
 def create_match():
     if 'active_user' in session:
         return render_template("create_match.html")
-    return redirect(url_for('error', msg='Sorry, you do not have access to this page.'))
+    return redirect(url_for('error', msg='You must login to access this page.'))
 
 @app.route("/create_account", methods=['POST', 'GET'])
 def create_account():

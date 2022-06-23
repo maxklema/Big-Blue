@@ -111,30 +111,13 @@ html, body {
 
 }
 
-#joinshow{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
-    padding-top: 90px;
-    padding-bottom: 100px;
-}
-
 .main {
     overflow: auto;
     padding-top: 90px;
     padding-bottom: 100px;
 }
 
-.matchview {
-	max-width: 1000px;
-	border: 1px solid #333;
-	margin:5px;
-	padding: 8px 12px;
-	background-color: #2176e8;
-	color:white;
 
-}
 
 footer  {
     position: absolute;
@@ -149,219 +132,84 @@ footer  {
     padding: 5px 100px;
     clear: both;
 
-
-    
-    
-
 }
 
-#recentmatchesheader {
-    padding-bottom: 20px;
-
-}
-
-.recentmatches {
-    background-color: #F0F0FF;
-    margin-bottom: 40px;
-    border-radius: 10px;
-    padding: 10px 50px;
-    width: 1300px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.importantinfo {
+.errorcontainer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 10px 0px;
 }
 
-.recentmatches .importantinfo h1 {
-    color: black;
-    font-size: 2em;
-}
-
-.recentmatches ul {
-    list-style: none;
-}
-
-.recentmatches h6 {
-    padding: 10px 0px;
-}
-    
-.login {
-    width: 500px;
-    height: 400px;
+.errormessage {
+    width: 700px;
+    min-height: 250px;
+    max-height: 30000px;
     background:#1B63C2;
     border-radius: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
-
+    padding: 20px 20px;
+    text-align: center;
+    color: #F0F0FF;
+    margin-top: 20px;
 }
 
 #addgraphic {
-    height: 150px;
     width: 150px;
-    background-color: #F0F0FF;
-    box-shadow: 0px 0px 0px 2px #c9c9d6;
+    height: 150px;
     border-radius: 100%;
+    background-color: #F0F0FF;
     margin: auto;
     margin-top: -50px;
-    
+    box-shadow: 0px 0px 0px 2px #c9c9d6;
 }
 
 #addgraphic img {
-    height: 100px;
     width: 100px;
+    height: 100px;
     transform: translate(0px, 25px);
-    
 }
 
-.login {
-    text-align: center;
-}
-
-.logintext {
-    text-align: center;
+.errormessage h1 {
     margin-top: 15px;
-    padding: 0px 8px;
-    color: #F0F0FF;
+    font-size: 2.4em;
 }
 
-.logintext h2 {
-    font-size: 1.8em;
-}
-
-.logintext h6 {
-    font-size: 1.0em;
-    margin-top: 5px;
-}
-
-#creatematch {
-    padding: 10px 30px;
-    border-radius: 20px;
-    border: none;
-    margin-top: 20px;
-    font-size: 2.1em;
-}
-
-#creatematch:hover {
-    cursor: pointer;
-    background-color: #dbdbdf;
-}
-
-.joincode {
-    text-align: center;
-}
-
-
-
-.joincode {
-    width: 500px;
-    height: 400px;
-    background:#1B63C2;
-    border-radius: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-#codetextbox {
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    margin-top: 20px;
-    font-size: 1.6em;
-    text-align: center;
-
-}
-
-#codetextbox:focus {
-    outline: none;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type=number]{
-    -moz-appearance: textfield;
-}
-
-.sidebars {
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row-reverse;
-    display: flex;
-    padding: 0px 400px;
-    margin-top: 50px;
-    margin-bottom: 20px;
-
-}
-
-
-.matchresults {
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-    padding: 0px 400px;
-    margin-bottom: 30px;
-}
-
-.results {
-    max-height: 3000px;
-    width: 100%;
-    background-color: #F0F0FF;
-    border-radius: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+.errormessage p {
+    font-size: 1em;
+    margin-top: 10px;
+    font-style: italic;
     
 }
 
-.resultcontainer {
-    padding: 40px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+@media (max-width: 763px){
+    .errormessage {
+        width: 500px;
+    }
+
+    .errormessage h1 {
+        font-size: 1.9em;
+    }
 }
 
-#courseicon {
-    max-height: auto;
-    max-width: auto;
-    max-height: 270px;
-    max-width: 270px;
-}
+@media (max-width: 533px){
+    .errormessage {
+        width: 90%;
+    }
 
-.scores {
-    margin-top: 20px;
-}
+    .errormessage h1 {
+        font-size: 1.5em;
+    }
+   
+    #addgraphic img {
+        width: 75px;
+        height: 75px;
+        transform: translate(0px, 25px);
+    }
 
-#matchdetails {
-    transform: translateY(100%);
-}
-
-#results {
-    padding: 0px 400px;
-    font-size: 2.5em;
-    margin-bottom: 15px;
-    margin-top: 30px;
-    
-}
-
-.verification {
-    display: flex;
-    flex-direction: row;
-    margin-top: 30px;
-    align-items: center;
-}
-
-.verification img {
-    height: 20px;
-    width: 20px;
-    margin-right: 5px;
-}
-
-.verification h5 {
-    color:#1B63C2;
+    #addgraphic {
+        width: 125px;
+        height: 125px;
+    }
 }
 
 

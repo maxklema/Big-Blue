@@ -1,0 +1,408 @@
+
+@font-face {
+    font-family: bigBlueBold;
+    src: url(Montserrat-Bold.ttf);
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: BigBlueBold;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.main {
+    overflow: auto;
+    padding-top: 90px;
+    padding-bottom: 100px;
+}
+
+header {
+    top: 0;
+    left: 0;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    background-color: #2176e8;
+    z-index: 10;
+    padding: 4px 100px;
+}
+
+header .logo {
+    max-width: 200px;
+    max-height: 200px;
+    position: relative;
+}
+
+header .navigation {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0px 30px;
+}
+
+header .navigation li {
+    list-style: none;
+    margin: 0px 15px;
+}
+
+header .navigation li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    
+
+}
+
+header .navigation li a:hover {
+    color: #F0F0FF;
+    
+
+}
+
+
+footer  {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-color: rgba(5, 20, 39, 0.699);
+    width: 100%;
+    z-index: 9;
+    padding: 5px 100px;
+
+}
+
+footer .logofooter {
+    max-width: 150px;
+    max-height: 150px;
+    position: relative;
+    padding: 2px 20px;
+
+}
+
+footer .footertext {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px 5px;
+}
+
+footer .footertext p{
+   color: white;
+   font-size: .7em;
+}
+
+footer .footertext p:hover{
+    color: #F0F0FF;
+    cursor: pointer;
+ }
+
+
+html, body {
+    height: 100%;
+}
+
+#container {
+    position: relative;
+    min-height: 97.7%;
+
+}
+
+footer  {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-color: rgba(5, 20, 39, 0.699);
+    width: 100%;
+    z-index: -1;
+    padding: 5px 100px;
+    clear: both;
+
+
+    
+    
+
+}
+
+.creatematch-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+form {
+    width: 600px;
+    max-height: 6000px;
+    background:#1B63C2;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 20px 20px;
+    text-align: center;
+    color: #F0F0FF;
+    
+
+}
+
+#addgraphic {
+    height: 150px;
+    width: 150px;
+    background-color: #F0F0FF;
+    box-shadow: 0px 0px 0px 2px #c9c9d6;
+    border-radius: 100%;
+    margin: auto;
+    margin-top: -50px;
+}
+
+#addgraphic img {
+    height: 100px;
+    width: 100px;
+    transform: translate(0, 25px);
+}
+
+form h1 {
+    font-size: 2.5em;
+    margin-top: 10px;
+}
+
+.basicmatchinfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number]{
+    -moz-appearance: textfield;
+}
+
+.eventtype {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-right: 30px;
+}
+
+.eventtype h2 {
+    font-size: 1.7em;
+}
+
+.matchtype {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.matchtype h2 {
+    font-size: 1.7em;
+}
+
+.teams {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#hometeam {
+    display: none;
+    flex-direction: column;
+    justify-content: left;
+    margin-top: 20px;
+}
+
+#hometeam p {
+    text-align: left;
+    font-size: 1.4em;
+}
+
+#hometeam input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.4em;
+    max-width: 240px;
+}
+
+#awayteam {
+    display: none;
+    flex-direction: column;
+    justify-content: left;
+    margin-top: 20px;
+}
+
+#awayteam p {
+    text-align: left;
+    font-size: 1.4em;
+}
+
+#awayteam input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.4em;
+    max-width: 240px;
+}
+
+.players {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.playerstext {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding-left: 20px;
+    margin-right: 15px;
+}
+
+.playerstext h3 {
+    text-align: left;
+    font-size: 1.3em;
+}
+
+
+.playerstext p {
+    text-align: left;
+    font-size: 0.9em;   
+}
+
+
+
+.playersinput input {
+    padding: 10px 5px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.4em;
+    max-width: 100px;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.matchcourse {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.coursetext {
+    margin-right: 10px;
+}
+
+.courseinput input {
+    padding: 10px 10px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.4em;
+    max-width: 330px;
+    margin-right: 20px;
+}
+
+#creatematchbutton {
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 25px;
+    font-size: 1.5em;
+}
+
+#creatematchbutton:hover {
+    cursor: pointer;
+    background-color: #cfcfdb;
+}
+
+
+@media (max-width: 500px){
+    header {
+        padding: 4px 15px;
+        flex-direction: column;
+    }
+
+    .main {
+        padding-top: 110px;
+    }
+
+    header .logo {
+        max-width: 200px;
+        max-height: 200px;
+        position: relative;
+        padding: 2px 10px;
+    }
+}
+
+@media (max-width: 781px){
+    footer {
+        padding: 4px 15px;
+        flex-direction: column; 
+    }
+}
+
+@media (max-width: 300px){
+    .main {
+        padding-top: 130px;
+    }
+}
+
+@media (max-width: 1000px){
+    footer {
+        padding: 4px 10px;
+
+    }
+}
+
+@media (max-width: 216px){
+    header .logo {
+       max-width: 100px;
+       max-height: 100px;
+    }
+}
+
+@media (max-width: 178px){
+    header .logo {
+       max-width: 75px;
+       max-height: 75px;
+    } 
+
+}
+
+
+
+    
+    
+
+
+
+
+
