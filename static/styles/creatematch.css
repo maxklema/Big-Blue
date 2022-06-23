@@ -459,9 +459,18 @@ input[type=number]{
         margin-top: 20px;
     }
 
-
 }
 
+@media (max-width: 435px) {
+    form {
+        width: 90%;
+        padding: 20px 5px;
+    }
+
+    .courseinput input {
+        width: 80%;
+    }
+}
 
 
     
