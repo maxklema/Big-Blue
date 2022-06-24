@@ -30,14 +30,16 @@
             var dbCall = new XMLHttpRequest();
             dbCall.open("GET", "/return_user_data/123",false);
             dbCall.send(null)
-            var users = dbCall.responseText;
-            var i = 0;
+            var users = JSON.parse(dbCall.responseText);
+            var i = 1;
             var temp = ["","","",""];
             while(true){
                 try {
-                    if (!(users[i]["username"] == null)){
+                    //if (!(users[i]["username"] == null)){
+
                         temp = ["","","",""];
                         temp[0] = "Username: " + users[i]["username"];
+                        
                         temp[1] = "Name: " + users[i]["name"];
                         temp[2] = "Rank: " + users[i]["rank"];
                         temp[3] = "Password: " + users[i]["password"];
@@ -53,7 +55,7 @@
                         
                         
                         document.getElementById("allusers").appendChild(div);
-                    }
+                    //}
                 } catch {
                     break;
                 }
