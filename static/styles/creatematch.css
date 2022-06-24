@@ -397,6 +397,80 @@ input[type=number]{
 
 }
 
+@media (max-width: 612px){
+    form {
+        width: 400px;
+    }
+
+    form h1 {
+        font-size: 2.1em;
+    }
+    
+    .basicmatchinfo {
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
+    }
+
+    .eventtype {
+        text-align: left;
+        margin-right: 0px;
+    }
+
+    .matchtype {
+        text-align: left;
+        margin-top: 20px;
+    }
+
+    .teams {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .players {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .playerstext {
+        margin-right: 2px;
+    }
+
+    .playerstext p {
+        text-align: left;
+        font-size: 0.9em; 
+
+    }
+
+    .playerstext h3 {
+        text-align: left;
+          
+    }
+
+    .playersinput input {
+        margin-top: 10px;
+    }
+
+    .matchcourse {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+}
+
+@media (max-width: 435px) {
+    form {
+        width: 90%;
+        padding: 20px 5px;
+    }
+
+    .courseinput input {
+        width: 80%;
+    }
+}
 
 
     

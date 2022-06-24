@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy, inspect
 from datetime import timedelta, datetime
+import string
+import random
 import json
 import os
 
@@ -8,8 +10,9 @@ app = Flask(__name__)
 
 app.secret_key = "max"
 app.permanent_session_lifetime = timedelta(minutes=60)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///webdata.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+characters = list(string.ascii_letters + string.digits + "!@#$")
 
 db = SQLAlchemy(app)
 
@@ -23,8 +26,9 @@ class users(db.Model):
     gender = db.Column(db.String(1))
     bio = db.Column(db.String(500))
     team = db.Column(db.String(25))
+    verified = db.Column(db.Boolean)
 
-    def __init__(self, name, username, password, email, rank, gender, bio, team):
+    def __init__(self, name, username, password, email, rank, gender, bio, team, verified):
         self.name = name
         self.username = username
         self.password = password
@@ -33,6 +37,7 @@ class users(db.Model):
         self.gender = gender
         self.bio = bio
         self.team = team
+        self.verified = verified
 
 class course(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -49,14 +54,18 @@ class match(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     match_name = db.Column(db.String(50))
     match_course = db.Column(db.String(50))
+    event_type = db.Column(db.String(1))
+    match_type = db.Column(db.String(25))
     start_time = db.Column(db.String(25))
     end_time = db.Column(db.String(25))
     participating_teams = (db.String(500))
+    total_players = db.Column(db.Integer)
     scores_file = (db.String(50))
-    match_code = db.Column(db.Integer)
+    match_code = db.Column(db.String(6))
     match_password = db.Column(db.String())
+    created_by = db.Column(db.String())
 
-    def __init__(self, match_name, match_course, start_time, end_time, participating_teams, scores_file, match_code, match_password):
+    def __init__(self, match_name, match_course, start_time, end_time, participating_teams, scores_file, match_code, match_password, event_type, match_type, total_players, created_by):
         self.match_name = match_name
         self.match_course = match_course
         self.start_time = start_time
@@ -65,6 +74,10 @@ class match(db.Model):
         self.scores_file = scores_file
         self.match_code = match_code
         self.match_password = match_password
+        self.event_type = event_type
+        self.match_type = match_type
+        self.total_players = total_players
+        self.created_by = created_by
 
 class edit_score_files():
     def __init__(self, score_file_name):
@@ -132,6 +145,14 @@ def sanitize_inputs(string_to_analize):
             return True
     return False
 
+def generate_code(length):
+    random.shuffle(characters)
+    password = []
+    for i in range(length):
+        password.append(random.choice(characters))
+    random.shuffle(password)
+    return "".join(password)
+
 @app.route("/")
 def index():
     return render_template("index.html", matches=look_for_match("XCRunner2022"))
@@ -169,10 +190,27 @@ def dashboard():
         return render_template("dashboard.html", name=session['active_user'][1], matches=look_for_match(session['active_user'][0]))
     return redirect(url_for('error', msg="You must login to access this page."))
 
-@app.route("/create_match")
+@app.route("/create_match", methods=['GET', 'POST'])
 def create_match():
     if 'active_user' in session:
-        return render_template("create_match.html")
+        if request.method == "POST":
+            for item in request.form:
+                if request.form[item] == "" or sanitize_inputs(request.form[item]):
+                    if request.form["eventtype"] != "singles" and request.form["hometeam"] == "" and request.form["awayteam"] == "":
+                        break
+                    return render_template('create_match.html', message="You have inputed an invalid value or an inapropriate value.")
+            
+            try:
+                new_match = match(request.form['coursename'], None, None, None, None, request.form['coursename'] + '.json', generate_code(6), None, request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0])
+                db.session.add(new_match)
+                db.session.commit()
+            except:
+                return redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
+
+            return redirect(url_for('match_dashboard'))
+        
+        return render_template('create_match.html')
+    
     return redirect(url_for('error', msg='You must login to access this page.'))
 
 @app.route("/create_account", methods=['POST', 'GET'])
@@ -189,7 +227,7 @@ def create_account():
             return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.")
 
         try: 
-            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'])
+            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], False)
             db.session.add(new_user)
             db.session.commit()
         except:
@@ -212,7 +250,8 @@ def admin():
 
 @app.route("/match_dashboard")
 def match_dashboard():
-    return render_template("match_dashboard.html")
+    if 'active_user' in session:
+        return render_template("match_dashboard.html", data=match.query.filter_by(created_by=session['active_user'][0]).all())
 
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):
