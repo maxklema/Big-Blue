@@ -181,7 +181,7 @@ form h1 {
 .basicmatchinfo {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-top: 20px;
 
@@ -221,7 +221,7 @@ input[type=number]{
 .teams {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -270,7 +270,7 @@ input[type=number]{
 .players {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-top: 20px;
 }
@@ -279,8 +279,6 @@ input[type=number]{
     display: flex;
     flex-direction: column;
     align-items: left;
-    padding-left: 20px;
-    margin-right: 15px;
 }
 
 .playerstext h3 {
@@ -304,30 +302,28 @@ input[type=number]{
     font-size: 1.4em;
     max-width: 100px;
     text-align: center;
-    margin-right: 20px;
 }
 
 .matchcourse {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 20px;
-    margin-left: 20px;
-}
 
+}
 .matchtext {
-    margin-right: 10px;
+    text-align: left;
 }
 
 .matchinput input {
     padding: 10px 10px;
     border-radius: 5px;
     border: none;
+    margin-left: 10px;
     margin-top: 5px;
     font-size: 1.4em;
     max-width: 330px;
-    margin-right: 20px;
 }
 
 .matchcourselocation {
@@ -336,11 +332,10 @@ input[type=number]{
     align-items: center;
     justify-content: space-around;
     margin-top: 20px;
-    margin-left: 20px;
 }
 
 .matchtextcourse {
-    margin-right: 10px;
+    text-align: left;
 }
 
 .matchinputcourse input {
@@ -350,20 +345,18 @@ input[type=number]{
     margin-top: 5px;
     font-size: 1.4em;
     max-width: 330px;
-    margin-right: 20px;
 }
 
 .timeofmatchstart {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 20px;
-    margin-left: 20px;
 }
 
 .starttime {
-    margin-right: 10px;
+    text-align: left;
 }
 
 .starttimeinput {
@@ -373,20 +366,18 @@ input[type=number]{
     margin-top: 5px;
     font-size: 1.4em;
     max-width: 330px;
-    margin-right: 20px;
 }
 
 .timeofmatchend {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 20px;
-    margin-left: 20px;
 }
 
 .endtime {
-    margin-right: 10px;
+    text-align: left;
 }
 
 .endtimeinput {
@@ -396,12 +387,11 @@ input[type=number]{
     margin-top: 5px;
     font-size: 1.4em;
     max-width: 330px;
-    margin-right: 20px;
 }
 .matchpassword {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-top: 20px;
 }
@@ -411,9 +401,8 @@ input[type=number]{
     display: flex;
     flex-direction: column;
     align-items: left;
-    padding-left: 20px;
-    margin-right: 15px;
     text-align: left;
+    padding-right: 5px;
 }
 
 .passwordtext h3 {
@@ -424,7 +413,8 @@ input[type=number]{
 
 .passwordstext p {
     text-align: left;
-    font-size: 0.9em;   
+    font-size: 0.9em;  
+    margin-right: 5px; 
 }
 
 
@@ -436,9 +426,25 @@ input[type=number]{
     margin-top: 5px;
     font-size: 1.4em;
     max-width: 200px;
-    margin-right: 20px;
+    margin-left: 5px;
 }
 
+.matchdetail-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.matchdetail {
+    max-height: 1000px;
+    width: 500px;
+    background-color: #1B63C2;
+    padding: 0px 0px;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    color: #F0F0FF;
+    text-align: center;
+}
 
 #creatematchbutton {
     padding: 10px 30px;
@@ -534,13 +540,13 @@ input[type=number]{
 
     .teams {
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
         text-align: center;
     }
 
     .players {
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
     }
 
     .playerstext {

@@ -23,121 +23,130 @@
                             {% endif %}
                         </h2>
 
-                        <div class="basicmatchinfo">
-                            <div class="eventtype">
-                                <h2>Event Type</h2>
-                                <div class="radiobuttonone">
-                                    <input type="radio" name="eventtype" onclick="doSomethingTwo();" id="singles" value="s">
-                                    <label for="singles">Singles</label>
-                                </div>
-                                <div class="radiobuttontwo">
-                                    <input type="radio" name="eventtype" onclick="doSomething();" id="teams" value="t">
-                                    <label for="teams">Teams</label>
-                                </div>
-                            </div>
-                            <div class="matchtype">
-                                <h2>Match Type</h2>
-                                <div class="radiobuttonthree">
-                                    <input type="radio" name="matchtype" id="strokeplay" value="strokeplay">
-                                    <label for="strokeplay">Stroke Play</label>
-                                </div>
-                                <div class="radiobuttonfour">
-                                    <input type="radio" name="matchtype" id="matchplay" value="matchplay">
-                                    <label for="matchplay">Match Play</label>
-                                </div>
-                            </div>
-                        </div>
-
                         
-                        <div class="teams">
-                            <div id="hometeam">
-                                <p>Home Team</p>
-                                <input type="text" name="hometeam">
+                        
+
+                    <div class="matchdetail-container">
+                        <div class="matchdetail">
+
+                            <div class="basicmatchinfo">
+                                <div class="eventtype">
+                                    <h2>Event Type</h2>
+                                    <div class="radiobuttonone">
+                                        <input type="radio" name="eventtype" onclick="doSomethingTwo();" id="singles" value="s">
+                                        <label for="singles">Singles</label>
+                                    </div>
+                                    <div class="radiobuttontwo">
+                                        <input type="radio" name="eventtype" onclick="doSomething();" id="teams" value="t">
+                                        <label for="teams">Teams</label>
+                                    </div>
+                                </div>
+                                <div class="matchtype">
+                                    <h2>Match Type</h2>
+                                    <div class="radiobuttonthree">
+                                        <input type="radio" name="matchtype" id="strokeplay" value="strokeplay">
+                                        <label for="strokeplay">Stroke Play</label>
+                                    </div>
+                                    <div class="radiobuttonfour">
+                                        <input type="radio" name="matchtype" id="matchplay" value="matchplay">
+                                        <label for="matchplay">Match Play</label>
+                                    </div>
+                                </div>
                             </div>
+    
                             
-                            <div id="awayteam">
-                                <p>Away Team</p>
-                                <input type="text" name="awayteam">
+                            <div class="teams">
+                                <div id="hometeam">
+                                    <p>Home Team</p>
+                                    <input type="text" name="hometeam">
+                                </div>
+                                
+                                <div id="awayteam">
+                                    <p>Away Team</p>
+                                    <input type="text" name="awayteam">
+                                </div>
+    
                             </div>
+    
+    
+                            <div class="players">
+                                <div class="playerstext">
+                                    <h3 id="playertextone">Number of Players</h3>
+                                    <p id="playertexttwo"><i>Note: input the number of players, not spots. Spots are only used for team matches.</i></p>
+                                </div>
+    
+                                <div class="playersinput">
+                                    <input type="number" name="numberofplayers">
+    
+                                </div>
+    
+                            </div>
+    
+                            <div class="matchcourse">
+                                <div class="matchtext">
+                                    <h3>Name of Match</h3>
+                                </div>
+    
+                                <div class="matchinput">
+                                    <input type="text" name="matchname">
+    
+                                </div>
+                            </div>
+    
+                            <div class="matchcourselocation">
+                                <div class="matchtextcourse">
+                                    <h3>Name of Course</h3>
+                                </div>
+    
+                                <div class="matchinputcourse">
+                                    <input type="text" name="coursename">
+    
+                                </div>
+                            </div>
+    
+                            <div class="timeofmatchstart">
+                                <div class="starttime">
+                                    <h3>Match Start Date</h3>
+                                </div>
+    
+                                <div class="starttimeinput">
+                                    <input type="datetime-local" name="starttime">
+    
+                                </div>
+                            </div>
+    
+                            <div class="timeofmatchend">
+                                <div class="endtime">
+                                    <h3>Match End Date</h3>
+                                </div>
+    
+                                <div class="endtimeinput">
+                                    <input type="datetime-local" name="endtime">
+    
+                                </div>
+                            </div>
+    
+    
+                            <div class="matchpassword">
+                                <div class="passwordtext">
+                                    <h3 id="passwordtextone">Match Password</h3>
+                                    <p id="passwordtexttwo"><i>Note: match passwords are not required, but are recommended to prevent unwanted guests and players.</i></p>
+                                </div>
+    
+                                <div class="passwordinput">
+                                    <input type="text" name="matchpassword" maxlength="15">
+    
+                                </div>
+    
+                            </div>
+    
+                            <input id="creatematchbutton" type="submit" value="Create Match">
+
+
 
                         </div>
 
-
-                        <div class="players">
-                            <div class="playerstext">
-                                <h3 id="playertextone">Number of Players</h3>
-                                <p id="playertexttwo"><i>Note: input the number of players, not spots. Spots are only used for team matches.</i></p>
-                            </div>
-
-                            <div class="playersinput">
-                                <input type="number" name="numberofplayers">
-
-                            </div>
-
-                        </div>
-
-                        <div class="matchcourse">
-                            <div class="matchtext">
-                                <h3>Name of Match</h3>
-                            </div>
-
-                            <div class="matchinput">
-                                <input type="text" name="matchname">
-
-                            </div>
-                        </div>
-
-                        <div class="matchcourselocation">
-                            <div class="matchtextcourse">
-                                <h3>Name of Course</h3>
-                            </div>
-
-                            <div class="matchinputcourse">
-                                <input type="text" name="coursename">
-
-                            </div>
-                        </div>
-
-                        <div class="timeofmatchstart">
-                            <div class="starttime">
-                                <h3>Match Start Date</h3>
-                            </div>
-
-                            <div class="starttimeinput">
-                                <input type="datetime-local" name="starttime">
-
-                            </div>
-                        </div>
-
-                        <div class="timeofmatchend">
-                            <div class="endtime">
-                                <h3>Match End Date</h3>
-                            </div>
-
-                            <div class="endtimeinput">
-                                <input type="datetime-local" name="endtime">
-
-                            </div>
-                        </div>
-
-
-                        <div class="matchpassword">
-                            <div class="passwordtext">
-                                <h3 id="passwordtextone">Match Password</h3>
-                                <p id="passwordtexttwo"><i>Note: match passwords are not required, but are recommended to prevent unwanted guests and players.</i></p>
-                            </div>
-
-                            <div class="passwordinput">
-                                <input type="text" name="matchpassword" maxlength="15">
-
-                            </div>
-
-                        </div>
-
-                        <input id="creatematchbutton" type="submit" value="Create Match">
-                        
-
-
+                    </div>
 
 
 
