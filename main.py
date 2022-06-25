@@ -219,7 +219,7 @@ def create_match():
     
     return redirect(url_for('error', msg='You must login to access this page.'))
 
-@app.route("edit_match/match", methods=["POST"])
+@app.route("/edit_match/<match>", methods=["POST"])
 def edit_match(match):
     if 'active_user' in session:
         return render_template("error", msg="This page does not yet exits")
