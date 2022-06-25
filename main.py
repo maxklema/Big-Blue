@@ -132,7 +132,7 @@ def look_for_match(user):
                 if team == "match_data":
                     break
                 else:
-                    team_scores.append(edit_score_files(file).sum_team_score(team))
+                    team_scores.append(team + ": " + str(edit_score_files(file).sum_team_score(team)))
             if data['match_data']['created_by'] == user:
                 matches.append((file.strip('.json').replace('_', ' ').capitalize(), data, team_scores))
             #pulls every match out
