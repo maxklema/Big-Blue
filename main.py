@@ -207,7 +207,7 @@ def create_match():
                     return render_template('create_match.html', message="You have inputed an invalid value or an inapropriate value.")
             
             try:
-                new_match = match(request.form['coursename'], None, None, None, None, request.form['coursename'] + '.json', generate_code(6), None, request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0])
+                new_match = match(request.form['matchname'], request.form['coursename'], request.form['starttime'], request.form['endtime'], request.form['hometeam']+','+request.form['awayteam'], request.form['matchname'] + '.json', generate_code(6), request.form['matchpassword'], request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0])
                 db.session.add(new_match)
                 db.session.commit()
             except:
@@ -218,6 +218,12 @@ def create_match():
         return render_template('create_match.html')
     
     return redirect(url_for('error', msg='You must login to access this page.'))
+
+@app.route("edit_match/match", methods=["POST"])
+def edit_match(match):
+    if 'active_user' in session:
+        return render_template("error", msg="This page does not yet exits")
+    return render_template("error", msg="You do not have access to this site!")
 
 @app.route("/create_account", methods=['POST', 'GET'])
 def create_account():
