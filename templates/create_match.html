@@ -77,19 +77,64 @@
                         </div>
 
                         <div class="matchcourse">
-                            <div class="coursetext">
+                            <div class="matchtext">
+                                <h3>Name of Match</h3>
+                            </div>
+
+                            <div class="matchinput">
+                                <input type="text" name="matchname">
+
+                            </div>
+                        </div>
+
+                        <div class="matchcourselocation">
+                            <div class="matchtextcourse">
                                 <h3>Name of Course</h3>
                             </div>
 
-                            <div class="courseinput">
+                            <div class="matchinputcourse">
                                 <input type="text" name="coursename">
 
                             </div>
                         </div>
 
-                        <input id="creatematchbutton" type="submit" value="Create Match">
+                        <div class="timeofmatchstart">
+                            <div class="starttime">
+                                <h3>Match Start Date</h3>
+                            </div>
 
-                       
+                            <div class="starttimeinput">
+                                <input type="datetime-local" name="starttime">
+
+                            </div>
+                        </div>
+
+                        <div class="timeofmatchend">
+                            <div class="endtime">
+                                <h3>Match End Date</h3>
+                            </div>
+
+                            <div class="endtimeinput">
+                                <input type="datetime-local" name="endtime">
+
+                            </div>
+                        </div>
+
+
+                        <div class="matchpassword">
+                            <div class="passwordtext">
+                                <h3 id="passwordtextone">Match Password</h3>
+                                <p id="passwordtexttwo"><i>Note: match passwords are not required, but are recommended to prevent unwanted guests and players.</i></p>
+                            </div>
+
+                            <div class="passwordinput">
+                                <input type="text" name="matchinput" maxlength="15">
+
+                            </div>
+
+                        </div>
+
+                        <input id="creatematchbutton" type="submit" value="Create Match">
                         
 
 
