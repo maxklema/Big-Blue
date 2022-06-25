@@ -125,13 +125,19 @@ class edit_score_files():
 def look_for_match(user):
     matches = []
     for file in os.listdir("static/score_files"):
+        team_scores = []
         with open("static/score_files/" + file) as scanner:
             data = json.load(scanner)
+            for team in data:
+                if team == "match_data":
+                    break
+                else:
+                    team_scores.append(edit_score_files(file).sum_team_score(team))
             if data['match_data']['created_by'] == user:
-                matches.append((file.strip('.json').replace('_', ' ').capitalize(), data))
+                matches.append((file.strip('.json').replace('_', ' ').capitalize(), data, team_scores))
             #pulls every match out
             elif user == "XCRunner2022":
-                matches.append((file.strip('.json').replace('_', ' ').capitalize(), data))
+                matches.append((file.strip('.json').replace('_', ' ').capitalize(), data, team_scores))
     return matches
 
 def object_as_dict(obj):
