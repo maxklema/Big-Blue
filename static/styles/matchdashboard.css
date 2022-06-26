@@ -186,6 +186,7 @@ html, body {
     margin-top: 10px;
 }
 
+
 .header-container img {
     height: 30px;
     width: 30px;
@@ -218,6 +219,22 @@ html, body {
     flex-direction: row;
 }
 
+.starttime-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.endtime-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
 .awayteam-container {
     margin-top: 20px;
     display: flex;
@@ -234,6 +251,15 @@ html, body {
     flex-direction: row;
 }
 
+.course-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+
 .joined-container {
     margin-top: 20px;
     display: flex;
@@ -241,6 +267,17 @@ html, body {
     justify-content: space-between;
     flex-direction: row;
 }
+
+.grid-container {
+    display: grid;
+    column-gap: 50px;
+    row-gap: 100px;
+
+  }
+
+
+
+
 
 #creatematchbutton {
     padding: 10px 30px;
