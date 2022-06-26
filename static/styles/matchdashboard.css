@@ -270,9 +270,7 @@ html, body {
 
 .grid-container {
     display: grid;
-    column-gap: 50px;
-    row-gap: 100px;
-
+    grid-template-columns: auto auto auto;
   }
 
 
