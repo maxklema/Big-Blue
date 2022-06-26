@@ -219,10 +219,11 @@ def create_match():
     
     return redirect(url_for('error', msg='You must login to access this page.'))
 
-@app.route("/edit_match/<match>", methods=["POST"])
-def edit_match(match):
-    if 'active_user' in session:
-        return render_template("error", msg="This page does not yet exits")
+@app.route("/edit_match/<match_to_edit>", methods=["POST", "GET"])
+def edit_match(match_to_edit):
+    found_match = match.query.filter_by(match_name=match_to_edit).first()
+    if 'active_user' in session and session['active_user'][0] == found_match.created_by:
+        return render_template('edit_match.html', editing=found_match)
     return render_template("error", msg="You do not have access to this site!")
 
 @app.route("/create_account", methods=['POST', 'GET'])
