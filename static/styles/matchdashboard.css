@@ -63,16 +63,17 @@ header .navigation li a:hover {
 
 
 footer  {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     display: flex;
     align-items: center;
     justify-content: left;
-    background-color: rgb(80 94 110);
+    background-color: rgba(5, 20, 39, 0.699);
     width: 100%;
-    z-index: 9;
+    z-index: -1;
     padding: 5px 100px;
+    clear: both;
 
 }
 
@@ -202,6 +203,24 @@ html, body {
 
 }
 
+.event-container h2 {
+    margin-right: 10px;
+}
+
+.password-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+
+}
+
+.password-container h2 {
+    margin-right: 10px;
+}
+
+
 
 .matchttype-container {
     margin-top: 20px;
@@ -209,6 +228,10 @@ html, body {
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+}
+
+.matchttype-container h2 {
+    margin-right: 10px;
 }
 
 .hometeam-container {
@@ -219,12 +242,20 @@ html, body {
     flex-direction: row;
 }
 
+.hometeam-container h2 {
+    margin-right: 10px;
+}
+
 .starttime-container {
     margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+}
+
+.starttime-container h2 {
+    margin-right: 10px;
 }
 
 .endtime-container {
@@ -235,12 +266,20 @@ html, body {
     flex-direction: row;
 }
 
+.endtime-container h2 {
+    margin-right: 10px;
+}
+
 .awayteam-container {
     margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+}
+
+.awayteam-container h2 {
+    margin-right: 10px;
 }
 
 .total-container {
@@ -251,12 +290,20 @@ html, body {
     flex-direction: row;
 }
 
+.total-container h2 {
+    margin-right: 10px;
+}
+
 .course-container {
     margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+}
+
+.course-container h2 {
+    margin-right: 10px;
 }
 
 
@@ -266,6 +313,10 @@ html, body {
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+}
+
+.joined-container h2 {
+    margin-right: 10px;
 }
 
 .grid-container {
@@ -385,5 +436,57 @@ html, body {
     } 
 
 
+}
+
+
+@media (max-width: 1800px){
+    .grid-container{
+        grid-template-columns: auto auto;
+    }
+}
+
+@media (max-width: 1091px){
+    .grid-container{
+        grid-template-columns: auto;
+    }
+}
+
+@media (max-width: 550px){
+    .matchdetail {
+        width: 95%;
+    }
+    .eventtype-container {
+        font-size: 0.8em;
+    }
+    .matchttype-container {
+        font-size: 0.8em;
+    }
+    .hometeam-container {
+        font-size: 0.8em;
+    }
+    .awayteam-container {
+        font-size: 0.8em;
+    }
+    .starttime-container {
+        font-size: 0.8em;
+    }
+    .endtime-container {
+        font-size: 0.8em;
+    }
+    .course-container {
+        font-size: 0.8em;
+    }
+    .total-container {
+        font-size: 0.8em;
+    }
+    .joined-container {
+        font-size: 0.8em;
+    }
+    .header-container h1 {
+        font-size: 1.6em;
+    }
+    .password-container {
+        font-size: 0.8em;
+    }
 }
 
