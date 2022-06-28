@@ -11,97 +11,100 @@
     <div id="container">
         <div class="main">
             <div class="grid-container">
-            {% for item in data %}
-            <div class="grid-item">
-                <body>
-                    <div class="joincode-container">
-                        <div class="joincode">
-                            <div class="joinimage">
-                                <img src="{{ url_for('static', filename='logo graphics/joinicon.png') }}">
-                            </div>
-                            <div class="joininfo">
-                                <h4>Match Join Code</h4>
-                                <h1>{{item.match_code}}</h1>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-                    <div class="matchdetail-container">
-                        <div class="matchdetail">
-                            
-
-                            <div class="matchcontent-container">
-                                <div class="matchcontent">
-                                    <div class="header-container">
-                                        <h1>Match Details for {{item.match_name}}</h1>
-                                    </div>
-                                    <div class="eventtype-container">
-                                        <h2>Event Type</h2>
-                                        <h4>{{item.event_type}}</h4>
-                                    </div>
-            
-                                    <div class="matchttype-container">
-                                        <h2>Match Type</h2>
-                                        <h4>{{item.match_type}}</h4>
-                                    </div>
-
-                                    <div class="hometeam-container">
-                                        <h2>Home Team</h2>
-                                        <h4>N/A</h4>
-                                    </div>
-
-                                    <div class="awayteam-container">
-                                        <h2>Away Team</h2>
-                                        <h4>N/A</h4>
-                                    </div>
-
-                                    <div class="starttime-container">
-                                        <h2>Start Time</h2>
-                                        <h4>{{item.start_time}}</h4>
-                                    </div>
-                                    
-                                    <div class="endtime-container">
-                                        <h2>End Time</h2>
-                                        <h4>{{item.end_time}}</h4>
-                                    </div>
-
-                                    <div class="course-container">
-                                        <h2>Course Name</h2>
-                                        <h4>{{item.match_course}}</h4>
-                                    </div>
-
-                                    <div class="total-container">
-                                        <h2>Total Players/Spots</h2>
-                                        <h4>{{item.total_players}}</h4>
-                                    </div>
-                                    
-                                    <div class="joined-container">
-                                        <h2>Players Joined</h2>
-                                        <h4>Comming Soon</h4>
-                                    </div>
-
-                                    
+                {% for item in data %}
+                <div class="grid-item">
+                    <body>
+                        <div class="joincode-container">
+                            <div class="joincode">
+                                <div class="joinimage">
+                                    <img src="{{ url_for('static', filename='logo graphics/joinicon.png') }}">
                                 </div>
+                                <div class="joininfo">
+                                    <h4>Match Join Code</h4>
+                                    <h1>{{item.match_code}}</h1>
+                                </div>
+
                             </div>
-
-                            <input id="creatematchbutton" type="submit" value="Start Live Scoring">
-                            
-                            <div class="editbuttons" style="margin-top: 10px; margin-bottom: 5px;">
-                                <a href="/edit_match/{{item.match_name}}"><img style="height: 40px; width: 40px;" src="{{ url_for('static', filename='logo graphics/pencilicon.png') }}"></a>
-                                <a href="/edit_match/{{item.match_name}}"><img style="margin-left: 10px; height: 40px; width: 40px;" src="{{ url_for('static', filename='logo graphics/trashcan.png') }}"></a>
-                            </div>
-                            
-
-
-
                         </div>
 
 
-                    </div>
-                </body>
+                        <div class="matchdetail-container">
+                            <div class="matchdetail">
+                                
+
+                                <div class="matchcontent-container">
+                                    <div class="matchcontent">
+                                        <div class="header-container">
+                                            <h1>Match Details for {{item.match_name}}</h1>
+                                        </div>
+                                        <div class="eventtype-container">
+                                            <h2>Event Type</h2>
+                                            <h4>{{item.event_type}}</h4>
+                                        </div>
+                
+                                        <div class="matchttype-container">
+                                            <h2>Match Type</h2>
+                                            <h4>{{item.match_type}}</h4>
+                                        </div>
+
+                                        <div class="hometeam-container">
+                                            <h2>Home Team</h2>
+                                            <h4>N/A</h4>
+                                        </div>
+
+                                        <div class="awayteam-container">
+                                            <h2>Away Team</h2>
+                                            <h4>N/A</h4>
+                                        </div>
+
+                                        <div class="starttime-container">
+                                            <h2>Start Time</h2>
+                                            <h4>{{item.start_time}}</h4>
+                                        </div>
+                                        
+                                        <div class="endtime-container">
+                                            <h2>End Time</h2>
+                                            <h4>{{item.end_time}}</h4>
+                                        </div>
+
+                                        <div class="course-container">
+                                            <h2>Course Name</h2>
+                                            <h4>{{item.match_course}}</h4>
+                                        </div>
+
+                                        <div class="total-container">
+                                            <h2>Total Players/Spots</h2>
+                                            <h4>{{item.total_players}}</h4>
+                                        </div>
+                                        
+                                        <div class="joined-container">
+                                            <h2>Players Joined</h2>
+                                            <h4>Comming Soon</h4>
+                                        </div>
+
+                                        
+                                    </div>
+                                </div>
+
+                                <input id="creatematchbutton" type="submit" value="Start Live Scoring">
+                                
+                                <div class="editbuttons" style="margin-top: 10px; margin-bottom: 5px;">
+                                    <a href="/edit_match/{{item.match_name}}"><img style="height: 40px; width: 40px;" src="{{ url_for('static', filename='logo graphics/pencilicon.png') }}"></a>
+                                    <a href="/edit_match/{{item.match_name}}"><img style="margin-left: 10px; height: 40px; width: 40px;" src="{{ url_for('static', filename='logo graphics/trashcan.png') }}"></a>
+                                </div>
+                                
+
+
+
+                            </div>
+
+
+                        </div>
+                    </body>
+                </div>
+                {% endfor %}
             </div>
+
         </div>
     </div>
             
@@ -116,6 +119,6 @@
 
             </footer>
         </div>
-        {% endfor %}
+        
     </div>
 {% endblock %}
