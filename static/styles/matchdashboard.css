@@ -121,7 +121,7 @@ html, body {
 .joincode {
     max-height: 1000px;
     width: 300px;
-    background-color: #1B63C2;
+    background-color: #124382;
     padding: 10px 20px;
     border-radius: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -155,7 +155,7 @@ html, body {
 .matchdetail {
     max-height: 1000px;
     width: 500px;
-    background-color: #1B63C2;
+    background-color: #1856A8;
     padding: 10px 20px;
     border-radius: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -174,7 +174,7 @@ html, body {
 .matchcontent {
     max-height: 900px;
     width: 95%;
-    background-color: #1B63C2;
+    background-color: #1856A8;
     text-align: left;
 
 }
