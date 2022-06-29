@@ -164,6 +164,7 @@ footer  {
     width: 100%;
     position: relative;
     border-radius: 10px;
+    object-fit: cover;
     
    
 }
@@ -176,6 +177,7 @@ footer  {
 
 #profilepicture {
     width: 130px;
+    object-fit: cover;
     height: 130px;
     border-radius: 100%;
     transform: translateY(-65px);
