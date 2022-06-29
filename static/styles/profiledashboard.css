@@ -1,7 +1,12 @@
 
 @font-face {
-    font-family: bigBlueBold;
+    font-family: BigBlueBold;
     src: url(Montserrat-Bold.ttf);
+}
+
+@font-face {
+    font-family: BigBlueNormal;
+    src: url(Montserrat-Regular.ttf);
 }
 
 
@@ -106,6 +111,7 @@ footer .footertext p{
 footer .footertext p:hover{
     color: #F0F0FF;
     cursor: pointer;
+    z-index: 2;
  }
 
 
@@ -116,6 +122,8 @@ html, body {
 #container {
     position: relative;
     min-height: 100%;
+    
+    
 
 }
 
@@ -133,6 +141,110 @@ footer  {
     clear: both;
 
 }
+
+.page-container { 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.mainsection {
+    width: 700px;
+    height: 2000px;
+    background-color: rgb(235, 235, 235);
+    margin-right: 50px;
+    border-radius: 10px;
+    
+
+}
+
+#banner {
+    height: 200px;
+    width: 100%;
+    position: relative;
+    border-radius: 10px;
+    
+   
+}
+
+.profilepicture-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+#profilepicture {
+    width: 130px;
+    height: 130px;
+    border-radius: 100%;
+    transform: translateY(-65px);
+    position: absolute;
+    box-shadow: rgb(235, 235, 235) 0px 0px 0px 10px;
+}
+
+.sidesection {
+    width: 400px;
+    height: 200px;
+    background-color: rgb(235, 235, 235);
+}
+
+.name-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 75px;
+}
+
+.name-container img {
+    width: 26px;
+    height: 26px;
+    margin-left: 5px;
+}
+
+#username {
+    text-align: center;
+}
+
+#bio {
+    padding: 15px 10px;
+    text-align: center;
+    font-family: BigBlueNormal;
+}
+
+.edit-profile-container {
+    display: flex;
+    justify-content: right;
+    padding-right: 20px;
+
+}
+
+.edit-profile-container button{
+    position: absolute;
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 10px;
+    font-size: 1.2em;
+    background-color: #2176e8;
+    color: #F0F0FF;
+}
+
+
+.edit-profile-container button:hover{
+    background-color: #1a60bd;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
 
 
 @media (max-width: 500px){

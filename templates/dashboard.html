@@ -10,8 +10,27 @@
     <div id="container">
         <div class="main">
             <body>
-                <div class="grid-container">
-                    
+                <div class="page-container">
+                    <div class="mainsection">
+                        <img id="banner" src="{{ url_for('static', filename='logo graphics/testbanner.png') }}" alt="">
+                        <div class="profilepicture-container">
+                            <img id="profilepicture" src="{{ url_for('static', filename='logo graphics/errorpagephoto.jpg') }}" alt="">
+                        </div>
+                        <div class="edit-profile-container">
+                            <button>Edit Profile</button>
+                        </div>
+                        
+                        <div class="name-container">
+                            <h2>Maxwell Klema</h2>
+                            <img src="{{ url_for('static', filename='logo graphics/verify.png') }}" alt="">
+                        </div>
+                        <p id="username">@agileinx</p>
+                        <p id="bio">Co-Founder of Defle and Big Blue</p>
+
+                    </div>
+                    <div class="sidesection">
+
+                    </div>
                 </div>
             </body>
         
