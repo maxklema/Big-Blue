@@ -58,7 +58,7 @@ class match(db.Model):
     match_type = db.Column(db.String(25))
     start_time = db.Column(db.String(25))
     end_time = db.Column(db.String(25))
-    participating_teams = (db.String(500))
+    participating_teams = (db.String(100))
     total_players = db.Column(db.Integer)
     scores_file = (db.String(50))
     match_code = db.Column(db.String(6))
@@ -233,7 +233,7 @@ def edit_match(match_to_edit):
             try:
                 found_match.event_type = request.form['eventtype']
                 found_match.match_type = request.form['matchtype']
-                found_match.participating_teams = request.form['hometeam'] +","+request.form['awayteam']
+                found_match.participating_teams = str(request.form['hometeam'] +","+request.form['awayteam'])
                 found_match.total_players = request.form['numberofplayers']
                 found_match.match_name = request.form['matchname']
                 found_match.course_name = request.form['coursename']
@@ -241,6 +241,7 @@ def edit_match(match_to_edit):
                 found_match.end_time = request.form['endtime']
                 found_match.match_password = request.form['matchpassword']
                 db.session.commit()
+                print(found_match.participating_teams)
             except:
                 redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
             
