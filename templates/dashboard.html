@@ -1,20 +1,30 @@
+{% extends "indexcontentcoachlogin.html" %}
 {% block content %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-    <title>{{ name }}'s Dashboard</title>
-    <h1>Hello {{ name }}</h1>
-    <h2>Your recent matches:</h2>
-    {% for match in matches %}
-        <div style="border-color: black; border-radius: 5%; border-style: solid;">
-            <h3 style="color:#2176e8">{{ match[0] }}</h3>
-            {% for item in match[1] %}
-                <p>Team: {{item}}</p>
-                <ul>
-                    {% for person in match[1][item] %}
-                        <li><i>{{person}}:{{match[1][item][person]}}</i></li>
-                    {% endfor %}
-                </ul><br>
-            {% endfor %}
-            <button>Edit this Match</button>
+
+<html>
+        <head>
+            <title>Big Blue | Match Dashboard</title>
+            <link rel="stylesheet" href="{{ url_for('static', filename='styles/profiledashboard.css') }}">
+        </head>
+
+    <div id="container">
+        <div class="main">
+            <body>
+                <div class="grid-container">
+                    
+                </div>
+            </body>
+        
+            <footer>
+                <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
+                <div class="footertext">
+                    <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+                </div>
+
+
+
+            </footer>
         </div>
-    {% endfor %}
+        
+    </div>
 {% endblock %}
