@@ -240,6 +240,38 @@ footer  {
 }
 
 
+.profileinfo {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.calender {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 30px;
+}
+
+.calender img {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
+
+.school {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.school img {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
 
 
 
