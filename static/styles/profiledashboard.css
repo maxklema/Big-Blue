@@ -151,7 +151,7 @@ footer  {
 
 .mainsection {
     width: 700px;
-    height: 2000px;
+    max-height: 100000px;
     background-color: rgb(235, 235, 235);
     margin-right: 50px;
     border-radius: 10px;
@@ -206,7 +206,8 @@ footer  {
 }
 
 #username {
-    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 #bio {
@@ -246,6 +247,7 @@ footer  {
     justify-content: center;
     flex-direction: row;
     margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .calender {
@@ -271,6 +273,32 @@ footer  {
     height: 20px;
     width: 20px;
     margin-right: 10px;
+}
+
+.profilebuttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 25px;
+}
+
+.profilebuttons button {
+    padding: 15px 50px;
+
+    border: none;
+    margin-top: 10px;
+    font-size: 1.6em;
+    background-color: rgb(235, 235, 235);
+    color: #414141;
+    cursor: pointer;
+}
+
+.profilebuttons button:hover {
+    background-color: rgb(207, 206, 206);
+    border-bottom-color: #2176e8;
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
 }
 
 
