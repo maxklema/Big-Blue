@@ -147,13 +147,13 @@ footer  {
     flex-direction: row;
     justify-content: center;
     margin-top: 20px;
+   
 }
 
 .mainsection {
     width: 700px;
     max-height: 100000px;
     background-color: rgb(235, 235, 235);
-    margin-right: 50px;
     border-radius: 10px;
     
 
@@ -215,6 +215,170 @@ footer  {
     text-align: center;
     font-family: BigBlueNormal;
 }
+
+.popup4 .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: #ffffff;
+    width: 650px;
+    height: 600px;
+    z-index: 2;
+    text-align: center;
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    border-radius: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 50px 20px;
+}
+
+.popup4 .close-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background: #2176e8;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.popup4 .close-btn:hover {
+    background: #1a60bd;
+}
+
+.popup4.active .overlay{
+    display: block;
+
+}
+
+.popup4 .overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    display: none;
+}
+
+.popup4.active .content {
+    transition: all 700ms ease-in-out;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.content button {
+    padding: 15px 35px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 20px;
+    font-size: 1.6em;
+    background-color: #2176e8;
+    color: #F0F0FF;
+    cursor: pointer;
+}
+
+.content button:hover {
+    background-color: #1a60bd;
+}
+
+.content h2 {
+    font-size: 2em;
+}
+
+.editfields {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.changeschool {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+.changeschool h5 {
+    text-align: left;
+}
+
+.changeschool input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.1em;
+    max-width: 240px;
+    border-style: solid;
+    border-color:rgb(0, 0, 0);
+    border-width: 1px;
+}
+
+.changename {
+    display: flex;
+    flex-direction: column;
+ 
+}
+
+.changename h5 {
+    text-align: left;
+}
+
+.changename input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.1em;
+    max-width: 240px;
+    border-style: solid;
+    border-color:rgb(0, 0, 0);
+    border-width: 1px;
+}
+
+.changebio-container {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.changebio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+ 
+}
+
+.changebio h5 {
+    text-align: left;
+}
+
+.changebio textarea {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 0.9em;
+    width: 500px;
+    height: 100px;
+    resize: none;
+    border-style: solid;
+    border-color:rgb(0, 0, 0);
+    border-width: 1px;
+}
+
+
+
 
 .edit-profile-container {
     display: flex;
@@ -285,7 +449,6 @@ footer  {
 
 .profilebuttons button {
     padding: 15px 50px;
-
     border: none;
     margin-top: 10px;
     font-size: 1.6em;

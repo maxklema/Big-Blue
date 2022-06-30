@@ -17,7 +17,7 @@
                             <img id="profilepicture" src="{{ url_for('static', filename='logo graphics/errorpagephoto.jpg') }}" alt="">
                         </div>
                         <div class="edit-profile-container">
-                            <button>Edit Profile</button>
+                            <button onclick="togglepopupsocialmedia()">Edit Profile</button>
                         </div>
                         
                         <div class="name-container">
@@ -38,6 +38,39 @@
                             </div>
                             
                             
+                        </div>
+
+                        <div class="popup4" id="popup-socialmedia">
+                            <div class="overlay"></div>
+                            <div class="content" id="lightcontentsocialmedia">
+                                <div class="close-btn" onclick="togglepopupsocialmedia()">&times;</div>
+                                
+                                <h2>Edit My Profile</h2>
+                                <button>Random Profile Banner</button>
+                                <div class="editfields">
+                                    <div class="changeschool">
+                                        <h5>School</h5>
+                                        <input type="text" maxlength="25">
+                                    </div>
+                                    <div class="changename">
+                                        <h5>Name</h5>
+                                        <input type="text" maxlength="25">
+                                    </div>
+                                </div>
+                                <div class="changebio-container">
+                                    <div class="changebio">
+                                        <h5>Bio</h5>
+                                       <textarea name="bio" id="" cols="30" rows="10"></textarea>
+                                    </div>
+                                </div>
+                               
+
+
+
+
+
+
+                            </div>
                         </div>
 
                         <!--
@@ -70,4 +103,13 @@
         </div>
         
     </div>
+    <script>
+        
+
+        function togglepopupsocialmedia() {
+            document.getElementById("popup-socialmedia").classList.toggle("active");
+        }
+
+    </script>
+</html>
 {% endblock %}
