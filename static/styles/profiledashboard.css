@@ -230,7 +230,10 @@ footer  {
     color: rgb(0, 0, 0);
     border-radius: 20px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    padding: 50px 20px;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 40px;
+    padding-bottom: 30px;
 }
 
 .popup4 .close-btn {
@@ -275,18 +278,38 @@ footer  {
     transform: translate(-50%, -50%) scale(1);
 }
 
-.content button {
-    padding: 15px 35px;
+.choosebanner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.choosebanner img {
+    height: 40px;
+    width: 140px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #F0F0F0;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 30px;
+
+}
+
+.choosebanner button {
+    padding: 10px 15px;
     border-radius: 20px;
     border: none;
-    margin-top: 20px;
-    font-size: 1.6em;
+    font-size: 1.3em;
     background-color: #2176e8;
     color: #F0F0FF;
     cursor: pointer;
+
 }
 
-.content button:hover {
+.choosebanner button:hover {
     background-color: #1a60bd;
 }
 
@@ -296,7 +319,7 @@ footer  {
 
 .editfields {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: row;
     margin-top: 20px;
@@ -305,7 +328,7 @@ footer  {
 .changeschool {
     display: flex;
     flex-direction: column;
-    margin-right: 20px;
+
 }
 
 .changeschool h5 {
@@ -349,13 +372,14 @@ footer  {
 .changebio-container {
     display: flex;
     margin-top: 20px;
-    justify-content: center;
+    justify-content: left;
+    
 }
 
 .changebio {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: left;
  
 }
 
@@ -369,7 +393,7 @@ footer  {
     border: none;
     margin-top: 5px;
     font-size: 0.9em;
-    width: 500px;
+    width: 530px;
     height: 100px;
     resize: none;
     border-style: solid;
@@ -377,6 +401,13 @@ footer  {
     border-width: 1px;
 }
 
+.editfields-container {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
 
 
 
@@ -412,6 +443,57 @@ footer  {
     flex-direction: row;
     margin-top: 20px;
     margin-bottom: 30px;
+}
+
+.changeprofilepicture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.changeprofilepicture img {
+    object-fit: cover;
+    height: 75px;
+    width: 75px;
+    border-radius: 100%;
+    border-style: solid;
+    border-color: #F0F0FF;
+    border-width: 2px;
+    margin-right: 30px;
+}
+
+.changeprofilepicture button {
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: none;
+    font-size: 1.3em;
+    background-color: #2176e8;
+    color: #F0F0FF;
+    cursor: pointer;
+}
+
+.changeprofilepicture button:hover {
+    background-color: #1a60bd;
+    cursor: pointer;
+}
+
+#savechanges {
+    padding: 15px 15px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 20px;
+    font-size: 1.6em;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: #F0F0F0;
+    color: #000000;
+    cursor: pointer;
+}
+
+#savechanges:hover {
+    background-color: #e0e0e0;
 }
 
 .calender {
@@ -456,6 +538,8 @@ footer  {
     color: #414141;
     cursor: pointer;
 }
+
+
 
 .profilebuttons button:hover {
     background-color: rgb(207, 206, 206);
