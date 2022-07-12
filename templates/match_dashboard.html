@@ -49,12 +49,12 @@
 
                                         <div class="hometeam-container">
                                             <h2>Home Team</h2>
-                                            <h4>{{item.participating_teams}}</h4>
+                                            <h4>{{item.teams1}}</h4>
                                         </div>
 
                                         <div class="awayteam-container">
                                             <h2>Away Team</h2>
-                                            <h4>{{item.participating_teams}}</h4>
+                                            <h4>{{item.teams1}}</h4>
                                         </div>
 
                                         <div class="starttime-container">
@@ -95,7 +95,7 @@
                                 
                                 <div class="editbuttons" style="margin-top: 10px; margin-bottom: 5px;">
                                     <a href="/edit_match/{{item.match_name}}"><img style="height: 40px; width: 40px;" src="{{ url_for('static', filename='logo graphics/pencilicon.png') }}"></a>
-                                    <a href="/edit_match/{{item.match_name}}"><img style="margin-left: 10px; height: 40px; width: 40px;" src="{{ url_for('static', filename='logo graphics/trashcan.png') }}"></a>
+                                    <a href="/delete_match/{{item.match_name}}"><img style="margin-left: 10px; height: 40px; width: 40px;" src="{{ url_for('static', filename='logo graphics/trashcan.png') }}"></a>
                                 </div>
                                 
 

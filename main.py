@@ -58,19 +58,19 @@ class match(db.Model):
     match_type = db.Column(db.String(25))
     start_time = db.Column(db.String(25))
     end_time = db.Column(db.String(25))
-    participating_teams = (db.String(100))
+    teams1 = (db.String())
     total_players = db.Column(db.Integer)
     scores_file = (db.String(50))
     match_code = db.Column(db.String(6))
     match_password = db.Column(db.String())
     created_by = db.Column(db.String())
 
-    def __init__(self, match_name, match_course, start_time, end_time, participating_teams, scores_file, match_code, match_password, event_type, match_type, total_players, created_by):
+    def __init__(self, match_name, match_course, start_time, end_time, teams1, scores_file, match_code, match_password, event_type, match_type, total_players, created_by):
         self.match_name = match_name
         self.match_course = match_course
         self.start_time = start_time
         self.end_time = end_time
-        self.participating_teams = participating_teams
+        self.teams1 = teams1
         self.scores_file = scores_file
         self.match_code = match_code
         self.match_password = match_password
@@ -207,7 +207,7 @@ def create_match():
                     return render_template('create_match.html', message="You have inputed an invalid value or an inapropriate value.")
             
             try:
-                new_match = match(request.form['matchname'], request.form['coursename'], request.form['starttime'], request.form['endtime'], request.form['hometeam']+','+request.form['awayteam'], request.form['matchname'] + '.json', generate_code(6), request.form['matchpassword'], request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0])
+                new_match = match(request.form['matchname'], request.form['coursename'], request.form['starttime'], request.form['endtime'], request.form['hometeam']+','+request.form['awayteam'], request.form['matchname'], generate_code(6), request.form['matchpassword'], request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0])
                 db.session.add(new_match)
                 db.session.commit()
             except:
@@ -233,7 +233,7 @@ def edit_match(match_to_edit):
             try:
                 found_match.event_type = request.form['eventtype']
                 found_match.match_type = request.form['matchtype']
-                found_match.participating_teams = str(request.form['hometeam'] +","+request.form['awayteam'])
+                found_match.teams1 = str(request.form['hometeam'] +","+request.form['awayteam'])
                 found_match.total_players = request.form['numberofplayers']
                 found_match.match_name = request.form['matchname']
                 found_match.course_name = request.form['coursename']
@@ -241,7 +241,7 @@ def edit_match(match_to_edit):
                 found_match.end_time = request.form['endtime']
                 found_match.match_password = request.form['matchpassword']
                 db.session.commit()
-                print(found_match.participating_teams)
+                print(found_match.teams1)
             except:
                 redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
             
@@ -250,6 +250,15 @@ def edit_match(match_to_edit):
         return render_template('edit_match.html', editing=found_match)
 
     return render_template("error", msg="You do not have access to this site!")
+
+@app.route("/delete_match/<match_to_delete>")
+def delete_match(match_to_delete):
+    found_match = match.query.filter_by(match_name=match_to_delete).first()
+    if 'active_user' in session and session['active_user'][0] == found_match.created_by:
+        db.session.delete(found_match)
+        db.session.commit()
+        return redirect(url_for("match_dashboard"))
+    return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/create_account", methods=['POST', 'GET'])
 def create_account():
