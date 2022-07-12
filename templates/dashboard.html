@@ -12,20 +12,26 @@
             <body>
                 <div class="page-container">
                     <div class="mainsection">
-                        <img id="banner" src="{{ url_for('static', filename='logo graphics/BigBlueBanner10.png') }}" alt="">
+                        <img id="banner" src="{{ url_for('static', filename='logo graphics/BigBlueBanner9.png') }}" alt="">
                         <div class="profilepicture-container">
-                            <img id="profilepicture" src="{{ url_for('static', filename='logo graphics/errorpagephoto.jpg') }}" alt="">
+                            <img id="profilepicture" src="{{ url_for('static', filename='logo graphics/user_photos/DatabaseOutline.jpg') }}" alt="">
                         </div>
                         <div class="edit-profile-container">
                             <button onclick="togglepopupsocialmedia()">Edit Profile</button>
                         </div>
                         
                         <div class="name-container">
-                            <h2>Maxwell Klema</h2>
+                            <h2>{{data.name}}</h2>
                             <img src="{{ url_for('static', filename='logo graphics/verify.png') }}" alt="">
                         </div>
-                        <p id="username">@agileinx • Coach</p>
-                        <p id="bio">Co-Founder of Defle and Big Blue</p>
+                        <p id="username">@{{data.username}} • 
+                            {% if data.rank == 'c' %}
+                                Coach
+                            {% elif data.rank == 'p' %}
+                                Player
+                            {% endif %}
+                        </p>
+                        <p id="bio">{{data.bio}}</p>
 
                         <div class="profileinfo">
                             <div class="calender">
@@ -34,7 +40,7 @@
                             </div>
                             <div class="school">
                                 <img src="{{ url_for('static', filename='logo graphics/schoolicon.png') }}" alt="">
-                                <p>Homestead High School</p>
+                                <p>{{data.team}}</p>
                             </div>
                             
                             
@@ -45,36 +51,37 @@
                             <div class="content" id="lightcontentsocialmedia">
                                 <div class="close-btn" onclick="togglepopupsocialmedia()">&times;</div>
                                 
-                            
-                                <div class="editfields-container">
-                                    <h2>Edit My Profile</h2>
-                                    <div class="choosebanner">
-                                        <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner10.png') }}" alt="">
-                                        <button>Random Profile Banner</button>
-                                    </div>
-                                    
-                                    <div class="editfields">
-                                        <div class="changeschool">
-                                            <h5>School</h5>
-                                            <input type="text" maxlength="25">
+                                <form method="post" action="#">
+                                    <div class="editfields-container">
+                                        <h2>Edit My Profile</h2>
+                                        <div class="choosebanner">
+                                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner10.png') }}" alt="">
+                                            <button>Random Profile Banner</button>
                                         </div>
-                                        <div class="changename">
-                                            <h5>Name</h5>
-                                            <input type="text" maxlength="25">
+                                        
+                                        <div class="editfields">
+                                            <div class="changeschool">
+                                                <h5>School</h5>
+                                                <input name="team" type="text" maxlength="25" value="{{data.team}}">
+                                            </div>
+                                            <div class="changename">
+                                                <h5>Name</h5>
+                                                <input name="name" type="text" maxlength="25" value="{{data.name}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="changebio-container">
-                                        <div class="changebio">
-                                            <h5>Bio</h5>
-                                            <textarea name="bio" id="" cols="30" rows="10"></textarea>
+                                        <div class="changebio-container">
+                                            <div class="changebio">
+                                                <h5>Bio</h5>
+                                                <textarea name="bio" id="" cols="30" rows="10" value="{{data.bio}}"></textarea>
+                                            </div>
                                         </div>
+                                        <div class="changeprofilepicture">
+                                            <img src="{{ url_for('static', filename='logo graphics/errorpagephoto.jpg') }}" alt="">
+                                            <button>Upload Profile Picture</button>
+                                        </div>
+                                        <input type="submit" id="savechanges">
                                     </div>
-                                    <div class="changeprofilepicture">
-                                        <img src="{{ url_for('static', filename='logo graphics/errorpagephoto.jpg') }}" alt="">
-                                        <button>Upload Profile Picture</button>
-                                    </div>
-                                    <button id="savechanges">Save Changes</button>
-                                </div>
+                                </form>
                                
 
 

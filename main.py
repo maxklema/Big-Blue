@@ -176,6 +176,8 @@ def error(msg):
 #needs to render a message when password is incorect. 
 @app.route("/login", methods=["POST", "GET"])
 def login():
+    if 'active_user' in session:
+        return redirect(url_for('dashboard'))
     if request.method == "POST":
 
         username_input = request.form['username']
@@ -190,10 +192,22 @@ def login():
 
     return render_template("login.html")
 
-@app.route("/dashboard", methods=['GET'])
+@app.route("/dashboard", methods=['GET', 'POST'])
 def dashboard():
+    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     if 'active_user' in session:
-        return render_template("dashboard.html", name=session['active_user'][1], matches=look_for_match(session['active_user'][0]))
+        if request.method == "POST":
+            for item in request.form:
+                if request.form[item] == "" or sanitize_inputs(request.form[item]):
+                    return redirect(url_for('error', msg="Sorry, you have input an inapropriate or non-existant value. Please try again."))
+
+            found_user.team = request.form['team']
+            found_user.name = request.form['name']
+            found_user.bio = request.form['bio']
+
+            db.session.commit()
+
+        return render_template("dashboard.html", data=found_user)
     return redirect(url_for('error', msg="You must login to access this page."))
 
 @app.route("/create_match", methods=['GET', 'POST'])
