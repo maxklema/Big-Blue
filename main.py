@@ -222,7 +222,7 @@ def dashboard():
 
 @app.route("/create_match", methods=['GET', 'POST'])
 def create_match():
-    if 'active_user' in session:
+    if 'active_user' in session and session['active_user'][2] == "c":
         if request.method == "POST":
             for item in request.form:
                 if request.form[item] == "" or sanitize_inputs(request.form[item]):
@@ -241,12 +241,12 @@ def create_match():
         
         return render_template('create_match.html')
     
-    return redirect(url_for('error', msg='You must login to access this page.'))
+    return redirect(url_for('error', msg='You do not have access to this page.'))
 
 @app.route("/edit_match/<match_to_edit>", methods=["POST", "GET"])
 def edit_match(match_to_edit):
     found_match = match.query.filter_by(match_name=match_to_edit).first()
-    if 'active_user' in session and session['active_user'][0] == found_match.created_by:
+    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "c":
         if request.method == "POST":
             for item in request.form:
                 if request.form[item] == "" or sanitize_inputs(request.form[item]):
@@ -278,7 +278,7 @@ def edit_match(match_to_edit):
 @app.route("/delete_match/<match_to_delete>")
 def delete_match(match_to_delete):
     found_match = match.query.filter_by(match_name=match_to_delete).first()
-    if 'active_user' in session and session['active_user'][0] == found_match.created_by:
+    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "c":
         db.session.delete(found_match)
         db.session.commit()
         return redirect(url_for("match_dashboard"))
