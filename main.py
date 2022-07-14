@@ -13,7 +13,7 @@ app.secret_key = "max"
 app.permanent_session_lifetime = timedelta(minutes=60)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///webdata.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-UPLOAD_FOLDER = '/static/logo graphics/user_photos'
+UPLOAD_FOLDER = 'static/logo graphics/user_photos'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 characters = list(string.ascii_letters + string.digits + "!@#$")
@@ -195,7 +195,7 @@ def login():
         found_user = users.query.filter_by(username=username_input).first()
         
         if found_user and found_user.username == username_input and found_user.password == password_input:
-            session['active_user'] = [found_user.username, found_user.name]
+            session['active_user'] = [found_user.username, found_user.name, found_user.rank]
             return redirect(url_for('dashboard'))
         else:
             return render_template("login.html", message="Username and password were incorrect! Please try again.")
@@ -322,13 +322,25 @@ def upload_profile_pic():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return 'File was uploaded sucsessfully.',200
+        else:
+            return redirect(url_for("error", msg="Sorry, there was a problem uploading your file. You might need to contact customer suport!"))
 
         found_user = users.query.filter_by(username=request.form['username']).first()
+        if found_user.pic != 'defaultprofilepicture.png':
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], found_user.pic))
         found_user.pic = file.filename
         db.session.commit()
+
+        return 'File was uploaded sucsessfully.',200
     
     return redirect(url_for('error', msg="You do not have access to this site"))
+
+@app.route("/test_upload")
+def test_upload():
+    if 'active_user' in session:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+        return render_template("upload_test.html", data=found_user)
+    return redirect(url_for('error', msg="Sorry, you do not have access to this site."))
 
 @app.route("/logout")
 def logout():
