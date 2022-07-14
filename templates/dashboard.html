@@ -3,7 +3,7 @@
 
 <html>
         <head>
-            <title>Big Blue | Match Dashboard</title>
+            <title>Big Blue | User Dashboard</title>
             <link rel="stylesheet" href="{{ url_for('static', filename='styles/profiledashboard.css') }}">
         </head>
 
@@ -14,7 +14,7 @@
                     <div class="mainsection">
                         <img id="banner" src="{{ url_for('static', filename='logo graphics/BigBlueBanner9.png') }}" alt="">
                         <div class="profilepicture-container">
-                            <img id="profilepicture" src="{{ url_for('static', filename='logo graphics/user_photos/DatabaseOutline.jpg') }}" alt="">
+                            <img id="profilepicture" src="{{ url_for('static', filename='logo graphics/user_photos/' + data.pic) }}" alt="">
                         </div>
                         <div class="edit-profile-container">
                             <button onclick="togglepopupsocialmedia()">Edit Profile</button>
@@ -22,7 +22,11 @@
                         
                         <div class="name-container">
                             <h2>{{data.name}}</h2>
-                            <img src="{{ url_for('static', filename='logo graphics/verify.png') }}" alt="">
+                            {% if data.verified == True %}
+                                <img src="{{ url_for('static', filename='logo graphics/verify.png') }}" alt="">
+                            {% else %}
+                                <p style="font-size:xx-small;"> **Not verified</p>
+                            {% endif %}
                         </div>
                         <p id="username">@{{data.username}} • 
                             {% if data.rank == 'c' %}

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy, inspect
 from datetime import timedelta, datetime
+from werkzeug.utils import secure_filename
 import string
 import random
 import json
@@ -12,6 +13,9 @@ app.secret_key = "max"
 app.permanent_session_lifetime = timedelta(minutes=60)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///webdata.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+UPLOAD_FOLDER = '/static/logo graphics/user_photos'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 characters = list(string.ascii_letters + string.digits + "!@#$")
 
 db = SQLAlchemy(app)
@@ -27,8 +31,9 @@ class users(db.Model):
     bio = db.Column(db.String(500))
     team = db.Column(db.String(25))
     verified = db.Column(db.Boolean)
+    pic = db.Column(db.String)
 
-    def __init__(self, name, username, password, email, rank, gender, bio, team, verified):
+    def __init__(self, name, username, password, email, rank, gender, bio, team, verified, pic):
         self.name = name
         self.username = username
         self.password = password
@@ -38,6 +43,7 @@ class users(db.Model):
         self.bio = bio
         self.team = team
         self.verified = verified
+        self.pic = pic
 
 class course(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -150,6 +156,10 @@ def sanitize_inputs(string_to_analize):
         if item == string_to_analize:
             return True
     return False
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def generate_code(length):
     random.shuffle(characters)
@@ -288,7 +298,7 @@ def create_account():
             return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.")
 
         try: 
-            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], False)
+            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], False, "defaultprofilepicture.png")
             db.session.add(new_user)
             db.session.commit()
         except:
@@ -297,6 +307,28 @@ def create_account():
         return render_template('create_account.html', message="Account created sucessfully!")
 
     return render_template('create_account.html')
+
+@app.route("/upload_profile_pic", methods=["POST"])
+def upload_profile_pic():
+    if request.method == "POST" and 'active_user' in session:
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            return redirect(url_for('error', msg="Sorry, you did not upload an image file. Please try again!"))
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '' or sanitize_inputs(file.filename):
+            return redirect(url_for("error", msg="Sorry, your file did not have a name. Please try again."))
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return 'File was uploaded sucsessfully.',200
+
+        found_user = users.query.filter_by(username=request.form['username']).first()
+        found_user.pic = file.filename
+        db.session.commit()
+    
+    return redirect(url_for('error', msg="You do not have access to this site"))
 
 @app.route("/logout")
 def logout():
