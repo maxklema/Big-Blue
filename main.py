@@ -235,7 +235,7 @@ def create_match():
                 db.session.add(new_match)
                 db.session.commit()
             except:
-                return redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
+                return redirect(url_for('error', msg="There was a problem creating this match. Call 330-550-1055!"))
 
             return redirect(url_for('match_dashboard'))
         
