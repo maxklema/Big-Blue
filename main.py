@@ -231,7 +231,7 @@ def create_match():
                     return render_template('create_match.html', message="You have inputed an invalid value or an inapropriate value.")
             
             try:
-                new_match = match(request.form['matchname'], request.form['coursename'], request.form['starttime'], request.form['endtime'], request.form['hometeam']+','+request.form['awayteam'], request.form['matchname'], generate_code(6), request.form['matchpassword'], request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0])
+                new_match = match(request.form['matchname'], request.form['coursename'], request.form['starttime'], request.form['endtime'], str(request.form['hometeam'],',',request.form['awayteam']), request.form['matchname'], generate_code(6), request.form['matchpassword'], request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0])
                 db.session.add(new_match)
                 db.session.commit()
             except:
