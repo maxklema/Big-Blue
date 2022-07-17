@@ -127,6 +127,50 @@ class edit_score_files():
         with open("static/score_files/" + self.score_file_name, "w") as file:
             json.dump(data, file, indent=3)
 
+#Scoring class
+class Scoring():
+    def create_json(filename, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, id):
+        data = {"players":{},"match_info": {"number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "id": id}}
+        with open("static/score_files/" + filename, "w") as file:
+            json.dump(data, file, indent=3)
+    def add_player(filename, player, team, opponent = None):
+        with open("static/score_files/" + filename, "rw") as file:
+            data = json.load(file)
+            holes = {}
+            if int(data["match_info"]["number_holes"]) == 9:
+                holes = {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0}
+            data["players"][player] = {"team": team, "scores":holes, "opponent": opponent}
+            json.dump(data, file, indent=3)
+
+    def edit_score(filename, player, hole, new_score): #used by both players and coaches
+        with open("static/score_files/" + filename, "rw") as file:
+            data = json.load(file)
+            if player in data["players"]: #POSSIBLE PLACE FOR ERRORS
+                data["players"][player]["scores"][hole] = new_score
+                json.dump(data, file, indent=3)
+    def calc_match_status(filename, player1, player2):
+        pass
+    def calc_match_results(filename):
+        with open("static/score_files/" + filename, "rw") as file:
+            data = json.load(file)
+            team1 = [data["match_info"]["home_team"], 0]
+            team2 = [data["match_info"]["away_team"], 0]
+
+            for player in data["players"]:
+                if player["team"] == team1[0]:
+                    team1[1] += add_scores(player["scores"]) #UGLY ALG WILL CAUSE ERROR
+                elif player["team"] == team2[0]:
+                    team2[1] += add_scores(player["scores"])
+            return team1, team2
+    def add_scores(data):
+        sum = 0
+        for hole in data:
+            sum += data[score]
+        return sum
+                    
+                
+
+
 #The code XCRunner 2022 pulls out every file for the main page!
 def look_for_match(user):
     matches = []
