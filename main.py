@@ -336,7 +336,7 @@ def upload_profile_pic():
         found_user.pic = file.filename
         db.session.commit()
 
-        return 'File was uploaded sucsessfully.',200
+        return redirect(url_for('dashboard'))
     
     return redirect(url_for('error', msg="You do not have access to this site"))
 

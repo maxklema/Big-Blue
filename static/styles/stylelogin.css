@@ -157,7 +157,7 @@ html, body {
 .password h3 {
     font-size: 1.3em;
     text-align: left;
-    padding: 0 20px;
+    padding: 0 40px;
 }
 
 #usernametext {
@@ -170,7 +170,7 @@ html, body {
 .username h3 {
     font-size: 1.3em;
     text-align: left;
-    padding: 0 20px;
+    padding: 0 40px;
 }
 
 .password input {
@@ -187,6 +187,7 @@ html, body {
     border: none;
     margin-top: 5px;
     font-size: 1.6em;
+
 }
 
 .username input:focus {

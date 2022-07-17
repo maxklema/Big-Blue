@@ -24,6 +24,10 @@
                             <button onclick="togglepopupsocialmedia()">Edit Profile</button>
                         </div>
                         
+                        <div class="edit-profilepicture-container">
+                            <img onclick="toggleprofilepicture();" id="cameraicon" src="{{ url_for('static', filename='logo graphics/cameraicon.png') }}" alt="">
+                        </div>
+                        
                         <div class="name-container">
                             <h2>{{data.name}}</h2>
                             {% if data.verified == True %}
@@ -83,10 +87,7 @@
                                                 <textarea name="bio" id="" cols="30" rows="10" value="{{data.bio}}"></textarea>
                                             </div>
                                         </div>
-                                        <div class="changeprofilepicture">
-                                            <img src="{{ url_for('static', filename='logo graphics/errorpagephoto.jpg') }}" alt="">
-                                            <button>Upload Profile Picture</button>
-                                        </div>
+                                        
                                         <input type="submit" id="savechanges">
                                     </div>
                                 </form>
@@ -100,6 +101,22 @@
                             </div>
                         </div>
 
+
+                        <div class="popup1" id="popup-profilepicture">
+                            <div class="overlay"></div>
+                            <div class="content" id="lightcontentsocialmedia">
+                                <div class="close-btn" onclick="toggleprofilepicture()">&times;</div>
+                                <h1>Upload new profile pic</h1>
+                                <form method=post enctype=multipart/form-data action="/upload_profile_pic">
+                                    <input type="text" name="username" value="{{data.username}}" readonly><br>
+                                  <input type=file name=file><br>
+                                  <input type=submit value=Upload><br>
+                                </form>
+
+                            </div>
+                        </div>
+
+                        
                         <!--
                         <div class="profilebuttons">
                             <button>Created Matches</button>
@@ -135,6 +152,10 @@
 
         function togglepopupsocialmedia() {
             document.getElementById("popup-socialmedia").classList.toggle("active");
+        }
+
+        function toggleprofilepicture() {
+            document.getElementById("popup-profilepicture").classList.toggle("active");
         }
 
     </script>

@@ -223,7 +223,7 @@ footer  {
     transform: translate(-50%, -50%) scale(0);
     background: #ffffff;
     width: 650px;
-    height: 600px;
+    height: 500px;
     z-index: 2;
     text-align: center;
     box-sizing: border-box;
@@ -274,6 +274,69 @@ footer  {
 }
 
 .popup4.active .content {
+    transition: all 700ms ease-in-out;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+
+.popup1 .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: #ffffff;
+    width: 450px;
+    height: 400px;
+    z-index: 2;
+    text-align: center;
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    border-radius: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+
+.popup1 .close-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background: #2176e8;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.popup1 .close-btn:hover {
+    background: #1a60bd;
+}
+
+.popup1.active .overlay{
+    display: block;
+
+}
+
+.popup1 .overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    display: none;
+}
+
+.popup1.active .content {
     transition: all 700ms ease-in-out;
     transform: translate(-50%, -50%) scale(1);
 }
@@ -418,6 +481,14 @@ footer  {
 
 }
 
+
+
+#cameraicon {
+    height: 40px;
+    width: 40px;
+}
+
+
 .edit-profile-container button{
     position: absolute;
     padding: 5px 15px;
@@ -429,11 +500,31 @@ footer  {
     color: #F0F0FF;
 }
 
+.edit-profilepicture-container {
+    display: flex;
+    justify-content: center;
+    padding-left: 90px;
+}
+
+.edit-profilepicture-container img{
+    position: absolute;
+    transform: translateY(20px);
+    border-radius: 100%;
+    border: none;
+    background-color: #2176e8;
+    color: #F0F0FF;
+    cursor: pointer;
+    
+    
+}
+
 
 .edit-profile-container button:hover{
     background-color: #1a60bd;
     cursor: pointer;
 }
+
+
 
 
 .profileinfo {
