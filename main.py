@@ -64,9 +64,9 @@ class match(db.Model):
     match_type = db.Column(db.String(25))
     start_time = db.Column(db.String(25))
     end_time = db.Column(db.String(25))
-    teams1 = (db.String())
+    teams1 = db.Column(db.String())
     total_players = db.Column(db.Integer)
-    scores_file = (db.String(50))
+    scores_file = db.Column(db.String(50))
     match_code = db.Column(db.String(6))
     match_password = db.Column(db.String())
     created_by = db.Column(db.String())
@@ -230,11 +230,14 @@ def create_match():
                         break
                     return render_template('create_match.html', message="You have inputed an invalid value or an inapropriate value.")
             
+            ezfix = request.form["hometeam"] + '~' + request.form["awayteam"]
+
             try:
-                new_match = match(request.form['matchname'], request.form['coursename'], request.form['starttime'], request.form['endtime'], str(request.form['hometeam'],',',request.form['awayteam']), request.form['matchname'], generate_code(6), request.form['matchpassword'], request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0])
+                new_match = match(request.form['matchname'], request.form['coursename'], request.form['starttime'], request.form['endtime'], ezfix, request.form['matchname'], generate_code(6), request.form['matchpassword'], request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0])
                 db.session.add(new_match)
                 db.session.commit()
-            except:
+            except Exception as err:
+                print(err)
                 return redirect(url_for('error', msg="There was a problem creating this match. Call 330-550-1055!"))
 
             return redirect(url_for('match_dashboard'))
@@ -254,10 +257,12 @@ def edit_match(match_to_edit):
                         break
                     return render_template('edit_match.html', message="You have inputed an invalid value or an inapropriate value.", editing=found_match)
             
+            ezfix = request.form["hometeam"] + '~' + request.form["awayteam"]
+
             try:
                 found_match.event_type = request.form['eventtype']
                 found_match.match_type = request.form['matchtype']
-                found_match.teams1 = str(request.form['hometeam'] +","+request.form['awayteam'])
+                found_match.teams1 = ezfix
                 found_match.total_players = request.form['numberofplayers']
                 found_match.match_name = request.form['matchname']
                 found_match.course_name = request.form['coursename']
