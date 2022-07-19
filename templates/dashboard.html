@@ -106,11 +106,15 @@
                             <div class="overlay"></div>
                             <div class="content" id="lightcontentsocialmedia">
                                 <div class="close-btn" onclick="toggleprofilepicture()">&times;</div>
-                                <h1>Upload new profile pic</h1>
+                                <h1>Upload New Profile Picture</h1>
                                 <form method=post enctype=multipart/form-data action="/upload_profile_pic">
-                                    <input type="text" name="username" value="{{data.username}}" readonly><br>
-                                  <input type=file name=file><br>
-                                  <input type=submit value=Upload><br>
+                                    <input type="text" name="username" value="{{data.username}}" hidden><br>
+                                    <div class="fileinput-container">
+                                        <input id="fileinput" type=file name=file> 
+                                    </div>
+                                    
+                                    <input id="upload" type=submit value=Upload>
+                                  
                                 </form>
 
                             </div>

@@ -285,19 +285,44 @@ footer  {
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     background: #ffffff;
-    width: 450px;
-    height: 400px;
+    width: 350px;
+    height: 320px;
     z-index: 2;
     text-align: center;
     box-sizing: border-box;
     color: rgb(0, 0, 0);
     border-radius: 20px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    padding-left: 60px;
-    padding-right: 60px;
+    padding-left: 30px;
+    padding-right: 30px;
     padding-top: 40px;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
 }
+
+.popup1 .content form {
+    margin-top: 5px;
+    
+}
+
+#upload {
+    padding: 15px 50px;
+    border: none;
+    margin-top: 25px;
+    font-size: 1.6em;
+    background-color: rgb(235, 235, 235);
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 100%;
+    background-color: #2176e8;
+    cursor: pointer;
+
+}
+
+#upload:hover {
+    background-color: #1c61bb;
+}
+
 
 .popup1 .close-btn {
     position: absolute;
@@ -340,6 +365,21 @@ footer  {
     transition: all 700ms ease-in-out;
     transform: translate(-50%, -50%) scale(1);
 }
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fileinput-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-left: 30px;
+}
+
 
 .choosebanner {
     display: flex;
