@@ -377,7 +377,7 @@ def upload_profile_pic():
         found_user = users.query.filter_by(username=request.form['username']).first()
         if found_user.pic != 'defaultprofilepicture.png':
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], found_user.pic))
-        found_user.pic = file.filename
+        found_user.pic = filename
         db.session.commit()
 
         return redirect(url_for('dashboard'))
@@ -407,6 +407,12 @@ def match_dashboard():
     if 'active_user' in session:
         return render_template("match_dashboard.html", data=match.query.filter_by(created_by=session['active_user'][0]).all())
     return redirect(url_for('error', msg="You do not have access to this site."))
+
+@app.route("/join/<joinCode>", methods=['POST'])
+def join(joinCode):
+    if request.method == "POST":
+        found_match = match.query.filter_by(match_code=joinCode).first()
+        return ''
 
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):
