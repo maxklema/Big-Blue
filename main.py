@@ -408,11 +408,17 @@ def match_dashboard():
         return render_template("match_dashboard.html", data=match.query.filter_by(created_by=session['active_user'][0]).all())
     return redirect(url_for('error', msg="You do not have access to this site."))
 
-@app.route("/join/<joinCode>", methods=['POST'])
-def join(joinCode):
+@app.route("/join", methods=['POST'])
+def join():
     if request.method == "POST":
-        found_match = match.query.filter_by(match_code=joinCode).first()
-        return ''
+        found_match = match.query.filter_by(match_code=request.form['joinCode']).first()
+        if found_match:
+            return render_template('match_join_page.html', data=found_match)
+        return redirect(url_for('error', msg="Sorry, it looks like we can't find this match. Please contact the match creator for the correct match code."))
+
+@app.route("/confirm_join")
+def confirm_join():
+    return '',200
 
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):

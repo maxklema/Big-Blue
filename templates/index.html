@@ -24,8 +24,15 @@
                             <img src="{{ url_for('static', filename='logo graphics/plussign.png') }}">
                         </div>
                         <h2 class="logintext">Enter Your Code Here!</h2>
+<<<<<<< HEAD
                         <input type="text"  maxlength="6" id="codetextbox">
                         <button id="creatematch">Join Event</button>
+=======
+                        <form method="post" action="/join">
+                            <input type="text" name="joinCode" maxlength="6" id="codetextbox">
+                            <input value="Join Event" type="submit" id="creatematch">
+                        </form>
+>>>>>>> 600e3a3a7605a44f003d9e328e5117540cb7d0d8
 
                     </div>
                 </div>
