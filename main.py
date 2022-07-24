@@ -384,13 +384,6 @@ def upload_profile_pic():
     
     return redirect(url_for('error', msg="You do not have access to this site"))
 
-@app.route("/test_upload")
-def test_upload():
-    if 'active_user' in session:
-        found_user = users.query.filter_by(username=session['active_user'][0]).first()
-        return render_template("upload_test.html", data=found_user)
-    return redirect(url_for('error', msg="Sorry, you do not have access to this site."))
-
 @app.route("/logout")
 def logout():
     if 'active_user' in session: 
