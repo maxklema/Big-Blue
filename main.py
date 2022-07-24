@@ -409,7 +409,7 @@ def join():
             return render_template('match_join_page.html', data=found_match)
         return redirect(url_for('error', msg="Sorry, it looks like we can't find this match. Please contact the match creator for the correct match code."))
 
-@app.route("/confirm_join")
+@app.route("/confirm_join", methods=['POST'])
 def confirm_join():
     return '',200
 
