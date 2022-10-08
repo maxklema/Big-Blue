@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import timedelta, datetime
+from werkzeug.utils import secure_filename
 import string
 import random
 import json
@@ -12,6 +13,9 @@ app.secret_key = "max"
 app.permanent_session_lifetime = timedelta(minutes=60)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///webdata.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+UPLOAD_FOLDER = 'static/logo graphics/user_photos'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 characters = list(string.ascii_letters + string.digits + "!@#$")
 
 db = SQLAlchemy(app)
@@ -27,8 +31,9 @@ class users(db.Model):
     bio = db.Column(db.String(500))
     team = db.Column(db.String(25))
     verified = db.Column(db.Boolean)
+    pic = db.Column(db.String)
 
-    def __init__(self, name, username, password, email, rank, gender, bio, team, verified):
+    def __init__(self, name, username, password, email, rank, gender, bio, team, verified, pic):
         self.name = name
         self.username = username
         self.password = password
@@ -38,6 +43,7 @@ class users(db.Model):
         self.bio = bio
         self.team = team
         self.verified = verified
+        self.pic = pic
 
 class course(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -58,19 +64,19 @@ class match(db.Model):
     match_type = db.Column(db.String(25))
     start_time = db.Column(db.String(25))
     end_time = db.Column(db.String(25))
-    participating_teams = (db.String(500))
+    teams1 = db.Column(db.String())
     total_players = db.Column(db.Integer)
-    scores_file = (db.String(50))
+    scores_file = db.Column(db.String(50))
     match_code = db.Column(db.String(6))
     match_password = db.Column(db.String())
     created_by = db.Column(db.String())
 
-    def __init__(self, match_name, match_course, start_time, end_time, participating_teams, scores_file, match_code, match_password, event_type, match_type, total_players, created_by):
+    def __init__(self, match_name, match_course, start_time, end_time, teams1, scores_file, match_code, match_password, event_type, match_type, total_players, created_by):
         self.match_name = match_name
         self.match_course = match_course
         self.start_time = start_time
         self.end_time = end_time
-        self.participating_teams = participating_teams
+        self.teams1 = teams1
         self.scores_file = scores_file
         self.match_code = match_code
         self.match_password = match_password
@@ -121,17 +127,67 @@ class edit_score_files():
         with open("static/score_files/" + self.score_file_name, "w") as file:
             json.dump(data, file, indent=3)
 
+#Scoring class
+class Scoring():
+    def create_json(filename, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, id):
+        data = {"players":{},"match_info": {"number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "id": id}}
+        with open("static/score_files/" + filename, "w") as file:
+            json.dump(data, file, indent=3)
+    def add_player(filename, player, team, opponent = None):
+        with open("static/score_files/" + filename, "rw") as file:
+            data = json.load(file)
+            holes = {}
+            if int(data["match_info"]["number_holes"]) == 9:
+                holes = {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0}
+            data["players"][player] = {"team": team, "scores":holes, "opponent": opponent}
+            json.dump(data, file, indent=3)
+
+    def edit_score(filename, player, hole, new_score): #used by both players and coaches
+        with open("static/score_files/" + filename, "rw") as file:
+            data = json.load(file)
+            if player in data["players"]: #POSSIBLE PLACE FOR ERRORS
+                data["players"][player]["scores"][hole] = new_score
+                json.dump(data, file, indent=3)
+    def calc_match_status(filename, player1, player2):
+        pass
+    def calc_match_results(filename):
+        with open("static/score_files/" + filename, "rw") as file:
+            data = json.load(file)
+            team1 = [data["match_info"]["home_team"], 0]
+            team2 = [data["match_info"]["away_team"], 0]
+
+            for player in data["players"]:
+                if player["team"] == team1[0]:
+                    team1[1] += add_scores(player["scores"]) #UGLY ALG WILL CAUSE ERROR
+                elif player["team"] == team2[0]:
+                    team2[1] += add_scores(player["scores"])
+            return team1, team2
+    def add_scores(data):
+        sum = 0
+        for hole in data:
+            sum += data[score]
+        return sum
+                    
+                
+
+
 #The code XCRunner 2022 pulls out every file for the main page!
 def look_for_match(user):
     matches = []
     for file in os.listdir("static/score_files"):
+        team_scores = []
         with open("static/score_files/" + file) as scanner:
             data = json.load(scanner)
+            for team in data:
+                if team == "match_data":
+                    break
+                else:
+                    team_scores.append(team + ": " + str(edit_score_files(file).sum_team_score(team)))
             if data['match_data']['created_by'] == user:
-                matches.append((file.strip('.json').replace('_', ' ').capitalize(), data))
+                matches.append((file.strip('.json').replace('_', ' ').capitalize(), data, team_scores))
             #pulls every match out
             elif user == "XCRunner2022":
-                matches.append((file.strip('.json').replace('_', ' ').capitalize(), data))
+                matches.append((file.strip('.json').replace('_', ' ').capitalize(), data, team_scores))
     return matches
 
 def object_as_dict(obj):
@@ -144,6 +200,10 @@ def sanitize_inputs(string_to_analize):
         if item == string_to_analize:
             return True
     return False
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def generate_code(length):
     random.shuffle(characters)
@@ -170,6 +230,8 @@ def error(msg):
 #needs to render a message when password is incorect. 
 @app.route("/login", methods=["POST", "GET"])
 def login():
+    if 'active_user' in session:
+        return redirect(url_for('dashboard'))
     if request.method == "POST":
 
         username_input = request.form['username']
@@ -177,22 +239,34 @@ def login():
         found_user = users.query.filter_by(username=username_input).first()
         
         if found_user and found_user.username == username_input and found_user.password == password_input:
-            session['active_user'] = [found_user.username, found_user.name]
+            session['active_user'] = [found_user.username, found_user.name, found_user.rank]
             return redirect(url_for('dashboard'))
         else:
             return render_template("login.html", message="Username and password were incorrect! Please try again.")
 
     return render_template("login.html")
 
-@app.route("/dashboard", methods=['GET'])
+@app.route("/dashboard", methods=['GET', 'POST'])
 def dashboard():
+    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     if 'active_user' in session:
-        return render_template("dashboard.html", name=session['active_user'][1], matches=look_for_match(session['active_user'][0]))
+        if request.method == "POST":
+            for item in request.form:
+                if request.form[item] == "" or sanitize_inputs(request.form[item]):
+                    return redirect(url_for('error', msg="Sorry, you have input an inapropriate or non-existant value. Please try again."))
+
+            found_user.team = request.form['team']
+            found_user.name = request.form['name']
+            found_user.bio = request.form['bio']
+
+            db.session.commit()
+
+        return render_template("dashboard.html", data=found_user)
     return redirect(url_for('error', msg="You must login to access this page."))
 
 @app.route("/create_match", methods=['GET', 'POST'])
 def create_match():
-    if 'active_user' in session:
+    if 'active_user' in session and session['active_user'][2] == "c":
         if request.method == "POST":
             for item in request.form:
                 if request.form[item] == "" or sanitize_inputs(request.form[item]):
@@ -200,18 +274,64 @@ def create_match():
                         break
                     return render_template('create_match.html', message="You have inputed an invalid value or an inapropriate value.")
             
+            ezfix = request.form["hometeam"] + '~' + request.form["awayteam"]
+
             try:
-                new_match = match(request.form['coursename'], None, None, None, None, request.form['coursename'] + '.json', generate_code(6), None, request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0])
+                new_match = match(request.form['matchname'], request.form['coursename'], request.form['starttime'], request.form['endtime'], ezfix, request.form['matchname'], generate_code(6), request.form['matchpassword'], request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0])
                 db.session.add(new_match)
                 db.session.commit()
-            except:
-                return redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
+            except Exception as err:
+                print(err)
+                return redirect(url_for('error', msg="There was a problem creating this match. Call 330-550-1055!"))
 
             return redirect(url_for('match_dashboard'))
         
         return render_template('create_match.html')
     
-    return redirect(url_for('error', msg='You must login to access this page.'))
+    return redirect(url_for('error', msg='You do not have access to this page.'))
+
+@app.route("/edit_match/<match_to_edit>", methods=["POST", "GET"])
+def edit_match(match_to_edit):
+    found_match = match.query.filter_by(match_name=match_to_edit).first()
+    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "c":
+        if request.method == "POST":
+            for item in request.form:
+                if request.form[item] == "" or sanitize_inputs(request.form[item]):
+                    if request.form["eventtype"] != "singles" and request.form["hometeam"] == "" and request.form["awayteam"] == "":
+                        break
+                    return render_template('edit_match.html', message="You have inputed an invalid value or an inapropriate value.", editing=found_match)
+            
+            ezfix = request.form["hometeam"] + '~' + request.form["awayteam"]
+
+            try:
+                found_match.event_type = request.form['eventtype']
+                found_match.match_type = request.form['matchtype']
+                found_match.teams1 = ezfix
+                found_match.total_players = request.form['numberofplayers']
+                found_match.match_name = request.form['matchname']
+                found_match.course_name = request.form['coursename']
+                found_match.start_time = request.form['starttime']
+                found_match.end_time = request.form['endtime']
+                found_match.match_password = request.form['matchpassword']
+                db.session.commit()
+                print(found_match.teams1)
+            except:
+                redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
+            
+            return redirect(url_for("match_dashboard"))
+
+        return render_template('edit_match.html', editing=found_match)
+
+    return render_template("error", msg="You do not have access to this site!")
+
+@app.route("/delete_match/<match_to_delete>")
+def delete_match(match_to_delete):
+    found_match = match.query.filter_by(match_name=match_to_delete).first()
+    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "c":
+        db.session.delete(found_match)
+        db.session.commit()
+        return redirect(url_for("match_dashboard"))
+    return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/create_account", methods=['POST', 'GET'])
 def create_account():
@@ -227,7 +347,7 @@ def create_account():
             return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.")
 
         try: 
-            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], False)
+            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], False, "defaultprofilepicture.png")
             db.session.add(new_user)
             db.session.commit()
         except:
@@ -236,6 +356,33 @@ def create_account():
         return render_template('create_account.html', message="Account created sucessfully!")
 
     return render_template('create_account.html')
+
+@app.route("/upload_profile_pic", methods=["POST"])
+def upload_profile_pic():
+    if request.method == "POST" and 'active_user' in session:
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            return redirect(url_for('error', msg="Sorry, you did not upload an image file. Please try again!"))
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '' or sanitize_inputs(file.filename):
+            return redirect(url_for("error", msg="Sorry, your file did not have a name. Please try again."))
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        else:
+            return redirect(url_for("error", msg="Sorry, there was a problem uploading your file. You might need to contact customer suport!"))
+
+        found_user = users.query.filter_by(username=request.form['username']).first()
+        if found_user.pic != 'defaultprofilepicture.png':
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], found_user.pic))
+        found_user.pic = filename
+        db.session.commit()
+
+        return redirect(url_for('dashboard'))
+    
+    return redirect(url_for('error', msg="You do not have access to this site"))
 
 @app.route("/logout")
 def logout():
@@ -252,6 +399,19 @@ def admin():
 def match_dashboard():
     if 'active_user' in session:
         return render_template("match_dashboard.html", data=match.query.filter_by(created_by=session['active_user'][0]).all())
+    return redirect(url_for('error', msg="You do not have access to this site."))
+
+@app.route("/join", methods=['POST'])
+def join():
+    if request.method == "POST":
+        found_match = match.query.filter_by(match_code=request.form['joinCode']).first()
+        if found_match:
+            return render_template('match_join_page.html', data=found_match)
+        return redirect(url_for('error', msg="Sorry, it looks like we can't find this match. Please contact the match creator for the correct match code."))
+
+@app.route("/confirm_join", methods=['POST'])
+def confirm_join():
+    return '',200
 
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):

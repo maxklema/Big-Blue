@@ -1,0 +1,193 @@
+
+{% extends "indexcontentcoachlogin.html" %}
+{% block content %}
+
+    <html>
+        <head>
+            <title>Big Blue | Edit Match</title>
+            <link rel="stylesheet" href="{{ url_for('static', filename='styles/creatematch.css') }}">
+
+
+    <div id="container">
+        <div class="main">
+            <body>
+                <div class="creatematch-container">
+                    <form action="#" method="post">
+                        <div id="addgraphic">
+                            <img src="{{ url_for('static', filename='logo graphics/pencilicontwo.png') }}">
+                        </div>
+                        <h1>Edit <i>{{editing.match_name}}</i></h1>
+                        <h2 style="color: rgb(248, 250, 115); margin-top: 10px; font-size: 1.2em;">
+                            {% if message %}
+                                {{message}}
+                            {% endif %}
+                        </h2>
+
+                        <div class="basicmatchinfo">
+                            <div class="eventtype">
+                                <h2>Event Type</h2>
+                                <div class="radiobuttonone">
+                                    <input type="radio" name="eventtype" onclick="doSomethingTwo();" id="singles" value="s">
+                                    <label for="singles">Singles</label>
+                                </div>
+                                <div class="radiobuttontwo">
+                                    <input type="radio" name="eventtype" onclick="doSomething();" id="teams" value="t">
+                                    <label for="teams">Teams</label>
+                                </div>
+                            </div>
+                            <div class="matchtype">
+                                <h2>Match Type</h2>
+                                <div class="radiobuttonthree">
+                                    <input type="radio" name="matchtype" id="strokeplay" value="strokeplay">
+                                    <label for="strokeplay">Stroke Play</label>
+                                </div>
+                                <div class="radiobuttonfour">
+                                    <input type="radio" name="matchtype" id="matchplay" value="matchplay">
+                                    <label for="matchplay">Match Play</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="teams">
+                            <div id="hometeam">
+                                <p>Home Team</p>
+                                <input type="text" name="hometeam" value="{{editing.participating_teams}}">
+                            </div>
+                            
+                            <div id="awayteam">
+                                <p>Away Team</p>
+                                <input type="text" name="awayteam" value="{{editing.participating_teams}}">
+                            </div>
+
+                        </div>
+
+
+                        <div class="players">
+                            <div class="playerstext">
+                                <h3 id="playertextone">Number of Players</h3>
+                                <p id="playertexttwo"><i>Note: input the number of players, not spots. Spots are only used for team matches.</i></p>
+                            </div>
+
+                            <div class="playersinput">
+                                <input type="number" name="numberofplayers" value="{{editing.total_players}}">
+                            </div>
+
+                        </div>
+
+                        <div class="matchcourse">
+                            <div class="matchtext">
+                                <h3>Name of Match</h3>
+                            </div>
+
+                            <div class="matchinput">
+                                <input type="text" name="matchname" value="{{editing.match_name}}">
+
+                            </div>
+                        </div>
+
+                        <div class="matchcourselocation">
+                            <div class="matchtextcourse">
+                                <h3>Name of Course</h3>
+                            </div>
+
+                            <div class="matchinputcourse">
+                                <input type="text" name="coursename" value="{{editing.match_course}}">
+
+                            </div>
+                        </div>
+
+                        <div class="timeofmatchstart">
+                            <div class="starttime">
+                                <h3>Match Start Date</h3>
+                            </div>
+
+                            <div class="starttimeinput">
+                                <input type="datetime-local" name="starttime" value="{{editing.start_time}}">
+
+                            </div>
+                        </div>
+
+                        <div class="timeofmatchend">
+                            <div class="endtime">
+                                <h3>Match End Date</h3>
+                            </div>
+
+                            <div class="endtimeinput">
+                                <input type="datetime-local" name="endtime" value="{{editing.end_time}}">
+
+                            </div>
+                        </div>
+
+
+                        <div class="matchpassword">
+                            <div class="passwordtext">
+                                <h3 id="passwordtextone">Match Password</h3>
+                                <p id="passwordtexttwo"><i>Note: match passwords are not required, but are recommended to prevent unwanted guests and players.</i></p>
+                            </div>
+
+                            <div class="passwordinput">
+                                <input type="text" name="matchpassword" value="{{editing.match_password}}" maxlength="15">
+                            </div>
+
+                        </div>
+
+                        <input id="creatematchbutton" type="submit" value="Save your changes">
+
+                        <p id="hiddenp1">{{editing.event_type}}</p>
+                        <p id="hiddenp2">{{editing.match_type}}</p>
+                        
+                    </form>
+                </div>
+            </body>
+            <footer>
+                <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
+                <div class="footertext">
+                    <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+                </div>
+
+
+
+            </footer>
+        </div>
+    </div>
+
+
+        <script>
+
+            var x = document.getElementById("hometeam");
+            var y = document.getElementById("awayteam");
+
+            function doSomething()
+            {
+                document.getElementById("playertextone").innerHTML = "Number of Spots";
+                document.getElementById("playertexttwo").innerHTML = "Note: input the number of spots, not players. Spots consist of two players: one from each team.";
+                x.style.display = "flex";
+                y.style.display = "flex";
+            }
+
+            function doSomethingTwo()
+            {
+                document.getElementById("playertextone").innerHTML = "Number of Players";
+                document.getElementById("playertexttwo").innerHTML = "Note: input the number of players, not spots. Spots are only used for team matches";
+                x.style.display = "none";
+                y.style.display = "none";
+            }
+
+            if (document.getElementById('hiddenp1').innerHTML == 's') {
+                document.getElementById('singles').checked = true;
+            } else if (document.getElementById('hiddenp1').innerHTML == 't') {
+                document.getElementById('teams').checked = true;
+            }
+
+            if (document.getElementById('hiddenp2').innerHTML == 'strokeplay') {
+                document.getElementById('strokeplay').checked = true;
+            } else if (document.getElementById('hiddenp1').innerHTML == 'matchplay') {
+                document.getElementById('matchplay').checked = true;
+            }
+
+        </script>
+    </html>
+
+    
+{% endblock %}

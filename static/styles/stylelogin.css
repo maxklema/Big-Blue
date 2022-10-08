@@ -71,7 +71,7 @@ header .navigation li a:hover {
 
 
 footer  {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     display: flex;
@@ -79,8 +79,9 @@ footer  {
     justify-content: left;
     background-color: rgba(5, 20, 39, 0.699);
     width: 100%;
-    z-index: 9;
+    z-index: -1;
     padding: 5px 100px;
+    clear: both;
 
 }
 
@@ -115,26 +116,7 @@ html, body {
 
 #container {
     position: relative;
-    min-height: 97.7%;
-
-}
-
-footer  {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    background-color: rgba(5, 20, 39, 0.699);
-    width: 100%;
-    z-index: -1;
-    padding: 5px 100px;
-    clear: both;
-
-
-    
-    
+    min-height: 100%;
 
 }
 
@@ -175,7 +157,7 @@ footer  {
 .password h3 {
     font-size: 1.3em;
     text-align: left;
-    padding: 0 20px;
+    padding: 0 40px;
 }
 
 #usernametext {
@@ -188,7 +170,7 @@ footer  {
 .username h3 {
     font-size: 1.3em;
     text-align: left;
-    padding: 0 20px;
+    padding: 0 40px;
 }
 
 .password input {
@@ -205,6 +187,7 @@ footer  {
     border: none;
     margin-top: 5px;
     font-size: 1.6em;
+
 }
 
 .username input:focus {

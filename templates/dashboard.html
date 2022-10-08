@@ -1,20 +1,167 @@
+{% if data.rank == 'c'%}
+    {% extends "indexcontentcoachlogin.html" %}
+{% else %}
+    {% extends "indexcontentplayerlogin.html" %}
+{% endif %}
 {% block content %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-    <title>{{ name }}'s Dashboard</title>
-    <h1>Hello {{ name }}</h1>
-    <h2>Your recent matches:</h2>
-    {% for match in matches %}
-        <div style="border-color: black; border-radius: 5%; border-style: solid;">
-            <h3 style="color:#2176e8">{{ match[0] }}</h3>
-            {% for item in match[1] %}
-                <p>Team: {{item}}</p>
-                <ul>
-                    {% for person in match[1][item] %}
-                        <li><i>{{person}}:{{match[1][item][person]}}</i></li>
-                    {% endfor %}
-                </ul><br>
-            {% endfor %}
-            <button>Edit this Match</button>
+
+<html>
+        <head>
+            <title>Big Blue | User Dashboard</title>
+            <link rel="stylesheet" href="{{ url_for('static', filename='styles/profiledashboard.css') }}">
+        </head>
+
+    <div id="container">
+        <div class="main">
+            <body>
+                <div class="page-container">
+                    <div class="mainsection">
+                        <img id="banner" src="{{ url_for('static', filename='logo graphics/BigBlueBanner6.png') }}" alt="">
+                        <div class="profilepicture-container">
+                            <img id="profilepicture" src="{{ url_for('static', filename='logo graphics/user_photos/' + data.pic) }}" alt="">
+                        </div>
+                        <div class="edit-profile-container">
+                            <button onclick="togglepopupsocialmedia()">Edit Profile</button>
+                        </div>
+                        
+                        <div class="edit-profilepicture-container">
+                            <img onclick="toggleprofilepicture();" id="cameraicon" src="{{ url_for('static', filename='logo graphics/cameraicon.png') }}" alt="">
+                        </div>
+                        
+                        <div class="name-container">
+                            <h2>{{data.name}}</h2>
+                            {% if data.verified == True %}
+                                <img src="{{ url_for('static', filename='logo graphics/verify.png') }}" alt="">
+                            {% else %}
+                                <p style="font-size:xx-small;"> **Not verified</p>
+                            {% endif %}
+                        </div>
+                        <p id="username">@{{data.username}} • 
+                            {% if data.rank == 'c' %}
+                                Coach
+                            {% elif data.rank == 'p' %}
+                                Player
+                            {% endif %}
+                        </p>
+                        <p id="bio">{{data.bio}}</p>
+
+                        <div class="profileinfo">
+                            <div class="calender">
+                                <img src="{{ url_for('static', filename='logo graphics/cake.png') }}" alt="">
+                                <p>Joined June 1, 2022</p>
+                            </div>
+                            <div class="school">
+                                <img src="{{ url_for('static', filename='logo graphics/schoolicon.png') }}" alt="">
+                                <p>{{data.team}}</p>
+                            </div>
+                            
+                            
+                        </div>
+
+                        <div class="popup4" id="popup-socialmedia">
+                            <div class="overlay"></div>
+                            <div class="content" id="lightcontentsocialmedia">
+                                <div class="close-btn" onclick="togglepopupsocialmedia()">&times;</div>
+                                
+                                <form method="post" action="#">
+                                    <div class="editfields-container">
+                                        <h2>Edit My Profile</h2>
+                                        <div class="choosebanner">
+                                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner10.png') }}" alt="">
+                                            <button>Random Profile Banner</button>
+                                        </div>
+                                        
+                                        <div class="editfields">
+                                            <div class="changeschool">
+                                                <h5>School</h5>
+                                                <input name="team" type="text" maxlength="25" value="{{data.team}}">
+                                            </div>
+                                            <div class="changename">
+                                                <h5>Name</h5>
+                                                <input name="name" type="text" maxlength="25" value="{{data.name}}">
+                                            </div>
+                                        </div>
+                                        <div class="changebio-container">
+                                            <div class="changebio">
+                                                <h5>Bio</h5>
+                                                <textarea name="bio" id="" cols="30" rows="10" value="{{data.bio}}"></textarea>
+                                            </div>
+                                        </div>
+                                        
+                                        <input type="submit" id="savechanges">
+                                    </div>
+                                </form>
+                               
+
+
+
+
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="popup1" id="popup-profilepicture">
+                            <div class="overlay"></div>
+                            <div class="content" id="lightcontentsocialmedia">
+                                <div class="close-btn" onclick="toggleprofilepicture()">&times;</div>
+                                <h1>Upload New Profile Picture</h1>
+                                <form method=post enctype=multipart/form-data action="/upload_profile_pic">
+                                    <input type="text" name="username" value="{{data.username}}" hidden><br>
+                                    <div class="fileinput-container">
+                                        <input id="fileinput" type=file name=file> 
+                                    </div>
+                                    
+                                    <input id="upload" type=submit value=Upload>
+                                  
+                                </form>
+
+                            </div>
+                        </div>
+
+                        
+                        <!--
+                        <div class="profilebuttons">
+                            <button>Created Matches</button>
+                            <button>Recent Matches</button>
+                        </div>
+                        <hr>
+                        -->
+                      
+
+                    </div>
+                    <!--
+                    <div class="sidesection">
+
+                    </div>
+                    -->
+                </div>
+            </body>
+        
+            <footer>
+                <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
+                <div class="footertext">
+                    <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+                </div>
+
+
+
+            </footer>
         </div>
-    {% endfor %}
+        
+    </div>
+    <script>
+        
+
+        function togglepopupsocialmedia() {
+            document.getElementById("popup-socialmedia").classList.toggle("active");
+        }
+
+        function toggleprofilepicture() {
+            document.getElementById("popup-profilepicture").classList.toggle("active");
+        }
+
+    </script>
+</html>
 {% endblock %}

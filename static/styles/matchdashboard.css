@@ -63,7 +63,7 @@ header .navigation li a:hover {
 
 
 footer  {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     display: flex;
@@ -71,8 +71,9 @@ footer  {
     justify-content: left;
     background-color: rgba(5, 20, 39, 0.699);
     width: 100%;
-    z-index: 9;
+    z-index: -1;
     padding: 5px 100px;
+    clear: both;
 
 }
 
@@ -113,14 +114,14 @@ html, body {
 
 .main {
     overflow: auto;
-    padding-top: 90px;
+    padding-top: 110px;
     padding-bottom: 100px;
 }
 
 .joincode {
     max-height: 1000px;
     width: 300px;
-    background-color: #1B63C2;
+    background-color: #124382;
     padding: 10px 20px;
     border-radius: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -154,7 +155,7 @@ html, body {
 .matchdetail {
     max-height: 1000px;
     width: 500px;
-    background-color: #1B63C2;
+    background-color: #1856A8;
     padding: 10px 20px;
     border-radius: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -173,7 +174,7 @@ html, body {
 .matchcontent {
     max-height: 900px;
     width: 95%;
-    background-color: #1B63C2;
+    background-color: #1856A8;
     text-align: left;
 
 }
@@ -185,6 +186,7 @@ html, body {
     align-items: center;
     margin-top: 10px;
 }
+
 
 .header-container img {
     height: 30px;
@@ -201,6 +203,24 @@ html, body {
 
 }
 
+.event-container h2 {
+    margin-right: 10px;
+}
+
+.password-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+
+}
+
+.password-container h2 {
+    margin-right: 10px;
+}
+
+
 
 .matchttype-container {
     margin-top: 20px;
@@ -208,6 +228,10 @@ html, body {
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+}
+
+.matchttype-container h2 {
+    margin-right: 10px;
 }
 
 .hometeam-container {
@@ -218,12 +242,44 @@ html, body {
     flex-direction: row;
 }
 
+.hometeam-container h2 {
+    margin-right: 10px;
+}
+
+.starttime-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.starttime-container h2 {
+    margin-right: 10px;
+}
+
+.endtime-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.endtime-container h2 {
+    margin-right: 10px;
+}
+
 .awayteam-container {
     margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+}
+
+.awayteam-container h2 {
+    margin-right: 10px;
 }
 
 .total-container {
@@ -234,6 +290,23 @@ html, body {
     flex-direction: row;
 }
 
+.total-container h2 {
+    margin-right: 10px;
+}
+
+.course-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.course-container h2 {
+    margin-right: 10px;
+}
+
+
 .joined-container {
     margin-top: 20px;
     display: flex;
@@ -241,6 +314,20 @@ html, body {
     justify-content: space-between;
     flex-direction: row;
 }
+
+.joined-container h2 {
+    margin-right: 10px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    row-gap: 100px;
+  }
+
+
+
+
 
 #creatematchbutton {
     padding: 10px 30px;
@@ -349,5 +436,57 @@ html, body {
     } 
 
 
+}
+
+
+@media (max-width: 1800px){
+    .grid-container{
+        grid-template-columns: auto auto;
+    }
+}
+
+@media (max-width: 1091px){
+    .grid-container{
+        grid-template-columns: auto;
+    }
+}
+
+@media (max-width: 550px){
+    .matchdetail {
+        width: 95%;
+    }
+    .eventtype-container {
+        font-size: 0.8em;
+    }
+    .matchttype-container {
+        font-size: 0.8em;
+    }
+    .hometeam-container {
+        font-size: 0.8em;
+    }
+    .awayteam-container {
+        font-size: 0.8em;
+    }
+    .starttime-container {
+        font-size: 0.8em;
+    }
+    .endtime-container {
+        font-size: 0.8em;
+    }
+    .course-container {
+        font-size: 0.8em;
+    }
+    .total-container {
+        font-size: 0.8em;
+    }
+    .joined-container {
+        font-size: 0.8em;
+    }
+    .header-container h1 {
+        font-size: 1.6em;
+    }
+    .password-container {
+        font-size: 0.8em;
+    }
 }
 
