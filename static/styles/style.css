@@ -8,7 +8,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    background-color: #fdfafd;
+    background-color: #eeeeee;
     font-family: BigBlueBold;
 }
 
@@ -68,6 +68,7 @@ header .navigation li a:hover {
     background-color: white;
     padding: 20px 30px;
     border-radius: 5px;
+    max-width: 375px;
 }
 
 .form-container form label {
@@ -81,6 +82,7 @@ header .navigation li a:hover {
     font-size: 20px;
     margin-bottom: 20px;
     border: 0.25px solid black;
+    background-color: white;
 }
 
 #joincode-submit-button {
@@ -94,4 +96,165 @@ header .navigation li a:hover {
     border: none;
     cursor: pointer;
     
+}
+
+body p {
+    text-align: center;
+}
+
+.Login-or-create-account-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.Login-or-create-account-div p {
+    background-color: white;
+    padding: 15px 55px;
+    border-radius: 5px;
+    font-size: 15px;
+    max-width: 375px;
+}
+
+#hyperlink {
+    color: #2176e8;
+    background-color: white;
+}
+
+
+.coaches-card-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.coaches-card {
+    padding: 20px 30px;
+    max-width: 365px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.coaches-card p{
+    background-color: white;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 100;
+    margin-bottom: 20px;
+}
+
+.coaches-card h3{
+    background-color: white;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.coaches-card button{
+    width: 300px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px 20px;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+}
+
+.coaches-card img {
+    height: 100px;
+    width: 100px;
+    background: white;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+}
+
+.about-us-container{
+    justify-content: center;
+    display: flex;
+    margin-top: 5%;
+}
+
+.about-us {
+    max-width: 365px;
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 5px;
+}
+
+.about-us p {
+    background-color: white;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 100;
+}
+
+.about-us h3 {
+    background-color: white;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.us-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.us {
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 5px;
+    max-width: 365px;
+}
+
+.us img {
+    background-color: white;
+    height: 120px;
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.us h3 {
+    background-color: white;
+    text-align: center;
+    padding-bottom: 20px;
+    margin-top: -10px;
+}
+
+.us p {
+    font-size: 15px;
+    background-color: white;
+    text-align: center;
+    font-weight: 100;
+}
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.contact {
+    background-color: white;
+    max-width: 365px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 20px 30px;
+}
+
+.contact h3 {
+    padding-bottom: 20px;
+    text-align: center;
+    background-color: white;
+}
+
+.contact p {
+    font-weight: 100;
+    font-size: 15px;
+    background-color: white;
 }

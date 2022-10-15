@@ -9,10 +9,29 @@
         <div class="form-container">
             <form action="">
                 <label for="joincode-box">Enter Join Code</label><br>
-                <input type="text" id="joincode-box"></input><br>
+                <input placeholder="094x3a" type="text" id="joincode-box"></input><br>
                 <input type="submit" name="submit-joincode" id="joincode-submit-button">
             </form>
         </div>
+
+
+        <div class="Login-or-create-account-div">
+            <p>Already have an account? <a id="hyperlink" href="/login">Login</a></p>
+        </div>
+
+        <div class="coaches-card-container">
+            <div class="coaches-card">
+                <img src="{{ url_for('static', filename='logo graphics/coach-whistle.png') }}">
+                <h3>Big Blue for Coaches</h3>
+                <p>Big Blue is made for coaches. We save you from the hassle of having to create your own live scoring systems through our easy to use platform. Set up matches, let your players join, share your code. We'll do the rest.</p>
+                <button>Get Started</button>
+            </div>
+        </div>
+        
+
+
+
+
 
 
 

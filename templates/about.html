@@ -1,0 +1,43 @@
+{% extends "indexcontent.html" %}
+{% block content %}
+
+<title>Big Blue | About</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">        
+
+    <body>
+        
+        <div class="about-us-container">
+            <div class="about-us">
+                <h3>About Big Blue</h3>
+                <p>Created for the Homestead High School Golf Team (IN) to help make live scoring more accessible.</p>
+            </div>
+        </div>
+
+
+        <div class="us-container">
+            <div class="us">
+                <img src="{{ url_for('static', filename='logo graphics/us.png') }}">
+                <h3>Us</h3>
+                <p>Maxwell Klema - Co-founder and front/end - Married to CSS</p><br>
+                <p>Grayson Welch - Co-founder and back/end - The Physicist</p><br>
+                <p>Dominic DeLuca - Co-founder and back/end - The Secret Weapon</p>
+            </div>
+        </div>
+
+
+        <div class="contact-container">
+            <div class="contact">
+                <h3>Contact</h3>
+                <p>For all business inquiries, threats, hate mail, and propaganda:</p><br>
+                <p>[put email address here]</p>
+            </div>
+        </div>
+
+
+
+
+
+    </body>
+
+
+{% endblock %}

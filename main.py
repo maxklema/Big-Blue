@@ -219,6 +219,10 @@ def verify_user(user: str, verified_input: bool):
     found_user.verified = verified
     db.session.commit()
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 @app.route("/")
 def index():
     return render_template("index.html", matches=look_for_match("XCRunner2022"))
