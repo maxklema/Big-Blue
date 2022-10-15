@@ -348,7 +348,7 @@ def create_account():
             return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.")
 
         try: 
-            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], False, "defaultprofilepicture.png")
+            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], True, "defaultprofilepicture.png")
             db.session.add(new_user)
             db.session.commit()
         except:

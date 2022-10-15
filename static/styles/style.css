@@ -8,18 +8,15 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    background-color: #fdfafd;
     font-family: BigBlueBold;
 }
 
-form {
-    padding: 10px;
-    line-height: 1.5;
-}
 
 header {
     top: 0;
     left: 0;
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -61,519 +58,40 @@ header .navigation li a:hover {
 
 }
 
-
-footer  {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    background-color: rgba(5, 20, 39, 0.699);
-    width: 100%;
-    z-index: -1;
-    padding: 5px 100px;
-    clear: both;
-
-}
-
-footer .logofooter {
-    max-width: 150px;
-    max-height: 150px;
-    position: relative;
-    padding: 2px 20px;
-
-}
-
-footer .footertext {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0px 5px;
-}
-
-footer .footertext p{
-   color: white;
-   font-size: .7em;
-}
-
-footer .footertext p:hover{
-    color: #F0F0FF;
-    cursor: pointer;
- }
-
-
-html, body {
-    height: 100%;
-}
-
-#container {
-    position: relative;
-    min-height: 97.7%;
-
-}
-
-#joinshow{
-    display: flex;
-    align-items: center;
+.form-container {
     justify-content: center;
-    max-width: 100%;
-    padding-top: 90px;
-    padding-bottom: 100px;
-}
-
-.main {
-    overflow: auto;
-    padding-top: 90px;
-    padding-bottom: 100px;
-}
-
-.matchview {
-	max-width: 1000px;
-	border: 1px solid #333;
-	margin:5px;
-	padding: 8px 12px;
-	background-color: #2176e8;
-	color:white;
-
-}
-
-footer  {
-    position: absolute;
-    bottom: 0;
-    left: 0;
     display: flex;
-    align-items: center;
-    justify-content: left;
-    background-color: rgba(5, 20, 39, 0.699);
-    width: 100%;
-    z-index: -1;
-    padding: 5px 100px;
-    clear: both;
-
-
-    
-    
-
+    margin-top: 5%;
 }
 
-#recentmatchesheader {
-    padding-bottom: 20px;
-
-}
-
-.recentmatches {
-    background-color: #F0F0FF;
-    margin-bottom: 40px;
-    border-radius: 10px;
-    padding: 10px 50px;
-    width: 1300px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.importantinfo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0px;
-}
-
-.recentmatches .importantinfo h1 {
-    color: black;
-    font-size: 2em;
-}
-
-.recentmatches ul {
-    list-style: none;
-}
-
-.recentmatches h6 {
-    padding: 10px 0px;
-}
-    
-.login {
-    width: 500px;
-    height: 400px;
-    background:#1B63C2;
-    border-radius: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
-
-}
-
-#addgraphic {
-    height: 150px;
-    width: 150px;
-    background-color: #F0F0FF;
-    box-shadow: 0px 0px 0px 2px #c9c9d6;
-    border-radius: 100%;
-    margin: auto;
-    margin-top: -50px;
-    
-}
-
-#addgraphic img {
-    height: 100px;
-    width: 100px;
-    transform: translate(0px, 25px);
-    
-}
-
-.login {
-    text-align: center;
-}
-
-.logintext {
-    text-align: center;
-    margin-top: 15px;
-    padding: 0px 8px;
-    color: #F0F0FF;
-}
-
-.logintext h2 {
-    font-size: 1.8em;
-}
-
-.logintext h6 {
-    font-size: 1.0em;
-    margin-top: 5px;
-}
-
-#creatematch {
-    padding: 10px 30px;
-    border-radius: 20px;
-    border: none;
-    margin-top: 20px;
-    font-size: 2.1em;
-}
-
-#creatematch:hover {
-    cursor: pointer;
-    background-color: #dbdbdf;
-}
-
-.joincode {
-    text-align: center;
-}
-
-
-
-.joincode {
-    width: 500px;
-    height: 400px;
-    background:#1B63C2;
-    border-radius: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-#codetextbox {
-    padding: 10px 20px;
+.form-container form {
+    background-color: white;
+    padding: 20px 30px;
     border-radius: 5px;
-    border: none;
-    margin-top: 20px;
-    font-size: 1.6em;
-    text-align: center;
-
 }
 
-#codetextbox:focus {
-    outline: none;
+.form-container form label {
+    background-color: white;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type=number]{
-    -moz-appearance: textfield;
-}
-
-.sidebars {
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row-reverse;
-    display: flex;
-    padding: 0px 400px;
-    margin-top: 50px;
+#joincode-box {
+    height: 40px;
+    width: 300px;
+    padding: 5px;
+    font-size: 20px;
     margin-bottom: 20px;
-
+    border: 0.25px solid black;
 }
 
-
-.matchresults {
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-    padding: 0px 400px;
-    margin-bottom: 30px;
-}
-
-.results {
-    max-height: 3000px;
-    width: 100%;
-    background-color: #F0F0FF;
-    border-radius: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+#joincode-submit-button {
+    width: 300px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px 20px;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
     
-}
-
-.resultcontainer {
-    padding: 40px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#courseicon {
-    max-height: auto;
-    max-width: auto;
-    max-height: 270px;
-    max-width: 270px;
-}
-
-.scores {
-    margin-top: 20px;
-}
-
-#matchdetails {
-    transform: translateY(100%);
-}
-
-#results {
-    padding: 0px 400px;
-    font-size: 2.5em;
-    margin-bottom: 15px;
-    margin-top: 30px;
-    
-}
-
-.verification {
-    display: flex;
-    flex-direction: row;
-    margin-top: 30px;
-    align-items: center;
-}
-
-.verification img {
-    height: 20px;
-    width: 20px;
-    margin-right: 5px;
-}
-
-.verification h5 {
-    color:#1B63C2;
-}
-
-
-
-@media (max-width: 1134px){
-    .logintext h6 {
-        padding: 0px 100px;
-    }
-    #creatematch {
-        padding: 10px 200px;
-        font-size: 2em;
-    
-    }
-    #codetextbox {
-        padding: 10px 100px;
-    }
-
-
-}
-
-
-
-@media (max-width: 915px){
-    .logintext h6 {
-        padding: 0px 20px;
-    }
-    #creatematch {
-        padding: 10px 100px;
-    
-    }
-    #codetextbox {
-        padding: 10px 50px;
-    }
-}
-
-@media (max-width: 658px){
-    .logintext h6 {
-        padding: 0px 20px;
-    }
-    #creatematch {
-        padding: 10px 30px;
-        font-size: 1.3em;
-    
-    }
-    #codetextbox {
-        padding: 10px 0px;
-    }
-
-}
-
-
-@media (max-width: 1900px){
-    .sidebars {
-        padding: 0px 300px;
-    }
-    .matchresults {
-        padding: 0px 300px;
-    }
-    #results {
-        padding: 0px 300px;
-        
-    }
-}
-
-@media (max-width: 1668px){
-    .sidebars {
-        padding: 0px 150px;
-    }
-    .matchresults {
-        padding: 0px 150px;
-    }
-    #results {
-        padding: 0px 150px;
-        
-    }
-}
-
-@media (max-width: 1334px){
-    .sidebars {
-        padding: 0px 50px;
-    }
-    .matchresults {
-        padding: 0px 50px;
-    }
-    #results {
-        padding: 0px 50px;
-        
-    }
-}
-
-@media (max-width: 1134px){
-    .sidebars {
-        padding: 0px 50px;
-        flex-direction: column-reverse;
-    }
-    .login {
-        margin-top: 20px;
-        width: 100%;
-    }
-    .joincode {
-        width: 100%;
-        margin-bottom: 50px;
-    }
-    .matchresults {
-        padding: 0px 50px;
-    }
-}
-
-
-@media (max-width: 500px){
-    .sidebars {
-        padding: 0px 50px;
-        flex-direction: column-reverse;
-    }
-    .login {
-        margin-top: 20px;
-        width: 400px;
-    }
-    .joincode {
-        width: 400px;
-    }
-    .matchresults {
-        padding: 0px 50px;
-        
-    }
-
-    .results {
-        width: 400px;
-    }
-}
-
-@media (max-width: 1000px){
-    .maincontent {
-        flex-direction: column-reverse;
-    }
-}
-
-@media (max-width: 723px){
-    header {
-        padding: 4px 15px;
-        flex-direction: row;
-    }
-
-    header .logo {
-        padding: 8px 20px;
-    }
-}
-
-@media (max-width: 500px){
-    header {
-        padding: 4px 15px;
-        flex-direction: column;
-    }
-
-    .main {
-        padding-top: 110px;
-    }
-
-    header .logo {
-        max-width: 200px;
-        max-height: 200px;
-        position: relative;
-        padding: 2px 10px;
-    }
-}
-
-@media (max-width: 781px){
-    footer {
-        padding: 4px 15px;
-        flex-direction: column; 
-    }
-}
-
-@media (max-width: 300px){
-    .main {
-        padding-top: 130px;
-    }
-}
-
-@media (max-width: 1000px){
-    footer {
-        padding: 4px 10px;
-
-    }
-}
-
-@media (max-width: 216px){
-    header .logo {
-       max-width: 100px;
-       max-height: 100px;
-    }
-}
-
-@media (max-width: 178px){
-    header .logo {
-       max-width: 75px;
-       max-height: 75px;
-    } 
-
-
-}
-
-@media (max-width: 1090px){
-    .matchresults {
-        flex-direction: column;
-    }
-    #courseicon {
-        max-height: auto;
-        max-width: auto;
-        max-height: 130px;
-        max-width: 130px;
-    }
-
 }

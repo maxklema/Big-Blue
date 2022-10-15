@@ -3,72 +3,20 @@
 
 <title>Big Blue | Home</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">        
-    <div id="container">
-            <div class="main">
-                <a href="/admin">ADMIN PAGE (Temporary link)</a>
-                <div class="sidebars">
-                    <div class="login">
-                        <div id="addgraphic">
-                            <img src="{{ url_for('static', filename='logo graphics/whistle.png') }}">
-                        </div>
-                        <div class="logintext">
-                            <h2>Want to Create an Event?</h2>
-                            <h6>Coaches/Organizers, we offer stroke play and match play formats. Just hit the create button below to get started!</h1>
-                        </div>
-                        <a href="/create_match"><button id="creatematch">Create an Event</button></a>
 
-                    </div>
-                    
-                    <div class="joincode">
-                        <div id="addgraphic">
-                            <img src="{{ url_for('static', filename='logo graphics/plussign.png') }}">
-                        </div>
-                        <h2 class="logintext">Enter Your Code Here!</h2>
-                        <form method="post" action="/join">
-                            <input type="text" name="joinCode" maxlength="6" id="codetextbox">
-                            <input value="Join Event" type="submit" id="creatematch">
-                        </form>
-
-                    </div>
-                </div>
-                <h1 id="results">Recent Events</h1>
-
-            {% for match in matches %}
-                <div class="matchresults"> 
-                    <div class="results">
-                        <div class="resultcontainer">
-                            <div>
-                                <h1>{{ match[0] }}</h1>
-                                <h2>{{ match[1]['match_data']['start'] }} - {{ match[1]['match_data']['end'] }}</h2>
-                                <div class="scores">
-                                    <h3>{{match[2][0]}}</h3>
-                                    <h3>{{match[2][1]}}</h3>
-                                </div>
-                                <h6 id="matchdetails">See Match Details</h6>
-                                <div class="verification">
-                                    <img src="{{ url_for('static', filename='logo graphics/verify.png') }}">
-                                    <h5>These match results have been verified by Big Blue</h5>
-                                </div>
-                            </div>
-                            <img src="{{ url_for('static', filename='logo graphics/coursegrey.png') }}" id="courseicon">
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-        <footer>
-            <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
-            <div class="footertext">
-                <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
-                
-            </div>
-
-
-
-        </footer>
-    </div>
+    <body>
         
+        <div class="form-container">
+            <form action="">
+                <label for="joincode-box">Enter Join Code</label><br>
+                <input type="text" id="joincode-box"></input><br>
+                <input type="submit" name="submit-joincode" id="joincode-submit-button">
+            </form>
+        </div>
 
+
+
+    </body>
 
 
 {% endblock %}
