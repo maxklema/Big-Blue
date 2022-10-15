@@ -214,6 +214,11 @@ def generate_code(length):
     random.shuffle(password)
     return "".join(password)
 
+def verify_user(user: str, verified_input: bool):
+    found_user = users.query.filter_by(username=user).first()
+    found_user.verified = verified
+    db.session.commit()
+
 @app.route("/")
 def index():
     return render_template("index.html", matches=look_for_match("XCRunner2022"))
@@ -228,7 +233,6 @@ def header():
 def error(msg):
     return render_template("error.html", message=msg)
 
-#needs to render a message when password is incorect. 
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if 'active_user' in session:
@@ -398,8 +402,9 @@ def admin():
 
 @app.route("/match_dashboard")
 def match_dashboard():
-    if 'active_user' in session:
-        return render_template("match_dashboard.html", data=match.query.filter_by(created_by=session['active_user'][0]).all())
+    if 'active_user' in session and session['active_user'][2] == 'c':
+        found_match = match.query.filter_by(created_by=session['active_user'][0]).all()
+        return render_template("match_dashboard.html", data=found_match)
     return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/join", methods=['POST'])
@@ -409,10 +414,6 @@ def join():
         if found_match:
             return render_template('match_join_page.html', data=found_match)
         return redirect(url_for('error', msg="Sorry, it looks like we can't find this match. Please contact the match creator for the correct match code."))
-
-@app.route("/confirm_join", methods=['POST'])
-def confirm_join():
-    return '',200
 
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):
