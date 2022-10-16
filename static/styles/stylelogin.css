@@ -60,14 +60,22 @@ header .navigation li a:hover {
 
 }
 
-.form-container {
+#error {
+    background-color: white;
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#form-container {
     display: flex;
     justify-content: center;
     margin-top: 5%;
+    margin-bottom: 20px;
 }
 
-.form-container form {
-    max-width: 365px;
+#form-container form {
+    width: 355px;
     padding: 20px 30px;
     background-color: white;
     border-radius: 5px;
@@ -93,7 +101,7 @@ header .navigation li a:hover {
     background-color: white;
 }
 
-.form-container label {
+#form-container label {
     background-color: white;
 }
 
@@ -107,4 +115,45 @@ header .navigation li a:hover {
     background: #2176e8;
     border: none;
     cursor: pointer;
+}
+
+#form-container form img {
+    background-color: white;
+    height: 73.5px;
+    width: 45px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
+#form-container h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    text-align: center;
+}
+
+.create-account-box-container {
+    display: flex;
+    margin-bottom: 5%;
+    justify-content: center;
+}
+
+.create-account-box {
+    border-radius: 5px;
+    width: 355px;
+    padding: 20px 30px;
+    background-color: white;
+}
+
+.create-account-box h5 {
+    background-color: white;
+    text-align: center;
+}
+
+.create-account-box h5 a {
+    background-color: white;
+    text-align: center;
+    color: #2176e8;
 }

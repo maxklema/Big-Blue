@@ -12,8 +12,18 @@
 
     <body>
         
-        <div class="form-container">
+
+
+
+
+
+        <div id="form-container">
             <form action="/login" method="post">
+                <img src="{{ url_for('static', filename='logo graphics/basicgolfer.png') }}" alt="">
+                <h3>Sign in to Big Blue</h3>
+                {% if message %}
+                    <h5 id="error">{{message}}</h5>    
+                {% endif %}
                 <label for="username-box">Username</label><br>
                 <input type="text" name="username" id="username-box"><br>
                 <label for="password-box">Password</label><br>
@@ -24,6 +34,14 @@
 
         </div>
 
+        <div class="create-account-box-container">
+            <div class="create-account-box">
+                <h5>Don't have an account? <a href="/create_account">Create One</a></h5>
+            </div>
+        </div>
+
     </body>
+
                 
 {% endblock %}
+
