@@ -1,7 +1,21 @@
-
 @font-face {
     font-family: bigBlueBold;
-    src: url(Montserrat-Bold.ttf);
+    src: url(font/Poppins-Bold.ttf);
+}
+
+@font-face {
+    font-family: bigBlueRegular;
+    src: url(font/Poppins-Regular.ttf);
+}
+
+@font-face {
+    font-family: bigBlueMedium;
+    src: url(font/Poppins-Medium.ttf);
+}
+
+@font-face {
+    font-family: bigBlueSemiBold;
+    src: url(font/Poppins-SemiBold.ttf);
 }
 
 
@@ -9,10 +23,9 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: BigBlueBold;
     background-color: #eeeeee;
+    font-family: bigBlueBold;
 }
-
 
 
 header {
@@ -25,31 +38,48 @@ header {
     align-items: center;
     background-color: #2176e8;
     z-index: 10;
-    padding: 4px 100px;
+    padding: 5px 100px;
 }
 
 header .logo {
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 150px;
+    max-height: 150px;
     position: relative;
+    background-color: #2176e8;
+    text-decoration: none;
+}
+
+header a {
+    text-decoration: none;
+    background-color: #2176e8;
 }
 
 header .navigation {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 0px 30px;
+    background-color: #2176e8;
+    border: none;
+    text-decoration: none;
+    font-family: bigBlueMedium;
 }
 
 header .navigation li {
     list-style: none;
     margin: 0px 15px;
+    border: none;
+    text-decoration: none;
+    background-color: #2176e8;
+    font-family: bigBlueMedium;
 }
 
 header .navigation li a {
     color: white;
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 18px;
+    border: none;
+    background-color: #2176e8;
+    font-family: bigBlueMedium;
     
 
 }
@@ -110,11 +140,14 @@ header .navigation li a:hover {
     height: 40px;
     font-size: 20px;
     text-align: center;
-    padding: 10px 20px;
     color: white;
     background: #2176e8;
     border: none;
     cursor: pointer;
+}
+
+#form-submit:hover {
+    background-color: #1b6cd7;
 }
 
 #form-container form img {
@@ -150,10 +183,12 @@ header .navigation li a:hover {
 .create-account-box h5 {
     background-color: white;
     text-align: center;
+    font-family: bigBlueSemiBold;
 }
 
 .create-account-box h5 a {
     background-color: white;
     text-align: center;
     color: #2176e8;
+    font-family: bigBlueSemiBold;
 }

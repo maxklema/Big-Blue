@@ -1,16 +1,21 @@
 @font-face {
     font-family: bigBlueBold;
-    src: url(Montserrat-Bold.ttf);
+    src: url(font/Poppins-Bold.ttf);
 }
 
 @font-face {
     font-family: bigBlueRegular;
-    src: url(Montserrat-Regular.ttf);
+    src: url(font/Poppins-Regular.ttf);
 }
 
 @font-face {
-    font-family: bigBlueSemi;
-    src: url(Montserrat-SemiBold.ttf);
+    font-family: bigBlueMedium;
+    src: url(font/Poppins-Medium.ttf);
+}
+
+@font-face {
+    font-family: bigBlueSemiBold;
+    src: url(font/Poppins-SemiBold.ttf);
 }
 
 
@@ -19,7 +24,7 @@
     margin: 0;
     box-sizing: border-box;
     background-color: #eeeeee;
-    font-family: BigBlueBold;
+    font-family: bigBlueBold;
 }
 
 
@@ -33,31 +38,48 @@ header {
     align-items: center;
     background-color: #2176e8;
     z-index: 10;
-    padding: 4px 100px;
+    padding: 5px 100px;
 }
 
 header .logo {
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 150px;
+    max-height: 150px;
     position: relative;
+    background-color: #2176e8;
+    text-decoration: none;
+}
+
+header a {
+    text-decoration: none;
+    background-color: #2176e8;
 }
 
 header .navigation {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 0px 30px;
+    background-color: #2176e8;
+    border: none;
+    text-decoration: none;
+    font-family: bigBlueMedium;
 }
 
 header .navigation li {
     list-style: none;
     margin: 0px 15px;
+    border: none;
+    text-decoration: none;
+    background-color: #2176e8;
+    font-family: bigBlueMedium;
 }
 
 header .navigation li a {
     color: white;
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 18px;
+    border: none;
+    background-color: #2176e8;
+    font-family: bigBlueMedium;
     
 
 }
@@ -78,7 +100,7 @@ header .navigation li a:hover {
     background-color: white;
     padding: 20px 30px;
     border-radius: 5px;
-    max-width: 365px;
+    max-width: 355px;
 }
 
 .form-container form label {
@@ -100,12 +122,15 @@ header .navigation li a:hover {
     height: 40px;
     font-size: 20px;
     text-align: center;
-    padding: 10px 20px;
     color: white;
     background: #2176e8;
     border: none;
     cursor: pointer;
     
+}
+
+#joincode-submit-button:hover {
+    background: #1b6cd7;
 }
 
 body p {
@@ -118,12 +143,14 @@ body p {
     margin-top: 20px;
 }
 
+
 .Login-or-create-account-div p {
     background-color: white;
-    padding: 15px 55px;
+    padding: 15px 45px;
     border-radius: 5px;
     font-size: 15px;
-    max-width: 375px;
+    width: 355px;
+    font-family: bigBlueSemiBold;
 }
 
 #hyperlink {
@@ -141,7 +168,7 @@ body p {
 
 .coaches-card {
     padding: 20px 30px;
-    max-width: 365px;
+    max-width: 355px;
     background-color: white;
     border-radius: 5px;
 }
@@ -166,11 +193,14 @@ body p {
     height: 40px;
     font-size: 20px;
     text-align: center;
-    padding: 10px 20px;
     color: white;
     background: #2176e8;
     border: none;
     cursor: pointer;
+}
+
+.coaches-card a button:hover{
+     background: #1b6cd7;
 }
 
 .coaches-card img {
@@ -190,7 +220,7 @@ body p {
 }
 
 .about-us {
-    max-width: 365px;
+    width: 355px;
     background-color: white;
     padding: 20px 30px;
     border-radius: 5px;
@@ -220,7 +250,7 @@ body p {
     background-color: white;
     padding: 20px 30px;
     border-radius: 5px;
-    max-width: 365px;
+    width: 355px;
 }
 
 .us img {
@@ -256,7 +286,7 @@ body p {
 
 .contact {
     background-color: white;
-    max-width: 365px;
+    width: 355px;
     border-radius: 5px;
     text-align: center;
     padding: 20px 30px;
