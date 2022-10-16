@@ -1,0 +1,22 @@
+{% extends "indexcontent.html" %}
+{% block content %}
+
+<title>Big Blue | Home</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">        
+
+    <body>
+        
+        <div class="form-container">
+            <form action="">
+                <img src="{{ url_for('static', filename='logo graphics/newjoinicon.png') }}" alt="">
+                <label for="joincode-box">Enter Join Code</label><br>
+                <input placeholder="094x3a" type="text" id="joincode-box"></input><br>
+                <input type="submit" name="submit-joincode" id="joincode-submit-button">
+            </form>
+        </div>
+
+
+    </body>
+
+
+{% endblock %}

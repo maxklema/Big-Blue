@@ -223,6 +223,12 @@ def verify_user(user: str, verified_input: bool):
 def about():
     return render_template("about.html")
 
+@app.route("/joincode")
+def joincode():
+    return render_template("join_code_page.html")
+
+
+
 @app.route("/")
 def index():
     return render_template("index.html", matches=look_for_match("XCRunner2022"))
