@@ -3,6 +3,16 @@
     src: url(Montserrat-Bold.ttf);
 }
 
+@font-face {
+    font-family: bigBlueRegular;
+    src: url(Montserrat-Regular.ttf);
+}
+
+@font-face {
+    font-family: bigBlueSemi;
+    src: url(Montserrat-SemiBold.ttf);
+}
+
 
 * {
     padding: 0;
@@ -68,7 +78,7 @@ header .navigation li a:hover {
     background-color: white;
     padding: 20px 30px;
     border-radius: 5px;
-    max-width: 375px;
+    max-width: 365px;
 }
 
 .form-container form label {
@@ -126,6 +136,7 @@ body p {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    margin-bottom: 5%;
 }
 
 .coaches-card {
@@ -141,6 +152,7 @@ body p {
     font-size: 15px;
     font-weight: 100;
     margin-bottom: 20px;
+    font-family: BigBlueRegular;
 }
 
 .coaches-card h3{
@@ -149,7 +161,7 @@ body p {
     padding-bottom: 20px;
 }
 
-.coaches-card button{
+.coaches-card a button{
     width: 300px;
     height: 40px;
     font-size: 20px;
@@ -189,6 +201,7 @@ body p {
     text-align: center;
     font-size: 15px;
     font-weight: 100;
+    font-family: BigBlueRegular;
 }
 
 .about-us h3 {
@@ -231,12 +244,14 @@ body p {
     background-color: white;
     text-align: center;
     font-weight: 100;
+    font-family: BigBlueRegular;
 }
 
 .contact-container {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    margin-bottom: 5%;
 }
 
 .contact {
@@ -257,4 +272,5 @@ body p {
     font-weight: 100;
     font-size: 15px;
     background-color: white;
+    font-family: BigBlueRegular;
 }

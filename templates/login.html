@@ -1,63 +1,29 @@
 {% extends "indexcontent.html" %}
 {% block content %}
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>Big Blue | Login</title>
-            <link rel="stylesheet" href="{{ url_for('static', filename='styles/stylelogin.css') }}">
+<!DOCTYPE html>
 
-            <link rel="shortcut icon" href="{{ url_for('static', filename='/logo graphics/favicon.ico') }}">
+    <head>
+        <title>Big Blue | Login</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/stylelogin.css') }}">
 
-        </head>
-        <div id="container">
-            <div class="main">
-                <body>
-                    <div class="form-container">
-                        <form action="#" method="post" class="form">
-                            <div id="addgraphic">
-                                <img src="{{ url_for('static', filename='logo graphics/golfer.png') }}">
-                            </div>
-                            <h1>Login to Big Blue</h1>
-                            <div class="username">
-                                {% if message %}
-                                    <h3 id="error">{{message}}</h3>
-                                    <h3 id="usernametext">Username</h3>
-                                {% else %}
-                                    <h3>Username</h3>
-                                {% endif %}
-                                <input type="text" name="username">
-                            </div>
-                            <div class="password">
-                                <h3>Password</h3>
-                                <input type="password" name="password">
-                                <a href="#"><p id="forgotpassword">Forgot Password?</p></a>
-                            </div>
-                                <input type="submit" value="Login" id="submit">
-                            </div>
-                        </form>
-                    
-                        <h1 id="or">━━━━━━━━━━━━ OR ━━━━━━━━━━━━</h1>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='/logo graphics/favicon.ico') }}">
 
-                        <div class="createaccountcontainer">
-                            <div class="createaccount">
-                                <h1>Don't have an Account?</h1>
-                               <a href="/create_account"><button>Create One!</button></a>
-                            </div>
-                        </div>
-                        
+    </head>
 
+    <body>
+        
+        <div class="form-container">
+            <form action="/login" method="post">
+                <label for="username-box">Username</label><br>
+                <input type="text" name="username" id="username-box"><br>
+                <label for="password-box">Password</label><br>
+                <input type="password" name="password" id="password-box"><br>
+                <input type="submit" value="Login" id="form-submit">
+            
+            </form>
 
-
-                    </div>
-                </body>
-            <footer>
-                <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
-                <div class="footertext">
-                    <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
-                </div>
-    
-    
-    
-            </footer>
         </div>
+
+    </body>
+                
 {% endblock %}

@@ -10,24 +10,15 @@
     margin: 0;
     box-sizing: border-box;
     font-family: BigBlueBold;
+    background-color: #eeeeee;
 }
 
-.form-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-}
 
-.main {
-    overflow: auto;
-    padding-top: 90px;
-    padding-bottom: 100px;
-}
 
 header {
     top: 0;
     left: 0;
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -69,423 +60,51 @@ header .navigation li a:hover {
 
 }
 
-
-footer  {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    background-color: rgba(5, 20, 39, 0.699);
-    width: 100%;
-    z-index: -1;
-    padding: 5px 100px;
-    clear: both;
-
-}
-
-footer .logofooter {
-    max-width: 150px;
-    max-height: 150px;
-    position: relative;
-    padding: 2px 20px;
-
-}
-
-footer .footertext {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0px 5px;
-}
-
-footer .footertext p{
-   color: white;
-   font-size: .7em;
-}
-
-footer .footertext p:hover{
-    color: #F0F0FF;
-    cursor: pointer;
- }
-
-
-html, body {
-    height: 100%;
-}
-
-#container {
-    position: relative;
-    min-height: 100%;
-
-}
-
-.form {
-    width: 500px;
-    max-height: 600px;
-    background:#1B63C2;
-    border-radius: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    padding: 20px 20px;
-    text-align: center;
-    color: #F0F0FF;
-    
-
-}
-
-#addgraphic {
-    height: 150px;
-    width: 150px;
-    background-color: #F0F0FF;
-    box-shadow: 0px 0px 0px 2px #c9c9d6;
-    border-radius: 100%;
-    margin: auto;
-    margin-top: -50px;
-    
-}
-
-.username {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.password {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.password h3 {
-    font-size: 1.3em;
-    text-align: left;
-    padding: 0 40px;
-}
-
-#usernametext {
-    font-size: 1.3em;
-    text-align: left;
-    padding: 0 20px;
-    margin-top: 5px;
-}
-
-.username h3 {
-    font-size: 1.3em;
-    text-align: left;
-    padding: 0 40px;
-}
-
-.password input {
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    margin-top: 5px;
-    font-size: 1.6em;
-}
-
-.username input {
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    margin-top: 5px;
-    font-size: 1.6em;
-
-}
-
-.username input:focus {
-    outline: none;
-}
-
-.password input:focus {
-    outline: none;
-}
-
-#submit {
-    padding: 10px 30px;
-    border-radius: 20px;
-    border: none;
-    margin-top: 15px;
-    font-size: 1.5em;
-}
-
-#error {
-    font-size: 1.1em;
-    text-align: left;
-    padding: 0 20px;
-    color: rgb(243, 243, 132);
-    
-}
-
-#forgotpassword {
-    text-decoration: none;
-    color: white;
-    font-size: 0.8em;
-    text-align: left;
-    padding: 0 20px;
-    margin-top: 3px;
-}
-
-.password a {
-    text-decoration: none;
-}
-
-#submit:hover {
-    background-color: #cfcfdb;
-    cursor: pointer;
-}
-
-form h1 {
-    font-size: 2.5em;
-    margin-top: 10px;
-}
-
-#addgraphic img {
-    height: 100px;
-    width: 60px;
-    transform: translate(0px, 25px);
-    
-}
-
-@media (max-width: 723px){
-    header {
-        padding: 4px 15px;
-        flex-direction: row;
-    }
-
-    header .logo {
-        padding: 8px 20px;
-    }
-}
-
-.createaccountcontainer {
+.form-container {
     display: flex;
     justify-content: center;
+    margin-top: 5%;
 }
 
-.createaccount {
-    height: 160px;
-    width: 500px;
-    margin-top: 10px;
-    background:#1B63C2;
-    border-radius: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    padding: 20px 20px;
+.form-container form {
+    max-width: 365px;
+    padding: 20px 30px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+#username-box {
+    height: 40px;
+    width: 300px;
+    padding: 5px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    border: 0.25px solid black;
+    background-color: white;
+}
+
+#password-box {
+    height: 40px;
+    width: 300px;
+    padding: 5px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    border: 0.25px solid black;
+    background-color: white;
+}
+
+.form-container label {
+    background-color: white;
+}
+
+#form-submit {
+    width: 300px;
+    height: 40px;
+    font-size: 20px;
     text-align: center;
-    color: #F0F0FF;
-    
-}
-
-.createaccount a button {
-    padding: 10px 30px;
-    border-radius: 20px;
+    padding: 10px 20px;
+    color: white;
+    background: #2176e8;
     border: none;
-    margin-top: 15px;
-    font-size: 1.5em;
-}
-
-.createaccount a button:hover {
-    background-color: #cfcfdb;
     cursor: pointer;
 }
-
-#or {
-    font-size: .8em;
-    text-align: center;
-    color: grey;
-    margin-top: 10px;
-}
-
-@media (max-width: 500px){
-    header {
-        padding: 4px 15px;
-        flex-direction: column;
-    }
-
-    .main {
-        padding-top: 110px;
-    }
-
-    header .logo {
-        max-width: 200px;
-        max-height: 200px;
-        position: relative;
-        padding: 2px 10px;
-    }
-}
-
-@media (max-width: 781px){
-    footer {
-        padding: 4px 15px;
-        flex-direction: column; 
-    }
-}
-
-@media (max-width: 300px){
-    .main {
-        padding-top: 130px;
-    }
-}
-
-@media (max-width: 1000px){
-    footer {
-        padding: 4px 10px;
-
-    }
-}
-
-@media (max-width: 216px){
-    header .logo {
-       max-width: 100px;
-       max-height: 100px;
-    }
-}
-
-@media (max-width: 178px){
-    header .logo {
-       max-width: 75px;
-       max-height: 75px;
-    } 
-
-}
-@media (max-width: 523px){
-    .form {
-        width: 450px;
-        max-height: 600px;
-        background:#1B63C2;
-        border-radius: 10px;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        padding: 20px 15px;
-        text-align: center;
-        color: #F0F0FF;
-        
-    }
-    .password input {
-        padding: 10px 15px;
-        border-radius: 5px;
-        border: none;
-        margin-top: 5px;
-        font-size: 1.5em;
-    }
-    
-    .username input {
-        padding: 10px 15px;
-        border-radius: 5px;
-        border: none;
-        margin-top: 5px;
-        font-size: 1.5em;
-    }
-    form h1 {
-        font-size: 2.1em;
-        margin-top: 10px;
-    }
-    .createaccount {
-        height: 160px;
-        width: 450px;
-        margin-top: 10px;
-        background:#1B63C2;
-        border-radius: 10px;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        padding: 20px 15px;
-        text-align: center;
-        color: #F0F0FF;
-        
-    }
-    
-    .createaccount a button {
-        padding: 10px 20px;
-        border-radius: 20px;
-        border: none;
-        margin-top: 15px;
-        font-size: 1.5em;
-    }
-
-    .createaccount h1 {
-        font-size: 1.3em;
-    }
-    #or {
-        font-size: .5em;
-        text-align: center;
-        color: grey;
-        margin-top: 10px;
-    }
-    footer {
-        margin-top: 20px;
-
-    }
-    
-    
-
-
-
-}
-
-@media (max-width: 523px){
-    .form {
-        width: 380px;
-        max-height: 600px;
-        background:#1B63C2;
-        border-radius: 10px;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        padding: 20px 10px;
-        text-align: center;
-        color: #F0F0FF;
-        
-    }
-    .password input {
-        padding: 10px 15px;
-        border-radius: 5px;
-        border: none;
-        margin-top: 5px;
-        font-size: 1.2em;
-    }
-    
-    .username input {
-        padding: 10px 15px;
-        border-radius: 5px;
-        border: none;
-        margin-top: 5px;
-        font-size: 1.2em;
-    }
-    form h1 {
-        font-size: 1.8em;
-        margin-top: 10px;
-    }
-    .createaccount {
-        height: 160px;
-        width: 380px;
-        margin-top: 10px;
-        background:#1B63C2;
-        border-radius: 10px;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        padding: 20px 10px;
-        text-align: center;
-        color: #F0F0FF;
-        
-    }
-    
-    .createaccount a button {
-        padding: 10px 20px;
-        border-radius: 20px;
-        border: none;
-        margin-top: 15px;
-        font-size: 1.5em;
-    }
-
-    .createaccount h1 {
-        font-size: 1.3em;
-    }
-    #or {
-        font-size: .5em;
-        text-align: center;
-        color: grey;
-        margin-top: 10px;
-    }
-    footer {
-        margin-top: 20px;
-
-    }
-    
-    
-
-
-
-}
-
