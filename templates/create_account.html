@@ -51,11 +51,12 @@ bio = bio
                 <div class="row-two">
                     <div class="full-password-one">
                         <label for="password-one">Password</label>
-                        <input type="password" id="password-one" name="password">
+                        <input onfocusout="checkPasswords()" type="password" id="password-one" name="password">
+                        <label id="password-error" for="">Passwords Must Match!</label>
                     </div>
                     <div class="full-password-two">
                         <label for="password-two">Confirm Password</label>
-                        <input type="password" id="password-two" name="password">
+                        <input onfocusout="checkPasswords()" type="password" id="password-two" name="password">
                     </div>
                 </div>
 
@@ -95,10 +96,30 @@ bio = bio
 
                 <input type="submit" value="Create Account" id="form-submit">
                 
+    
 
             </form>
         </div>        
 
     </body>
+
+    <script>
+        function checkPasswords(){
+            let password_one = document.getElementById("password-one");
+            let password_two = document.getElementById("password-two");
+
+            if (password_one.value == password_two.value && password_one.value != ""){
+                password_one.style.borderColor = "green";
+                password_two.style.borderColor = "green";
+                document.getElementById("password-error").style.display = "none";
+            } else {
+                password_one.style.borderColor = "red";
+                password_two.style.borderColor = "red";
+                document.getElementById("password-error").style.display = "block";
+            }
+        }
+
+    </script>
+
     
 {% endblock %}

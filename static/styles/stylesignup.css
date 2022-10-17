@@ -301,3 +301,9 @@ body form div div label {
     margin-bottom: 20px;
 }
 
+#password-error {
+    font-size: 13px;
+    color: red;
+    font-family: bigBlueSemiBold;
+    display: none;
+}
