@@ -271,6 +271,33 @@ body form div div label {
     display: block;
 }
 
+#error {
+    background-color: white;
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+    font-family: bigBlueSemiBold;
+}
+
+
 #form-submit:hover {
     background-color: #1b6cd7;
 }
+
+.form-container form h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    text-align: center;
+}
+
+.form-container form img {
+    background-color: white;
+    height: 73.5px;
+    width: 45px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    margin-bottom: 20px;
+}
+

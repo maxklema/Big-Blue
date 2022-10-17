@@ -26,6 +26,17 @@ bio = bio
         <div class="form-container">
             <form action="#" method="post">
                 
+                <img src="{{ url_for('static', filename='logo graphics/basicgolfer.png') }}" alt="">
+
+                <h3>Create Big Blue Account</h3>
+                {% if message %}
+                    <h5 id="error">{{message}}</h5>
+                    <script>
+                        if (document.getElementById("error").innerHTML == "Account created sucessfully!"){
+                            document.getElementById("error").style.color = "#2176e8";
+                        }
+                    </script>   
+                {% endif %}
                 <div class="row-one">
                     <div class="full-name">
                         <label for="name">Full Name</label>
