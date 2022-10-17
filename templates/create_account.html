@@ -1,109 +1,93 @@
 {% extends "indexcontent.html" %}
 {% block content %}
 
-    <html>
-        <head>
-            <title>Big Blue | Create Account</title>
-            <link rel="stylesheet" href="{{ url_for('static', filename='styles/stylesignup.css') }}">
+<!--
+
+names for different form elements
+
+-name = name
+-username = username
+-password = password
+-email = email
+-gender = gender
+affiliated team = team
+account_type = rank
+bio = bio
 
 
-    <div id="container">
-        <div class="main">
-            <body>
-                <div class="form-container">
-                    <form action="#" method="post">
-                        <div id="addgraphic">
-                            <img src="{{ url_for('static', filename='logo graphics/newaccount.png') }}">
-                        </div>
-                        <h1>Create your Big Blue Account!</h1>
-              
-                        <p><i>Players are not forced to make accounts. It is only reccomended when they wish to save results.</i></p>
-                        <h2 style="color: rgb(248, 250, 115); margin-top: 10px; font-size: 1.2em;">
-                            {% if message %}
-                                {{message}}
-                            {% endif %}
-                        </h2>
-                        <div class="name">
-                            <div class="namename">
-                                <h3>Name</h3>
-                                <input type="text" name="name">
-                            </div>
-                            <div class="nameusername">
-                                <h3>Username</h3>
-                                <input type="text" name="username">
-                            </div>
-                           
-                        </div>
-                        <div class="password">
-                            <div class="passwordfirst">
-                                <h3>Create Password</h3>
-                                <input type="password" name="password">
-                            </div>
-                            <div class="passwordsecond">
-                                <h3>Confirm Password</h3>
-                                <input type="password">
-                            </div>
-                        </div>
-                       
-                       <div class="personalinfo">
-                            <div class="email">
-                                <h3>Email</h3>
-                                <input type="text" name="email">
-                            </div>
+-->
+   
+    <head>
+        <title>Big Blue | Create Account</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/stylesignup.css') }}">
 
-                            <div class="gender">
-                                <h3>Gender</h3>
-                                <input type="text" name="gender">
-                            </div>
-
-                       </div>
-                       
-                       <div class="accountinfo">
-                            <div class="team">
-                                <h3>Affiliated Team</h3>
-                                <input type="text" name="team">
-                            </div>
-
-                            <div class="accounttype">
-                                <h3>Account Type</h3>
-                                <div class="radiobuttonone">
-                                    <input type="radio" name="rank" id="coach" value="c">
-                                    <label for="coach">Coach</label>
-                                </div>
-                                <div class="radiobuttontwo">
-                                    <input type="radio" name="rank" id="player" value="p">
-                                    <label for="player">Player</label>
-                                </div>
-            
-                            </div>
-                       </div>
-
-                     
-                        
-                       <div class="aboutyou">
-                           <div class="aboutyouinner">
-                                <h3>Tell Us About Yourself</h3>
-                                <textarea placeholder="This will show up in your profile bio" rows = "5" cols = "60" type="text" name="bio"></textarea>
-                           </div>
-                       </div>
-                        
-                        
-                        
-                        <input id="createaccountbutton" type="submit" value="Create Account">
-                    </form>
-                </div>
- 
-            </body>
-            <footer>
-                <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
-                <div class="footertext">
-                    <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+    </head>
+    <body>
+        <div class="form-container">
+            <form action="#" method="post">
+                
+                <div class="row-one">
+                    <div class="full-name">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name">
+                    </div>
+                    <div class="full-username">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username">
+                    </div>
                 </div>
 
+                <div class="row-two">
+                    <div class="full-password-one">
+                        <label for="password-one">Password</label>
+                        <input type="password" id="password-one" name="password">
+                    </div>
+                    <div class="full-password-two">
+                        <label for="password-two">Confirm Password</label>
+                        <input type="password" id="password-two" name="password">
+                    </div>
+                </div>
 
+                <div class="row-three">
+                    <div class="full-email">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    <div class="full-gender">
+                        <label for="gender">Gender</label>
+                        <select name="gender" id="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
 
-            </footer>
-        </div>
-    </div>
-    </html>
+                <div class="row-four">
+                    <div class="full-team">
+                        <label for="team">Affiliated Team</label>
+                        <input type="text" id="team" name="team">
+                    </div>
+                    <div class="full-rank">
+                        <label for="rank">Account Type</label>
+                        <select name="rank" id="rank">
+                            <option value="coach">Coach</option>
+                            <option value="player">Player</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row-five">
+                    <label for="bio">Account Bio</label>
+                    <textarea name="bio" id="bio"></textarea>
+                </div>
+
+                <input type="submit" value="Create Account" id="form-submit">
+                
+
+            </form>
+        </div>        
+
+    </body>
+    
 {% endblock %}

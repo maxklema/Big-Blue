@@ -18,6 +18,9 @@
     src: url(font/Poppins-SemiBold.ttf);
 }
 
+#imagehref {
+    height: 40px;
+}
 
 * {
     padding: 0;
@@ -121,6 +124,7 @@ header .navigation li a:hover {
     margin-bottom: 20px;
     border: 0.25px solid black;
     background-color: white;
+    font-family: bigBlueMedium;
 }
 
 #password-box {
@@ -131,6 +135,7 @@ header .navigation li a:hover {
     margin-bottom: 20px;
     border: 0.25px solid black;
     background-color: white;
+    font-family: bigBlueMedium;
 }
 
 #form-container label {
