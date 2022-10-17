@@ -38,7 +38,7 @@ header {
     align-items: center;
     background-color: #2176e8;
     z-index: 10;
-    padding: 5px 100px;
+    padding: 8px 100px;
 }
 
 header .logo {
@@ -52,6 +52,7 @@ header .logo {
 header a {
     text-decoration: none;
     background-color: #2176e8;
+    height: none;
 }
 
 header .navigation {
