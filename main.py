@@ -216,7 +216,7 @@ def generate_code(length):
 
 def verify_user(user: str, verified_input: bool):
     found_user = users.query.filter_by(username=user).first()
-    found_user.verified = verified
+    found_user.verified = verified_input
     db.session.commit()
 
 @app.route("/about")
@@ -439,4 +439,6 @@ def return_user_data(password):
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
+        verify_user('hornplaying247', True)
+        verify_user('maxklema', True)
     app.run('0.0.0.0', port=8000, debug=True)
