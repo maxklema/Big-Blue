@@ -24,7 +24,7 @@ bio = bio
     </head>
     <body>
         <div class="form-container">
-            <form action="#" method="post">
+            <form action="#" method="post" name="Form">
                 
                 <img src="{{ url_for('static', filename='logo graphics/basicgolfer.png') }}" alt="">
 
@@ -40,18 +40,20 @@ bio = bio
                 <div class="row-one">
                     <div class="full-name">
                         <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name">
+                        <input onfocusout="checkFullName()" type="text" id="name" name="name">
+                        <label id="full-name-error" for="">This Field is Required</label>
                     </div>
                     <div class="full-username">
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="username">
+                        <input onfocusout="checkUsername()" type="text" id="username" name="username">
+                        <label id="full-username-error" for="">This Field is Required</label>
                     </div>
                 </div>
 
                 <div class="row-two">
                     <div class="full-password-one">
                         <label for="password-one">Password</label>
-                        <input onfocusout="checkPasswords()" type="password" id="password-one" name="password">
+                        <input onfocusout="checkPasswords()" type="password" id="password-one" name="password-one">
                         <label id="password-error" for="">Passwords Must Match!</label>
                     </div>
                     <div class="full-password-two">
@@ -63,7 +65,8 @@ bio = bio
                 <div class="row-three">
                     <div class="full-email">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email">
+                        <input onfocusout="checkEmails()" type="email" id="email" name="email">
+                        <label id="email-error" for="">This Field is Required</label>
                     </div>
                     <div class="full-gender">
                         <label for="gender">Gender</label>
@@ -78,7 +81,8 @@ bio = bio
                 <div class="row-four">
                     <div class="full-team">
                         <label for="team">Affiliated Team</label>
-                        <input type="text" id="team" name="team">
+                        <input onfocusout="checkTeam()" type="text" id="team" name="team">
+                        <label id="team-error" for="">This Field is Required</label>
                     </div>
                     <div class="full-rank">
                         <label for="rank">Account Type</label>
@@ -91,10 +95,11 @@ bio = bio
 
                 <div class="row-five">
                     <label for="bio">Account Bio</label>
-                    <textarea name="bio" id="bio"></textarea>
+                    <textarea onfocusout="checkBio()" name="bio" id="bio"></textarea>
+                    <label id="bio-error" for="">We Require a Profile Biography</label>
                 </div>
 
-                <input type="submit" value="Create Account" id="form-submit">
+                <input type="submit" onclick="return validateForm()" value="Create Account" id="form-submit">
                 
     
 
@@ -104,6 +109,94 @@ bio = bio
     </body>
 
     <script>
+
+        function validateForm() {
+            var a = document.forms["Form"]["name"].value;
+            var b = document.forms["Form"]["username"].value;
+            var c = document.forms["Form"]["password-one"].value;
+            var c = document.forms["Form"]["password"].value;
+            var d = document.forms["Form"]["email"].value;
+            var e = document.forms["Form"]["team"].value;
+            var f = document.forms["Form"]["bio"].value;
+            if ((((a == null || a == "") || (b == null || b == "")) || ((c == null || c == "") || (d == null || d == ""))) || ((e == null || e == "") ||  (f == null || f == ""))) {
+                //checks passwords
+                let password_one = document.getElementById("password-one");
+                let password_two = document.getElementById("password-two");
+
+                if (password_one.value == password_two.value && password_one.value != ""){
+                    password_one.style.borderColor = "green";
+                    password_two.style.borderColor = "green";
+                    document.getElementById("password-error").style.display = "none";
+                } else {
+                    password_one.style.borderColor = "red";
+                    password_two.style.borderColor = "red";
+                    document.getElementById("password-error").style.display = "block";
+                }
+
+                //checks full name
+                let full_name = document.getElementById("name");
+                if (full_name.value == ""){
+                    full_name.style.borderColor = "red";
+                    document.getElementById("full-name-error").style.display = "block";
+                } else {
+                    full_name.style.borderColor = "black";
+                    document.getElementById("full-name-error").style.display = "none";
+                }
+                //checks username
+                let username = document.getElementById("username");
+                if (username.value == ""){
+                    username.style.borderColor = "red";
+                    document.getElementById("full-username-error").style.display = "block";
+                } else {
+                    username.style.borderColor = "black";
+                    document.getElementById("full-username-error").style.display = "none";
+                }
+                //checks email
+                let email = document.getElementById("email");
+                if (email.value == ""){
+                    email.style.borderColor = "red";
+                    document.getElementById("email-error").style.display = "block";
+                } else {
+                    email.style.borderColor = "black";
+                    document.getElementById("email-error").style.display = "none";
+                }
+                //checks team
+                let team = document.getElementById("team");
+                if (team.value == ""){
+                    team.style.borderColor = "red";
+                    document.getElementById("team-error").style.display = "block";
+                } else {
+                    team.style.borderColor = "black";
+                    document.getElementById("team-error").style.display = "none";
+                }
+                //checks bio
+                let bio = document.getElementById("bio");
+                if (bio.value == ""){
+                    bio.style.borderColor = "red";
+                    document.getElementById("bio-error").style.display = "block";
+                } else {
+                    bio.style.borderColor = "black";
+                    document.getElementById("bio-error").style.display = "none";
+                }
+
+                return false;
+            } else if (document.getElementById("password-one").value != document.getElementById("password-two").value) {
+                let password_one = document.getElementById("password-one");
+                let password_two = document.getElementById("password-two");
+
+                if (password_one.value == password_two.value && password_one.value != ""){
+                    password_one.style.borderColor = "green";
+                    password_two.style.borderColor = "green";
+                    document.getElementById("password-error").style.display = "none";
+                } else {
+                    password_one.style.borderColor = "red";
+                    password_two.style.borderColor = "red";
+                    document.getElementById("password-error").style.display = "block";
+                }
+                return false;
+            }
+        }
+  
         function checkPasswords(){
             let password_one = document.getElementById("password-one");
             let password_two = document.getElementById("password-two");
@@ -116,6 +209,63 @@ bio = bio
                 password_one.style.borderColor = "red";
                 password_two.style.borderColor = "red";
                 document.getElementById("password-error").style.display = "block";
+            }
+
+
+        }
+
+        function checkFullName(){
+            let full_name = document.getElementById("name");
+            if (full_name.value == ""){
+                full_name.style.borderColor = "red";
+                document.getElementById("full-name-error").style.display = "block";
+            } else {
+                full_name.style.borderColor = "black";
+                document.getElementById("full-name-error").style.display = "none";
+            }
+        }
+
+        function checkUsername(){
+            let username = document.getElementById("username");
+            if (username.value == ""){
+                username.style.borderColor = "red";
+                document.getElementById("full-username-error").style.display = "block";
+            } else {
+                username.style.borderColor = "black";
+                document.getElementById("full-username-error").style.display = "none";
+            }
+        }
+
+        function checkEmails() {
+            let email = document.getElementById("email");
+            if (email.value == ""){
+                email.style.borderColor = "red";
+                document.getElementById("email-error").style.display = "block";
+            } else {
+                email.style.borderColor = "black";
+                document.getElementById("email-error").style.display = "none";
+            }
+        }
+
+        function checkTeam() {
+            let team = document.getElementById("team");
+            if (team.value == ""){
+                team.style.borderColor = "red";
+                document.getElementById("team-error").style.display = "block";
+            } else {
+                team.style.borderColor = "black";
+                document.getElementById("team-error").style.display = "none";
+            }
+        }
+
+        function checkBio() {
+            let bio = document.getElementById("bio");
+            if (bio.value == ""){
+                bio.style.borderColor = "red";
+                document.getElementById("bio-error").style.display = "block";
+            } else {
+                bio.style.borderColor = "black";
+                document.getElementById("bio-error").style.display = "none";
             }
         }
 
