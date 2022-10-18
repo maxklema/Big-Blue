@@ -416,6 +416,10 @@ def match_dashboard():
         return render_template("match_dashboard.html", data=found_match)
     return redirect(url_for('error', msg="You do not have access to this site."))
 
+@app.route('/active_match/<match_code>')
+def active_match():
+    return '',200
+
 @app.route("/join", methods=['POST'])
 def join():
     if request.method == "POST":
