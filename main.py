@@ -228,7 +228,6 @@ def joincode():
     return render_template("join_code_page.html")
 
 
-
 @app.route("/")
 def index():
     return render_template("index.html", matches=look_for_match("XCRunner2022"))
@@ -354,7 +353,7 @@ def create_account():
 
         for item in request.form:
             if request.form[item] == "" or sanitize_inputs(request.form[item]):
-                return redirect(url_for('error', msg="Your value was either blank or inapropriate. Please input all correct values. The problem is with the field: " + request.form[item]))
+                return redirect(url_for('error', msg="Your value was either blank or inapropriate. Please input all correct values. The problem is with the field: [add go back code]" + request.form[item]))
 
         found_username = users.query.filter_by(username=request.form['username']).first()
         found_email = users.query.filter_by(email=request.form['email']).first()
@@ -417,6 +416,10 @@ def match_dashboard():
         return render_template("match_dashboard.html", data=found_match)
     return redirect(url_for('error', msg="You do not have access to this site."))
 
+@app.route('/active_match/<match_code>')
+def active_match():
+    return '',200
+
 @app.route("/join", methods=['POST'])
 def join():
     if request.method == "POST":
@@ -439,6 +442,4 @@ def return_user_data(password):
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-        verify_user('hornplaying247', True)
-        verify_user('maxklema', True)
     app.run('0.0.0.0', port=8000, debug=True)
