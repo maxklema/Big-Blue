@@ -342,3 +342,35 @@ body form div div label {
     font-family: bigBlueSemiBold;
     display: none;
 }
+
+@media (max-width: 736px){
+    .row-one {
+        flex-direction: column;
+    }
+    .full-name {
+        margin-bottom: 20px;
+    }
+    .row-two {
+        flex-direction: column;
+    }
+    .full-password-one {
+        margin-bottom: 20px;
+    }
+    .row-three {
+        flex-direction: column;
+    }
+    .full-email {
+        margin-bottom: 20px;
+    }
+    .row-four {
+        flex-direction: column;
+    }
+    .full-team {
+        margin-bottom: 20px;
+    }
+    body form {
+        width: 355px;
+    }
+
+
+}
