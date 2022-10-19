@@ -29,16 +29,19 @@
 			var info = [];
             var dbCall = new XMLHttpRequest();
             dbCall.open("GET", "/return_user_data/123",false);
-            dbCall.send(null)
+            //dbCall.send(null)
+            console.log(dbCall.responseText);
             var users = JSON.parse(dbCall.responseText);
+            
             var i = 1;
             var temp = ["","","",""];
             while(true){
-                try {
+                //try {
                     //if (!(users[i]["username"] == null)){
 
                         temp = ["","","",""];
                         temp[0] = "Username: " + users[i]["username"];
+                        console.log(temp[0]);
                         
                         temp[1] = "Name: " + users[i]["name"];
                         temp[2] = "Rank: " + users[i]["rank"];
@@ -56,9 +59,9 @@
                         
                         document.getElementById("allusers").appendChild(div);
                     //}
-                } catch {
+                //} catch {
                     break;
-                }
+                //}
                 i++;
             }
 				
