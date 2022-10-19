@@ -21,6 +21,8 @@ characters = list(string.ascii_letters + string.digits + "!@#$")
 
 db = SQLAlchemy(app)
 
+
+
 class users(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column(db.String(100))
@@ -432,6 +434,7 @@ def join():
 def return_user_data(password):
     if password == "123":
         list_of_users = users.query.all()
+        print(list_of_users)
         dict_to_send = {}
         for item in list_of_users:
             dict_to_send[item._id] = object_as_dict(item)

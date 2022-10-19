@@ -54,9 +54,6 @@ header a {
     background-color: #2176e8;
 }
 
-#imagehref {
-    height: 40px;
-}
 
 header .navigation {
     display: flex;
