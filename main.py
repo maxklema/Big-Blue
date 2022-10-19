@@ -27,8 +27,8 @@ class users(db.Model):
     username = db.Column(db.String(50))
     password = db.Column(db.String(50))
     email = db.Column(db.String(100))
-    rank = db.Column(db.String(1))
-    gender = db.Column(db.String(1))
+    rank = db.Column(db.String(10))
+    gender = db.Column(db.String(10))
     bio = db.Column(db.String(500))
     team = db.Column(db.String(25))
     verified = db.Column(db.Boolean)
@@ -280,7 +280,7 @@ def dashboard():
 
 @app.route("/create_match", methods=['GET', 'POST'])
 def create_match():
-    if 'active_user' in session and session['active_user'][2] == "c":
+    if 'active_user' in session and session['active_user'][2] == "coach":
         if request.method == "POST":
             for item in request.form:
                 if request.form[item] == "" or sanitize_inputs(request.form[item]):
