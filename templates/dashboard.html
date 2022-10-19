@@ -27,7 +27,7 @@
 
     <div class="main-container">
         <div class="profile-frame">
-            <img id="banner" src="{{ url_for('static', filename='logo graphics/BigBluebanner.png') }}" alt="">
+            <img id="banner" src="{{ url_for('static', filename='logo graphics/BigBlueBanner7.png') }}" alt="">
             <div class="profile-picture-container">
                 <img id="profilepicture" src="{{ url_for('static', filename='logo graphics/user_photos/' + data.pic) }}" alt="">
             </div>
@@ -58,6 +58,45 @@
                 <h4 id="join-date">June 1, 2022</h4>
                 <img id="school-icon"src="{{ url_for('static', filename='logo graphics/schoolicon.png') }}" alt="">
                 <h4>{{data.team}}</h4>
+            </div>
+
+            <div class="row-one-buttons">
+                <a href="">
+                    <button>
+                        <div class="match-dashboard-container">
+                            <img id="dashboard-icon" src="{{ url_for('static', filename='logo graphics/dashboardicon.png') }}" alt="">
+                            <h3>Match Dashboard</h3>
+                        </div>
+                    </button>
+                </a>
+                <a href="">
+                    <button>
+                        <div class="create-dashboard-container">
+                            <img src="{{ url_for('static', filename='logo graphics/plusicon.png') }}" alt="">
+                            <h3>Create Match</h3>
+                        </div>
+                    </button>
+                </a>
+            </div>
+
+
+            <div class="row-two-buttons">
+                <a href="">
+                    <button>
+                        <div class="add-new-course-container">
+                            <img src="{{ url_for('static', filename='logo graphics/golfholeicon.png') }}" alt="">
+                            <h3>Add New Course</h3>
+                        </div>
+                    </button>
+                </a>
+                <a href="">
+                    <button>
+                        <div class="edit-profile-container">
+                            <img src="{{ url_for('static', filename='logo graphics/penciliconprofile.png') }}" alt="">
+                            <h3>Edit Profile</h3>
+                        </div>
+                    </button>
+                </a>
             </div>
             
 

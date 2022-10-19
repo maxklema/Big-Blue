@@ -190,6 +190,7 @@ header .navigation li a:hover {
     background-color: white;
     align-items: center;
     padding-bottom: 20px;
+    border-radius: 0px 0px 5px 5px;
 }
 
 .join-date-and-school-container img {
@@ -213,7 +214,107 @@ header .navigation li a:hover {
     margin-left: 15px;
 }
 
+.row-one-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(247, 247, 247);
+    align-items: center;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-bottom: 20px;
+    padding-top: 30px;
+}
 
+.row-one-buttons button {
+    background-color: transparent;
+    height: 50px;
+    width: 250px;
+    border: 0.5px solid black;
+    cursor: pointer;
+}
+
+.row-one-buttons button h3 {
+    background-color: transparent;
+}
+
+.row-one-buttons button img {
+    height: 25px;
+    background-color: transparent;
+    width: 25px;
+}
+
+.match-dashboard-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 30px;
+    flex-direction: row;
+    background-color: transparent;
+    align-items: center;
+}
+
+.create-dashboard-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 50px;
+    flex-direction: row;
+    background-color: transparent;
+    align-items: center;
+}
+
+.row-two-buttons button {
+    background-color: transparent;
+    height: 50px;
+    width: 250px;
+    border: 0.5px solid black;
+    cursor: pointer;
+}
+
+.row-two-buttons button h3 {
+    background-color: transparent;
+}
+
+.row-two-buttons button img {
+    height: 27px;
+    background-color: transparent;
+    width: 27px;
+}
+
+.row-two-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(247, 247, 247);
+    align-items: center;
+    padding-bottom: 30px;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 10px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.add-new-course-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 38px;
+    flex-direction: row;
+    background-color: transparent;
+    align-items: center;
+}
+
+.edit-profile-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 60px;
+    flex-direction: row;
+    background-color: transparent;
+    align-items: center;
+}
+
+#dashboard-icon{
+    height: 30px;
+    width: 30px;  
+}
 
 
 
