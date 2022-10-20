@@ -27,7 +27,9 @@
 
     <div class="main-container">
         <div class="profile-frame">
-            <img id="banner" src="{{ url_for('static', filename='logo graphics/BigBlueBanner7.png') }}" alt="">
+            <div class="banner-container">
+                <img id="banner" src="{{ url_for('static', filename='logo graphics/BigBlueBanner9.png') }}" alt="">
+            </div>
             <div class="profile-picture-container">
                 <img id="profilepicture" src="{{ url_for('static', filename='logo graphics/user_photos/' + data.pic) }}" alt="">
             </div>
@@ -61,18 +63,18 @@
             </div>
 
             <div class="row-one-buttons">
-                <a href="">
+                <a id="match-dashboard-href" href="">
                     <button>
                         <div class="match-dashboard-container">
-                            <img id="dashboard-icon" src="{{ url_for('static', filename='logo graphics/dashboardicon.png') }}" alt="">
+                            <!--<img id="dashboard-icon" src="{{ url_for('static', filename='logo graphics/dashboardicon.png') }}" alt="">-->
                             <h3>Match Dashboard</h3>
                         </div>
                     </button>
                 </a>
-                <a href="">
+                <a id="create-match-href" href="">
                     <button>
                         <div class="create-dashboard-container">
-                            <img src="{{ url_for('static', filename='logo graphics/plusicon.png') }}" alt="">
+                            <!--<img src="{{ url_for('static', filename='logo graphics/plusicon.png') }}" alt="">-->
                             <h3>Create Match</h3>
                         </div>
                     </button>
@@ -81,18 +83,18 @@
 
 
             <div class="row-two-buttons">
-                <a href="">
+                <a id="add-new-course-href" href="">
                     <button>
                         <div class="add-new-course-container">
-                            <img src="{{ url_for('static', filename='logo graphics/golfholeicon.png') }}" alt="">
+                            <!--<img src="{{ url_for('static', filename='logo graphics/golfholeicon.png') }}" alt="">-->
                             <h3>Add New Course</h3>
                         </div>
                     </button>
                 </a>
-                <a href="">
+                <a id="edit-profile-href" href="">
                     <button>
                         <div class="edit-profile-container">
-                            <img src="{{ url_for('static', filename='logo graphics/penciliconprofile.png') }}" alt="">
+                            <!--<img src="{{ url_for('static', filename='logo graphics/penciliconprofile.png') }}" alt="">-->
                             <h3>Edit Profile</h3>
                         </div>
                     </button>

@@ -104,11 +104,14 @@ header .navigation li a:hover {
     border-radius: 5px;
 }
 
+.banner-container {
+    width: 710px;
+    width: 225px;
+}
+
 #banner {
     max-width: 710px;
-    max-height: 225px;
     background-color: white;
-    image-resolution: 1dpi;
     border-radius: 5px 5px 0px 0px;
 }
 
@@ -218,19 +221,20 @@ header .navigation li a:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: rgb(247, 247, 247);
+    background-color: rgb(255, 255, 255);
     align-items: center;
     padding-left: 80px;
     padding-right: 80px;
     padding-bottom: 20px;
     padding-top: 30px;
+    border-top: 0.25px solid rgb(200, 200, 200)
 }
 
 .row-one-buttons button {
     background-color: transparent;
     height: 50px;
     width: 250px;
-    border: 0.5px solid black;
+    border: 0.5px solid #2176e8;
     cursor: pointer;
 }
 
@@ -244,29 +248,38 @@ header .navigation li a:hover {
     width: 25px;
 }
 
+#create-match-href {
+    background-color: #2176e8;
+}
+
+#match-dashboard-href {
+    background-color: #2176e8;
+}
+
 .match-dashboard-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0px 30px;
     flex-direction: row;
-    background-color: transparent;
     align-items: center;
+    background-color: #2176e8;
+    color: white;
 }
 
 .create-dashboard-container {
     display: flex;
-    justify-content: space-between;
-    padding: 0px 50px;
+    justify-content: center;
     flex-direction: row;
-    background-color: transparent;
     align-items: center;
+    color: white;
+    background-color: #2176e8;
 }
 
 .row-two-buttons button {
     background-color: transparent;
     height: 50px;
     width: 250px;
-    border: 0.5px solid black;
+    border: 0.5px solid #2176e8;
     cursor: pointer;
 }
 
@@ -284,7 +297,7 @@ header .navigation li a:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: rgb(247, 247, 247);
+    background-color: rgb(255, 255, 255);
     align-items: center;
     padding-bottom: 30px;
     padding-left: 80px;
@@ -295,26 +308,36 @@ header .navigation li a:hover {
 
 .add-new-course-container {
     display: flex;
-    justify-content: space-between;
-    padding: 0px 38px;
+    justify-content: center;
     flex-direction: row;
-    background-color: transparent;
+    background-color: #2176e8;
     align-items: center;
+    color: white;
 }
 
 .edit-profile-container {
     display: flex;
-    justify-content: space-between;
-    padding: 0px 60px;
+    justify-content: center;
     flex-direction: row;
-    background-color: transparent;
+    background-color: #2176e8;
     align-items: center;
+    color: white;
 }
 
 #dashboard-icon{
     height: 30px;
     width: 30px;  
 }
+
+#edit-profile-href{
+    background-color: #2176e8;
+}
+
+#add-new-course-href {
+    background-color: #2176e8;
+}
+
+
 
 
 
