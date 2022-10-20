@@ -106,7 +106,7 @@ header .navigation li a:hover {
 
 .banner-container {
     width: 710px;
-    width: 225px;
+
 }
 
 #banner {
@@ -138,15 +138,15 @@ header .navigation li a:hover {
     height: 17px;
     width: 17px;
     background-color: white;
+    margin-left: 5px;
 
 }
 
 .username-and-verification-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     background-color: white;
-    padding: 0px 38.1%;
     align-items: center;
     margin-top: 5px;
 }
@@ -337,6 +337,162 @@ header .navigation li a:hover {
     background-color: #2176e8;
 }
 
+@media (max-width: 765px){
+    .banner-container {
+        width: 500px;
+    }
+    
+    #banner {
+        max-width: 500px;
+        background-color: white;
+        border-radius: 5px 5px 0px 0px;
+    }
+
+    .profile-frame {
+        width: 500px;
+        background-color: white;
+        border-radius: 5px;
+    }
+    .row-one-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: rgb(255, 255, 255);
+        align-items: center;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 20px;
+        padding-top: 20px;
+        border-top: 0.25px solid rgb(200, 200, 200)
+    }
+    
+    .row-one-buttons button {
+        background-color: transparent;
+        height: 50px;
+        width: 200px;
+        border: 0.5px solid #2176e8;
+        cursor: pointer;
+    }
+    .row-two-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: rgb(255, 255, 255);
+        align-items: center;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 20px;
+        padding-top: 0px;
+    }
+    
+    .row-two-buttons button {
+        background-color: transparent;
+        height: 50px;
+        width: 200px;
+        border: 0.5px solid #2176e8;
+        cursor: pointer;
+    }
+    .username-and-verification-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        background-color: white;
+        padding: 0px 30%;
+        align-items: center;
+        margin-top: 5px;
+    }
+
+    .username-and-verification-container img {
+        margin-left: 5px;
+    }
+    
+    
+}
+
+@media (max-width: 550px){
+    .banner-container {
+        width: 355px;
+    }
+    
+    #banner {
+        max-width: 355px;
+        background-color: white;
+        border-radius: 5px 5px 0px 0px;
+    }
+
+    .profile-frame {
+        width: 355px;
+        background-color: white;
+        border-radius: 5px;
+    }
+    .row-one-buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: rgb(255, 255, 255);
+        align-items: center;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 20px;
+        padding-top: 20px;
+        border-top: 0.25px solid rgb(200, 200, 200)
+    }
+    
+    .row-one-buttons button {
+        background-color: transparent;
+        height: 50px;
+        width: 200px;
+        border: 0.5px solid #2176e8;
+        cursor: pointer;
+    }
+    .row-two-buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: rgb(255, 255, 255);
+        align-items: center;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 20px;
+        padding-top: 0px;
+    }
+    
+    .row-two-buttons button {
+        background-color: transparent;
+        height: 50px;
+        width: 200px;
+        border: 0.5px solid #2176e8;
+        cursor: pointer;
+    }
+
+    .username-and-verification-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        background-color: white;
+        align-items: center;
+        margin-top: 5px;
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+
+
+    .username-and-verification-container img {
+        margin-left: 5px;
+    }
+    .username-and-verification-container h3 {
+        font-size: 20px;
+    }
+
+    #create-match-href {
+        margin-top: 20px;
+    }
+
+    #edit-profile-href {
+        margin-top: 20px;
+    }
+
+}
 
 
 
