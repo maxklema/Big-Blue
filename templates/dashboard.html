@@ -1,7 +1,11 @@
-{% if data.rank == 'coach'%}
-    {% extends "indexcontentcoachlogin.html" %}
-{% else %}
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentplayerlogin.html" %}   
+{% elif data.rank == 'player' %}
     {% extends "indexcontentplayerlogin.html" %}
+{% elif data.rank == 'c' %}
+    {% extends "indexcontentplayerlogin.html" %}   
+{% else %}
+    {% extends "indexcontent.html" %}
 {% endif %}
 {% block content %}
 
@@ -21,7 +25,7 @@
 -->
 
     <head>
-        <title>Big Blue | User Dashboard</title>
+        <title>Big Blue | Profile</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/profiledashboard.css') }}">
     </head>
 
@@ -63,7 +67,7 @@
             </div>
 
             <div class="row-one-buttons">
-                <a id="match-dashboard-href" href="">
+                <a id="match-dashboard-href" href="/match_dashboard">
                     <button>
                         <div class="match-dashboard-container">
                             <!--<img id="dashboard-icon" src="{{ url_for('static', filename='logo graphics/dashboardicon.png') }}" alt="">-->
@@ -73,10 +77,7 @@
                 </a>
                 <a id="create-match-href" href="">
                     <button>
-                        <div class="create-dashboard-container">
-                            <!--<img src="{{ url_for('static', filename='logo graphics/plusicon.png') }}" alt="">-->
-                            <h3>Create Match</h3>
-                        </div>
+                        <h3>Create Match</h3>
                     </button>
                 </a>
             </div>
@@ -91,7 +92,7 @@
                         </div>
                     </button>
                 </a>
-                <a id="edit-profile-href" href="">
+                <a id="edit-profile-href" href="/dashboard/edit_profile">
                     <button>
                         <div class="edit-profile-container">
                             <!--<img src="{{ url_for('static', filename='logo graphics/penciliconprofile.png') }}" alt="">-->

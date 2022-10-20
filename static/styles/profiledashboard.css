@@ -269,11 +269,8 @@ header .navigation li a:hover {
     color: white;
 }
 
-.create-dashboard-container {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
+#create-match-href button h3 {
+    text-align: center;
     color: white;
     background-color: #2176e8;
 }
@@ -496,6 +493,7 @@ header .navigation li a:hover {
     }
 
 }
+
 
 
 

@@ -1,0 +1,56 @@
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentplayerlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}
+{% elif data.rank == 'c' %}
+    {% extends "indexcontentplayerlogin.html" %}   
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
+{% block content %}
+
+<!-- 
+
+{% if data.verified == True %}
+                                <img src="{{ url_for('static', filename='logo graphics/verify.png') }}" alt="">
+                            {% else %}
+                                <p style="font-size:xx-small;"> **Not verified</p>
+                            {% endif %}
+
+{{data.name}} // name
+{{data.bio}} // bio
+{{data.team}} //team
+
+
+-->
+
+    <head>
+        <title>Big Blue | Edit Profile</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/edit_profile.css') }}">
+    </head>
+
+    <body>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+
+
+
+
+
+
+
+
+{% endblock %}

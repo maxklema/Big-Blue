@@ -225,6 +225,14 @@ def verify_user(user: str, verified_input: bool):
 def about():
     return render_template("about.html")
 
+@app.route("/dashboard/edit_profile")
+def edit_profile():
+    if 'active_user' in session:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+        return render_template("edit_profile.html", data=found_user)
+    else:
+        return render_template("login.html")
+
 @app.route("/joincode")
 def joincode():
     return render_template("join_code_page.html")
