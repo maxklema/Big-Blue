@@ -29,7 +29,7 @@
 			var info = [];
             var dbCall = new XMLHttpRequest();
             dbCall.open("GET", "/return_user_data/123",false);
-            //dbCall.send(null)
+            dbCall.send(null)
             console.log(dbCall.responseText);
             var users = JSON.parse(dbCall.responseText);
             

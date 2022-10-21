@@ -430,14 +430,26 @@ def join():
 
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):
+    print("hi")
     if password == "123":
         list_of_users = users.query.all()
+        print(list_of_users)
+        print("end")
         dict_to_send = {}
-        for item in list_of_users:
+        for item in list_of_users:   
             dict_to_send[item._id] = object_as_dict(item)
         return dict_to_send,200
     else:
         return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
+
+@app.route("/active_match_view")
+def active_match_view():
+    return render_template("active_match_view.html")
+
+@app.route("/course_creation")
+def course_creation():
+    return render_template("create_course.html")
+
 
 if __name__ == "__main__":
     with app.app_context():
