@@ -58,10 +58,14 @@
             </div>
 
             <div class="join-date-and-school-container">
-                <img src="{{ url_for('static', filename='logo graphics/cake.png') }}" alt="">
-                <h4 id="join-date">June 1, 2022</h4>
-                <img id="school-icon"src="{{ url_for('static', filename='logo graphics/schoolicon.png') }}" alt="">
-                <h4>{{data.team}}</h4>
+                <div class="join-date-container">
+                    <img src="{{ url_for('static', filename='logo graphics/cake.png') }}" alt="">
+                    <h4 id="join-date">June 1, 2022</h4>
+                </div>
+                <div class="school-name-container">
+                    <img id="school-icon"src="{{ url_for('static', filename='logo graphics/schoolicon.png') }}" alt="">
+                    <h4>{{data.team}}</h4>
+                </div>
             </div>
 
             <div class="row-one-buttons">
