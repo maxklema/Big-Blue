@@ -93,3 +93,93 @@ header .navigation li a:hover {
     
 
 }
+
+.main-container {
+    display: flex;
+    margin-top: 5%;
+    justify-content: center;
+    margin-bottom: 5%;
+}
+
+.main-frame {
+    width: 710px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.left-side {
+    width: 20%;
+    border-right: 1px solid rgb(218, 218, 218);
+    background-color: white;
+}
+
+.left-side a {
+    background-color: white;
+    font-size: 12x;
+    margin-bottom: 20px;
+    color: rgb(143, 143, 143);
+    text-decoration: none;
+    font-family: bigBlueMedium;
+}
+
+.right-side {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    flex-direction: column;
+    padding-left: 20px;
+    background-color: white;
+
+}
+
+.right-side h3 {
+    background-color: white;
+}
+
+.right-side form {
+    background-color: white;
+}
+
+.inputbox {
+    height: 25px;
+    width: 300px;
+    padding: 5px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    border: 0.25px solid black;
+    background-color: white;
+    font-family: bigBlueMedium;
+    padding: 5px 5px;
+}
+
+#bio {
+    width: 100%;
+    height: 70px;
+    background-color: white;
+    resize: none;
+    padding: 5px 5px;
+    font-family: bigBlueMedium;
+    font-size: 15px;
+    border: 0.25px solid black;
+    background-color: white;
+}
+
+#form-submit {
+    width: 130px;
+    height: 30px;
+    font-size: 15px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+
+}
+
+.right-side form label {
+    background-color: white;
+}
