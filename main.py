@@ -425,7 +425,7 @@ def upload_profile_pic():
         else:
             return redirect(url_for("error", msg="Sorry, there was a problem uploading your file. You might need to contact customer suport!"))
 
-        found_user = users.query.filter_by(username=request.form['username']).first()
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if found_user.pic != 'defaultprofilepicture.png':
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], found_user.pic))
         found_user.pic = filename
