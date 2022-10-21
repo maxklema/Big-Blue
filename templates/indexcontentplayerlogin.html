@@ -7,6 +7,7 @@
     <head>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo graphics/favicon.ico') }}">
 
     </head>
 
@@ -17,8 +18,8 @@
                 <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logo">
             </a>
             <ul class="navigation">
-                <li><a href="">Profile</a></li>
-                <li><a href="#">Join Match</a></li>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="/dashboard">Profile</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
 

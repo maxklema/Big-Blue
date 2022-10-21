@@ -47,6 +47,9 @@ header .logo {
     position: relative;
     background-color: #2176e8;
     text-decoration: none;
+    padding: 0;
+    margin: 0;
+    display: block;
 }
 
 header a {
@@ -54,9 +57,6 @@ header a {
     background-color: #2176e8;
 }
 
-#imagehref {
-    height: 40px;
-}
 
 header .navigation {
     display: flex;
