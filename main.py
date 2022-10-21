@@ -52,12 +52,14 @@ class course(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     course_name = db.Column(db.String(50))
     pars_of_holes = db.Column(db.String)
-    course_stats = db.Column(db.String(1000))
+    city = db.Column(db.String)
+    course_bio = db.Column(db.String(1000))
 
-    def __init__(self, course_name, pars_of_holes, course_stats):
+    def __init__(self, course_name, pars_of_holes, city, course_bio):
         self.course_name = course_name
         self.pars_of_holes = pars_of_holes
-        self.course_stats = course_stats
+        self.city = city
+        self.course_bio = course_bio
 
 class match(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -329,7 +331,7 @@ def create_match():
 @app.route("/edit_match/<match_to_edit>", methods=["POST", "GET"])
 def edit_match(match_to_edit):
     found_match = match.query.filter_by(match_name=match_to_edit).first()
-    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "c":
+    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
         if request.method == "POST":
             for item in request.form:
                 if request.form[item] == "" or sanitize_inputs(request.form[item]):
@@ -448,7 +450,7 @@ def admin():
 
 @app.route("/match_dashboard")
 def match_dashboard():
-    if 'active_user' in session and session['active_user'][2] == 'c':
+    if 'active_user' in session and session['active_user'][2] == 'coach':
         found_match = match.query.filter_by(created_by=session['active_user'][0]).all()
         return render_template("match_dashboard.html", data=found_match)
     return redirect(url_for('error', msg="You do not have access to this site."))
@@ -477,9 +479,35 @@ def return_user_data(password):
 def active_match_view():
     return render_template("active_match_view.html")
 
-@app.route("/course_creation")
-def course_creation():
-    return render_template("create_course.html")
+@app.route("/create_course", methods=['GET', 'POST'])
+def create_course():
+    if 'active_user' in session and session['active_user'][2] == 'coach':
+
+        if request.method =="POST":
+
+            for item in request.form:
+                if request.form[item] == "" or sanitize_inputs(item) or 'numberholes' not in request.form:
+                    return render_template("create_course.html", message='Your values were either blank or inapropriate. Please try again.')
+
+            if request.form['numberholes'] == '9':
+                i = 9
+            else:
+                i = 18
+
+            list_of_pars = []
+
+            for n in range(i):
+                list_of_pars.append(request.form['holepar' + str(n + 1)])
+
+            course_entry = course(request.form["course-name"], ''.join(list_of_pars), request.form['city'], '')
+            db.session.add(course_entry)
+            db.session.commit()
+
+            return render_template("create_course.html", message='Course created sucsessfully!')
+
+        return render_template("create_course.html")
+    else:
+        return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
 
 
 if __name__ == "__main__":

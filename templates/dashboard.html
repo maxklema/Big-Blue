@@ -1,9 +1,7 @@
 {% if data.rank == 'coach' %}
-    {% extends "indexcontentplayerlogin.html" %}   
+    {% extends "indexcontentcoachlogin.html" %}   
 {% elif data.rank == 'player' %}
-    {% extends "indexcontentplayerlogin.html" %}
-{% elif data.rank == 'c' %}
-    {% extends "indexcontentplayerlogin.html" %}   
+    {% extends "indexcontentplayerlogin.html" %}  
 {% else %}
     {% extends "indexcontent.html" %}
 {% endif %}
@@ -47,7 +45,7 @@
             <div class="username-and-rank-container">
                 <h4>@{{data.username}}</h4>
                 <h4 id="divider">•</h4>
-                {% if data.rank == "c" %}
+                {% if data.rank == "coach" %}
                     <h4>Coach</h4>
                 {% else %}
                     <h4>Player</h4>
@@ -84,7 +82,7 @@
 
 
             <div class="row-two-buttons">
-                <a id="add-new-course-href" href="">
+                <a id="add-new-course-href" href="/create_course">
                     <button>
                         <div class="add-new-course-container">
                             <!--<img src="{{ url_for('static', filename='logo graphics/golfholeicon.png') }}" alt="">-->
