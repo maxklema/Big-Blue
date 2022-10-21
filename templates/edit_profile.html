@@ -35,12 +35,12 @@
         <div class="main-container">
             <div class="main-frame">
                 <div class="left-side">
-                    <a href="Basic Information">Basic Info</a>
-                    <a href="Profile Picture">Profile Picture</a>
+                    <a style="cursor: pointer;" onclick="myFunctionTwo()">Basic Info</a><br>
+                    <a style="cursor: pointer; margin-top: 5px;" onclick="myFunction()">Profile Picture</a>
                 </div>
                 <div class="right-side">
-                    <h3>Basic Information</h3><br>
-                    <form method=POST name="Form" action="/edit_user_profile">
+                    <form method=POST name="Form" id="info-form" action="/edit_user_profile">
+                        <h3>Basic Information</h3><br>
                         <label for="name">Name</label><br>
                         <input onfocusout="checkFullName()" class="inputbox" id="name" value="{{data.name}}" name="name" type="text"><br>
                         <label for="email">Email</label><br>
@@ -51,6 +51,15 @@
                         <textarea onfocusout="checkBio()" name="bio" id="bio">{{data.bio}}</textarea>
 
                         <input type="submit" onclick="return validateForm()" value="Save Changes" id="form-submit">
+                    </form>
+
+                    <form method="POST" name="Profile-Form" id="profile-picture-form" action="/upload_profile_pic" style="display: none;">
+                        <h3>Profile Picture</h3><br>
+                        <input style="background-color: white;" id="fileinput" type=file name=file><br>
+                        <input id="form-submit" type=submit value=Upload>
+
+
+
                     </form>
 
                     
@@ -114,6 +123,15 @@
             }
         }
   
+        function myFunction() {
+            document.getElementById("profile-picture-form").style.display = "block";
+            document.getElementById("info-form").style.display = "none";
+        }
+
+        function myFunctionTwo() {
+            document.getElementById("profile-picture-form").style.display = "none";
+            document.getElementById("info-form").style.display = "block";
+        }
         
         function checkFullName(){
             let full_name = document.getElementById("name");
@@ -150,6 +168,7 @@
             } else {
                 bio.style.borderColor = "black";
         }
+
     }
 
     </script>
