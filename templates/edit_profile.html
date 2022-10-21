@@ -30,6 +30,129 @@
     </head>
 
     <body>
+
+
+        <div class="main-container">
+            <div class="main-frame">
+                <div class="left-side">
+                    <a href="Basic Information">Basic Info</a>
+                    <a href="Profile Picture">Profile Picture</a>
+                </div>
+                <div class="right-side">
+                    <h3>Basic Information</h3><br>
+                    <form method=POST name="Form" action="/edit_user_profile">
+                        <label for="name">Name</label><br>
+                        <input onfocusout="checkFullName()" class="inputbox" id="name" value="{{data.name}}" name="name" type="text"><br>
+                        <label for="email">Email</label><br>
+                        <input onfocusout="checkEmails()" class="inputbox" type="email" name="email" id="email" value="{{data.email}}"><br>
+                        <label for="team">Team</label><br>
+                        <input onfocusout="checkTeam()" class="inputbox" type="text" name="team" id="team" value="{{data.team}}"><br>
+                        <label for="bio">Bio</label><br>
+                        <textarea onfocusout="checkBio()" name="bio" id="bio">{{data.bio}}</textarea>
+
+                        <input type="submit" onclick="return validateForm()" value="Save Changes" id="form-submit">
+                    </form>
+
+                    
+                    
+                    
+                </div>
+            </div>
+
+
+        </div>
+
+    <script>
+
+        function validateForm() {
+            var a = document.forms["Form"]["name"].value;
+            var b = document.forms["Form"]["email"].value;
+            var c = document.forms["Form"]["team"].value;
+            var d = document.forms["Form"]["bio"].value;
+            if (((a == null || a == "") || (b == null || b == "")) || ((c == null || c == "") || (d == null || d == ""))) {
+                
+    
+                //checks full name
+                let full_name = document.getElementById("name");
+                if (full_name.value == ""){
+                    full_name.style.borderColor = "red";
+                } else {
+                    full_name.style.borderColor = "black";
+                }
+
+                
+                //checks email
+                let email = document.getElementById("email");
+                if (email.value == ""){
+                    email.style.borderColor = "red";
+                } else {
+                    email.style.borderColor = "black";
+                }
+
+                
+                //checks team
+                let team = document.getElementById("team");
+                if (team.value == ""){
+                    team.style.borderColor = "red";
+                } else {
+                    team.style.borderColor = "black";
+                }
+
+                
+                //checks bio
+                let bio = document.getElementById("bio");
+                if (bio.value == ""){
+                    bio.style.borderColor = "red";
+                } else {
+                    bio.style.borderColor = "black";
+                }
+
+                return false;
+
+                
+        
+            }
+        }
+  
+        
+        function checkFullName(){
+            let full_name = document.getElementById("name");
+            if (full_name.value == ""){
+                full_name.style.borderColor = "red";
+            } else {
+                full_name.style.borderColor = "black";
+            }
+        }
+
+
+        function checkEmails() {
+            let email = document.getElementById("email");
+            if (email.value == ""){
+                email.style.borderColor = "red";
+            } else {
+                email.style.borderColor = "black";
+            }
+        }
+
+        function checkTeam() {
+            let team = document.getElementById("team");
+            if (team.value == ""){
+                team.style.borderColor = "red";
+            } else {
+                team.style.borderColor = "black";
+            }
+        }
+
+        function checkBio() {
+            let bio = document.getElementById("bio");
+            if (bio.value == ""){
+                bio.style.borderColor = "red";
+            } else {
+                bio.style.borderColor = "black";
+        }
+    }
+
+    </script>
         
 
 

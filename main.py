@@ -393,6 +393,21 @@ def create_account():
 
     return render_template('create_account.html')
 
+
+@app.route("/edit_user_profile", methods=["POST"])
+def edit_user_profile():
+    if request.method == "POST" and 'active_user' in session:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+        found_user.team = request.form['team']
+        found_user.name = request.form['name']
+        found_user.bio = request.form['bio']
+        found_user.email = request.form['email']
+
+        db.session.commit()
+
+        return render_template("dashboard.html", data=found_user)
+    return redirect(url_for('error', msg="Something went wrong. Please try again!"))
+
 @app.route("/upload_profile_pic", methods=["POST"])
 def upload_profile_pic():
     if request.method == "POST" and 'active_user' in session:
