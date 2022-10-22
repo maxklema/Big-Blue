@@ -237,8 +237,7 @@ def verify_user(user: str, verified_input: bool):
 
 @app.route("/about")
 def about():
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
-    return render_template("about.html", data=found_user)
+    return render_template("about.html")
 
 @app.route("/dashboard/edit_profile")
 def edit_profile():
@@ -250,26 +249,22 @@ def edit_profile():
 
 @app.route("/joincode")
 def joincode():
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
-    return render_template("join_code_page.html", data=found_user)
+    return render_template("join_code_page.html")
 
 
 @app.route("/")
 def index():
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
-    return render_template("index.html", data=found_user, matches=look_for_match("XCRunner2022"))
+    return render_template("index.html", matches=look_for_match("XCRunner2022"))
 
 @app.route("/header", methods=['GET'])
 def header():
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     if 'active_user' in session:
         return render_template("header.html")
     return render_template("error.html", message="Sorry, you do not have access to this page.")
 
 @app.route("/error/<msg>")
 def error(msg):
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
-    return render_template("error.html", message=msg, data=found_user)
+    return render_template("error.html", message=msg)
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
@@ -279,7 +274,7 @@ def login():
 
         username_input = request.form['username']
         password_input = request.form['password']
-        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+        found_user = users.query.filter_by(username=username_input).first()
         
         if found_user and found_user.username == username_input and found_user.password == password_input:
             session['active_user'] = [found_user.username, found_user.name, found_user.rank]
@@ -309,7 +304,6 @@ def dashboard():
 
 @app.route("/create_match", methods=['GET', 'POST'])
 def create_match():
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     if 'active_user' in session and session['active_user'][2] == "coach":
         if request.method == "POST":
             for item in request.form:
@@ -326,17 +320,16 @@ def create_match():
                 db.session.commit()
             except Exception as err:
                 print(err)
-                return redirect(url_for('error', data=found_user, msg="There was a problem creating this match. Call 330-550-1055!"))
+                return redirect(url_for('error', msg="There was a problem creating this match. Call 330-550-1055!"))
 
-            return redirect(url_for('match_dashboard', data=found_user))
+            return redirect(url_for('match_dashboard'))
         
-        return render_template('create_match.html', data=found_user)
+        return render_template('create_match.html')
     
-    return redirect(url_for('error', data=found_user, msg='You do not have access to this page.'))
+    return redirect(url_for('error', msg='You do not have access to this page.'))
 
 @app.route("/edit_match/<match_to_edit>", methods=["POST", "GET"])
 def edit_match(match_to_edit):
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     found_match = match.query.filter_by(match_name=match_to_edit).first()
     if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
         if request.method == "POST":
@@ -344,7 +337,7 @@ def edit_match(match_to_edit):
                 if request.form[item] == "" or sanitize_inputs(request.form[item]):
                     if request.form["eventtype"] != "singles" and request.form["hometeam"] == "" and request.form["awayteam"] == "":
                         break
-                    return render_template('edit_match.html', data=found_user, message="You have inputed an invalid value or an inapropriate value.", editing=found_match)
+                    return render_template('edit_match.html', message="You have inputed an invalid value or an inapropriate value.", editing=found_match)
             
             ezfix = request.form["hometeam"] + '~' + request.form["awayteam"]
 
@@ -361,27 +354,25 @@ def edit_match(match_to_edit):
                 db.session.commit()
                 print(found_match.teams1)
             except:
-                redirect(url_for('error', data=found_user, msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
+                redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
             
-            return redirect(url_for("match_dashboard", data=found_user))
+            return redirect(url_for("match_dashboard"))
 
-        return render_template('edit_match.html', data=found_user, editing=found_match)
+        return render_template('edit_match.html', editing=found_match)
 
-    return render_template("error", data=found_user, msg="You do not have access to this site!")
+    return render_template("error", msg="You do not have access to this site!")
 
 @app.route("/delete_match/<match_to_delete>")
 def delete_match(match_to_delete):
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     found_match = match.query.filter_by(match_name=match_to_delete).first()
     if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "c":
         db.session.delete(found_match)
         db.session.commit()
-        return redirect(url_for("match_dashboard", data=found_user))
-    return redirect(url_for('error', data=found_user, msg="You do not have access to this site."))
+        return redirect(url_for("match_dashboard"))
+    return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/create_account", methods=['POST', 'GET'])
 def create_account():
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     if request.method == "POST":
 
         for item in request.form:
@@ -391,18 +382,18 @@ def create_account():
         found_username = users.query.filter_by(username=request.form['username']).first()
         found_email = users.query.filter_by(email=request.form['email']).first()
         if found_username or found_email:
-            return render_template('create_account.html', data=found_user, message="Sorry, the email or username you entered is already in use.")
+            return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.")
 
         try: 
             new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], True, "defaultprofilepicture.png")
             db.session.add(new_user)
             db.session.commit()
         except:
-            return redirect(url_for('error', data=found_user, msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
+            return redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
 
-        return render_template('create_account.html', data=found_user, message="Account created sucessfully!")
+        return render_template('create_account.html', message="Account created sucessfully!")
 
-    return render_template('create_account.html', data=found_user)
+    return render_template('create_account.html')
 
 
 @app.route("/edit_user_profile", methods=["POST"])
@@ -417,7 +408,7 @@ def edit_user_profile():
         db.session.commit()
 
         return render_template("dashboard.html", data=found_user)
-    return redirect(url_for('error', data=found_user, msg="Something went wrong. Please try again!"))
+    return redirect(url_for('error', msg="Something went wrong. Please try again!"))
 
 @app.route("/upload_profile_pic", methods=["POST"])
 def upload_profile_pic():
@@ -455,16 +446,14 @@ def logout():
 
 @app.route("/admin")
 def admin():
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
-    return render_template("admin.html", data=found_user)
+    return render_template("admin.html")
 
 @app.route("/match_dashboard")
 def match_dashboard():
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     if 'active_user' in session and session['active_user'][2] == 'coach':
         found_match = match.query.filter_by(created_by=session['active_user'][0]).all()
         return render_template("match_dashboard.html", data=found_match)
-    return redirect(url_for('error', data=found_user, msg="You do not have access to this site."))
+    return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route('/active_match/<match_code>')
 def active_match():
@@ -472,36 +461,33 @@ def active_match():
 
 @app.route("/join", methods=['POST'])
 def join():
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     if request.method == "POST":
         found_match = match.query.filter_by(match_code=request.form['joinCode']).first()
         if found_match:
             return render_template('match_join_page.html', data=found_match)
-        return redirect(url_for('error', data=found_user, msg="Sorry, it looks like we can't find this match. Please contact the match creator for the correct match code."))
+        return redirect(url_for('error', msg="Sorry, it looks like we can't find this match. Please contact the match creator for the correct match code."))
 
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    print("hi")
     if password == "123":
         return return_admin_data()
     else:
-        return redirect(url_for("error", data=found_user, msg='Sorry, you do not have access to this site.'))
+        return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
 
 @app.route("/active_match_view")
 def active_match_view():
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
-    return render_template("active_match_view.html", data=found_user)
+    return render_template("active_match_view.html")
 
 @app.route("/create_course", methods=['GET', 'POST'])
 def create_course():
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     if 'active_user' in session and session['active_user'][2] == 'coach':
 
         if request.method =="POST":
 
             for item in request.form:
                 if request.form[item] == "" or sanitize_inputs(item) or 'numberholes' not in request.form:
-                    return render_template("create_course.html", data=found_user, message='Your values were either blank or inapropriate. Please try again.')
+                    return render_template("create_course.html", message='Your values were either blank or inapropriate. Please try again.')
 
             if request.form['numberholes'] == '9':
                 i = 9
@@ -517,11 +503,11 @@ def create_course():
             db.session.add(course_entry)
             db.session.commit()
 
-            return render_template("create_course.html", data=found_user, message='Course created sucsessfully!')
+            return render_template("create_course.html", message='Course created sucsessfully!')
 
-        return render_template("create_course.html", data=found_user)
+        return render_template("create_course.html")
     else:
-        return redirect(url_for("error", data=found_user, msg='Sorry, you do not have access to this site.'))
+        return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
 
 
 if __name__ == "__main__":
