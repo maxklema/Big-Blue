@@ -189,7 +189,7 @@ body p {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    margin-bottom: 5%;
+    margin-bottom: 20px;
 }
 
 .coaches-card {
@@ -331,5 +331,63 @@ body p {
     font-family: BigBlueRegular;
 }
 
+.about-us-card {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 5%;
+}
+
+
+.about-us-index-container {
+    padding: 20px 30px;
+    max-width: 355px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.about-us-index-container img {
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 300px;
+    max-height: 300px;
+}
+
+.about-us-index-container h3 {
+    background-color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.about-us-index-container p {
+    background-color: white;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 100;
+    margin-bottom: 20px;
+    font-family: BigBlueRegular;
+}
+
+.about-us-index-container a button{
+    width: 300px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+}
+
+.about-us-index-container button:hover{
+     background: #1b6cd7;
+}
+
+
+.about-us-index-container a {
+    
+}
 
 
