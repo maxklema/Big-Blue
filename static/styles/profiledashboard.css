@@ -216,12 +216,14 @@ header .navigation li a:hover {
     background-color: white;
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .join-date-container {
     background-color: white;
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .join-date-and-school-container .join-date-container img {
@@ -541,6 +543,7 @@ header .navigation li a:hover {
         padding-left: 2%;
         padding-right: 2%;
         overflow: hidden;
+        align-items: center;
     }
 
     .school-name-container {
@@ -552,6 +555,7 @@ header .navigation li a:hover {
         overflow: hidden;
         align-items: center;
         margin-top: 10px;
+        align-items: center;
     }
 
 }
