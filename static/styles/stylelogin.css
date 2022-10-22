@@ -52,6 +52,16 @@ header .logo {
     text-decoration: none;
 }
 
+.navigation li a img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin-left: -15px;
+    align-items: center;
+    margin-top: 6px;
+    object-fit: cover;
+}
+
 header a {
     text-decoration: none;
     background-color: #2176e8;

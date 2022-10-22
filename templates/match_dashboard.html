@@ -1,4 +1,12 @@
-{% extends "indexcontentcoachlogin.html" %}
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}
+{% elif data.rank == 'c' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
 {% block content %}
 
 <html>

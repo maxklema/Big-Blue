@@ -1,9 +1,9 @@
 {% if data.rank == 'coach' %}
-    {% extends "indexcontentplayerlogin.html" %}   
+    {% extends "indexcontentcoachlogin.html" %}   
 {% elif data.rank == 'player' %}
     {% extends "indexcontentplayerlogin.html" %}
 {% elif data.rank == 'c' %}
-    {% extends "indexcontentplayerlogin.html" %}   
+    {% extends "indexcontentcoachlogin.html" %}   
 {% else %}
     {% extends "indexcontent.html" %}
 {% endif %}
