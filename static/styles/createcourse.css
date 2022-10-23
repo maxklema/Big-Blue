@@ -243,7 +243,7 @@ input[type=number] {
     background-color: white;
 }
 
-.row-eight {
+#row-eight {
     display: flex;
     flex-direction: row;
     margin-top: 20px;
@@ -251,11 +251,11 @@ input[type=number] {
     background-color: white;
 }
 
-.row-eight div {
+#row-eight div {
     background-color: white;
 }
 
-.row-nine {
+#row-nine {
     display: flex;
     flex-direction: row;
     margin-top: 20px;
@@ -263,11 +263,11 @@ input[type=number] {
     background-color: white;
 }
 
-.row-nine div {
+#row-nine div {
     background-color: white;
 }
 
-.row-ten {
+#row-ten {
     display: flex;
     flex-direction: row;
     margin-top: 20px;
@@ -275,11 +275,11 @@ input[type=number] {
     background-color: white;
 }
 
-.row-ten div {
+#row-ten div {
     background-color: white;
 }
 
-.row-eleven {
+#row-eleven {
     display: flex;
     flex-direction: row;
     margin-top: 20px;
@@ -287,7 +287,7 @@ input[type=number] {
     background-color: white;
 }
 
-.row-eleven div {
+#row-eleven div {
     background-color: white;
 }
 

@@ -33,9 +33,9 @@
                 <div class="row-one">
                     <div>
                         <label for="number-holes">Number of Holes</label><br>
-                        <select name="numberholes" id="number-holes">
-                            <option name="numberholes" value="9">9</option>
+                        <select onfocusout="hideparholes()" name="numberholes" id="number-holes">
                             <option name="numberholes" value="18">18</option>
+                            <option name="numberholes" value="9">9</option>
                         </select>
                     </div>
                     <div>
@@ -93,53 +93,154 @@
                         <input maxlength="1" type="number" name="holepar9" id="holepar9">
                     </div>
                     <div>
-                        <label for="holepar10">Hole 10 Par</label><br>
+                        <label id="label-10" for="holepar10">Hole 10 Par</label><br>
                         <input maxlength="1" type="number" name="holepar10" id="holepar10">
                     </div>
                 </div>
-                <div class="row-eight">
-                    <div>
-                        <label for="holepar11">Hole 11 Par</label><br>
+                <div id="row-eight">
+                    <div id="inner-div">
+                        <label id="label-11" for="holepar11">Hole 11 Par</label><br>
                         <input maxlength="1" type="number" name="holepar11" id="holepar11">
                     </div>
-                    <div>
-                        <label for="holepar12">Hole 12 Par</label><br>
+                    <div id="inner-div">
+                        <label id="label-12" for="holepar12">Hole 12 Par</label><br>
                         <input maxlength="1" type="number" name="holepar12" id="holepar12">
                     </div>
                 </div>
-                <div class="row-nine">
-                    <div>
-                        <label for="holepar13">Hole 13 Par</label><br>
+                <div id="row-nine">
+                    <div id="inner-div">
+                        <label id="label-13" for="holepar13">Hole 13 Par</label><br>
                         <input maxlength="1" type="number" name="holepar13" id="holepar13">
                     </div>
-                    <div>
-                        <label for="holepar14">Hole 14 Par</label><br>
+                    <div id="inner-div">
+                        <label id="label-14" for="holepar14">Hole 14 Par</label><br>
                         <input maxlength="1" type="number" name="holepar14" id="holepar14">
                     </div>
                 </div>
-                <div class="row-ten">
-                    <div>
-                        <label for="holepar15">Hole 15 Par</label><br>
+                <div id="row-ten">
+                    <div id="inner-div">
+                        <label id="label-15" for="holepar15">Hole 15 Par</label><br>
                         <input maxlength="1" type="number" name="holepar15" id="holepar15">
                     </div>
-                    <div>
-                        <label for="holepar16">Hole 16 Par</label><br>
+                    <div id="inner-div">
+                        <label id="label-16" for="holepar16">Hole 16 Par</label><br>
                         <input maxlength="1" type="number" name="holepar16" id="holepar16">
                     </div>
                 </div>
-                <div class="row-eleven">
-                    <div>
-                        <label for="holepar17">Hole 17 Par</label><br>
+                <div id="row-eleven">
+                    <div id="inner-div">
+                        <label id="label-17" for="holepar17">Hole 17 Par</label><br>
                         <input maxlength="1" type="number" name="holepar17" id="holepar17">
                     </div>
-                    <div>
-                        <label for="holepar18">Hole 18 Par</label><br>
+                    <div id="inner-div">
+                        <label id="label-18" for="holepar18">Hole 18 Par</label><br>
                         <input maxlength="1" type="number" name="holepar18" id="holepar18">
                     </div>
                 </div>
 
                 <input type="submit" value="Add Course" id="add-course-button">
                 
+                <script>
+                    
+                    function hideparholes(){
+                        var value = document.getElementById("number-holes").value
+                        
+                        if (value != "18"){
+                            
+                            
+                            document.getElementById("holepar10").value = "0";
+                            document.getElementById("holepar10").style.display = "none";
+                            document.getElementById("label-10").style.display = "none";
+
+                            document.getElementById("holepar11").value = "0";
+                            document.getElementById("holepar11").style.display = "none";
+                            document.getElementById("label-11").style.display = "none";
+
+                            document.getElementById("holepar12").value = "0";
+                            document.getElementById("holepar12").style.display = "none";
+                            document.getElementById("label-12").style.display = "none";
+
+                            document.getElementById("holepar13").value = "0";
+                            document.getElementById("holepar13").style.display = "none";
+                            document.getElementById("label-13").style.display = "none";
+
+                            document.getElementById("holepar14").value = "0";
+                            document.getElementById("holepar14").style.display = "none";
+                            document.getElementById("label-14").style.display = "none";
+
+                            document.getElementById("holepar15").value = "0";
+                            document.getElementById("holepar15").style.display = "none";
+                            document.getElementById("label-15").style.display = "none";
+
+                            document.getElementById("holepar16").value = "0";
+                            document.getElementById("holepar16").style.display = "none";
+                            document.getElementById("label-16").style.display = "none";
+
+                            document.getElementById("holepar17").value = "0";
+                            document.getElementById("holepar17").style.display = "none";
+                            document.getElementById("label-17").style.display = "none";
+
+                            document.getElementById("holepar18").value = "0";
+                            document.getElementById("holepar18").style.display = "none";
+                            document.getElementById("label-18").style.display = "none";
+
+                            document.getElementById("row-eight").style.display = "none";
+                            document.getElementById("row-nine").style.display = "none";
+                            document.getElementById("row-ten").style.display = "none";
+                            document.getElementById("row-eleven").style.display = "none";
+                            document.getElementById("inner-div").style.display = "none";
+
+            
+                        } else if (document.getElementById("number-holes").value == "18"){
+                            document.getElementById("holepar10").value = "";
+                            document.getElementById("holepar10").style.display = "";
+                            document.getElementById("label-10").style.display = "";
+
+                            document.getElementById("holepar11").value = "";
+                            document.getElementById("holepar11").style.display = "";
+                            document.getElementById("label-11").style.display = "";
+
+                            document.getElementById("holepar12").value = "";
+                            document.getElementById("holepar12").style.display = "";
+                            document.getElementById("label-12").style.display = "";
+
+                            document.getElementById("holepar13").value = "";
+                            document.getElementById("holepar13").style.display = "";
+                            document.getElementById("label-13").style.display = "";
+
+                            document.getElementById("holepar14").value = "";
+                            document.getElementById("holepar14").style.display = "";
+                            document.getElementById("label-14").style.display = "";
+
+                            document.getElementById("holepar15").value = "";
+                            document.getElementById("holepar15").style.display = "";
+                            document.getElementById("label-15").style.display = "";
+
+                            document.getElementById("holepar16").value = "";
+                            document.getElementById("holepar16").style.display = "";
+                            document.getElementById("label-16").style.display = "";
+
+                            document.getElementById("holepar17").value = "";
+                            document.getElementById("holepar17").style.display = "";
+                            document.getElementById("label-17").style.display = "";
+
+                            document.getElementById("holepar18").value = "";
+                            document.getElementById("holepar18").style.display = "";
+                            document.getElementById("label-18").style.display = "";
+
+                            document.getElementById("row-eight").style.display = "flex";
+                            document.getElementById("row-nine").style.display = "flex";
+                            document.getElementById("row-ten").style.display = "flex";
+                            document.getElementById("row-eleven").style.display = "flex";
+                            document.getElementById("inner-div").style.display = "";
+                        }
+                        
+                        
+                    }
+
+
+
+                </script>
 
 
 
