@@ -38,7 +38,7 @@
                             <option name="numberholes" value="9">9</option>
                         </select>
                     </div>
-                    <div>
+                    <div class="responsive-one">
                         <label for="course-name">Course Name</label><br>
                         <input onfocusout="hidename()" maxlength="30" type="text" name="course-name" id="course-name">
                     </div>
@@ -52,7 +52,7 @@
                         <label for="holepar1">Hole 1 Par</label><br>
                         <input onfocusout="hideparone()" maxlength="1" type="number" name="holepar1" id="holepar1">
                     </div>
-                    <div>
+                    <div class="responsive-three">
                         <label for="holepar2">Hole 2 Par</label><br>
                         <input onfocusout="hidepartwo()" maxlength="1" type="number" name="holepar2" id="holepar2">
                     </div>
@@ -62,7 +62,7 @@
                         <label for="holepar3">Hole 3 Par</label><br>
                         <input onfocusout="hideparthree()" maxlength="1" type="number" name="holepar3" id="holepar3">
                     </div>
-                    <div>
+                    <div class="responsive-four">
                         <label for="holepar4">Hole 4 Par</label><br>
                         <input onfocusout="hideparfour()" maxlength="1" type="number" name="holepar4" id="holepar4">
                     </div>
@@ -72,7 +72,7 @@
                         <label for="holepar5">Hole 5 Par</label><br>
                         <input onfocusout="hideparfive()" maxlength="1" type="number" name="holepar5" id="holepar5">
                     </div>
-                    <div>
+                    <div class="responsive-five">
                         <label for="holepar6">Hole 6 Par</label><br>
                         <input onfocusout="hideparsix()" maxlength="1" type="number" name="holepar6" id="holepar6">
                     </div>
@@ -82,7 +82,7 @@
                         <label for="holepar7">Hole 7 Par</label><br>
                         <input onfocusout="hideparseven()" maxlength="1" type="number" name="holepar7" id="holepar7">
                     </div>
-                    <div>
+                    <div class="responsive-six">
                         <label for="holepar8">Hole 8 Par</label><br>
                         <input onfocusout="hidepareight()" maxlength="1" type="number" name="holepar8" id="holepar8">
                     </div>
@@ -92,13 +92,13 @@
                         <label for="holepar9">Hole 9 Par</label><br>
                         <input onfocusout="hideparnine()" maxlength="1" type="number" name="holepar9" id="holepar9">
                     </div>
-                    <div>
+                    <div class="responsive-seven">
                         <label id="label-10" for="holepar10">Hole 10 Par</label><br>
                         <input onfocusout="hideparten()" maxlength="1" type="number" name="holepar10" id="holepar10">
                     </div>
                 </div>
                 <div id="row-eight">
-                    <div id="inner-div">
+                    <div id="inner-divTwo">
                         <label id="label-11" for="holepar11">Hole 11 Par</label><br>
                         <input onfocusout="hidepareleven()" maxlength="1" type="number" name="holepar11" id="holepar11">
                     </div>
@@ -108,7 +108,7 @@
                     </div>
                 </div>
                 <div id="row-nine">
-                    <div id="inner-div">
+                    <div id="inner-divTwo">
                         <label id="label-13" for="holepar13">Hole 13 Par</label><br>
                         <input onfocusout="hideparthirteen()" maxlength="1" type="number" name="holepar13" id="holepar13">
                     </div>
@@ -118,7 +118,7 @@
                     </div>
                 </div>
                 <div id="row-ten">
-                    <div id="inner-div">
+                    <div id="inner-divTwo">
                         <label id="label-15" for="holepar15">Hole 15 Par</label><br>
                         <input onfocusout="hideparfifteen()" maxlength="1" type="number" name="holepar15" id="holepar15">
                     </div>
@@ -128,7 +128,7 @@
                     </div>
                 </div>
                 <div id="row-eleven">
-                    <div id="inner-div">
+                    <div id="inner-divTwo">
                         <label id="label-17" for="holepar17">Hole 17 Par</label><br>
                         <input onfocusout="hideparseventeen()" maxlength="1" type="number" name="holepar17" id="holepar17">
                     </div>
@@ -555,7 +555,9 @@
                             document.getElementById("row-nine").style.display = "none";
                             document.getElementById("row-ten").style.display = "none";
                             document.getElementById("row-eleven").style.display = "none";
+
                             document.getElementById("inner-div").style.display = "none";
+                            document.getElementById("inner-divTwo").style.display = "none";
 
             
                         } else if (document.getElementById("number-holes").value == "18"){
@@ -599,7 +601,9 @@
                             document.getElementById("row-nine").style.display = "flex";
                             document.getElementById("row-ten").style.display = "flex";
                             document.getElementById("row-eleven").style.display = "flex";
+                            
                             document.getElementById("inner-div").style.display = "";
+                            document.getElementById("inner-divTwo").style.display = "";
                         }
                         
                         

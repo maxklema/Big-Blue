@@ -326,3 +326,78 @@ input[type=number] {
     display: block;
     margin-bottom: 20px;
 }
+
+@media (max-width: 785px){
+    .form-container form {
+        width: 355px;
+    }
+
+    .row-one {
+        flex-direction: column;
+    }
+
+    .responsive-one {
+        margin-top: 20px;
+    }
+
+    .row-three {
+        flex-direction: column;
+    }
+
+    .responsive-three {
+        margin-top: 20px;
+    }
+
+    .row-four {
+        flex-direction: column;
+    }
+
+    .responsive-four {
+        margin-top: 20px;
+    }
+
+    .row-five {
+        flex-direction: column;
+    }
+
+    .responsive-five {
+        margin-top: 20px;
+    }
+
+    .row-six {
+        flex-direction: column;
+    }
+
+    .responsive-six {
+        margin-top: 20px;
+    }
+
+    .row-seven {
+        flex-direction: column;
+    }
+
+    .responsive-seven {
+        margin-top: 20px;
+    }
+
+    #row-eight {
+        flex-direction: column;
+    }
+
+
+    #row-nine {
+        flex-direction: column;
+    }
+
+    #row-ten {
+        flex-direction: column;
+    }
+
+    #row-eleven {
+        flex-direction: column;
+    }
+
+    #inner-div {
+        margin-top: 20px;
+    }
+}
