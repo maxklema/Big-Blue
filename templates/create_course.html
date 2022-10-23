@@ -40,108 +40,475 @@
                     </div>
                     <div>
                         <label for="course-name">Course Name</label><br>
-                        <input maxlength="30" type="text" name="course-name" id="course-name">
+                        <input onfocusout="hidename()" maxlength="30" type="text" name="course-name" id="course-name">
                     </div>
                 </div>
                 <div class="row-two">
                     <label for="city">City or Address</label><br>
-                    <input placeholder="EX: 11502 Illinois Rd, Fort Wayne, IN 46814" maxlength="100" type="text" name="city" id="city">
+                    <input onfocusout="hidecity()" placeholder="EX: 11502 Illinois Rd, Fort Wayne, IN 46814" maxlength="100" type="text" name="city" id="city">
                 </div>
                 <div class="row-three">
                     <div>
                         <label for="holepar1">Hole 1 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar1" id="holepar1">
+                        <input onfocusout="hideparone()" maxlength="1" type="number" name="holepar1" id="holepar1">
                     </div>
                     <div>
                         <label for="holepar2">Hole 2 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar2" id="holepar2">
+                        <input onfocusout="hidepartwo()" maxlength="1" type="number" name="holepar2" id="holepar2">
                     </div>
                 </div>
                 <div class="row-four">
                     <div>
                         <label for="holepar3">Hole 3 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar3" id="holepar3">
+                        <input onfocusout="hideparthree()" maxlength="1" type="number" name="holepar3" id="holepar3">
                     </div>
                     <div>
                         <label for="holepar4">Hole 4 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar4" id="holepar4">
+                        <input onfocusout="hideparfour()" maxlength="1" type="number" name="holepar4" id="holepar4">
                     </div>
                 </div>
                 <div class="row-five">
                     <div>
                         <label for="holepar5">Hole 5 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar5" id="holepar5">
+                        <input onfocusout="hideparfive()" maxlength="1" type="number" name="holepar5" id="holepar5">
                     </div>
                     <div>
                         <label for="holepar6">Hole 6 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar6" id="holepar6">
+                        <input onfocusout="hideparsix()" maxlength="1" type="number" name="holepar6" id="holepar6">
                     </div>
                 </div>
                 <div class="row-six">
                     <div>
                         <label for="holepar7">Hole 7 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar7" id="holepar7">
+                        <input onfocusout="hideparseven()" maxlength="1" type="number" name="holepar7" id="holepar7">
                     </div>
                     <div>
                         <label for="holepar8">Hole 8 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar8" id="holepar8">
+                        <input onfocusout="hidepareight()" maxlength="1" type="number" name="holepar8" id="holepar8">
                     </div>
                 </div>
                 <div class="row-seven">
                     <div>
                         <label for="holepar9">Hole 9 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar9" id="holepar9">
+                        <input onfocusout="hideparnine()" maxlength="1" type="number" name="holepar9" id="holepar9">
                     </div>
                     <div>
                         <label id="label-10" for="holepar10">Hole 10 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar10" id="holepar10">
+                        <input onfocusout="hideparten()" maxlength="1" type="number" name="holepar10" id="holepar10">
                     </div>
                 </div>
                 <div id="row-eight">
                     <div id="inner-div">
                         <label id="label-11" for="holepar11">Hole 11 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar11" id="holepar11">
+                        <input onfocusout="hidepareleven()" maxlength="1" type="number" name="holepar11" id="holepar11">
                     </div>
                     <div id="inner-div">
                         <label id="label-12" for="holepar12">Hole 12 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar12" id="holepar12">
+                        <input onfocusout="hidepartwelve()" maxlength="1" type="number" name="holepar12" id="holepar12">
                     </div>
                 </div>
                 <div id="row-nine">
                     <div id="inner-div">
                         <label id="label-13" for="holepar13">Hole 13 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar13" id="holepar13">
+                        <input onfocusout="hideparthirteen()" maxlength="1" type="number" name="holepar13" id="holepar13">
                     </div>
                     <div id="inner-div">
                         <label id="label-14" for="holepar14">Hole 14 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar14" id="holepar14">
+                        <input onfocusout="hideparfourteen()" maxlength="1" type="number" name="holepar14" id="holepar14">
                     </div>
                 </div>
                 <div id="row-ten">
                     <div id="inner-div">
                         <label id="label-15" for="holepar15">Hole 15 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar15" id="holepar15">
+                        <input onfocusout="hideparfifteen()" maxlength="1" type="number" name="holepar15" id="holepar15">
                     </div>
                     <div id="inner-div">
                         <label id="label-16" for="holepar16">Hole 16 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar16" id="holepar16">
+                        <input onfocusout="hideparsixteen()" maxlength="1" type="number" name="holepar16" id="holepar16">
                     </div>
                 </div>
                 <div id="row-eleven">
                     <div id="inner-div">
                         <label id="label-17" for="holepar17">Hole 17 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar17" id="holepar17">
+                        <input onfocusout="hideparseventeen()" maxlength="1" type="number" name="holepar17" id="holepar17">
                     </div>
                     <div id="inner-div">
                         <label id="label-18" for="holepar18">Hole 18 Par</label><br>
-                        <input maxlength="1" type="number" name="holepar18" id="holepar18">
+                        <input onfocusout="hidepareightteen()" maxlength="1" type="number" name="holepar18" id="holepar18">
                     </div>
                 </div>
 
-                <input type="submit" value="Add Course" id="add-course-button">
+                <input type="submit" onclick="return validateForm()" value="Add Course" id="add-course-button">
                 
                 <script>
                     
+                    function validateForm(){
+                        var a = document.getElementById("course-name").value;
+                        var b = document.getElementById("number-holes").value;
+                        var c = document.getElementById("city").value;
+                        var d = document.getElementById("holepar1").value;
+                        var e = document.getElementById("holepar2").value;
+                        var f = document.getElementById("holepar3").value;
+                        var g = document.getElementById("holepar4").value;
+                        var h = document.getElementById("holepar5").value;
+                        var i = document.getElementById("holepar6").value;
+                        var j = document.getElementById("holepar7").value;
+                        var k = document.getElementById("holepar8").value;
+                        var l = document.getElementById("holepar9").value;
+                        var m = document.getElementById("holepar10").value;
+                        var n = document.getElementById("holepar11").value;
+                        var o = document.getElementById("holepar12").value;
+                        var p = document.getElementById("holepar13").value;
+                        var q = document.getElementById("holepar14").value;
+                        var r = document.getElementById("holepar15").value;
+                        var s = document.getElementById("holepar16").value;
+                        var t = document.getElementById("holepar17").value;
+                        var u = document.getElementById("holepar18").value;
+                        if (((((a == "" || b == "") || (c == "" || d == "")) || (e = "" || f == "")) || ((((g = "" || h == "") || (i = "" || j == "")) || ((k = "" || l == "") || (m = "" || n == ""))))) || ((((o = "" || p == "") || (q = "" || r == "")) || ((s = "" || t == "") || (u == ""))))) {
+                            
+                
+                    
+                            let num_holes = document.getElementById("number-holes");
+                            if (num_holes.value == ""){
+                                num_holes.style.borderColor = "red";
+                            } else {
+                                num_holes.style.borderColor = "black";
+                            }
+
+                
+                            let city = document.getElementById("city");
+                            if (city.value == ""){
+                                city.style.borderColor = "red";
+                            } else {
+                                city.style.borderColor = "black";
+                            }
+
+                            
+                            let course_name = document.getElementById("course-name");
+                            if (course_name.value == ""){
+                                course_name.style.borderColor = "red";
+                            } else {
+                                course_name.style.borderColor = "black";
+                            }
+                            
+                            
+                            let parone = document.getElementById("holepar1");
+                            if (parone.value == ""){
+                                parone.style.borderColor = "red";
+                            } else {
+                                parone.style.borderColor = "black";
+                            }
+
+                            let partwo = document.getElementById("holepar2");
+                            if (partwo.value == ""){
+                                partwo.style.borderColor = "red";
+                            } else {
+                                partwo.style.borderColor = "black";
+                            }
+
+                            let parthree = document.getElementById("holepar3");
+                            if (parthree.value == ""){
+                                parthree.style.borderColor = "red";
+                            } else {
+                                parthree.style.borderColor = "black";
+                            }
+
+                            let parfour = document.getElementById("holepar4");
+                            if (parfour.value == ""){
+                                parfour.style.borderColor = "red";
+                            } else {
+                                parfour.style.borderColor = "black";
+                            }
+
+                            let parfive = document.getElementById("holepar5");
+                            if (parfive.value == ""){
+                                parfive.style.borderColor = "red";
+                            } else {
+                                parfive.style.borderColor = "black";
+                            }
+
+                            let parsix = document.getElementById("holepar6");
+                            if (parsix.value == ""){
+                                parsix.style.borderColor = "red";
+                            } else {
+                                parsix.style.borderColor = "black";
+                            }
+
+                            let parseven = document.getElementById("holepar7");
+                            if (parseven.value == ""){
+                                parseven.style.borderColor = "red";
+                            } else {
+                                parseven.style.borderColor = "black";
+                            }
+
+                            let pareight = document.getElementById("holepar8");
+                            if (pareight.value == ""){
+                                pareight.style.borderColor = "red";
+                            } else {
+                                pareight.style.borderColor = "black";
+                            }
+
+                            let parnine = document.getElementById("holepar9");
+                            if (parnine.value == ""){
+                                parnine.style.borderColor = "red";
+                            } else {
+                                parnine.style.borderColor = "black";
+                            }
+
+                            let parten = document.getElementById("holepar10");
+                            if (parten.value == ""){
+                                parten.style.borderColor = "red";
+                            } else {
+                                parten.style.borderColor = "black";
+                            }
+
+                            let pareleven = document.getElementById("holepar11");
+                            if (pareleven.value == ""){
+                                pareleven.style.borderColor = "red";
+                            } else {
+                                pareleven.style.borderColor = "black";
+                            }
+
+                            let partwelve = document.getElementById("holepar12");
+                            if (partwelve.value == ""){
+                                partwelve.style.borderColor = "red";
+                            } else {
+                                partwelve.style.borderColor = "black";
+                            }
+
+                            let parthirteen = document.getElementById("holepar13");
+                            if (parthirteen.value == ""){
+                                parthirteen.style.borderColor = "red";
+                            } else {
+                                parthirteen.style.borderColor = "black";
+                            }
+
+                            let parfourteen = document.getElementById("holepar14");
+                            if (parfourteen.value == ""){
+                                parfourteen.style.borderColor = "red";
+                            } else {
+                                parfourteen.style.borderColor = "black";
+                            }
+
+                            let parfifteen = document.getElementById("holepar15");
+                            if (parfifteen.value == ""){
+                                parfifteen.style.borderColor = "red";
+                            } else {
+                                parfifteen.style.borderColor = "black";
+                            }
+
+                            let parsixteen = document.getElementById("holepar16");
+                            if (parsixteen.value == ""){
+                                parsixteen.style.borderColor = "red";
+                            } else {
+                                parsixteen.style.borderColor = "black";
+                            }
+
+                            let parseventeen = document.getElementById("holepar17");
+                            if (parseventeen.value == ""){
+                                parseventeen.style.borderColor = "red";
+                            } else {
+                                parseventeen.style.borderColor = "black";
+                            }
+
+                            let pareightteen = document.getElementById("holepar18");
+                            if (pareightteen.value == ""){
+                                pareightteen.style.borderColor = "red";
+                            } else {
+                                pareightteen.style.borderColor = "black";
+                            }
+
+
+                            return false;
+                        }
+                    }
+
+                    function hidecity(){
+                        let city = document.getElementById("city");
+                        if (city.value == ""){
+                            city.style.borderColor = "red";
+                        } else {
+                            city.style.borderColor = "black";
+                        }
+                    }
+
+                    function hidename(){
+                        let course_name = document.getElementById("course-name");
+                        if (course_name.value == ""){
+                            course_name.style.borderColor = "red";
+                        } else {
+                            course_name.style.borderColor = "black";
+                        }
+                    }
+
+                    function hideparone(){
+                        let parone = document.getElementById("holepar1");
+                        if (parone.value == ""){
+                            parone.style.borderColor = "red";
+                        } else {
+                            parone.style.borderColor = "black";
+                        }
+                    }
+
+                    function hidepartwo(){
+                        let partwo = document.getElementById("holepar2");
+                        if (partwo.value == ""){
+                            partwo.style.borderColor = "red";
+                        } else {
+                            partwo.style.borderColor = "black";
+                        }
+                    }
+
+                    function hideparthree(){
+                        let parthree = document.getElementById("holepar3");
+                        if (parthree.value == ""){
+                            parthree.style.borderColor = "red";
+                        } else {
+                            parthree.style.borderColor = "black";
+                        }
+                    }
+
+                    function hideparfour(){
+                        let parfour = document.getElementById("holepar4");
+                        if (parfour.value == ""){
+                            parfour.style.borderColor = "red";
+                        } else {
+                            parfour.style.borderColor = "black";
+                        }
+                    }
+
+                    function hideparfive(){
+                        let parfive = document.getElementById("holepar5");
+                        if (parfive.value == ""){
+                            parfive.style.borderColor = "red";
+                        } else {
+                            parfive.style.borderColor = "black";
+                        }
+                    }
+
+                    function hideparsix(){
+                        let parsix = document.getElementById("holepar6");
+                        if (parsix.value == ""){
+                            parsix.style.borderColor = "red";
+                        } else {
+                            parsix.style.borderColor = "black";
+                        }
+                    }
+
+                    function hideparseven(){
+                        let parseven = document.getElementById("holepar7");
+                        if (parseven.value == ""){
+                            parseven.style.borderColor = "red";
+                        } else {
+                            parseven.style.borderColor = "black";
+                        }
+                    }
+
+                    function hidepareight(){
+                        let pareight = document.getElementById("holepar8");
+                        if (pareight.value == ""){
+                            pareight.style.borderColor = "red";
+                        } else {
+                            pareight.style.borderColor = "black";
+                        }
+                    }
+
+                    function hideparnine(){
+                        let parnine = document.getElementById("holepar9");
+                        if (parnine.value == ""){
+                            parnine.style.borderColor = "red";
+                        } else {
+                            parnine.style.borderColor = "black";
+                        }
+                    }
+
+                    function hideparten(){
+                        let parten = document.getElementById("holepar10");
+                        if (parten.value == ""){
+                            parten.style.borderColor = "red";
+                        } else {
+                            parten.style.borderColor = "black";
+                        } 
+                    }
+
+                    function hidepareleven(){
+                        let pareleven = document.getElementById("holepar11");
+                        if (pareleven.value == ""){
+                            pareleven.style.borderColor = "red";
+                        } else {
+                            pareleven.style.borderColor = "black";
+                        }
+                    }
+
+                    function hidepartwelve(){
+                        let partwelve = document.getElementById("holepar12");
+                        if (partwelve.value == ""){
+                            partwelve.style.borderColor = "red";
+                        } else {
+                            partwelve.style.borderColor = "black";
+                        }
+                    }
+
+                    function hideparthirteen(){
+                        let parthirteen = document.getElementById("holepar13");
+                        if (parthirteen.value == ""){
+                            parthirteen.style.borderColor = "red";
+                        } else {
+                            parthirteen.style.borderColor = "black";
+                        }
+                    }
+
+                    function hideparfourteen(){
+                        let parfourteen = document.getElementById("holepar14");
+                        if (parfourteen.value == ""){
+                            parfourteen.style.borderColor = "red";
+                        } else {
+                            parfourteen.style.borderColor = "black";
+                        }
+                    }
+
+                    function hideparfifteen(){
+                        let parfifteen = document.getElementById("holepar15");
+                        if (parfifteen.value == ""){
+                            parfifteen.style.borderColor = "red";
+                        } else {
+                            parfifteen.style.borderColor = "black";
+                        }
+                    }
+
+                    function hideparsixteen(){
+                        let parsixteen = document.getElementById("holepar16");
+                        if (parsixteen.value == ""){
+                            parsixteen.style.borderColor = "red";
+                        } else {
+                            parsixteen.style.borderColor = "black";
+                        }
+
+                    }
+
+                    function hideparseventeen(){
+                        let parseventeen = document.getElementById("holepar17");
+                        if (parseventeen.value == ""){
+                            parseventeen.style.borderColor = "red";
+                        } else {
+                            parseventeen.style.borderColor = "black";
+                        }
+                    }
+
+                    function hidepareightteen(){
+                        let pareightteen = document.getElementById("holepar18");
+                        if (pareightteen.value == ""){
+                            pareightteen.style.borderColor = "red";
+                        } else {
+                            pareightteen.style.borderColor = "black";
+                        }
+                    }
+
+    
+
+                    
+
+
                     function hideparholes(){
                         var value = document.getElementById("number-holes").value
                         
