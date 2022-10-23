@@ -1,0 +1,328 @@
+@font-face {
+    font-family: bigBlueBold;
+    src: url(font/Poppins-Bold.ttf);
+}
+
+@font-face {
+    font-family: bigBlueRegular;
+    src: url(font/Poppins-Regular.ttf);
+}
+
+@font-face {
+    font-family: bigBlueMedium;
+    src: url(font/Poppins-Medium.ttf);
+}
+
+@font-face {
+    font-family: bigBlueSemiBold;
+    src: url(font/Poppins-SemiBold.ttf);
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: #eeeeee;
+    font-family: bigBlueBold;
+}
+
+
+header {
+    top: 0;
+    left: 0;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    background-color: #2176e8;
+    z-index: 10;
+    padding: 8px 100px;
+}
+
+header .logo {
+    max-width: 150px;
+    max-height: 150px;
+    position: relative;
+    background-color: #2176e8;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+header a {
+    text-decoration: none;
+    background-color: #2176e8;
+}
+
+.navigation li a img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin-left: -15px;
+    align-items: center;
+    margin-top: 6px;
+    object-fit: cover;
+}
+
+header .navigation {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #2176e8;
+    border: none;
+    text-decoration: none;
+    font-family: bigBlueMedium;
+    align-items: center;
+}
+
+header .navigation li {
+    list-style: none;
+    margin: 0px 15px;
+    border: none;
+    text-decoration: none;
+    background-color: #2176e8;
+    font-family: bigBlueMedium;
+    align-items: center;
+}
+
+header .navigation li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    border: none;
+    background-color: #2176e8;
+    font-family: bigBlueMedium;
+    
+
+}
+
+header .navigation li a:hover {
+    color: #F0F0FF;
+    
+
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.form-container form {
+    width: 710px;
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 5px;
+}
+
+.form-container form h3 {
+    background-color: white;
+    text-align: center;
+}
+
+.form-container form input {
+    height: 40px;
+    width: 300px;
+    padding: 5px;
+    font-size: 20px;
+    border: 0.25px solid black;
+    background-color: white;
+    font-family: bigBlueMedium;
+}
+
+.form-container form label {
+    background-color: white;
+}
+
+.row-one {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+    
+}
+
+.row-one div {
+    background-color: white;
+}
+
+.row-one div select {
+    height: 40px;
+    width: 300px;
+    padding: 5px;
+    font-size: 20px;
+    border: 0.25px solid black;
+    background-color: white;
+    font-family: bigBlueMedium;
+}
+
+.row-two {
+    margin-top: 20px;
+    background-color: white;
+    position: relative;
+}
+
+#city {
+    width: 100%;
+}
+
+.row-three {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.row-three div {
+    background-color: white;
+}
+
+.row-four {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.row-four div {
+    background-color: white;
+}
+
+.row-five {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.row-five div {
+    background-color: white;
+}
+
+.row-six {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.row-six div {
+    background-color: white;
+}
+
+.row-seven {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.row-seven div {
+    background-color: white;
+}
+
+.row-eight {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.row-eight div {
+    background-color: white;
+}
+
+.row-nine {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.row-nine div {
+    background-color: white;
+}
+
+.row-ten {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.row-ten div {
+    background-color: white;
+}
+
+.row-eleven {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.row-eleven div {
+    background-color: white;
+}
+
+#add-course-button {
+    width: 300px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-family: bigBlueBold;
+}
+
+#error {
+    background-color: white;
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+    font-family: bigBlueSemiBold;
+    margin-top: 15px;
+}
+
+.form-container form img {
+    background-color: white;
+    height: 150px;
+    width: 150px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    margin-bottom: 20px;
+}

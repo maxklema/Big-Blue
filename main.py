@@ -11,7 +11,7 @@ import sqlite3
 app = Flask(__name__)
 
 app.secret_key = "max"
-app.permanent_session_lifetime = timedelta(minutes=60)
+app.permanent_session_lifetime = timedelta(minutes=600)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///webdata.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 UPLOAD_FOLDER = 'static/logo graphics/user_photos'
