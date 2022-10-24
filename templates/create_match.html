@@ -1,197 +1,119 @@
 
-{% extends "indexcontentcoachlogin.html" %}
+{% extends "indexcontent.html" %}
 {% block content %}
 
-    <html>
-        <head>
-            <title>Big Blue | Create Match</title>
-            <link rel="stylesheet" href="{{ url_for('static', filename='styles/creatematch.css') }}">
 
+<!-- 
+    
+    have an if statement on page load that if courses = none, redirect them to course creation. Then have a middle page that says
+    "You must create a course before creating a match // button to create a course" - this
+    will probably go in main.py
 
-    <div id="container">
-        <div class="main">
-            <body>
-                <div class="creatematch-container">
-                    <form action="/create_match" method="post">
-                        <div id="addgraphic">
-                            <img src="{{ url_for('static', filename='logo graphics/golferreadingputt.png') }}">
-                        </div>
-                        <h1>Create a Match</h1>
-                        <h2 style="color: rgb(248, 250, 115); margin-top: 10px; font-size: 1.2em;">
-                            {% if message %}
-                                {{message}}
-                            {% endif %}
-                        </h2>
+    <form action="/create_match" method="post">
+     {% if message %}
+        {{message}}
+    {% endif %}
+    eventtype - singles (dosomethingtwo)/teams (dosomething) value = "simgles/team"
 
-                        
-                        
+    matchtype - stroke play / match play value="strokeplay/matchplay"
 
-                    <div class="matchdetail-container">
-                        <div class="matchdetail">
+    hometeam
+    awayteam (if event-type is teams)
 
-                            <div class="basicmatchinfo">
-                                <div class="eventtype">
-                                    <h2>Event Type</h2>
-                                    <div class="radiobuttonone">
-                                        <input type="radio" name="eventtype" onclick="doSomethingTwo();" id="singles" value="s">
-                                        <label for="singles">Singles</label>
-                                    </div>
-                                    <div class="radiobuttontwo">
-                                        <input type="radio" name="eventtype" onclick="doSomething();" id="teams" value="t">
-                                        <label for="teams">Teams</label>
-                                    </div>
-                                </div>
-                                <div class="matchtype">
-                                    <h2>Match Type</h2>
-                                    <div class="radiobuttonthree">
-                                        <input type="radio" name="matchtype" id="strokeplay" value="strokeplay">
-                                        <label for="strokeplay">Stroke Play</label>
-                                    </div>
-                                    <div class="radiobuttonfour">
-                                        <input type="radio" name="matchtype" id="matchplay" value="matchplay">
-                                        <label for="matchplay">Match Play</label>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            
-                            <div class="teams">
-                                <div id="hometeam">
-                                    <p>Home Team</p>
-                                    <input type="text" name="hometeam">
-                                </div>
-                                
-                                <div id="awayteam">
-                                    <p>Away Team</p>
-                                    <input type="text" name="awayteam">
-                                </div>
-    
-                            </div>
-    
-    
-                            <div class="players">
-                                <div class="playerstext">
-                                    <h3 id="playertextone">Number of Players</h3>
-                                    <p id="playertexttwo"><i>Note: input the number of players, not spots. Spots are only used for team matches.</i></p>
-                                </div>
-    
-                                <div class="playersinput">
-                                    <input type="number" name="numberofplayers">
-    
-                                </div>
-    
-                            </div>
-    
-                            <div class="matchcourse">
-                                <div class="matchtext">
-                                    <h3>Name of Match</h3>
-                                </div>
-    
-                                <div class="matchinput">
-                                    <input maxlength="25" type="text" name="matchname">
-    
-                                </div>
-                            </div>
-    
-                            <div class="matchcourselocation">
-                                <div class="matchtextcourse">
-                                    <h3>Name of Course</h3>
-                                </div>
-    
-                                <div class="matchinputcourse">
-                                    <input maxlength="25" type="text" name="coursename">
-    
-                                </div>
-                            </div>
-    
-                            <div class="timeofmatchstart">
-                                <div class="starttime">
-                                    <h3>Match Start Date</h3>
-                                </div>
-    
-                                <div class="starttimeinput">
-                                    <input type="datetime-local" name="starttime">
-    
-                                </div>
-                            </div>
-    
-                            <div class="timeofmatchend">
-                                <div class="endtime">
-                                    <h3>Match End Date</h3>
-                                </div>
-    
-                                <div class="endtimeinput">
-                                    <input type="datetime-local" name="endtime">
-    
-                                </div>
-                            </div>
-    
-    
-                            <div class="matchpassword">
-                                <div class="passwordtext">
-                                    <h3 id="passwordtextone">Match Password</h3>
-                                    <p id="passwordtexttwo"><i>Note: match passwords are not required, but are recommended to prevent unwanted guests and players.</i></p>
-                                </div>
-    
-                                <div class="passwordinput">
-                                    <input type="text" name="matchpassword" maxlength="15">
-    
-                                </div>
-    
-                            </div>
-    
-                            <input id="creatematchbutton" type="submit" value="Create Match">
+    numberofplayers
+
+    matchname
+
+    coursename - this will be the dropdown
+
+    starttime/endtime
+
+    matchpassword
 
 
 
-                        </div>
-
-                    </div>
 
 
 
-                        
-                    </form>
-                </div>
-            </body>
-            <footer>
-                <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
-                <div class="footertext">
-                    <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
-                </div>
+
+-->
+
+    <head>
+        <title>Create Match | Big Blue</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/creatematch.css') }}">
+
+    </head>
 
 
 
-            </footer>
+
+    <div class="main-container">
+        <form action="/create_match" method="post">
+        <img src="{{ url_for('static', filename='logo graphics/create-match-icon.png') }}" alt="">
+        <h3>Create a Match</h3>
+        {% if message %}
+            {{message}}
+        {% endif %}
+        <div class="row-one">
+            <div class="event-type">
+                <label for="event-type">Event Type</label><br>
+                <select onfocusout="hideparholes()" name="eventtype" id="event-type">
+                    <option name="eventtype" value="Singles">Singles</option>
+                    <option name="eventtype" value="Teams">Teams</option>
+                </select>
+            </div>
+            <div class="match-type">
+                <label for="match-type">Match Type</label><br>
+                <select onfocusout="hideparholes()" name="matchtype" id="match-type">
+                    <option name="matchtype" value="Stroke Play">Stroke Play</option>
+                    <option name="matchtype" value="Match Play">Match Play</option>
+                </select>
+            </div>
         </div>
+        
+        
+        
+        
+        </form>
+
+
+
+
+
     </div>
 
 
-        <script>
 
-            var x = document.getElementById("hometeam");
-            var y = document.getElementById("awayteam");
 
-            function doSomething()
-            {
-                document.getElementById("playertextone").innerHTML = "Number of Spots";
-                document.getElementById("playertexttwo").innerHTML = "Note: input the number of spots, not players. Spots consist of two players: one from each team.";
-                x.style.display = "flex";
-                y.style.display = "flex";
-            }
 
-            function doSomethingTwo()
-            {
-                document.getElementById("playertextone").innerHTML = "Number of Players";
-                document.getElementById("playertexttwo").innerHTML = "Note: input the number of players, not spots. Spots are only used for team matches";
-                x.style.display = "none";
-                y.style.display = "none";
-            }
+
+
+
+    <script>
+
+        var x = document.getElementById("hometeam");
+        var y = document.getElementById("awayteam");
+
+        function doSomething()
+        {
+            document.getElementById("playertextone").innerHTML = "Number of Spots";
+            document.getElementById("playertexttwo").innerHTML = "Note: input the number of spots, not players. Spots consist of two players: one from each team.";
+            x.style.display = "flex";
+            y.style.display = "flex";
+        }
+
+        function doSomethingTwo()
+        {
+            document.getElementById("playertextone").innerHTML = "Number of Players";
+            document.getElementById("playertexttwo").innerHTML = "Note: input the number of players, not spots. Spots are only used for team matches";
+            x.style.display = "none";
+            y.style.display = "none";
+        }
 
 
 
         </script>
-    </html>
+
 
     
 {% endblock %}
