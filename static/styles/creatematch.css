@@ -408,3 +408,58 @@ header .navigation li a:hover {
     margin-bottom: 20px;
     font-family: bigBlueBold;
 }
+
+@media (max-width: 760px){
+    .main-container form {
+        width: 355px;
+    }
+    .main-container form img {
+        height: 100px;
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        background-color: white;
+        margin-top: 10px;
+    }
+    .main-container .row-one {
+        flex-direction: column;
+    }
+
+    .match-type {
+        margin-top: 20px;
+    }
+
+    .main-container #row-two {
+        flex-direction: column;
+    }
+
+    .away-team {
+        margin-top: 20px;
+    }
+
+    .row-three {
+        flex-direction: column;
+    }
+
+    .coursename {
+        margin-top: 15px;
+    }
+
+    .row-five {
+        flex-direction: column;
+    }
+
+    .password-one {
+        margin-top: 20px;
+    }
+
+    .end-date{
+        margin-top: 20px;
+    }
+
+    #password-one {
+        width: 300px;
+    }
+
+}
