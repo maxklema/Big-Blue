@@ -308,9 +308,8 @@ def create_match():
         if request.method == "POST":
             for item in request.form:
                 if request.form[item] == "" or sanitize_inputs(request.form[item]):
-                    if request.form["eventtype"] != "singles" and request.form["hometeam"] == "" and request.form["awayteam"] == "":
                         break
-                    return render_template('create_match.html', message="You have inputed an invalid value or an inapropriate value.")
+                        return render_template('create_match.html', message="You have inputed an invalid value or an inapropriate value.")
             
             ezfix = request.form["hometeam"] + '~' + request.form["awayteam"]
             

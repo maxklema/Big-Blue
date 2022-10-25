@@ -49,92 +49,91 @@
 
     <div class="main-container">
         <form action="/create_match" method="post">
-        <img src="{{ url_for('static', filename='logo graphics/create-match-icon.png') }}" alt="">
-        <h3>Create a Match</h3>
-        {% if message %}
-            {{message}}
-        {% endif %}
+            <img src="{{ url_for('static', filename='logo graphics/create-match-icon.png') }}" alt="">
+            <h3>Create a Match</h3>
+            {% if message %}
+                <h5 id="error">{{message}}</h5> 
+            {% endif %}
 
-
-        <div class="row-six">
-            <label for="match-name">Match Name</label><br>
-            <input type="text" maxlength="70" name="matchname" id="match-name">
-        </div>
-
-        <div class="row-one">
-            <div class="event-type">
-                <label for="event-type">Event Type</label><br>
-                <select onfocusout="doSomething()" name="eventtype" id="event-type">
-                    <option name="eventtype" value="Teams">Teams</option>
-                    <option name="eventtype" value="Singles">Singles</option>
-                </select>
-            </div>
-            <div class="match-type">
-                <label for="match-type">Match Type</label><br>
-                <select onfocusout="hideparholes()" name="matchtype" id="match-type">
-                    <option name="matchtype" value="Stroke Play">Stroke Play</option>
-                    <option name="matchtype" value="Match Play">Match Play</option>
-                </select>
-            </div>
-        </div>
-
-        <div id="row-two">
-            <div class="home-team">
-                <label for="hometeam">Home Team</label><br>
-                <input type="text" maxlength="30" name="hometeam" id="hometeam">
-            </div>
-            <div class="away-team">
-                <label for="awayteam">Away Team</label><br>
-                <input type="text" maxlength="30" name="awayteam" id="awayteam">
-
+            <div class="row-six">
+                <label for="match-name">Match Name</label><br>
+                <input onfocusout="hidename()" type="text" maxlength="70" name="matchname" id="match-name">
             </div>
 
-
-
-
-        </div>
-
-    
-
-        <div class="row-three">
-            <div>
-                <label for="numberspots">Number of Players</label><br>
-                <input maxlength="3" type="number" name="numberofplayers" id="numberspots"><br>
-                <label id="note" for="">If it is a team event, insert number of players PER team</label>
+            <div class="row-one">
+                <div class="event-type">
+                    <label for="event-type">Event Type</label><br>
+                    <select onfocusout="doSomething()" name="eventtype" id="event-type">
+                        <option name="eventtype" value="Teams">Teams</option>
+                        <option name="eventtype" value="Singles">Singles</option>
+                    </select>
+                </div>
+                <div class="match-type">
+                    <label for="match-type">Match Type</label><br>
+                    <select name="matchtype" id="match-type">
+                        <option name="matchtype" value="Stroke Play">Stroke Play</option>
+                        <option name="matchtype" value="Match Play">Match Play</option>
+                    </select>
+                </div>
             </div>
-            <div>
-                <label for="coursename">Course Name</label><br>
-                <select name="coursename" id="coursename">
-                    <option name="coursename" value="course-one">Course One</option>
-                    <option name="coursename" value="course-two">Course Two</option>
-                </select>
-            </div>
-        </div>
 
-        <div class="row-five">
-            <div class="start-date">
-                <label for="startdate">Start Date</label><br>
-                <input type="date" name="starttime" id="startdate">
+            <div id="row-two">
+                <div class="home-team">
+                    <label id="label-home" for="hometeam">Home Team</label><br>
+                    <input onfocusout="hidehometeam()" type="text" maxlength="30" name="hometeam" id="hometeam">
+                </div>
+                <div class="away-team">
+                    <label id="label-away" for="awayteam">Away Team</label><br>
+                    <input onfocusout="hideawayteam()" type="text" maxlength="30" name="awayteam" id="awayteam">
+
+                </div>
+
+
+
+
             </div>
-            <div class="password-one">
-                <label for="password-one">Match Password</label><br>
-                <input type="text" maxlength="30" name="matchpassword" id="password-one">
-            </div>
-            <div class="end-date">
-                <label for="enddate">End Date</label><br>
-                <input type="date" name="endtime" id="enddate">
-            </div>
-        </div>
 
         
 
+            <div class="row-three">
+                <div>
+                    <label for="numberspots">Number of Players</label><br>
+                    <input onfocusout="hidenumberofplayers()" maxlength="3" type="number" name="numberofplayers" id="numberspots"><br>
+                    <label id="note" for="">If it is a team event, insert number of players PER team</label>
+                </div>
+                <div>
+                    <label for="coursename">Course Name</label><br>
+                    <select name="coursename" id="coursename">
+                        <option name="coursename" value="course-one">Course One</option>
+                        <option name="coursename" value="course-two">Course Two</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row-five">
+                <div class="start-date">
+                    <label for="startdate">Start Date</label><br>
+                    <input type="date" name="starttime" id="startdate">
+                </div>
+                <div class="password-one">
+                    <label for="password-one">Match Password</label><br>
+                    <input onfocusout="hidepassword()" type="text" maxlength="30" name="matchpassword" id="password-one">
+                </div>
+                <div class="end-date">
+                    <label for="enddate">End Date</label><br>
+                    <input type="date" name="endtime" id="enddate">
+                </div>
+            </div>
+
+            
 
 
 
 
-        <div class="row-seven">
-            <input type="submit" id="submit-button" onclick="return validateForm()" value="Create Match">
-        </div>
+
+            <div class="row-seven">
+                <input type="submit" id="submit-button" onclick="return validateForm()" value="Create Match">
+            </div>
 
 
 
@@ -156,21 +155,7 @@
 
 
 
-    <script>
-
-
-        function doSomething()
-        {
-            if (document.getElementById("event-type").value == "Teams"){
-                document.getElementById("row-two").style.display = "flex";
-            } else {
-                document.getElementById("row-two").style.display = "none";
-            }
-            
-        }
-
-
-        </script>
+    <script src="{{ url_for('static', filename='Javascript Files/create_match.js') }}"></script>
 
 
     

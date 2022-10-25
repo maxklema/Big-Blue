@@ -30,6 +30,14 @@ input[type=number]{
     src: url(font/Poppins-SemiBold.ttf);
 }
 
+#error {
+    background-color: white;
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+    font-family: bigBlueSemiBold;
+    margin-top: 15px;
+}
 
 * {
     padding: 0;
