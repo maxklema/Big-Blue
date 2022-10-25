@@ -313,6 +313,7 @@ def create_match():
                     return render_template('create_match.html', message="You have inputed an invalid value or an inapropriate value.")
             
             ezfix = request.form["hometeam"] + '~' + request.form["awayteam"]
+            
 
             try:
                 new_match = match(request.form['matchname'], request.form['coursename'], request.form['starttime'], request.form['endtime'], ezfix, request.form['matchname'], generate_code(6), request.form['matchpassword'], request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0])
@@ -482,7 +483,7 @@ def active_match_view():
 @app.route("/create_course", methods=['GET', 'POST'])
 def create_course():
     if 'active_user' in session and session['active_user'][2] == 'coach':
-
+ 
         if request.method =="POST":
 
             for item in request.form:

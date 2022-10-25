@@ -13,18 +13,18 @@
      {% if message %}
         {{message}}
     {% endif %}
-    eventtype - singles (dosomethingtwo)/teams (dosomething) value = "simgles/team"
+    !eventtype - singles (dosomethingtwo)/teams (dosomething) value = "simgles/team"
 
-    matchtype - stroke play / match play value="strokeplay/matchplay"
+    !matchtype - stroke play / match play value="strokeplay/matchplay"
 
-    hometeam
-    awayteam (if event-type is teams)
+    !hometeam
+    !awayteam (if event-type is teams)
 
-    numberofplayers
+    !numberofplayers
 
-    matchname
+    !matchname
 
-    coursename - this will be the dropdown
+    !coursename - this will be the dropdown
 
     starttime/endtime
 
@@ -54,12 +54,19 @@
         {% if message %}
             {{message}}
         {% endif %}
+
+
+        <div class="row-six">
+            <label for="match-name">Match Name</label><br>
+            <input type="text" maxlength="70" name="matchname" id="match-name">
+        </div>
+
         <div class="row-one">
             <div class="event-type">
                 <label for="event-type">Event Type</label><br>
-                <select onfocusout="hideparholes()" name="eventtype" id="event-type">
-                    <option name="eventtype" value="Singles">Singles</option>
+                <select onfocusout="doSomething()" name="eventtype" id="event-type">
                     <option name="eventtype" value="Teams">Teams</option>
+                    <option name="eventtype" value="Singles">Singles</option>
                 </select>
             </div>
             <div class="match-type">
@@ -70,7 +77,67 @@
                 </select>
             </div>
         </div>
+
+        <div id="row-two">
+            <div class="home-team">
+                <label for="hometeam">Home Team</label><br>
+                <input type="text" maxlength="30" name="hometeam" id="hometeam">
+            </div>
+            <div class="away-team">
+                <label for="awayteam">Away Team</label><br>
+                <input type="text" maxlength="30" name="awayteam" id="awayteam">
+
+            </div>
+
+
+
+
+        </div>
+
+    
+
+        <div class="row-three">
+            <div>
+                <label for="numberspots">Number of Players</label><br>
+                <input maxlength="3" type="number" name="numberofplayers" id="numberspots"><br>
+                <label id="note" for="">If it is a team event, insert number of players PER team</label>
+            </div>
+            <div>
+                <label for="coursename">Course Name</label><br>
+                <select name="coursename" id="coursename">
+                    <option name="coursename" value="course-one">Course One</option>
+                    <option name="coursename" value="course-two">Course Two</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row-five">
+            <div class="start-date">
+                <label for="startdate">Start Date</label><br>
+                <input type="date" name="starttime" id="startdate">
+            </div>
+            <div class="password-one">
+                <label for="password-one">Match Password</label><br>
+                <input type="text" maxlength="30" name="matchpassword" id="password-one">
+            </div>
+            <div class="end-date">
+                <label for="enddate">End Date</label><br>
+                <input type="date" name="endtime" id="enddate">
+            </div>
+        </div>
+
         
+
+
+
+
+
+        <div class="row-seven">
+            <input type="submit" id="submit-button" onclick="return validateForm()" value="Create Match">
+        </div>
+
+
+
         
         
         
@@ -91,25 +158,16 @@
 
     <script>
 
-        var x = document.getElementById("hometeam");
-        var y = document.getElementById("awayteam");
 
         function doSomething()
         {
-            document.getElementById("playertextone").innerHTML = "Number of Spots";
-            document.getElementById("playertexttwo").innerHTML = "Note: input the number of spots, not players. Spots consist of two players: one from each team.";
-            x.style.display = "flex";
-            y.style.display = "flex";
+            if (document.getElementById("event-type").value == "Teams"){
+                document.getElementById("row-two").style.display = "flex";
+            } else {
+                document.getElementById("row-two").style.display = "none";
+            }
+            
         }
-
-        function doSomethingTwo()
-        {
-            document.getElementById("playertextone").innerHTML = "Number of Players";
-            document.getElementById("playertexttwo").innerHTML = "Note: input the number of players, not spots. Spots are only used for team matches";
-            x.style.display = "none";
-            y.style.display = "none";
-        }
-
 
 
         </script>

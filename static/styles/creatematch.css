@@ -1,3 +1,14 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number]{
+    -moz-appearance: textfield;
+}
+
+
 
 @font-face {
     font-family: bigBlueBold;
@@ -183,19 +194,209 @@ header .navigation li a:hover {
     font-family: bigBlueMedium;
 }
 
-
-
-
-
-
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+#row-two {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: white;
+    margin-top: 20px;
 }
 
-input[type=number]{
-    -moz-appearance: textfield;
+.home-team {
+    background-color: white;
 }
 
+.away-team {
+    background-color: white;
+}
+
+.home-team label {
+    background-color: white;
+}
+
+.away-team label {
+    background-color: white;
+}
+
+#row-two div input {
+    height: 40px;
+    width: 300px;
+    padding: 5px;
+    font-size: 20px;
+    border: 0.25px solid black;
+    background-color: white;
+    font-family: bigBlueMedium;
+}
+
+.row-three {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: white;
+    margin-top: 20px;
+
+}
+
+.row-three div {
+    background-color: white;
+}
+
+.row-three div input {
+    height: 40px;
+    width: 300px;
+    padding: 5px;
+    font-size: 20px;
+    border: 0.25px solid black;
+    background-color: white;
+    font-family: bigBlueMedium;
+}
+
+.row-three div select {
+    height: 40px;
+    width: 300px;
+    padding: 5px;
+    font-size: 20px;
+    border: 0.25px solid black;
+    background-color: white;
+    font-family: bigBlueMedium; 
+}
+
+#note {
+    font-size: 10px;
+    color: #2176e8;
+}
+
+.row-three div label {
+    background-color: white;
+}
+
+.row-four {
+    background-color: white;
+    margin-top: 20px;
+}
+
+.row-four label {
+    background-color: white;
+}
+
+.row-four input {
+    height: 40px;
+    width: 100%;
+    padding: 5px;
+    font-size: 20px;
+    border: 0.25px solid black;
+    background-color: white;
+    font-family: bigBlueMedium; 
+}
+
+.row-five {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: white;
+    margin-top: 15px;
+}
+
+.row-five .start-date {
+    background-color: white;
+}
+
+.row-five .end-date {
+    background-color: white;
+}
+
+.start-date label {
+    background-color: white;
+}
+
+.end-date label {
+    background-color: white;
+}
+
+.start-date input {
+    height: 40px;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 8px;
+    font-size: 20px;
+    border: 0.25px solid black;
+    background-color: white;
+    font-family: bigBlueMedium; 
+}
+
+.end-date input {
+    height: 40px;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 8px;
+    font-size: 20px;
+    border: 0.25px solid black;
+    background-color: white;
+    font-family: bigBlueMedium;  
+}
+
+#password-one {
+    height: 40px;
+    width: 200px;
+    padding: 5px;
+    font-size: 20px;
+    border: 0.25px solid black;
+    background-color: white;
+    font-family: bigBlueMedium;
+}
+
+.row-five div label {
+    background-color: white;
+}
+
+.password-one {
+    background-color: white;
+}
+
+.row-six {
+    background-color: white;
+    margin-top: 20px;
+}
+
+.row-six div {
+    background-color: white;
+}
+
+.row-six label {
+    background-color: white;
+}
+
+.row-six input {
+    height: 40px;
+    width: 100%;
+    padding: 5px;
+    font-size: 20px;
+    border: 0.25px solid black;
+    background-color: white;
+    font-family: bigBlueMedium;
+}
+
+.row-seven {
+    display: flex;
+    margin-top: 40px;
+    justify-content: center;
+    background-color: white;
+}
+
+.row-seven input {
+    width: 160px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: 20px;
+    font-family: bigBlueBold;
+}
