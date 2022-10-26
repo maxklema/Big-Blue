@@ -154,7 +154,36 @@ class Scoring():
                 data["players"][player]["scores"][hole] = new_score
                 json.dump(data, file, indent=3)
     def calc_match_status(filename, player1, player2):
-        pass
+        with open("static/score_files/" + filename, "rw"):
+            data = json.load(file)
+            status=""
+            score=0
+            first_scores = data["players"][player1]
+            second_scores = data["players"][player2]
+            last_hole=0
+            for i in range(int(data["match_info"]["number_holes"])):
+                if (first_score[str(i+1)] != 0) and (second_score[str(i+1)] != 0):
+                    last_hole+=1
+                    if first_scores[str(i+1)] < second_scores[str(i+1)]:
+                        score+=1
+                    elif second_scores[str(i+1)] < first_scores[str(i+1)]:
+                        score-=1
+                else:
+                    break
+        holes_left = int(data["match_info"]["number_holes"])-last_hole
+        if score > 0:
+            if score > holes_left:
+                status = player1 + " wins " + str(score) + "&" + holes_left
+            else:
+                status= player1 + " is up " + str(score) + " thru " + last_hole
+        elif score < 0:
+            if abs(score) > holes_left:
+                status = player2 + " wins " + str(abs(score)) + "&" + holes_left
+            else:
+                status= player2 + " is up " + str(abs(score)) + " thru " + last_hole
+        else:
+            status = "AS"
+        return status
     def calc_match_results(filename):
         with open("static/score_files/" + filename, "rw") as file:
             data = json.load(file)
