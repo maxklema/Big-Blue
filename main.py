@@ -133,36 +133,50 @@ class edit_score_files():
             json.dump(data, file, indent=3)
 
 #Scoring class
+#Scoring class
 class Scoring():
     def create_json(filename, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, id):
         data = {"players":{},"match_info": {"number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "id": id}}
-        with open("static/score_files/" + filename, "w") as file:
-            json.dump(data, file, indent=3)
-    def add_player(filename, player, team, opponent = None):
-        with open("static/score_files/" + filename, "rw") as file:
+        #json_string = json
+        with open("static/score_files/" + filename, "a+") as file:
+            
+            print(json.dump(data, file, indent=3))
+
+    def add_player(filename, player, team):
+        #json.load("test.json")
+        with open("static/score_files/" + filename, "r+") as file:
+            file.seek(0)
             data = json.load(file)
             holes = {}
-            if int(data["match_info"]["number_holes"]) == 9:
+            if data["match_info"]["number_holes"] == "9":
                 holes = {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0}
-            data["players"][player] = {"team": team, "scores":holes, "opponent": opponent}
-            json.dump(data, file, indent=3)
+                
+            data["players"][player] = {"team": team, "scores":holes}
+
+            file.seek(0)
+            json_object = json.dump(data, file, indent=3)
+            file.truncate()
 
     def edit_score(filename, player, hole, new_score): #used by both players and coaches
-        with open("static/score_files/" + filename, "rw") as file:
+        with open("static/score_files/" + filename, "r+") as file:
+            file.seek(0)
             data = json.load(file)
             if player in data["players"]: #POSSIBLE PLACE FOR ERRORS
-                data["players"][player]["scores"][hole] = new_score
-                json.dump(data, file, indent=3)
+                data["players"][player]["scores"][str(hole)] = new_score
+                file.seek(0)
+                json_object = json.dump(data, file, indent=3)
+                file.truncate()
     def calc_match_status(filename, player1, player2):
-        with open("static/score_files/" + filename, "rw"):
+        with open("static/score_files/" + filename, "r") as file:
+            file.seek(0)
             data = json.load(file)
             status=""
             score=0
-            first_scores = data["players"][player1]
-            second_scores = data["players"][player2]
+            first_scores = data["players"][player1]["scores"]
+            second_scores = data["players"][player2]["scores"]
             last_hole=0
             for i in range(int(data["match_info"]["number_holes"])):
-                if (first_score[str(i+1)] != 0) and (second_score[str(i+1)] != 0):
+                if (first_scores[str(i+1)] != 0) and (second_scores[str(i+1)] != 0):
                     last_hole+=1
                     if first_scores[str(i+1)] < second_scores[str(i+1)]:
                         score+=1
@@ -173,35 +187,39 @@ class Scoring():
         holes_left = int(data["match_info"]["number_holes"])-last_hole
         if score > 0:
             if score > holes_left:
-                status = player1 + " wins " + str(score) + "&" + holes_left
+                status = player1 + " wins " + str(score) + "&" + str(holes_left)
             else:
-                status= player1 + " is up " + str(score) + " thru " + last_hole
+                status= player1 + " is up " + str(score) + " thru " + str(last_hole)
         elif score < 0:
             if abs(score) > holes_left:
-                status = player2 + " wins " + str(abs(score)) + "&" + holes_left
+                status = player2 + " wins " + str(abs(score)) + "&" + str(holes_left)
             else:
-                status= player2 + " is up " + str(abs(score)) + " thru " + last_hole
+                status= player2 + " is up " + str(abs(score)) + " thru " + str(last_hole)
         else:
-            status = "AS"
+            status = "AS" + " thru " + str(last_hole)
         return status
+    def add_scores(data):
+        sum = 0
+        for hole in data:
+            
+            sum += data[str(hole)]
+        return sum
     def calc_match_results(filename):
-        with open("static/score_files/" + filename, "rw") as file:
+        with open("static/score_files/" + filename, "r") as file:
+            file.seek(0)
             data = json.load(file)
             team1 = [data["match_info"]["home_team"], 0]
             team2 = [data["match_info"]["away_team"], 0]
 
-            for player in data["players"]:
+            for player in data["players"].values():
+                print(player)
                 if player["team"] == team1[0]:
-                    team1[1] += add_scores(player["scores"]) #UGLY ALG WILL CAUSE ERROR
+                    team1[1] += Scoring.add_scores(player["scores"])#UGLY ALG WILL CAUSE ERROR
                 elif player["team"] == team2[0]:
-                    team2[1] += add_scores(player["scores"])
+                    team2[1] += Scoring.add_scores(player["scores"])
             return team1, team2
-    def add_scores(data):
-        sum = 0
-        for hole in data:
-            sum += data[score]
-        return sum
-                    
+
+#with open("static/score_files/" + filename, "rw") as file:
                 
 
 
