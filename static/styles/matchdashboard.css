@@ -110,337 +110,85 @@ html, body {
     height: 100%;
 }
 
-#container {
-    position: relative;
-    min-height: 97.7%;
-
-}
-
-.main {
-    overflow: auto;
-    padding-top: 110px;
-    padding-bottom: 100px;
-}
-
-.joincode {
-    max-height: 1000px;
-    width: 300px;
-    background-color: #124382;
-    padding: 10px 20px;
-    border-radius: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    color: #F0F0FF;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    flex-direction: row;
-    align-items: center;
-}
-
-.joincode-container {
-    display: flex;
-    justify-content: space-around;
-    margin-top: -20px;
-}
-
-.joinimage img {
-    width: 70px;
-    height: 70px;
-    margin-right: 20px;
-}
-
-.matchdetail-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.matchdetail {
-    max-height: 1000px;
-    width: 500px;
-    background-color: #1856A8;
-    padding: 10px 20px;
-    border-radius: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    color: #F0F0FF;
-    text-align: center;
-}
-
-.matchcontent-container {
-    display: flex;
-    justify-content: center;
-    padding: 0px;
-    text-align: left;
-
-}
-
-.matchcontent {
-    max-height: 900px;
-    width: 95%;
-    background-color: #1856A8;
-    text-align: left;
-
-}
-
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 10px;
-}
-
-
-.header-container img {
-    height: 30px;
-    width: 30px;
-}
-
-
-.eventtype-container {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-
-}
-
-.event-container h2 {
-    margin-right: 10px;
-}
-
-.password-container {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-
-}
-
-.password-container h2 {
-    margin-right: 10px;
-}
-
-
-
-.matchttype-container {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-}
-
-.matchttype-container h2 {
-    margin-right: 10px;
-}
-
-.hometeam-container {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-}
-
-.hometeam-container h2 {
-    margin-right: 10px;
-}
-
-.starttime-container {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-}
-
-.starttime-container h2 {
-    margin-right: 10px;
-}
-
-.endtime-container {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-}
-
-.endtime-container h2 {
-    margin-right: 10px;
-}
-
-.awayteam-container {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-}
-
-.awayteam-container h2 {
-    margin-right: 10px;
-}
-
-.total-container {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-}
-
-.total-container h2 {
-    margin-right: 10px;
-}
-
-.course-container {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-}
-
-.course-container h2 {
-    margin-right: 10px;
-}
-
-
-.joined-container {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-}
-
-.joined-container h2 {
-    margin-right: 10px;
-}
 
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto;
-    row-gap: 100px;
+    row-gap: 50px;
+    column-gap: 20px;
   }
 
 
-
-
-
-#creatematchbutton {
-    padding: 10px 30px;
-    border-radius: 20px;
-    border: none;
-    margin-top: 25px;
-    font-size: 1.5em;
-    margin-bottom: 10px;
+.main-container {
+    justify-content: center;
+    display: flex;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
-#creatematchbutton:hover {
-    cursor: pointer;
-    background-color: #cfcfdb;
+ .match-container{
+    width: 455px;
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px 30px;
+    
+}
+
+.match-container h3 {
+    background-color: white;
+}
+
+#row-one {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    padding-bottom: 10px;
+    border-bottom: 0.25px solid rgb(180, 180, 180);
+}
+
+#row-one div {
+    background-color: white;
+}
+
+.row-div {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    padding-bottom: 10px;
+}
+
+.row-div div {
+    background-color: white;
+}
+
+.row-div div h4 {
+    background-color: white;
+    font-family: bigBlueRegular;
+    overflow: hidden;
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media (max-width: 723px){
-    header {
-        padding: 4px 15px;
-        flex-direction: row;
-    }
-
-    header .logo {
-        padding: 8px 20px;
-    }
+#action-icons a img {
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    margin-left: 5px;
 }
 
-@media (max-width: 500px){
-    header {
-        padding: 4px 15px;
-        flex-direction: column;
-    }
-
-    .main {
-        padding-top: 110px;
-    }
-
-    header .logo {
-        max-width: 200px;
-        max-height: 200px;
-        position: relative;
-        padding: 2px 10px;
-    }
+#action-icons {
+    background-color: white;
 }
 
-@media (max-width: 781px){
-    footer {
-        padding: 4px 15px;
-        flex-direction: column; 
-    }
+#action-icons a {
+    background-color: white;  
 }
 
-@media (max-width: 300px){
-    .main {
-        padding-top: 130px;
-    }
-}
 
-@media (max-width: 1000px){
-    footer {
-        padding: 4px 10px;
-
-    }
-}
-
-@media (max-width: 216px){
-    header .logo {
-       max-width: 100px;
-       max-height: 100px;
-    }
-}
-
-@media (max-width: 178px){
-    header .logo {
-       max-width: 75px;
-       max-height: 75px;
-    } 
-
-
-}
 
 
 @media (max-width: 1800px){
@@ -454,43 +202,3 @@ html, body {
         grid-template-columns: auto;
     }
 }
-
-@media (max-width: 550px){
-    .matchdetail {
-        width: 95%;
-    }
-    .eventtype-container {
-        font-size: 0.8em;
-    }
-    .matchttype-container {
-        font-size: 0.8em;
-    }
-    .hometeam-container {
-        font-size: 0.8em;
-    }
-    .awayteam-container {
-        font-size: 0.8em;
-    }
-    .starttime-container {
-        font-size: 0.8em;
-    }
-    .endtime-container {
-        font-size: 0.8em;
-    }
-    .course-container {
-        font-size: 0.8em;
-    }
-    .total-container {
-        font-size: 0.8em;
-    }
-    .joined-container {
-        font-size: 0.8em;
-    }
-    .header-container h1 {
-        font-size: 1.6em;
-    }
-    .password-container {
-        font-size: 0.8em;
-    }
-}
-
