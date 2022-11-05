@@ -1,5 +1,4 @@
-
-{% extends "indexcontent.html" %}
+{% extends "indexcontentcoachlogin.html" %}
 {% block content %}
 
 <!-- 
@@ -35,7 +34,7 @@
                     <form method=POST name="Form" id="info-form" action="/edit_user_profile">
                         <h3>Basic Information</h3><br>
                         <label for="name">Name</label><br>
-                        <input maxlength="16" onfocusout="checkFullName()" class="inputbox" id="name" value="{{data.name}}" name="name" type="text"><br>
+                        <input maxlength="25" onfocusout="checkFullName()" class="inputbox" id="name" value="{{data.name}}" name="name" type="text"><br>
                         <label for="email">Email</label><br>
                         <input maxlength="50" onfocusout="checkEmails()" class="inputbox" type="email" name="email" id="email" value="{{data.email}}"><br>
                         <label for="team">Team</label><br>

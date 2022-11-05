@@ -175,6 +175,7 @@ html, body {
 
 .match-container h3 {
     background-color: white;
+    overflow: hidden;
 }
 
 #row-one {
@@ -184,10 +185,12 @@ html, body {
     background-color: white;
     padding-bottom: 10px;
     border-bottom: 0.25px solid rgb(180, 180, 180);
+    overflow: hidden;
 }
 
 #row-one div {
     background-color: white;
+    overflow: hidden;
 }
 
 .row-div {
@@ -197,10 +200,12 @@ html, body {
     justify-content: space-between;
     background-color: white;
     padding-bottom: 10px;
+    overflow: hidden;
 }
 
 .row-div div {
     background-color: white;
+    overflow: hidden;
 }
 
 .row-div div h4 {

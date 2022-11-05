@@ -440,6 +440,7 @@ header .navigation li a:hover {
         padding: 0px 30%;
         align-items: center;
         margin-top: 5px;
+        overflow: hidden;
     }
 
     .username-and-verification-container img {
