@@ -8,6 +8,16 @@
         </head>
 
     <div class="main-container">
+        <div class="heading-info">
+            <div class="hero-info">
+                <h3>Dashboard</h3>
+                <p>All of your matches in one place</p>
+            </div>
+            <div class="hero-buttons">
+                <a href="/create_match">New Match</a>
+                <a href="/create_course">New Course</a>
+            </div>
+        </div>
         <div class="grid-container">
             {% for item in data[::-1] %}
                 <div class="match-container">
@@ -60,6 +70,68 @@
                             <h4>{{item.teams1.split('~')[0]}}</h4>
                         </div>
                     </div>
+
+                    <div class="row-div">
+                        <div>
+                            <h4>Away Team</h4>
+                        </div>
+
+                        <div>
+                            <h4>{{item.teams1.split('~')[1]}}</h4>
+                        </div>
+                    </div>
+
+                    <div class="row-div">
+                        <div>
+                            <h4>Total Spots</h4>
+                        </div>
+
+                        <div>
+                            <h4>{{item.total_players}}</h4>
+                        </div>
+                    </div>
+
+                    <div class="row-div">
+                        <div>
+                            <h4>Course Name</h4>
+                        </div>
+
+                        <div>
+                            <h4>{{item.course_name}}</h4>
+                        </div>
+                    </div>
+
+                    <div class="row-div">
+                        <div>
+                            <h4>Start Date</h4>
+                        </div>
+
+                        <div>
+                            <h4>{{item.start_time}}</h4>
+                        </div>
+                    </div>
+
+                    <div class="row-div">
+                        <div>
+                            <h4>End Date</h4>
+                        </div>
+
+                        <div>
+                            <h4>{{item.end_time}}</h4>
+                        </div>
+                    </div>
+
+                    <div class="row-div">
+                        <div>
+                            <h4>Match Password</h4>
+                        </div>
+
+                        <div>
+                            <h4>{{item.match_password}}</h4>
+                        </div>
+                    </div>
+
+                    <button id="button-begin">Start Match</button>
 
                 </div>        
             {% endfor %}

@@ -17,7 +17,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 UPLOAD_FOLDER = 'static/logo graphics/user_photos'
 ALLOWED_EXTENSIONS = {'png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG', 'gif', 'GIF'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-characters = list(string.ascii_letters + string.digits + "!@#$")
+characters = list(string.digits)
 
 db = SQLAlchemy(app)
 
@@ -412,7 +412,7 @@ def edit_match(match_to_edit):
 @app.route("/delete_match/<match_to_delete>")
 def delete_match(match_to_delete):
     found_match = match.query.filter_by(match_name=match_to_delete).first()
-    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "c":
+    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
         db.session.delete(found_match)
         db.session.commit()
         return redirect(url_for("match_dashboard"))
