@@ -2,15 +2,11 @@ function doSomething()
 {
     if (document.getElementById("event-type").value == "Teams"){
         document.getElementById("row-two").style.display = "flex";
-        document.getElementById("hometeam").value = ""
-        document.getElementById("awayteam").value = ""
     } else {
         document.getElementById("row-two").style.display = "none";
-        document.getElementById("hometeam").value = "null"
-        document.getElementById("awayteam").value = "null"
     }
-    
 }
+
 
 
 function validateForm(){
@@ -19,6 +15,7 @@ function validateForm(){
     var c = document.getElementById("awayteam").value;
     var d = document.getElementById("numberspots").value;
     var e = document.getElementById("password-one").value;
+    var f = document.getElementById("event-type").value;
     if (((((a == "") || (a == null)) || ((b == "") || (b == null))) || (((c == "") || (c == null)) || ((d == "") || (d == null)))) || ((e == "") || (e == null))) {
         
 
@@ -63,6 +60,15 @@ function validateForm(){
 
 
         return false;
+
+    } else if (f == "Singles") {
+        let hometeam = document.getElementById("hometeam");
+        hometeam.value = "";
+
+        let awayteam = document.getElementById("awayteam");
+        awayteam.value = "";
+
+
     }
 }
 

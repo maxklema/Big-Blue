@@ -379,6 +379,7 @@ def create_match():
 def edit_match(match_to_edit):
     found_match = match.query.filter_by(match_name=match_to_edit).first()
     if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if request.method == "POST":
             for item in request.form:
                 if request.form[item] == "" or sanitize_inputs(request.form[item]):
@@ -405,7 +406,7 @@ def edit_match(match_to_edit):
             
             return redirect(url_for("match_dashboard"))
 
-        return render_template('edit_match.html', editing=found_match)
+        return render_template('edit_match.html', data=found_user, editing=found_match)
 
     return render_template("error", msg="You do not have access to this site!")
 

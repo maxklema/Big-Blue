@@ -1,193 +1,179 @@
 
-{% extends "indexcontentcoachlogin.html" %}
+{% extends "indexcontent.html" %}
 {% block content %}
 
-    <html>
-        <head>
-            <title>Big Blue | Edit Match</title>
-            <link rel="stylesheet" href="{{ url_for('static', filename='styles/creatematch.css') }}">
+
+<!-- 
+    
+    have an if statement on page load that if courses = none, redirect them to course creation. Then have a middle page that says
+    "You must create a course before creating a match // button to create a course" - this
+    will probably go in main.py
+
+    <form action="/create_match" method="post">
+     {% if message %}
+        {{message}}
+    {% endif %}
+    !eventtype - singles (dosomethingtwo)/teams (dosomething) value = "simgles/team"
+
+    !matchtype - stroke play / match play value="strokeplay/matchplay"
+
+    !hometeam
+    !awayteam (if event-type is teams)
+
+    !numberofplayers
+
+    !matchname
+
+    !coursename - this will be the dropdown
+
+    starttime/endtime
+
+    matchpassword
 
 
-    <div id="container">
-        <div class="main">
-            <body>
-                <div class="creatematch-container">
-                    <form action="#" method="post">
-                        <div id="addgraphic">
-                            <img src="{{ url_for('static', filename='logo graphics/pencilicontwo.png') }}">
-                        </div>
-                        <h1>Edit <i>{{editing.match_name}}</i></h1>
-                        <h2 style="color: rgb(248, 250, 115); margin-top: 10px; font-size: 1.2em;">
-                            {% if message %}
-                                {{message}}
-                            {% endif %}
-                        </h2>
-
-                        <div class="basicmatchinfo">
-                            <div class="eventtype">
-                                <h2>Event Type</h2>
-                                <div class="radiobuttonone">
-                                    <input type="radio" name="eventtype" onclick="doSomethingTwo();" id="singles" value="s">
-                                    <label for="singles">Singles</label>
-                                </div>
-                                <div class="radiobuttontwo">
-                                    <input type="radio" name="eventtype" onclick="doSomething();" id="teams" value="t">
-                                    <label for="teams">Teams</label>
-                                </div>
-                            </div>
-                            <div class="matchtype">
-                                <h2>Match Type</h2>
-                                <div class="radiobuttonthree">
-                                    <input type="radio" name="matchtype" id="strokeplay" value="strokeplay">
-                                    <label for="strokeplay">Stroke Play</label>
-                                </div>
-                                <div class="radiobuttonfour">
-                                    <input type="radio" name="matchtype" id="matchplay" value="matchplay">
-                                    <label for="matchplay">Match Play</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                        <div class="teams">
-                            <div id="hometeam">
-                                <p>Home Team</p>
-                                <input type="text" name="hometeam" value="{{editing.participating_teams}}">
-                            </div>
-                            
-                            <div id="awayteam">
-                                <p>Away Team</p>
-                                <input type="text" name="awayteam" value="{{editing.participating_teams}}">
-                            </div>
-
-                        </div>
 
 
-                        <div class="players">
-                            <div class="playerstext">
-                                <h3 id="playertextone">Number of Players</h3>
-                                <p id="playertexttwo"><i>Note: input the number of players, not spots. Spots are only used for team matches.</i></p>
-                            </div>
-
-                            <div class="playersinput">
-                                <input type="number" name="numberofplayers" value="{{editing.total_players}}">
-                            </div>
-
-                        </div>
-
-                        <div class="matchcourse">
-                            <div class="matchtext">
-                                <h3>Name of Match</h3>
-                            </div>
-
-                            <div class="matchinput">
-                                <input type="text" name="matchname" value="{{editing.match_name}}">
-
-                            </div>
-                        </div>
-
-                        <div class="matchcourselocation">
-                            <div class="matchtextcourse">
-                                <h3>Name of Course</h3>
-                            </div>
-
-                            <div class="matchinputcourse">
-                                <input type="text" name="coursename" value="{{editing.match_course}}">
-
-                            </div>
-                        </div>
-
-                        <div class="timeofmatchstart">
-                            <div class="starttime">
-                                <h3>Match Start Date</h3>
-                            </div>
-
-                            <div class="starttimeinput">
-                                <input type="datetime-local" name="starttime" value="{{editing.start_time}}">
-
-                            </div>
-                        </div>
-
-                        <div class="timeofmatchend">
-                            <div class="endtime">
-                                <h3>Match End Date</h3>
-                            </div>
-
-                            <div class="endtimeinput">
-                                <input type="datetime-local" name="endtime" value="{{editing.end_time}}">
-
-                            </div>
-                        </div>
 
 
-                        <div class="matchpassword">
-                            <div class="passwordtext">
-                                <h3 id="passwordtextone">Match Password</h3>
-                                <p id="passwordtexttwo"><i>Note: match passwords are not required, but are recommended to prevent unwanted guests and players.</i></p>
-                            </div>
 
-                            <div class="passwordinput">
-                                <input type="text" name="matchpassword" value="{{editing.match_password}}" maxlength="15">
-                            </div>
+-->
 
-                        </div>
+    <head>
+        <title>Create Match | Big Blue</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/creatematch.css') }}">
 
-                        <input id="creatematchbutton" type="submit" value="Save your changes">
+    </head>
 
-                        <p id="hiddenp1">{{editing.event_type}}</p>
-                        <p id="hiddenp2">{{editing.match_type}}</p>
-                        
-                    </form>
+
+
+
+    <div class="main-container">
+        <form action="/edit_match/{{editing.match_name}}" method="post">
+            <img src="{{ url_for('static', filename='logo graphics/create-match-icon.png') }}" alt="">
+            <h3>Edit Your Match</h3>
+            {% if message %}
+                <h5 id="error">{{message}}</h5> 
+            {% endif %}
+
+            <div class="row-six">
+                <label for="match-name">Match Name</label><br>
+                <input onfocusout="hidename()" value="{{editing.match_name}}" type="text" maxlength="25" name="matchname" id="match-name">
+            </div>
+
+            <div class="row-one">
+                <div class="event-type">
+                    <label for="event-type">Event Type</label><br>
+                    <select value="{{editing.event_type}}" onfocusout="doSomething()" name="eventtype" id="event-type">
+                        {% if editing.event_type == "Teams" %}
+                            <option name="eventtype" value="Teams" selected>Teams</option>
+                            <option name="eventtype" value="Singles">Singles</option>
+                        {% else %}
+                            <option name="eventtype" value="Teams">Teams</option>
+                            <option name="eventtype" value="Singles" selected>Singles</option>
+                        {% endif %}
+                       
+                    </select>
                 </div>
-            </body>
-            <footer>
-                <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
-                <div class="footertext">
-                    <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
+                <div class="match-type">
+                    <label for="match-type">Match Type</label><br>
+                    <select value="{{editing.match_type}}" name="matchtype" id="match-type">
+                        {% if editing.match_type == "Stroke Play" %}
+                            <option name="matchtype" value="Stroke Play" selected>Stroke Play</option>
+                            <option name="matchtype" value="Match Play">Match Play</option>
+                        {% else %}
+                            <option name="matchtype" value="Stroke Play">Stroke Play</option>
+                            <option name="matchtype" value="Match Play" selected>Match Play</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div id="row-two">
+                <div class="home-team">
+                    <label id="label-home" for="hometeam">Home Team</label><br>
+                    <input value="{{editing.teams1.split('~')[0]}}" onfocusout="hidehometeam()" type="text" maxlength="20" name="hometeam" id="hometeam">
+                </div>
+                <div class="away-team">
+                    <label id="label-away" for="awayteam">Away Team</label><br>
+                    <input value="{{editing.teams1.split('~')[1]}}" onfocusout="hideawayteam()" type="text" maxlength="20" name="awayteam" id="awayteam">
+
                 </div>
 
 
 
-            </footer>
-        </div>
+
+            </div>
+
+        
+
+            <div class="row-three">
+                <div>
+                    <label for="numberspots">Number of Players</label><br>
+                    <input value="{{editing.total_players}}" onfocusout="hidenumberofplayers()" maxlength="3" type="number" name="numberofplayers" id="numberspots"><br>
+                    <label id="note" for="">If it is a team event, insert number of players PER team</label>
+                </div>
+                <div class="coursename">
+                    <label for="coursename">Course Name</label><br>
+                    <select name="coursename" id="coursename">
+                        <option name="coursename" value="course-one">Course One</option>
+                        <option name="coursename" value="course-two">Course Two</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row-five">
+                <div class="start-date">
+                    <label for="startdate">Start Date</label><br>
+                    <input value="{{editing.start_time}}" type="date" name="starttime" id="startdate">
+                </div>
+                <div class="password-one">
+                    <label for="password-one">Match Password</label><br>
+                    <input value="{{editing.match_password}}" onfocusout="hidepassword()" type="text" maxlength="15" name="matchpassword" id="password-one">
+                </div>
+                <div class="end-date">
+                    <label for="enddate">End Date</label><br>
+                    <input value="{{editing.end_time}}" type="date" name="endtime" id="enddate">
+                </div>
+            </div>
+
+            
+
+
+
+
+
+            <div class="row-seven">
+                <input type="submit" id="submit-button" onclick="return validateForm()" value="Save Changes">
+            </div>
+
+
+
+        
+        
+        
+        </form>
+
+
+
+
+
     </div>
 
 
-        <script>
 
-            var x = document.getElementById("hometeam");
-            var y = document.getElementById("awayteam");
 
-            function doSomething()
-            {
-                document.getElementById("playertextone").innerHTML = "Number of Spots";
-                document.getElementById("playertexttwo").innerHTML = "Note: input the number of spots, not players. Spots consist of two players: one from each team.";
-                x.style.display = "flex";
-                y.style.display = "flex";
-            }
 
-            function doSomethingTwo()
-            {
-                document.getElementById("playertextone").innerHTML = "Number of Players";
-                document.getElementById("playertexttwo").innerHTML = "Note: input the number of players, not spots. Spots are only used for team matches";
-                x.style.display = "none";
-                y.style.display = "none";
-            }
 
-            if (document.getElementById('hiddenp1').innerHTML == 's') {
-                document.getElementById('singles').checked = true;
-            } else if (document.getElementById('hiddenp1').innerHTML == 't') {
-                document.getElementById('teams').checked = true;
-            }
 
-            if (document.getElementById('hiddenp2').innerHTML == 'strokeplay') {
-                document.getElementById('strokeplay').checked = true;
-            } else if (document.getElementById('hiddenp1').innerHTML == 'matchplay') {
-                document.getElementById('matchplay').checked = true;
-            }
 
-        </script>
-    </html>
+    <script src="{{ url_for('static', filename='Javascript Files/create_match.js') }}"></script>
+
+
+    <script>
+        window.onload = function() {
+            doSomething();
+        };
+    </script>
 
     
 {% endblock %}
