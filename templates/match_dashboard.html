@@ -18,6 +18,11 @@
                 <a href="/create_course">New Course</a>
             </div>
         </div>
+        {% if data is defined and data|length == 0 %}
+            <div class="no-matches">
+                <img src="{{ url_for('static', filename='logo graphics/nomatchesimage.png') }}">
+            </div>
+        {% endif %}
         <div class="grid-container">
             {% for item in data[::-1] %}
                 <div class="match-container">

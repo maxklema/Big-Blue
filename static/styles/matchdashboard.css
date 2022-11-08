@@ -178,6 +178,17 @@ html, body {
     overflow: hidden;
 }
 
+.no-matches {
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+}
+
+.no-matches img {
+    height: 320px;
+    width: 320px;
+}
+
 #row-one {
     display: flex;
     flex-direction: row;
