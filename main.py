@@ -296,6 +296,14 @@ def chooseprofilepicture():
         return render_template("login.html")
 
 
+@app.route("/newprofilepicture")
+def newprofilepicture():
+    if 'active_user' in session:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+        return render_template("profile-pic-animation.html", data=found_user)
+    else:
+        return render_template("login.html")
+
 @app.route("/dashboard/edit_profile")
 def edit_profile():
     if 'active_user' in session:
@@ -491,7 +499,7 @@ def upload_profile_pic():
         found_user.pic = filename
         db.session.commit()
 
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('newprofilepicture'))
     
     return redirect(url_for('error', msg="You do not have access to this site"))
 

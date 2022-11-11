@@ -113,7 +113,7 @@ header .navigation li a:hover {
 }
 
 .main-frame {
-    width: 710px;
+    width: 355px;
     background-color: white;
     padding: 20px 30px;
     border-radius: 5px;
@@ -126,7 +126,8 @@ header .navigation li a:hover {
     height: 100px;
     width: 100px;
     border-radius: 100%;
-    margin-top: 10px;
+    margin-top: 20px;
+    object-fit: cover;
 
 }
 
@@ -136,23 +137,9 @@ header .navigation li a:hover {
     background-color: white;
 }
 
-
-.choose-file-container {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-}
-
-#fileinput {
-    margin-top: 30px;
-    background-color: white;
-    margin-left: 90px;
-
-}
-
-#form-submit {
-    margin-top: 30px;
-    width: 100px;
+.main-frame a button {
+    margin-top: 20px;
+    width: 120px;
     height: 40px;
     font-size: 20px;
     text-align: center;
@@ -167,24 +154,7 @@ header .navigation li a:hover {
     font-family: bigBlueBold;
 }
 
-.main-frame a{
-    margin-top: 20px;
-    text-align: right;
-    background-color: white;
-    color: #2176e8;
-    font-size: 20px;
+.main-frame a {
     text-decoration: none;
 }
 
-.main-frame a h5 {
-    background-color: white;
-}
-
-.main-frame a:hover {
-    color: #1a5aad;
-}
-
-
-@media (max-width: 700px) {
-
-}
