@@ -112,4 +112,73 @@ header .navigation li a:hover {
     margin-bottom: 5%;
 }
 
-.main
+.main-frame {
+    width: 710px;
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 5px;
+}
+
+#profile-container {
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+
+}
+
+.main-frame h2 {
+    text-align: center;
+    margin-top: 20px;
+    background-color: white;
+}
+
+
+.choose-file-container {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+
+#fileinput {
+    margin-top: 30px;
+    background-color: white;
+    margin-left: 90px;
+
+}
+
+#form-submit {
+    margin-top: 30px;
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: 20px;
+    font-family: bigBlueBold;
+}
+
+.main-frame a{
+    margin-top: 20px;
+    text-align: right;
+    background-color: white;
+    color: #2176e8;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.main-frame a h5 {
+    background-color: white;
+}
+
+.main-frame a:hover {
+    color: #1a5aad;
+}

@@ -9,9 +9,18 @@
 
 
 <div class="main-container">
-    <div class="main-frame">
-        <h1>Test</h1>
-    </div>
+    <form class="main-frame" method=post enctype=multipart/form-data action="/upload_profile_pic">
+        <img id="profile-container" src="{{ url_for('static', filename='logo graphics/insertpiccamera.png') }}" alt="">
+        <h2>Welcome {{data.name}}, let's set you up with a profile picture</h2>
+        <div class="choose-file-container">
+            <input style="background-color: white;" id="fileinput" type=file name=file>
+        </div>
+        <input id="form-submit" type=submit value=Upload>
+
+        <a href="/dashboard"><h5>Skip ➜</h5></a>
+    </form>
+
+
 
 </div>
 
