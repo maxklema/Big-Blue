@@ -33,7 +33,7 @@ class users(db.Model):
     gender = db.Column(db.String(10))
     bio = db.Column(db.String(500))
     team = db.Column(db.String(25))
-    verified = db.Column(db.Boolean)
+    verified = db.Column(db.Integer)
     pic = db.Column(db.String)
 
     def __init__(self, name, username, password, email, rank, gender, bio, team, verified, pic):
