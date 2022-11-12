@@ -1,5 +1,10 @@
 <body>
     <p>This is the course dashboard page! Here is where the information about courses will be displayed.</p>
+    {% if data is defined and data|length == 0 %}
+            <div class="no-matches">
+                <img src="{{ url_for('static', filename='logo graphics/nomatchesimage.png') }}">
+            </div>
+        {% endif %}
     {% for item in data%}
         <h3>{{item.course_name}}</h3>
         <p>{{item.pars_of_holes}}</p>

@@ -527,7 +527,7 @@ def match_dashboard():
 def course_dashboard():
     if 'active_user' in session and session['active_user'][2] == 'coach':
         found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
-        return render_template("course_dashboard", data=found_course)
+        return render_template("course_dashboard.html", data=found_course)
     return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route('/active_match/<match_code>')
@@ -572,9 +572,9 @@ def create_course():
             list_of_pars = []
 
             for n in range(i):
-                list_of_pars.append(request.form['holepar' + str(n + 1) + ','])
+                list_of_pars.append(request.form['holepar' + str(n + 1)] + ',')
 
-            course_entry = course(request.form["course-name"], ''.join(list_of_pars), request.form['city'], '')
+            course_entry = course(request.form["course-name"], ''.join(list_of_pars), request.form['city'], '', session['active_user'][0])
             db.session.add(course_entry)
             db.session.commit()
 
