@@ -54,12 +54,14 @@ class course(db.Model):
     pars_of_holes = db.Column(db.String)
     city = db.Column(db.String)
     course_bio = db.Column(db.String(1000))
+    created_by = db.Column(db.String)
 
-    def __init__(self, course_name, pars_of_holes, city, course_bio):
+    def __init__(self, course_name, pars_of_holes, city, course_bio, created_by):
         self.course_name = course_name
         self.pars_of_holes = pars_of_holes
         self.city = city
         self.course_bio = course_bio
+        self.created_by = created_by
 
 class match(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -529,6 +531,13 @@ def match_dashboard():
         return render_template("match_dashboard.html", data=found_match)
     return redirect(url_for('error', msg="You do not have access to this site."))
 
+@app.route("/course_dashboard")
+def course_dashboard():
+    if 'active_user' in session and session['active_user'][2] == 'coach':
+        found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
+        return render_template("course_dashboard.html", data=found_course)
+    return redirect(url_for('error', msg="You do not have access to this site."))
+
 @app.route('/active_match/<match_code>')
 def active_match():
     return '',200
@@ -571,9 +580,9 @@ def create_course():
             list_of_pars = []
 
             for n in range(i):
-                list_of_pars.append(request.form['holepar' + str(n + 1)])
+                list_of_pars.append(request.form['holepar' + str(n + 1)] + ',')
 
-            course_entry = course(request.form["course-name"], ''.join(list_of_pars), request.form['city'], '')
+            course_entry = course(request.form["course-name"], ''.join(list_of_pars), request.form['city'], '', session['active_user'][0])
             db.session.add(course_entry)
             db.session.commit()
 
