@@ -37,7 +37,9 @@
             </div>
             <div class="username-and-verification-container">
                 <h3>{{data.name}}</h3>
-                {% if data.verified == True %}
+                {% if data.verified == 1 %}
+                    <img src="{{ url_for('static', filename='logo graphics/normalverify.png') }}" alt="">
+                {% elif data.verified == 2 %}
                     <img src="{{ url_for('static', filename='logo graphics/verify.png') }}" alt="">
                 {% endif %}
 
