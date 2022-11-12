@@ -454,10 +454,18 @@ def create_account():
             new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], True, "defaultprofilepicture.png")
             db.session.add(new_user)
             db.session.commit()
+
+            new_username = request.form['username']
+            new_rank = request.form['rank']
+            new_name = request.form['name']
         except:
             return redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
 
-        return render_template('create_account.html', message="Account created sucessfully!")
+        found_user = users.query.filter_by(username=new_username).first()
+        
+        session['active_user'] = [new_username, new_name, new_rank]
+        return redirect(url_for('chooseprofilepicture'))
+
 
     return render_template('create_account.html')
 
