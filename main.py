@@ -279,15 +279,18 @@ def generate_code(length):
     random.shuffle(password)
     return "".join(password)
 
-def verify_user(user: str, verified_input: bool):
-    found_user = users.query.filter_by(username=user).first()
-    found_user.verified = verified_input
-    db.session.commit()
+def verify_user(user: str, verified_input: int):
+    try:
+        found_user = users.query.filter_by(username=user).first()
+        found_user.verified = verified_input
+        db.session.commit()
+        print("USER: " + user + " -> VERIFIED: " + verified_input)
+    except:
+        print("Could not complete this task.")
 
 @app.route("/about")
 def about():
     return render_template("about.html")
-
 
 @app.route("/chooseprofilepicture")
 def chooseprofilepicture():
@@ -317,7 +320,6 @@ def edit_profile():
 @app.route("/joincode")
 def joincode():
     return render_template("join_code_page.html")
-
 
 @app.route("/")
 def index():
@@ -453,7 +455,7 @@ def create_account():
             return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.")
 
         try: 
-            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], True, "defaultprofilepicture.png")
+            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png")
             db.session.add(new_user)
             db.session.commit()
 
@@ -557,6 +559,14 @@ def return_user_data(password):
         return return_admin_data()
     else:
         return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
+
+@app.route("/change_verified_status/<admin>/<user>/<verified>")
+def change_verified_status(admin, user, verified):
+    if admin == '123':
+        verify_user(user, verified)
+        return 'USER: ' + user + " verification status has changed!",200
+    else:
+        return 'Sorry, you do not have access to this site.'
 
 @app.route("/active_match_view")
 def active_match_view():
