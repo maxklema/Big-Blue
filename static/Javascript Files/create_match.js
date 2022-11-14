@@ -2,8 +2,23 @@ function doSomething()
 {
     if (document.getElementById("event-type").value == "Teams"){
         document.getElementById("row-two").style.display = "flex";
+        let hometeam = document.getElementById("hometeam");
+        let awayteam = document.getElementById("awayteam");
+
+        if (hometeam.value == "n/a"){
+            hometeam.value = ""
+        }
+        if (awayteam.value == "n/a"){
+            awayteam.value = ""
+        }
+        
     } else {
         document.getElementById("row-two").style.display = "none";
+        let hometeam = document.getElementById("hometeam");
+        hometeam.value = "n/a";
+
+        let awayteam = document.getElementById("awayteam");
+        awayteam.value = "n/a";
     }
 }
 
@@ -116,10 +131,10 @@ function validateFormTwo(){
 
     } else if (f == "Singles") {
         let hometeam = document.getElementById("hometeam");
-        hometeam.value = "";
+        hometeam.value = "n/a";
 
         let awayteam = document.getElementById("awayteam");
-        awayteam.value = "";
+        awayteam.value = "n/a";
 
 
     }
