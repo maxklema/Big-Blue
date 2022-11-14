@@ -185,6 +185,17 @@ header .navigation li a:hover {
 }
 
 
-@media (max-width: 700px) {
+@media (max-width: 786px) {
+    .main-frame {
+        width: 355px;
+    }
+    .main-frame a h5 {
+        text-align: center;
+    }
+    #fileinput {
+        margin-top: 30px;
+        background-color: white;
+        margin-left: 50px;
+    }
 
 }
