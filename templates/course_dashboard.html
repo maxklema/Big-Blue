@@ -1,14 +1,235 @@
+{% extends "indexcontent.html" %}
+{% block content %}
+
 <body>
-    <p>This is the course dashboard page! Here is where the information about courses will be displayed.</p>
-    {% if data is defined and data|length == 0 %}
-            <div class="no-matches">
-                <img src="{{ url_for('static', filename='logo graphics/nomatchesimage.png') }}">
+    <head>
+        <title>Big Blue | Match Dashboard</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/matchdashboard.css') }}">
+    </head>
+    <div class="main-container">
+        <div class="heading-info">
+            <div class="hero-info">
+                <h3>Course Dashboard</h3>
+                <p>All of your courses in one place</p>
+            </div>
+            <div class="hero-buttons">
+                <a href="/create_course">New Course</a>
+                <a href="/match_dashboard">Match Dashboard</a>
+            </div>
+        </div>
+        {% if data is defined and data|length == 0 %}
+            <div class="no-courses">
+                <img src="{{ url_for('static', filename='logo graphics/nocoursesyet.png') }}">
             </div>
         {% endif %}
-    {% for item in data%}
-        <h3>{{item.course_name}}</h3>
+        <div class="grid-container">
+            {% for item in data[::-1] %}
+                <div class="match-container">
+                    <div id="row-one">
+                        <div class="course-name-container">
+                            <h3>{{item.course_name}}</h3>
+                        </div>
+                        <div id="action-icons">
+                            <a href="/edit_course/{{item.course_name}}"><img src="{{ url_for('static', filename='logo graphics/pencilicon.png') }}"></a>
+                            <a href="/delete_course/{{item.course_name}}"><img src="{{ url_for('static', filename='logo graphics/trashcan.png') }}"></a>
+                        </div>
+                    </div>
+
+                    <div class="row-div">
+                        <div>
+                            <h4>Location</h4>
+                        </div>
+
+                        <div class="location-container">
+                            <h4>{{item.city}}</h4>
+                        </div>
+                    </div>
+
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 1</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par1}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 2</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par2}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 3</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par3}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 4</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par4}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 5</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par5}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 6</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par6}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 7</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par7}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 8</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par8}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 9</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par9}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 10</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par10}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 11</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par11}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 12</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par12}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 13</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par13}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 14</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par14}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 15</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par15}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 16</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par16}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 17</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par17}}</h4>
+                        </div>
+                    </div>
+                    <div class="row-div">
+                        <div>
+                            <h4>Hole 18</h4>
+                        </div>
+
+                        <div>
+                            <h4>Par {{item.par18}}</h4>
+                        </div>
+                    </div>
+
+
+
+                </div>        
+            {% endfor %}
+        </div>
+
+
+    </div>
+    
+</body>
+
+{% endblock %}
+
+
+
+<!-- 
+
+<h3>{{item.course_name}}</h3>
         <p>{{item.pars_of_holes}}</p>
         <p>{{item.city}}</p>
         <p>{{item.course_bio}}</p>
-    {% endfor %}
-</body>
+
+
+
+-->

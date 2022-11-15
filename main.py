@@ -51,14 +51,48 @@ class users(db.Model):
 class course(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     course_name = db.Column(db.String(50))
-    pars_of_holes = db.Column(db.String)
+    par1 = db.Column(db.Integer)
+    par2 = db.Column(db.Integer)
+    par3 = db.Column(db.Integer)
+    par4 = db.Column(db.Integer)
+    par5 = db.Column(db.Integer)
+    par6 = db.Column(db.Integer)
+    par7 = db.Column(db.Integer)
+    par8 = db.Column(db.Integer)
+    par9 = db.Column(db.Integer)
+    par10 = db.Column(db.Integer)
+    par11 = db.Column(db.Integer)
+    par12 = db.Column(db.Integer)
+    par13 = db.Column(db.Integer)
+    par14 = db.Column(db.Integer)
+    par15 = db.Column(db.Integer)
+    par16 = db.Column(db.Integer)
+    par17 = db.Column(db.Integer)
+    par18 = db.Column(db.Integer)
     city = db.Column(db.String)
     course_bio = db.Column(db.String(1000))
     created_by = db.Column(db.String)
 
-    def __init__(self, course_name, pars_of_holes, city, course_bio, created_by):
+    def __init__(self, course_name, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18, city, course_bio, created_by):
         self.course_name = course_name
-        self.pars_of_holes = pars_of_holes
+        self.par1 = par1
+        self.par2 = par2
+        self.par3 = par3
+        self.par4 = par4
+        self.par5 = par5
+        self.par6 = par6
+        self.par7 = par7
+        self.par8 = par8
+        self.par9 = par9
+        self.par10 = par10
+        self.par11 = par11
+        self.par12 = par12
+        self.par13 = par13
+        self.par14 = par14
+        self.par15 = par15
+        self.par16 = par16
+        self.par17 = par17
+        self.par18 = par18
         self.city = city
         self.course_bio = course_bio
         self.created_by = created_by
@@ -432,6 +466,40 @@ def edit_match(match_to_edit):
 
     return render_template("error", msg="You do not have access to this site!")
 
+
+@app.route("/edit_course/<course_to_edit>", methods=["POST", "GET"])
+def edit_course(course_to_edit):
+    found_course = course.query.filter_by(course_name=course_to_edit).first()
+    if 'active_user' in session and session['active_user'][0] == found_course.created_by and session['active_user'][2] == "coach":
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+        if request.method == "POST":
+            found_course.course_name = request.form['course-name']
+            found_course.par1 = request.form['holepar1']
+            found_course.par2 = request.form['holepar2']
+            found_course.par3 = request.form['holepar3']
+            found_course.par4 = request.form['holepar4']
+            found_course.par5 = request.form['holepar5']
+            found_course.par6 = request.form['holepar6']
+            found_course.par7 = request.form['holepar7']
+            found_course.par8 = request.form['holepar8']
+            found_course.par9 = request.form['holepar9']
+            found_course.par10 = request.form['holepar10']
+            found_course.par11 = request.form['holepar11']
+            found_course.par12 = request.form['holepar12']
+            found_course.par13 = request.form['holepar13']
+            found_course.par14 = request.form['holepar14']
+            found_course.par15 = request.form['holepar15']
+            found_course.par16 = request.form['holepar16']
+            found_course.par17 = request.form['holepar17']
+            found_course.par18 = request.form['holepar18']
+            found_course.city = request.form['city']
+            found_course.bio = ""
+        
+            db.session.commit()
+    
+    return render_template('edit_course.html', data=found_user, editing=found_course)
+
+
 @app.route("/delete_match/<match_to_delete>")
 def delete_match(match_to_delete):
     found_match = match.query.filter_by(match_name=match_to_delete).first()
@@ -440,6 +508,15 @@ def delete_match(match_to_delete):
         db.session.commit()
         return redirect(url_for("match_dashboard"))
     return redirect(url_for('error', msg="You do not have access to this site."))
+
+@app.route("/delete_course/<course_to_delete>")
+def delete_course(course_to_delete):
+    found_course = course.query.filter_by(course_name=course_to_delete).first()
+    if 'active_user' in session and session['active_user'][0] == found_course.created_by and session['active_user'][2] == "coach":
+        db.session.delete(found_course)
+        db.session.commit()
+        return redirect(url_for("course_dashboard"))
+    return redirect(url_for('error', msg="You do not have access to this page."))
 
 @app.route("/create_account", methods=['POST', 'GET'])
 def create_account():
@@ -582,17 +659,8 @@ def create_course():
                 if request.form[item] == "" or sanitize_inputs(item) or 'numberholes' not in request.form:
                     return render_template("create_course.html", message='Your values were either blank or inapropriate. Please try again.')
 
-            if request.form['numberholes'] == '9':
-                i = 9
-            else:
-                i = 18
 
-            list_of_pars = []
-
-            for n in range(i):
-                list_of_pars.append(request.form['holepar' + str(n + 1)] + ',')
-
-            course_entry = course(request.form["course-name"], ''.join(list_of_pars), request.form['city'], '', session['active_user'][0])
+            course_entry = course(request.form["course-name"], request.form["holepar1"], request.form["holepar2"], request.form["holepar3"], request.form["holepar4"], request.form["holepar5"], request.form["holepar6"], request.form["holepar7"], request.form["holepar8"], request.form["holepar9"], request.form["holepar10"], request.form["holepar11"], request.form["holepar12"], request.form["holepar13"], request.form["holepar14"], request.form["holepar15"], request.form["holepar16"], request.form["holepar17"], request.form["holepar18"], request.form['city'], '', session['active_user'][0])
             db.session.add(course_entry)
             db.session.commit()
 
