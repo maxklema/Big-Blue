@@ -496,6 +496,8 @@ def edit_course(course_to_edit):
             found_course.bio = ""
         
             db.session.commit()
+
+            return redirect(url_for("course_dashboard"))
     
     return render_template('edit_course.html', data=found_user, editing=found_course)
 
@@ -664,7 +666,7 @@ def create_course():
             db.session.add(course_entry)
             db.session.commit()
 
-            return render_template("create_course.html", message='Course created sucsessfully!')
+            return render_template("course_dashboard.html", message='Course created sucsessfully!')
 
         return render_template("create_course.html")
     else:
