@@ -42,12 +42,16 @@ header {
 }
 
 header .logo {
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 180px;
+    max-height: 180px;
     position: relative;
-    background-color: #2176e8;
+    background-color: transparent;
     text-decoration: none;
+    padding: 0;
+    margin: 0;
+    display: block;
 }
+
 
 header a {
     text-decoration: none;

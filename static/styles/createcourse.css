@@ -41,8 +41,8 @@ header {
 }
 
 header .logo {
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 180px;
+    max-height: 180px;
     position: relative;
     background-color: transparent;
     text-decoration: none;
@@ -50,6 +50,7 @@ header .logo {
     margin: 0;
     display: block;
 }
+
 
 header a {
     text-decoration: none;
