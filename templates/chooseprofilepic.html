@@ -17,7 +17,7 @@
 <div class="main-container">
     <form class="main-frame" method=post enctype=multipart/form-data action="/upload_profile_pic">
         <img id="profile-container" src="{{ url_for('static', filename='logo graphics/insertpiccamera.png') }}" alt="">
-        <h2>Welcome {{data.name}}, let's set you up with a profile picture</h2>
+        <h2>Welcome <span style="color:#1b6cd7">{{data.name}}</span>, let's set you up with a profile picture</h2>
         <div class="choose-file-container">
             <input style="background-color: white;" id="fileinput" type=file name=file>
         </div>
