@@ -23,7 +23,6 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    background-color: #eeeeee;
     font-family: bigBlueBold;
 }
 
@@ -36,7 +35,7 @@ header {
     justify-content: space-between;
     width: 100%;
     align-items: center;
-    background-color: #2176e8;
+    background-image: linear-gradient(to right, #3185f3, #0c4999);
     z-index: 10;
     padding: 8px 100px;
 }
@@ -45,7 +44,7 @@ header .logo {
     max-width: 150px;
     max-height: 150px;
     position: relative;
-    background-color: #2176e8;
+    background-color: transparent;
     text-decoration: none;
     padding: 0;
     margin: 0;
@@ -54,7 +53,7 @@ header .logo {
 
 header a {
     text-decoration: none;
-    background-color: #2176e8;
+    background-color: transparent;
 }
 
 .navigation li a img {
@@ -71,7 +70,7 @@ header .navigation {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    background-color: #2176e8;
+    background-image: transparent;
     border: none;
     text-decoration: none;
     font-family: bigBlueMedium;
@@ -83,7 +82,7 @@ header .navigation li {
     margin: 0px 15px;
     border: none;
     text-decoration: none;
-    background-color: #2176e8;
+    background-color: transparent;
     font-family: bigBlueMedium;
     align-items: center;
 }
@@ -93,11 +92,13 @@ header .navigation li a {
     text-decoration: none;
     font-size: 18px;
     border: none;
-    background-color: #2176e8;
+    background-color: transparent;
     font-family: bigBlueMedium;
     
 
 }
+
+
 
 header .navigation li a:hover {
     color: #F0F0FF;
@@ -105,6 +106,10 @@ header .navigation li a:hover {
 
 }
 
+html, body {
+    height: 100%;
+    background-color: #eeeeee;
+}
 .main-container {
     display: flex;
     margin-top: 5%;

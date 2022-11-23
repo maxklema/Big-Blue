@@ -612,14 +612,16 @@ def admin():
 def match_dashboard():
     if 'active_user' in session and session['active_user'][2] == 'coach':
         found_match = match.query.filter_by(created_by=session['active_user'][0]).all()
-        return render_template("match_dashboard.html", data=found_match)
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+        return render_template("match_dashboard.html", data=found_user, match_data=found_match)
     return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/course_dashboard")
 def course_dashboard():
     if 'active_user' in session and session['active_user'][2] == 'coach':
         found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
-        return render_template("course_dashboard.html", data=found_course)
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+        return render_template("course_dashboard.html", data=found_user, course_data=found_course)
     return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route('/active_match/<match_code>')
@@ -657,7 +659,7 @@ def active_match_view():
 @app.route("/create_course", methods=['GET', 'POST'])
 def create_course():
     if 'active_user' in session and session['active_user'][2] == 'coach':
- 
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if request.method =="POST":
 
             for item in request.form:
@@ -670,9 +672,9 @@ def create_course():
             db.session.commit()
             found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
 
-            return render_template("course_dashboard.html", data=found_course, message='Course created sucsessfully!')
+            return render_template("course_dashboard.html", data=found_user, course_data=found_course, message='Course created sucsessfully!')
 
-        return render_template("create_course.html")
+        return render_template("create_course.html", data=found_user)
     else:
         return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
 

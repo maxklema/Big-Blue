@@ -1,9 +1,15 @@
-{% extends "indexcontent.html" %}
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}  
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
 {% block content %}
 
 <html>
         <head>
-            <title>Big Blue | Match Dashboard</title>
+            <title>Match Dashboard | Big Blue</title>
             <link rel="stylesheet" href="{{ url_for('static', filename='styles/matchdashboard.css') }}">
         </head>
 
@@ -18,13 +24,13 @@
                 <a href="/course_dashboard">Course Dashboard</a>
             </div>
         </div>
-        {% if data is defined and data|length == 0 %}
+        {% if match_data is defined and match_data|length == 0 %}
             <div class="no-matches">
                 <img src="{{ url_for('static', filename='logo graphics/nomatchesimage.png') }}">
             </div>
         {% endif %}
         <div class="grid-container">
-            {% for item in data[::-1] %}
+            {% for item in match_data[::-1] %}
                 <div class="match-container">
                     <div id="row-one">
                         <div>
