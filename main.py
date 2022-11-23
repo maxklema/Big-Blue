@@ -51,6 +51,7 @@ class users(db.Model):
 class course(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     course_name = db.Column(db.String(50))
+    course_holes = db.Column(db.String(3))
     par1 = db.Column(db.Integer)
     par2 = db.Column(db.Integer)
     par3 = db.Column(db.Integer)
@@ -73,8 +74,9 @@ class course(db.Model):
     course_bio = db.Column(db.String(1000))
     created_by = db.Column(db.String)
 
-    def __init__(self, course_name, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18, city, course_bio, created_by):
+    def __init__(self, course_name, course_holes, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18, city, course_bio, created_by):
         self.course_name = course_name
+        self.course_holes = course_holes
         self.par1 = par1
         self.par2 = par2
         self.par3 = par3
@@ -474,6 +476,7 @@ def edit_course(course_to_edit):
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if request.method == "POST":
             found_course.course_name = request.form['course-name']
+            found_course.course_holes = request.form['numberholes']
             found_course.par1 = request.form['holepar1']
             found_course.par2 = request.form['holepar2']
             found_course.par3 = request.form['holepar3']
@@ -658,15 +661,16 @@ def create_course():
         if request.method =="POST":
 
             for item in request.form:
-                if request.form[item] == "" or sanitize_inputs(item) or 'numberholes' not in request.form:
+                if sanitize_inputs(item) or 'numberholes' not in request.form:
                     return render_template("create_course.html", message='Your values were either blank or inapropriate. Please try again.')
 
 
-            course_entry = course(request.form["course-name"], request.form["holepar1"], request.form["holepar2"], request.form["holepar3"], request.form["holepar4"], request.form["holepar5"], request.form["holepar6"], request.form["holepar7"], request.form["holepar8"], request.form["holepar9"], request.form["holepar10"], request.form["holepar11"], request.form["holepar12"], request.form["holepar13"], request.form["holepar14"], request.form["holepar15"], request.form["holepar16"], request.form["holepar17"], request.form["holepar18"], request.form['city'], '', session['active_user'][0])
+            course_entry = course(request.form["course-name"], request.form["numberholes"], request.form["holepar1"], request.form["holepar2"], request.form["holepar3"], request.form["holepar4"], request.form["holepar5"], request.form["holepar6"], request.form["holepar7"], request.form["holepar8"], request.form["holepar9"], request.form["holepar10"], request.form["holepar11"], request.form["holepar12"], request.form["holepar13"], request.form["holepar14"], request.form["holepar15"], request.form["holepar16"], request.form["holepar17"], request.form["holepar18"], request.form['city'], '', session['active_user'][0])
             db.session.add(course_entry)
             db.session.commit()
+            found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
 
-            return render_template("course_dashboard.html", message='Course created sucsessfully!')
+            return render_template("course_dashboard.html", data=found_course, message='Course created sucsessfully!')
 
         return render_template("create_course.html")
     else:

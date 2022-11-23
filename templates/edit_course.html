@@ -17,11 +17,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/createcourse.css') }}">
 
 
-    <body>
+    <body onload="onload()">
         <div class="form-container">
             <form action="/edit_course/{{editing.course_name}}" method="post">
                 <img src="{{ url_for('static', filename='logo graphics/golfcart.png') }}" alt="">
-                <h3>Add a New Course</h3>
+                <h3>Edit Your Course</h3>
                 {% if message %}
                     <h5 id="error">{{message}}</h5>
                     <script>
@@ -34,8 +34,13 @@
                     <div>
                         <label for="number-holes">Number of Holes</label><br>
                         <select onfocusout="hideparholes()" name="numberholes" id="number-holes">
-                            <option name="numberholes" value="18">18</option>
-                            <option name="numberholes" value="9">9</option>
+                            {% if editing.course_holes == "9" %}
+                                <option name="numberholes" value="18">18</option>
+                                <option name="numberholes" value="9" selected>9</option>
+                            {% else %}
+                                <option name="numberholes" value="9">9</option>
+                                <option name="numberholes" value="18" selected>18</option>
+                            {% endif %}
                         </select>
                     </div>
                     <div class="responsive-one">
