@@ -409,6 +409,7 @@ def dashboard():
 
 @app.route("/create_match", methods=['GET', 'POST'])
 def create_match():
+    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     if 'active_user' in session and session['active_user'][2] == "coach":
         if request.method == "POST":
             for item in request.form:
@@ -425,11 +426,11 @@ def create_match():
                 db.session.commit()
             except Exception as err:
                 print(err)
-                return redirect(url_for('error', msg="There was a problem creating this match. Call 330-550-1055!"))
+                return redirect(url_for('error', msg="There was a problem creating this match. Call 330-550-1057!"))
 
             return redirect(url_for('match_dashboard'))
         
-        return render_template('create_match.html')
+        return render_template('create_match.html', data=found_user)
     
     return redirect(url_for('error', msg='You do not have access to this page.'))
 
@@ -443,7 +444,7 @@ def edit_match(match_to_edit):
                 if request.form[item] == "" or sanitize_inputs(request.form[item]):
                     if request.form["eventtype"] != "singles" and request.form["hometeam"] == "" and request.form["awayteam"] == "":
                         break
-                    return render_template('edit_match.html', message="You have inputed an invalid value or an inapropriate value.", editing=found_match)
+                    return render_template('edit_match.html', data=found_user, message="You have inputed an invalid value or an inapropriate value.", editing=found_match)
             
             ezfix = request.form["hometeam"] + '~' + request.form["awayteam"]
 
