@@ -1,5 +1,12 @@
-{% extends "indexcontent.html" %}
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}  
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
 {% block content %}
+
 
 <title>Big Blue | Home</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">        

@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 
 
@@ -18,9 +20,9 @@
                 <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logo">
             </a>
             <ul class="navigation">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="/dashboard">Profile</a></li>
                 <li><a href="/logout">Logout</a></li>
+                <li><a href="/dashboard">{{data.username}}</a></li>
+                <li><a href=""><img id="profile-pic" src="{{ url_for('static', filename='logo graphics/user_photos/' + data.pic) }}" alt=""></a></li>
             </ul>
 
 

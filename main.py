@@ -359,7 +359,11 @@ def joincode():
 
 @app.route("/")
 def index():
-    return render_template("index.html", matches=look_for_match("XCRunner2022"))
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
+    return render_template("index.html", data=found_user, matches=look_for_match("XCRunner2022"))
 
 @app.route("/header", methods=['GET'])
 def header():
@@ -373,6 +377,10 @@ def error(msg):
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
     if 'active_user' in session:
         return redirect(url_for('dashboard'))
     if request.method == "POST":
@@ -381,13 +389,14 @@ def login():
         password_input = request.form['password']
         found_user = users.query.filter_by(username=username_input).first()
         
+
         if found_user and found_user.username == username_input and found_user.password == password_input:
             session['active_user'] = [found_user.username, found_user.name, found_user.rank]
             return redirect(url_for('dashboard'))
         else:
-            return render_template("login.html", message="Username and password were incorrect! Please try again.")
+            return render_template("login.html", data=found_user, message="Username and password were incorrect! Please try again.")
 
-    return render_template("login.html")
+    return render_template("login.html", data=found_user)
 
 @app.route("/dashboard", methods=['GET', 'POST'])
 def dashboard():
@@ -526,6 +535,10 @@ def delete_course(course_to_delete):
 
 @app.route("/create_account", methods=['POST', 'GET'])
 def create_account():
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
     if request.method == "POST":
 
         for item in request.form:
@@ -554,7 +567,7 @@ def create_account():
         return redirect(url_for('chooseprofilepicture'))
 
 
-    return render_template('create_account.html')
+    return render_template('create_account.html', data=found_user)
 
 
 @app.route("/edit_user_profile", methods=["POST"])
