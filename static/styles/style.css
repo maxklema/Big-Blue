@@ -98,19 +98,17 @@ header .navigation li a {
 
 }
 
-
-
 header .navigation li a:hover {
     color: #F0F0FF;
     
 
 }
 
+
 html, body {
     height: 100%;
     background-color: #eeeeee;
 }
-
 
 .form-container {
     justify-content: center;
@@ -322,6 +320,7 @@ body p {
     border-radius: 5px;
     text-align: center;
     padding: 20px 30px;
+    margin-bottom: 5% !important;
 }
 
 .contact h3 {
@@ -340,8 +339,7 @@ body p {
 .about-us-card {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 5%;
+    margin-top: 30px;
 }
 
 
@@ -350,6 +348,7 @@ body p {
     max-width: 355px;
     background-color: white;
     border-radius: 5px;
+    margin-bottom: 5% !important;
 }
 
 .about-us-index-container img {

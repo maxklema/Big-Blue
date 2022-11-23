@@ -326,7 +326,11 @@ def verify_user(user: str, verified_input: int):
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
+    return render_template("about.html", data=found_user)
 
 @app.route("/chooseprofilepicture")
 def chooseprofilepicture():
@@ -355,7 +359,11 @@ def edit_profile():
 
 @app.route("/joincode")
 def joincode():
-    return render_template("join_code_page.html")
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
+    return render_template("join_code_page.html", data=found_user)
 
 @app.route("/")
 def index():

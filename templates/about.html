@@ -1,5 +1,10 @@
-
-{% extends "indexcontent.html" %}
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}  
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
 {% block content %}
 
 <title>Big Blue | About</title>
