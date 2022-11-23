@@ -334,4 +334,15 @@ html, body {
     .heading-info p {
         text-align: center;
     }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons a {
+        width: 315px;
+        text-align: center;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
 }
