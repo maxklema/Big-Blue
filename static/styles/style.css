@@ -347,7 +347,6 @@ body p {
     max-width: 355px;
     background-color: white;
     border-radius: 5px;
-    margin-bottom: 5% !important;
 }
 
 .about-us-index-container img {
@@ -394,4 +393,52 @@ body p {
     
 }
 
+.FAQ-card-container {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+}
 
+.FAQ-card {
+    padding: 20px 30px;
+    max-width: 355px;
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 5%;
+}
+
+.FAQ-card img {
+    max-width: 300px;
+    max-height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.FAQ-card h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 15px;
+}
+
+.FAQ-card p {
+    font-family: BigBlueRegular;
+    font-size: 15px;
+    margin-bottom: 20px;
+
+}
+
+.FAQ-card a button {
+    width: 300px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+}
+
+.FAQ-card a button:hover {
+    background-color: #1b6cd7;
+}
