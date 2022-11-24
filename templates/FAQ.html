@@ -1,0 +1,132 @@
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}  
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
+{% block content %}
+
+
+<title>FAQ | Big Blue</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/FAQ.css') }}">     
+
+    
+    <div class="header-information">
+        <img src="{{ url_for('static', filename='logo graphics/FAQ-Banner.png') }}">
+    </div>
+
+    <h4>⸻   General   ⸻</h4>
+    <div class="General-Questions-Container">
+        <div class="General-Questions">
+            <div>
+                <details>
+                    <summary>What is BigBlue.golf?</summary>
+                    <hr>
+                    <p>
+                        BigBlue.golf is a live golf scorekeeping service. We make it easier than ever to join golf matches and track how your favorite teams are doing in real time! The days of crowding around the scoreboard to see results are over.<br><br>
+    
+                        For players, your coach will give you an access code and the match password. After, you will join your group number for that match. After every hole, you will enter the scores of you and your opponents. That's it! We do all the rest. <br><br>
+                        
+                        For coaches, joining and setting up matches takes only a few minutes. With our easy-to-use UI, you can quickly add golf courses to your dashboard and create matches at those different courses. Once completed, you can begin matches and provide your players with the access code to join.
+                        </p>
+                    </details>
+            </div>
+    
+            <div>
+                <details>
+                    <summary>Is BigBlue.golf Free?</summary>
+                    <hr>
+                    <p>Yes, our mission is to make live scoring accessible to everyone. This means making our service free to all of our users. However, money doesn't grow on trees, so we will likely find advertisers who want to work with us. We also plan on making a premium service in the future with extra features (don't worry! These will not hinder usability).</p>
+                    </details>
+            </div>
+
+            <div>
+                <details>
+                    <summary>Who Created BigBlue.golf?</summary>
+                    <hr>
+                    <p>BigBlue.golf was created by three high school students in Indiana. You can learn more about us on our <span><u><a href="/about" style="color: rgb(11, 112, 196);">About</a></u></span> page.</p>
+                    </details>
+            </div>
+        </div>
+    </div>
+    <h4>⸻   Account   ⸻</h4>
+    <div class="General-Questions-Container">
+        <div class="General-Questions">
+            <div>
+                <details>
+                    <summary>Do I Need an Account?</summary>
+                    <hr>
+                    <p>Only coaches are required to have accounts to create golf matches. For players and spectators, it is not necessary. However, players can create accounts if they want to. As of version 1.0.0, player accounts serve minimum functionality, but we plan to expand on this in the future.</p>
+                    </details>
+            </div>
+    
+            <div>
+                <details>
+                    <summary>How Do I Create an Account?</summary>
+                    <hr>
+                    <p>You can sign up for free <span><u><a href="/create_account" style="color: rgb(11, 112, 196)">Here</a></u></span></p>
+                    </details>
+            </div>
+
+            <div>
+                <details>
+                    <summary>How Do I Access my Dashboards?</summary>
+                    <hr>
+                    <p>On your profile page, you can click the "Dashboard" button. You can also access the dashboard by clicking "Dashboard" in your header.</p>
+                    </details>
+            </div>
+
+            <div>
+                <details>
+                    <summary>How Do I Change my Profile Picture?</summary>
+                    <hr>
+                    <p>On your profile page, click "Edit Profile" and then click "Profile Picture" in the left side menu. You can then upload an image from your desktop. We support file extensions such as GIF, PNG, and JPG.</p>
+                    </details>
+            </div>
+
+            <div>
+                <details>
+                    <summary>How Do I Update my Personal Information?</summary>
+                    <hr>
+                    <p>On your profile page, click "Edit Profile." This will take you to a page where you can update your information. Note, we currently do not allow you to change usernames, passwords, or account types as of version 1.0.0.</p>
+                    </details>
+            </div>
+
+            <div>
+                <details>
+                    <summary>How Do I Change my Profile Banner?</summary>
+                    <hr>
+                    <p>As of version 1.0.0, you cannot change your profile banner. Don't worry, you will be able to in the future.</p>
+                    </details>
+            </div>
+
+            <div>
+                <details>
+                    <summary>How do I get my Account Verified?</summary>
+                    <hr>
+                    <p>As of version 1.0.0, we are only verifying authentic coaches. If you are a coach for a school, league, or organization and wish to request verification, you must direct message us on Twitter (@bigbluegolfapp) with credentials or documentation proving your authenticity. You must also provide your username and school/team name/organization. <bold>Please note, your verification will be removed if you change your school/team/organization without notifying us.</bold></p>
+                    </details>
+            </div>
+
+            <div>
+                <details>
+                    <summary>How do I Delete my Account?</summary>
+                    <hr>
+                    <p>fill in later</bold></p>
+                    </details>
+            </div>
+            
+        </div>
+    </div>
+
+    <h4>⸻   Match and Course Information   ⸻</h4>
+   
+
+
+
+
+
+
+
+{% endblock %}

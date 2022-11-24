@@ -324,6 +324,14 @@ def verify_user(user: str, verified_input: int):
     except:
         print("Could not complete this task.")
 
+@app.route("/FAQ")
+def FAQ():
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
+    return render_template("FAQ.html", data=found_user)
+
 @app.route("/about")
 def about():
     try:
