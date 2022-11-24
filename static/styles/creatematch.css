@@ -145,6 +145,7 @@ input[type=number]{
     padding: 20px 30px;
     background-color: white;
     border-radius: 5px;
+    margin-bottom: 5%;
 }
 
 .main-container form h3 {

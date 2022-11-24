@@ -136,6 +136,7 @@ input[type=number] {
     background-color: white;
     padding: 20px 30px;
     border-radius: 5px;
+    margin-bottom: 5%;
 }
 
 .form-container form h3 {
