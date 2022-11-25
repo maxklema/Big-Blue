@@ -171,7 +171,6 @@ class edit_score_files():
             json.dump(data, file, indent=3)
 
 #Scoring class
-#Scoring class
 class Scoring():
     def create_json(filename, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, id):
         data = {"players":{},"match_info": {"number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "id": id}}
@@ -461,7 +460,7 @@ def create_match():
 
 @app.route("/edit_match/<match_to_edit>", methods=["POST", "GET"])
 def edit_match(match_to_edit):
-    found_match = match.query.filter_by(match_name=match_to_edit).first()
+    found_match = match.query.filter_by(_id=match_to_edit).first()
     if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if request.method == "POST":
@@ -486,7 +485,7 @@ def edit_match(match_to_edit):
                 db.session.commit()
                 print(found_match.teams1)
             except:
-                redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
+                redirect(url_for('error', msg="There was a problem adding your match to the database. Please make sure you have inputed all fields. If all else fails, contact customer suport."))
             
             return redirect(url_for("match_dashboard"))
 
@@ -497,7 +496,7 @@ def edit_match(match_to_edit):
 
 @app.route("/edit_course/<course_to_edit>", methods=["POST", "GET"])
 def edit_course(course_to_edit):
-    found_course = course.query.filter_by(course_name=course_to_edit).first()
+    found_course = course.query.filter_by(_id=course_to_edit).first()
     if 'active_user' in session and session['active_user'][0] == found_course.created_by and session['active_user'][2] == "coach":
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if request.method == "POST":
@@ -585,6 +584,16 @@ def create_account():
 
     return render_template('create_account.html', data=found_user)
 
+@app.route("/delete_account")
+def delete_account():
+
+    user = session['active_user'][0]
+    found_user = user.query.filter_by(username=user).first()
+    db.session.delete(found_user)
+    
+    session.pop('active_user')
+
+    redirect(url_for('index'))
 
 @app.route("/edit_user_profile", methods=["POST"])
 def edit_user_profile():

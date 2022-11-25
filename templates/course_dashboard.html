@@ -36,8 +36,8 @@
                             <h3>{{item.course_name}}</h3>
                         </div>
                         <div id="action-icons">
-                            <a href="/edit_course/{{item.course_name}}"><img src="{{ url_for('static', filename='logo graphics/pencilicon.png') }}"></a>
-                            <a href="/delete_course/{{item.course_name}}"><img src="{{ url_for('static', filename='logo graphics/trashcan.png') }}"></a>
+                            <a href="/edit_course/{{item._id}}"><img src="{{ url_for('static', filename='logo graphics/pencilicon.png') }}"></a>
+                            <a href="/delete_course/{{item._id}}"><img src="{{ url_for('static', filename='logo graphics/trashcan.png') }}"></a>
                         </div>
                     </div>
 
