@@ -253,6 +253,12 @@ class Scoring():
                 elif player["team"] == team2[0]:
                     team2[1] += Scoring.add_scores(player["scores"])
             return team1, team2
+    
+    def return_data(filename):
+        with open("static/score_files/" + str(filename), "r") as file:
+            file.seek(0)
+            data = json.load(file)
+            return data
 
 #with open("static/score_files/" + filename, "rw") as file:
 
@@ -690,9 +696,10 @@ def change_verified_status(admin, user, verified):
     else:
         return 'Sorry, you do not have access to this site.'
 
-@app.route("/active_match_view")
-def active_match_view():
-    return render_template("active_match_view.html")
+@app.route("/active_match_view/<json_data>")
+def active_match_view(json_data):
+    json_data = Scoring.return_data("3")
+    return render_template("active_match_view.html", data=json_data)
 
 @app.route("/create_course", methods=['GET', 'POST'])
 def create_course():
