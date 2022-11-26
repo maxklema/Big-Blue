@@ -133,13 +133,13 @@ class Scoring():
     def create_json(filename, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, Id):
         data = {"players":{},"match_info": {"number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "id": Id}}
         #json_string = json
-        with open("static/score_files/" + filename + ".json", "a+") as file:
+        with open("static/score_files/" + str(filename), "a+") as file:
             
             print(json.dump(data, file, indent=3))
 
     def add_player(filename, player, team):
         #json.load("test.json")
-        with open("static/score_files/" + filename + ".json", "r+") as file:
+        with open("static/score_files/" + str(filename), "r+") as file:
             file.seek(0)
             data = json.load(file)
             holes = {}
@@ -153,7 +153,7 @@ class Scoring():
             file.truncate()
 
     def edit_score(filename, player, hole, new_score): #used by both players and coaches
-        with open("static/score_files/" + filename + ".json", "r+") as file:
+        with open("static/score_files/" + str(filename), "r+") as file:
             file.seek(0)
             data = json.load(file)
             if player in data["players"]: #POSSIBLE PLACE FOR ERRORS
@@ -163,7 +163,7 @@ class Scoring():
                 file.truncate()
 
     def calc_match_status(filename, player1, player2):
-        with open("static/score_files/" + filename + ".json", "r") as file:
+        with open("static/score_files/" + str(filename), "r") as file:
             file.seek(0)
             data = json.load(file)
             status=""
@@ -201,7 +201,7 @@ class Scoring():
             sum += int(data[str(hole)])
         return sum
     def calc_match_results(filename):
-        with open("static/score_files/" + filename + ".json", "r") as file:
+        with open("static/score_files/" + str(filename), "r") as file:
             file.seek(0)
             data = json.load(file)
             team1 = [data["match_info"]["home_team"], 0]
@@ -216,27 +216,6 @@ class Scoring():
             return team1, team2
 
 #with open("static/score_files/" + filename, "rw") as file:
-                
-
-
-#The code XCRunner 2022 pulls out every file for the main page!
-def look_for_match(user):
-    matches = []
-    for file in os.listdir("static/score_files"):
-        team_scores = []
-        with open("static/score_files/" + file) as scanner:
-            data = json.load(scanner)
-            for team in data:
-                if team == "match_data":
-                    break
-                else:
-                    team_scores.append(team + ": " + str(edit_score_files(file).sum_team_score(team)))
-            if data['match_data']['created_by'] == user:
-                matches.append((file.strip('.json').replace('_', ' ').capitalize(), data, team_scores))
-            #pulls every match out
-            elif user == "XCRunner2022":
-                matches.append((file.strip('.json').replace('_', ' ').capitalize(), data, team_scores))
-    return matches
 
 def object_as_dict(obj):
     return {c.key: getattr(obj, c.key)
@@ -346,7 +325,7 @@ def index():
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
     except:
         found_user = ""
-    return render_template("index.html", data=found_user, matches=look_for_match("XCRunner2022"))
+    return render_template("index.html", data=found_user)
 
 @app.route("/header", methods=['GET'])
 def header():
@@ -634,6 +613,27 @@ def course_dashboard():
 @app.route('/active_match/<match_code>')
 def active_match():
     return '',200
+
+@app.route('/start_match/<match_id>/<course_id>')
+def start_match(match_id, course_id):
+    found_match = match.query.filter_by(_id=match_id).first()
+    found_course = course.query.filter_by(_id=course_id).first()
+    print(session['active_user'][0], found_match.created_by)
+    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][0] == found_course.created_by:
+        Scoring.create_json(
+            found_match._id, 
+            found_course.course_holes, 
+            found_match.match_name, 
+            found_match.start_time, 
+            found_match.end_time, 
+            found_match.teams1.split("~")[0], 
+            found_match.teams1.split("~")[1], 
+            found_match.event_type, 
+            found_match._id
+        )
+        return "Working!", 200 #Send to live coach dashboard once developed
+    else:
+        return redirect(url_for('error', msg='You do not have access to this site.'))
 
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):
