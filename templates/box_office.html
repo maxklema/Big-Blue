@@ -14,12 +14,12 @@
         
         <div class="form-container">
             <form action="#" method="post">
-                <img src="{{ url_for('static', filename='logo graphics/newjoinicon.png') }}" alt="">
+                <img src="{{ url_for('static', filename='logo graphics/whistle.png') }}" alt="">
                 {% if data %}
-                <label for="joincode-box"><h6 style="color: red;">{{data}}</h6></label><br>
+                <label for="joincode-box"></label><br>
                 {% endif %}
-                <label for="joincode-box">Enter Join Code</label><br>
-                <input placeholder="094x3a" type="text" id="joincode-box" name="code_entry"></input><br>
+                <label for="joincode-box">Enter Match Password:</label><br>
+                <input placeholder="xxxxxx" type="text" id="joincode-box" name="code_entry"></input><br>
                 <input type="submit" value="Join Match" name="submit-joincode" id="joincode-submit-button">
             </form>
         </div>

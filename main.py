@@ -171,7 +171,6 @@ class edit_score_files():
             json.dump(data, file, indent=3)
 
 #Scoring class
-#Scoring class
 class Scoring():
     def create_json(filename, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, id):
         data = {"players":{},"match_info": {"number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "id": id}}
@@ -365,13 +364,22 @@ def edit_profile():
     else:
         return render_template("login.html")
 
-@app.route("/joincode")
+@app.route("/joincode", methods=['POST', 'GET'])
 def joincode():
-    try:
-        found_user = users.query.filter_by(username=session['active_user'][0]).first()
-    except:
-        found_user = ""
-    return render_template("join_code_page.html", data=found_user)
+    if request.method == 'POST':
+        code_entry = request.form['code_entry']
+        found_match = match.query.filter_by(match_code=code_entry).first()
+        if found_match:
+            if found_match.match_password == "":
+                print('No password!')
+                #route to live player dashboard
+            return redirect(url_for('box_office', match1=found_match))
+        return render_template("join_code_page.html", data="We can't find that match... Please check your join code and try again.")
+    return render_template("join_code_page.html", data=None)
+
+@app.route("/box_office/<match1>", methods=['GET', 'POST'])
+def box_office(match1):
+    return render_template('box_office.html', data=None)
 
 @app.route("/")
 def index():
@@ -461,7 +469,7 @@ def create_match():
 
 @app.route("/edit_match/<match_to_edit>", methods=["POST", "GET"])
 def edit_match(match_to_edit):
-    found_match = match.query.filter_by(match_name=match_to_edit).first()
+    found_match = match.query.filter_by(_id=match_to_edit).first()
     if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if request.method == "POST":
@@ -486,7 +494,7 @@ def edit_match(match_to_edit):
                 db.session.commit()
                 print(found_match.teams1)
             except:
-                redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
+                redirect(url_for('error', msg="There was a problem adding your match to the database. Please make sure you have inputed all fields. If all else fails, contact customer suport."))
             
             return redirect(url_for("match_dashboard"))
 
@@ -497,7 +505,7 @@ def edit_match(match_to_edit):
 
 @app.route("/edit_course/<course_to_edit>", methods=["POST", "GET"])
 def edit_course(course_to_edit):
-    found_course = course.query.filter_by(course_name=course_to_edit).first()
+    found_course = course.query.filter_by(_id=course_to_edit).first()
     if 'active_user' in session and session['active_user'][0] == found_course.created_by and session['active_user'][2] == "coach":
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if request.method == "POST":
@@ -585,6 +593,16 @@ def create_account():
 
     return render_template('create_account.html', data=found_user)
 
+@app.route("/delete_account")
+def delete_account():
+
+    user = session['active_user'][0]
+    found_user = user.query.filter_by(username=user).first()
+    db.session.delete(found_user)
+    
+    session.pop('active_user')
+
+    redirect(url_for('index'))
 
 @app.route("/edit_user_profile", methods=["POST"])
 def edit_user_profile():
@@ -657,14 +675,6 @@ def course_dashboard():
 @app.route('/active_match/<match_code>')
 def active_match():
     return '',200
-
-@app.route("/join", methods=['POST'])
-def join():
-    if request.method == "POST":
-        found_match = match.query.filter_by(match_code=request.form['joinCode']).first()
-        if found_match:
-            return render_template('match_join_page.html', data=found_match)
-        return redirect(url_for('error', msg="Sorry, it looks like we can't find this match. Please contact the match creator for the correct match code."))
 
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):
