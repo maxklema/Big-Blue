@@ -4,15 +4,18 @@
 <title>Big Blue | Match View</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">        
     {% for player in data['players'] %}
-        <h3>{{player}}</h3>
-        <ul>
-            {% for strokes in data['players'][player]['scores'] %}
-                <li>
-                    Hole: {{strokes}}: {{data['players'][player]['scores'][strokes]}}
-                </li>
-            {% endfor %}
-        </ul>
+        <h3>{{player}} | Team: {{data['players'][player]['team']}}</h3>
+        <details>
+            <ul>
+                {% for strokes in data['players'][player]['scores'] %}
+                    <li>
+                        Hole: {{strokes}}: {{data['players'][player]['scores'][strokes]}}
+                    </li>
+                {% endfor %}
+            </ul>
+    </details>
     {% endfor %}
+    <hr>
         
 
 

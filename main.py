@@ -255,7 +255,7 @@ class Scoring():
             return team1, team2
     
     def return_data(filename):
-        with open("static/score_files/" + str(filename), "r") as file:
+        with open("static/score_files/" + str(filename) + ".json", "r") as file:
             file.seek(0)
             data = json.load(file)
             return data
@@ -698,7 +698,7 @@ def change_verified_status(admin, user, verified):
 
 @app.route("/active_match_view/<json_data>")
 def active_match_view(json_data):
-    json_data = Scoring.return_data("3")
+    json_data = Scoring.return_data("11")
     return render_template("active_match_view.html", data=json_data)
 
 @app.route("/create_course", methods=['GET', 'POST'])
