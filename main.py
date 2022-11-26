@@ -172,16 +172,16 @@ class edit_score_files():
 
 #Scoring class
 class Scoring():
-    def create_json(filename, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, id):
-        data = {"players":{},"match_info": {"number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "id": id}}
+    def create_json(filename, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, Id):
+        data = {"players":{},"match_info": {"number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "id": Id}}
         #json_string = json
-        with open("static/score_files/" + filename, "a+") as file:
+        with open("static/score_files/" + filename + ".json", "a+") as file:
             
             print(json.dump(data, file, indent=3))
 
     def add_player(filename, player, team):
         #json.load("test.json")
-        with open("static/score_files/" + filename, "r+") as file:
+        with open("static/score_files/" + filename + ".json", "r+") as file:
             file.seek(0)
             data = json.load(file)
             holes = {}
@@ -195,7 +195,7 @@ class Scoring():
             file.truncate()
 
     def edit_score(filename, player, hole, new_score): #used by both players and coaches
-        with open("static/score_files/" + filename, "r+") as file:
+        with open("static/score_files/" + filename + ".json", "r+") as file:
             file.seek(0)
             data = json.load(file)
             if player in data["players"]: #POSSIBLE PLACE FOR ERRORS
@@ -204,7 +204,7 @@ class Scoring():
                 json_object = json.dump(data, file, indent=3)
                 file.truncate()
     def calc_match_status(filename, player1, player2):
-        with open("static/score_files/" + filename, "r") as file:
+        with open("static/score_files/" + filename + ".json", "r") as file:
             file.seek(0)
             data = json.load(file)
             status=""
@@ -242,7 +242,7 @@ class Scoring():
             sum += data[str(hole)]
         return sum
     def calc_match_results(filename):
-        with open("static/score_files/" + filename, "r") as file:
+        with open("static/score_files/" + filename + ".json", "r") as file:
             file.seek(0)
             data = json.load(file)
             team1 = [data["match_info"]["home_team"], 0]
