@@ -555,7 +555,7 @@ def create_account():
         found_username = users.query.filter_by(username=request.form['username']).first()
         found_email = users.query.filter_by(email=request.form['email']).first()
         if found_username or found_email:
-            return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.")
+            return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.", data=found_user)
 
         try: 
             new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png")
