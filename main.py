@@ -581,7 +581,8 @@ def delete_account():
 
     found_user = users.query.filter_by(username=session['active_user'][0]).first()
     db.session.delete(found_user)
-    
+    db.session.commit()
+
     session.pop('active_user')
 
     return redirect(url_for('index'))
