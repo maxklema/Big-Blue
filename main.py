@@ -579,13 +579,12 @@ def create_account():
 @app.route("/delete_account")
 def delete_account():
 
-    user = session['active_user'][0]
-    found_user = user.query.filter_by(username=user).first()
+    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     db.session.delete(found_user)
     
     session.pop('active_user')
 
-    redirect(url_for('index'))
+    return redirect(url_for('index'))
 
 @app.route("/edit_user_profile", methods=["POST"])
 def edit_user_profile():
