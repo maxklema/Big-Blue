@@ -3,110 +3,19 @@
 
 <title>Big Blue | Match View</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">        
-    <div id="container">
-        <body>
-        </body>
-            <div id="match-title">Chestnut Hills - 18 Holes Singles Strokeplay</div>
-            <div id="match-details">Number of Players etc. etc.</div>
-            <div id="player-data">
-                <div class="individual-player-data">
-                    <div class="player-name-total">Dominic DeLuca   -8 thru 18</div>
-                    <details>
-                        <div class="scores">
-                            <ol>
-                                <li>1</li>
-                                <li>2</li>
-                                <li>3</li>
-                                <li>4</li>
-                                <li>5</li>
-                                <li>6</li>
-                                <li>7</li>
-                                <li>8</li>
-                                <li>9</li>
-                                <li>10</li>
-                                <li>11</li>
-                                <li>12</li>
-                                <li>13</li>
-                                <li>14</li>
-                                <li>15</li>
-                                <li>16</li>
-                                <li>17</li>
-                                <li>18</li>
-                            </ol>
-                        </div>
-                    </details>
-
-                </div>
-                <div id="player-data">
-
-                <div class="individual-player-data">
-                    <div class="player-name-total">Grayson   +20 thru 1</div>
-                    <details>
-                        <div class="scores">
-                            <ol>
-                                <li>24</li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                            </ol>
-                        </div>
-                    </details>
-
-                </div>
-                <div class="individual-player-data">
-                    <div class="player-name-total">Max  -3 thru 1</div>
-                    <details>
-                        <div class="scores">
-                            <ol>
-                                <li>1</li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                            </ol>
-                        </div>
-                    </details>
-
-                </div>
-            </div>
-        <footer>
-            <img src="{{ url_for('static', filename='logo graphics/bigbluewhite.png') }}" class="logofooter">
-            <div class="footertext">
-                <p>Ⓒ 2022 Big Blue, a MK, GW, DD creation. Fort Wayne, Indiana</p>
-                
-            </div>
-
-
-
-        </footer>
-    </div>
+    {% for player in data['players'] %}
+        <h3>{{player}} | Team: {{data['players'][player]['team']}}</h3>
+        <details>
+            <ul>
+                {% for strokes in data['players'][player]['scores'] %}
+                    <li>
+                        Hole: {{strokes}}: {{data['players'][player]['scores'][strokes]}}
+                    </li>
+                {% endfor %}
+            </ul>
+    </details>
+    {% endfor %}
+    <hr>
         
 
 

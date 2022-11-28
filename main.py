@@ -128,74 +128,71 @@ class match(db.Model):
         self.total_players = total_players
         self.created_by = created_by
 
-class edit_score_files():
-    def __init__(self, score_file_name):
-        self.score_file_name = score_file_name
-        self.error_msg = "Error, input not found!"
-        
-    def return_all_scores(self):
-        with open("static/score_files/" + self.score_file_name) as file:
-            data = json.load(file)
-            return data
-
-    def return_team(self, team):
-        with open("static/score_files/" + self.score_file_name) as file:
-            data = json.load(file)
-            for item in data:
-                if item == team:
-                    return data[item]
-            return self.error_msg
-
-    def sum_team_score(self, team):
-        with open("static/score_files/" + self.score_file_name) as file:
-            team_score = 0
-            data = json.load(file)
-            for item in data:
-                if item == team:
-                    for player in data[item]:
-                        team_score = team_score + data[item][player]
-                    return team_score
-            return self.error_msg
-
-    #working but needs to be shortened up...
-    def edit_player_score(self, team, player, new_score):
-        with open("static/score_files/" + self.score_file_name) as file:
-            data = json.load(file)
-            for item in data:
-                if item == team:
-                    for person in data[item]:
-                        print(person)
-                        if person == player:
-                            data[item][person] = new_score
-        with open("static/score_files/" + self.score_file_name, "w") as file:
-            json.dump(data, file, indent=3)
-
 #Scoring class
 class Scoring():
-    def create_json(filename, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, id):
-        data = {"players":{},"match_info": {"number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "id": id}}
+    def create_json(filename, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, Id):
+        data = {"players":{},"match_info": {"number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "id": Id},"lobby":[], "message":""}
         #json_string = json
-        with open("static/score_files/" + filename, "a+") as file:
+        with open("static/score_files/" + str(filename) + ".json", "a+") as file:
             
             print(json.dump(data, file, indent=3))
+    def add_to_lobby(filename, player):
+        with open("static/score_files/" + str(filename) + ".json", "r+") as file:
+            file.seek(0)
+            data = json.load(file)
+            data["lobby"].append(player)
+            file.seek(0)
+            json_object = json.dump(data, file, indent=3)
+            file.truncate()
+        
+    def change_message(filename, message):
+        with open("static/score_files/" + str(filename) + ".json", "r+") as file:
+            file.seek(0)
+            data = json.load(file)
+            data["message"] = str(message)
+            file.seek(0)
+            json_object = json.dump(data, file, indent=3)
+            file.truncate()
+
+    def kick_player(filename, player):
+        with open("static/score_files/" + str(filename) + ".json", "r+") as file:
+            file.seek(0)
+            data = json.load(file)
+            try:
+                del data["players"][player]
+            except:
+                try:
+                    data["lobby"].remove(player)
+                except: 
+                    pass
+
+            file.seek(0)
+            json_object = json.dump(data, file, indent=3)
+            file.truncate()
+
 
     def add_player(filename, player, team):
         #json.load("test.json")
-        with open("static/score_files/" + filename, "r+") as file:
+        with open("static/score_files/" + str(filename) + ".json", "r+") as file:
             file.seek(0)
             data = json.load(file)
             holes = {}
             if data["match_info"]["number_holes"] == "9":
                 holes = {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0}
+            elif data["match_info"]["number_holes"] == "18":
+                holes = {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0}
                 
             data["players"][player] = {"team": team, "scores":holes}
+
+            if player in data["lobby"]:
+                data["lobby"].remove(player)
 
             file.seek(0)
             json_object = json.dump(data, file, indent=3)
             file.truncate()
 
     def edit_score(filename, player, hole, new_score): #used by both players and coaches
-        with open("static/score_files/" + filename, "r+") as file:
+        with open("static/score_files/" + str(filename) + ".json", "r+") as file:
             file.seek(0)
             data = json.load(file)
             if player in data["players"]: #POSSIBLE PLACE FOR ERRORS
@@ -203,8 +200,9 @@ class Scoring():
                 file.seek(0)
                 json_object = json.dump(data, file, indent=3)
                 file.truncate()
+
     def calc_match_status(filename, player1, player2):
-        with open("static/score_files/" + filename, "r") as file:
+        with open("static/score_files/" + str(filename) + ".json", "r") as file:
             file.seek(0)
             data = json.load(file)
             status=""
@@ -239,10 +237,10 @@ class Scoring():
         sum = 0
         for hole in data:
             
-            sum += data[str(hole)]
+            sum += int(data[str(hole)])
         return sum
     def calc_match_results(filename):
-        with open("static/score_files/" + filename, "r") as file:
+        with open("static/score_files/" + str(filename) + ".json", "r") as file:
             file.seek(0)
             data = json.load(file)
             team1 = [data["match_info"]["home_team"], 0]
@@ -251,33 +249,18 @@ class Scoring():
             for player in data["players"].values():
                 print(player)
                 if player["team"] == team1[0]:
-                    team1[1] += Scoring.add_scores(player["scores"])#UGLY ALG WILL CAUSE ERROR
+                    team1[1] += Scoring.add_scores(player['scores'])#UGLY ALG WILL CAUSE ERROR
                 elif player["team"] == team2[0]:
                     team2[1] += Scoring.add_scores(player["scores"])
             return team1, team2
+    
+    def return_data(filename):
+        with open("static/score_files/" + str(filename) + ".json", "r") as file:
+            file.seek(0)
+            data = json.load(file)
+            return data
 
 #with open("static/score_files/" + filename, "rw") as file:
-                
-
-
-#The code XCRunner 2022 pulls out every file for the main page!
-def look_for_match(user):
-    matches = []
-    for file in os.listdir("static/score_files"):
-        team_scores = []
-        with open("static/score_files/" + file) as scanner:
-            data = json.load(scanner)
-            for team in data:
-                if team == "match_data":
-                    break
-                else:
-                    team_scores.append(team + ": " + str(edit_score_files(file).sum_team_score(team)))
-            if data['match_data']['created_by'] == user:
-                matches.append((file.strip('.json').replace('_', ' ').capitalize(), data, team_scores))
-            #pulls every match out
-            elif user == "XCRunner2022":
-                matches.append((file.strip('.json').replace('_', ' ').capitalize(), data, team_scores))
-    return matches
 
 def object_as_dict(obj):
     return {c.key: getattr(obj, c.key)
@@ -387,7 +370,7 @@ def index():
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
     except:
         found_user = ""
-    return render_template("index.html", data=found_user, matches=look_for_match("XCRunner2022"))
+    return render_template("index.html", data=found_user)
 
 @app.route("/header", methods=['GET'])
 def header():
@@ -676,6 +659,27 @@ def course_dashboard():
 def active_match():
     return '',200
 
+@app.route('/start_match/<match_id>/<course_id>')
+def start_match(match_id, course_id):
+    found_match = match.query.filter_by(_id=match_id).first()
+    found_course = course.query.filter_by(_id=course_id).first()
+    print(session['active_user'][0], found_match.created_by)
+    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][0] == found_course.created_by:
+        Scoring.create_json(
+            found_match._id, 
+            found_course.course_holes, 
+            found_match.match_name, 
+            found_match.start_time, 
+            found_match.end_time, 
+            found_match.teams1.split("~")[0], 
+            found_match.teams1.split("~")[1], 
+            found_match.event_type, 
+            found_match._id
+        )
+        return "Working!", 200 #Send to live coach dashboard once developed
+    else:
+        return redirect(url_for('error', msg='You do not have access to this site.'))
+
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):
     print("hi")
@@ -692,9 +696,10 @@ def change_verified_status(admin, user, verified):
     else:
         return 'Sorry, you do not have access to this site.'
 
-@app.route("/active_match_view")
-def active_match_view():
-    return render_template("active_match_view.html")
+@app.route("/active_match_view/<json_data>")
+def active_match_view(json_data):
+    json_data = Scoring.return_data("11")
+    return render_template("active_match_view.html", data=json_data)
 
 @app.route("/create_course", methods=['GET', 'POST'])
 def create_course():
