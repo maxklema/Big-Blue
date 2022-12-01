@@ -46,7 +46,7 @@ bio = bio
                 <div class="row-one">
                     <div class="full-name">
                         <label for="name">Full Name</label>
-                        <input onfocusout="checkFullName()" type="text" id="name" name="name">
+                        <input maxlength="25" onfocusout="checkFullName()" type="text" id="name" name="name">
                         <label id="full-name-error" for="">This Field is Required</label>
                     </div>
                     <div class="full-username">
@@ -59,12 +59,12 @@ bio = bio
                 <div class="row-two">
                     <div class="full-password-one">
                         <label for="password-one">Password</label>
-                        <input onfocusout="checkPasswords()" type="password" id="password-one" name="password-one">
+                        <input maxlength="25" onfocusout="checkPasswords()" type="password" id="password-one" name="password-one">
                         <label id="password-error" for="">Passwords Must Match!</label>
                     </div>
                     <div class="full-password-two">
                         <label for="password-two">Confirm Password</label>
-                        <input onfocusout="checkPasswords()" type="password" id="password-two" name="password">
+                        <input maxlength="25" onfocusout="checkPasswords()" type="password" id="password-two" name="password">
                     </div>
                 </div>
 
@@ -87,7 +87,7 @@ bio = bio
                 <div class="row-four">
                     <div class="full-team">
                         <label for="team">Affiliated Team</label>
-                        <input onfocusout="checkTeam()" type="text" id="team" name="team">
+                        <input maxlength="25" onfocusout="checkTeam()" type="text" id="team" name="team">
                         <label id="team-error" for="">This Field is Required</label>
                     </div>
                     <div class="full-rank">
@@ -101,7 +101,7 @@ bio = bio
 
                 <div class="row-five">
                     <label for="bio">Account Bio</label>
-                    <textarea onfocusout="checkBio()" name="bio" id="bio"></textarea>
+                    <textarea maxlength="150" onfocusout="checkBio()" name="bio" id="bio"></textarea>
                     <label id="bio-error" for="">We Require a Profile Biography</label>
                 </div>
 

@@ -608,6 +608,7 @@ def upload_profile_pic():
         if 'file' not in request.files:
             return redirect(url_for('error', msg="Sorry, you did not upload an image file. Please try again!"))
         file = request.files['file']
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if file.filename == '' or sanitize_inputs(file.filename):
@@ -616,11 +617,16 @@ def upload_profile_pic():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         else:
-            return redirect(url_for("error", msg="Sorry, there was a problem uploading your file. You might need to contact customer suport!"))
+            return redirect(url_for("error", msg="Sorry, there was a problem uploading your file. You might need to contact customer support!"))
 
-        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+        if filename == found_user.pic:
+                    return redirect(url_for('newprofilepicture'))
+
         if found_user.pic != 'defaultprofilepicture.png':
-            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], found_user.pic))
+            try:
+                os.remove(os.path.join(app.config['UPLOAD_FOLDER'], found_user.pic))
+            except:
+                found_user.pic = filename        
         found_user.pic = filename
         db.session.commit()
 

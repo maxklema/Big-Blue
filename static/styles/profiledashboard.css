@@ -542,30 +542,34 @@ html, body {
         margin-top: 20px;
     }
 
+
     .join-date-and-school-container {
         flex-direction: column;
     }
-
-    .join-date-container {
-        display: flex;
-        flex-direction: row;
-        background-color: white;
-        padding-left: 2%;
-        padding-right: 2%;
-        overflow: hidden;
-        align-items: center;
-    }
-
+    
     .school-name-container {
-        display: flex;
-        flex-direction: row;
         background-color: white;
         padding-left: 2%;
         padding-right: 2%;
         overflow: hidden;
-        align-items: center;
         margin-top: 10px;
         align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    
+    .join-date-container {
+        background-color: white;
+        padding-left: 2%;
+        padding-right: 2%;
+        overflow: hidden;
+        margin-top: 10px;
+        align-items: center;
+        position: relative;
+    }
+
+    #join-date {
+        margin-left: 10px;
     }
 
 }
