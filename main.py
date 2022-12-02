@@ -524,7 +524,7 @@ def edit_course(course_to_edit):
 
 @app.route("/delete_match/<match_to_delete>")
 def delete_match(match_to_delete):
-    found_match = match.query.filter_by(match_name=match_to_delete).first()
+    found_match = match.query.filter_by(_id=match_to_delete).first()
     if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
         db.session.delete(found_match)
         db.session.commit()
@@ -533,7 +533,7 @@ def delete_match(match_to_delete):
 
 @app.route("/delete_course/<course_to_delete>")
 def delete_course(course_to_delete):
-    found_course = course.query.filter_by(course_name=course_to_delete).first()
+    found_course = course.query.filter_by(_id=course_to_delete).first()
     if 'active_user' in session and session['active_user'][0] == found_course.created_by and session['active_user'][2] == "coach":
         db.session.delete(found_course)
         db.session.commit()
