@@ -426,6 +426,7 @@ def dashboard():
 @app.route("/create_match", methods=['GET', 'POST'])
 def create_match():
     found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
     if 'active_user' in session and session['active_user'][2] == "coach":
         if request.method == "POST":
             for item in request.form:
@@ -446,12 +447,12 @@ def create_match():
 
             return redirect(url_for('match_dashboard'))
         
-        return render_template('create_match.html', data=found_user)
-    
+        return render_template('create_match.html', course_data=found_course, data=found_user)
     return redirect(url_for('error', msg='You do not have access to this page.'))
 
 @app.route("/edit_match/<match_to_edit>", methods=["POST", "GET"])
 def edit_match(match_to_edit):
+    found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
     found_match = match.query.filter_by(_id=match_to_edit).first()
     if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
@@ -481,7 +482,7 @@ def edit_match(match_to_edit):
             
             return redirect(url_for("match_dashboard"))
 
-        return render_template('edit_match.html', data=found_user, editing=found_match)
+        return render_template('edit_match.html', course_data=found_course, data=found_user, editing=found_match)
 
     return render_template("error", msg="You do not have access to this site!")
 
