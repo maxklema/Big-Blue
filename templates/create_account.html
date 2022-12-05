@@ -46,12 +46,12 @@ bio = bio
                 <div class="row-one">
                     <div class="full-name">
                         <label for="name">Full Name</label>
-                        <input maxlength="25" onfocusout="checkFullName()" type="text" id="name" name="name">
+                        <input pattern="[a-zA-Z0-9 ]+" minlength="3" maxlength="25" onfocusout="checkFullName()" type="text" id="name" name="name">
                         <label id="full-name-error" for="">This Field is Required</label>
                     </div>
                     <div class="full-username">
                         <label for="username">Username</label>
-                        <input maxlength="15" onfocusout="checkUsername()" type="text" id="username" name="username">
+                        <input pattern="[a-zA-Z0-9]+" minlength="3" maxlength="15" onfocusout="checkUsername()" type="text" id="username" name="username">
                         <label id="full-username-error" for="">This Field is Required</label>
                     </div>
                 </div>
@@ -233,6 +233,7 @@ bio = bio
 
         function checkUsername(){
             let username = document.getElementById("username");
+            username.value = username.value.toLowerCase();
             if (username.value == ""){
                 username.style.borderColor = "red";
                 document.getElementById("full-username-error").style.display = "block";

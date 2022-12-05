@@ -33,7 +33,7 @@
                     <h5 id="error">{{message}}</h5>    
                 {% endif %}
                 <label for="username-box">Username</label><br>
-                <input type="text" name="username" id="username-box"><br>
+                <input type="text" name="username" id="username-box" onfocusout="UsernameToLower();"><br>
                 <label for="password-box">Password</label><br>
                 <input type="password" name="password" id="password-box"><br>
                 <input type="submit" value="Login" id="form-submit">
@@ -49,6 +49,14 @@
         </div>
 
     </body>
+
+    <script>
+        function UsernameToLower(){
+            let username = document.getElementById("username-box");
+            username.value = username.value.toLowerCase();
+        }
+
+    </script>
 
                 
 {% endblock %}
