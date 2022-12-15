@@ -109,6 +109,7 @@
                 <div class="coursename">
                     <label for="coursename">Course Name</label><br>
                     <select name="coursename" id="coursename">
+                        <option name="coursename" value="course-name">Default Course</option>
                         {% for item in course_data[::1] %}
                             <option name="coursename" value="course-name">{{item.course_name}}</option>
                         {% endfor %}

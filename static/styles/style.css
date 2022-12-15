@@ -77,6 +77,10 @@ header .navigation {
     align-items: center;
 }
 
+header .mobile-navigation {
+    display: none;
+}
+
 header .navigation li {
     list-style: none;
     margin: 0px 15px;
@@ -441,4 +445,20 @@ body p {
 
 .FAQ-card a button:hover {
     background-color: #1b6cd7;
+}
+
+@media (max-width: 850px){
+    header .navigation {
+        display: none;
+    }
+
+    header .mobile-navigation {
+        display: block;
+    }
+}
+
+@media (max-width: 600px){
+    header {
+        padding: 8px 40px;
+    }
 }

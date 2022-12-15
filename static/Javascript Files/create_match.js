@@ -57,7 +57,7 @@ function validateForm(){
         
         
         let num_spots = document.getElementById("numberspots");
-        if (num_spots.value == ""){
+        if (num_spots.value == "" || num_spots.value < 0){
             num_spots.style.borderColor = "red";
         } else {
             num_spots.style.borderColor = "black";
@@ -84,6 +84,7 @@ function validateFormTwo(){
     var d = document.getElementById("numberspots").value;
     var e = document.getElementById("password-one").value;
     var f = document.getElementById("event-type").value;
+
     if (((((a == "") || (a == null)) || ((b == "") || (b == null))) || (((c == "") || (c == null)) || ((d == "") || (d == null)))) || ((e == "") || (e == null))) {
         
 
@@ -113,7 +114,7 @@ function validateFormTwo(){
         
         
         let num_spots = document.getElementById("numberspots");
-        if (num_spots.value == ""){
+        if ((num_spots.value == "" || num_spots.value < 0) || num_spots.value > 9){
             num_spots.style.borderColor = "red";
         } else {
             num_spots.style.borderColor = "black";
@@ -170,7 +171,7 @@ function hideawayteam() {
 
 function hidenumberofplayers() {
     let num_spots = document.getElementById("numberspots");
-        if (num_spots.value == ""){
+        if (num_spots.value == "" || num_spots.value < 0){
             num_spots.style.borderColor = "red";
         } else {
             num_spots.style.borderColor = "black";
