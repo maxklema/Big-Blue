@@ -65,11 +65,9 @@ header a {
     z-index: 999999999;
     opacity: 0.98;
     background-color: #3185f3;
+    display: none;
 }
 
-body {
-    overflow: hidden;
-}
 
 .mobile-hrefs .content-container {
     display: flex;
@@ -133,6 +131,13 @@ header .navigation {
 
 header .mobile-navigation {
     display: none;
+}
+
+#menu-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
 }
 
 header .navigation li {
@@ -506,10 +511,19 @@ body p {
         display: none;
     }
 
-    header .mobile-navigation {
+    .mobile-navigation {
+        display: block;
+        visibility: visible;
+    }
+    #menu-button {
+        visibility: visible;
+        display: block;
+    }
+    #hamburger-icon {
         display: block;
     }
 }
+
 
 @media (max-width: 600px){
     header {

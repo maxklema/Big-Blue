@@ -25,13 +25,13 @@
                 <li><a href="/dashboard">{{data.username}}</a></li>
                 <li><a href=""><img id="profile-pic" src="{{ url_for('static', filename='logo graphics/user_photos/' + data.pic) }}" alt=""></a></li>
             </ul>
-            <h3 class="mobile-navigation" style="color: white;">☰</h3>
+            <button id="menu-button" onclick="openMenu();" hidden><h3 class="mobile-navigation" id="hamburger-icon" style="color: white;" hidden>☰</h3></button>
                                             
         </header>
 
         <div class="mobile-hrefs">
             <div class="close-button-container">
-                <button><h1>✕</h1></button>
+                <button id="close-menu-button" onclick="closeMenu();"><h1>✕</h1></button>
             </div>
             <div class="content-container">
                 <a href="/match_dashboard">Dashboard</a>
@@ -41,6 +41,36 @@
             </div>
     
         </div> 
+
+        <script>
+            let button = document.getElementById("menu-button")
+            let mobile_header_menu = document.getElementsByClassName("mobile-hrefs")[0];
+
+            function openMenu() {
+                mobile_header_menu.style.display = "block";
+            }
+
+            function closeMenu() {
+                let mobile_header_menu = document.getElementsByClassName("mobile-hrefs")[0];
+                mobile_header_menu.style.display = "none";
+            }
+
+            window.addEventListener('resize', onWindowResize);
+
+            function onWindowResize() {
+                if (window.matchMedia("(max-width: 850px)").matches) {
+                    document.getElementById("menu-button").removeAttribute("hidden");
+                    document.getElementById("hamburger-icon").removeAttribute("hidden");
+                
+                
+                } 
+                
+                else if (window.matchMedia("(min-width: 850px)").matches) {
+                    document.getElementById("menu-button").setAttribute("hidden", "");
+                    document.getElementById("hamburger-icon").setAttribute("hidden", "");
+                }
+            }
+        </script>
 
         {% block content %}
             
