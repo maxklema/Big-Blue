@@ -14,21 +14,57 @@
     <body>
 
         <header>
-           
-            <a id="imagehref" href="/">
+            <a href="/">
                 <img id="logo-image" src="{{ url_for('static', filename='logo graphics/BigBlue_NewLogo-White.png') }}" class="logo">
             </a>
-            
             <ul class="navigation">
                 <li><a href="/joincode">Join Match</a></li>
                 <li><a href="/login">Login</a></li>
                 <li><a href="/about">About</a></li>
             </ul>
-
-           
-
-
+            <button id="menu-button" onclick="openMenu();" hidden><h1 class="mobile-navigation" id="hamburger-icon" style="color: white;" hidden>☰</h1></button>
+                                            
         </header>
+
+        <div class="mobile-hrefs">
+            <div class="close-button-container">
+                <button id="close-menu-button" onclick="closeMenu();"><h1>✕</h1></button>
+            </div>
+            <div class="content-container">
+                <a href="/joincode">Join Match</a>
+                <a href="/login">Login</a>
+                <a href="/about">About</a>
+            </div>
+    
+        </div> 
+
+        <script>
+            let button = document.getElementById("menu-button")
+            let mobile_header_menu = document.getElementsByClassName("mobile-hrefs")[0];
+
+            function openMenu() {
+                mobile_header_menu.style.display = "block";
+            }
+
+            function closeMenu() {
+                let mobile_header_menu = document.getElementsByClassName("mobile-hrefs")[0];
+                mobile_header_menu.style.display = "none";
+            }
+
+            window.addEventListener('resize', onWindowResize);
+
+            function onWindowResize() {
+                if (window.matchMedia("(max-width: 850px)").matches) {
+                    document.getElementById("menu-button").removeAttribute("hidden");
+                    document.getElementById("hamburger-icon").removeAttribute("hidden");
+                } 
+                
+                else if (window.matchMedia("(min-width: 850px)").matches) {
+                    document.getElementById("menu-button").setAttribute("hidden", "");
+                    document.getElementById("hamburger-icon").setAttribute("hidden", "");
+                }
+            }
+        </script>
 
         {% block content %}
             
