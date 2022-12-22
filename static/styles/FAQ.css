@@ -35,7 +35,7 @@ header {
     justify-content: space-between;
     width: 100%;
     align-items: center;
-    background-color: white;
+    background-image: linear-gradient(to right, #3185f3, #0c4999);
     z-index: 10;
     padding: 8px 100px;
 }
@@ -48,13 +48,65 @@ header .logo {
     text-decoration: none;
     padding: 0;
     margin: 0;
-    filter: grayscale(0%);
     display: block;
 }
 
 header a {
     text-decoration: none;
     background-color: transparent;
+}
+
+.mobile-hrefs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999999;
+    opacity: 0.98;
+    background-color: #3185f3;
+    display: none;
+    transition: display 3.5s ease-in-out;
+}
+
+
+.mobile-hrefs .content-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 150px;
+}
+
+
+.mobile-hrefs .content-container a {
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+    text-align: center;
+}
+
+.mobile-hrefs .content-container a img {
+    height: 100px;
+    width: 100px;
+    margin-top: 20px;
+    object-fit: cover;
+}
+
+.close-button-container {
+    display: flex;
+    justify-content: right;
+    padding: 20px 20px;
+}
+
+.close-button-container button {
+    background-color: transparent;
+    color: white;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    cursor: pointer;
+    border: none;
+
 }
 
 .navigation li a img {
@@ -78,6 +130,17 @@ header .navigation {
     align-items: center;
 }
 
+header .mobile-navigation {
+    display: none;
+}
+
+#menu-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+}
+
 header .navigation li {
     list-style: none;
     margin: 0px 15px;
@@ -89,7 +152,7 @@ header .navigation li {
 }
 
 header .navigation li a {
-    color: rgb(0, 0, 0);
+    color: white;
     text-decoration: none;
     font-size: 18px;
     border: none;
@@ -100,7 +163,7 @@ header .navigation li a {
 }
 
 header .navigation li a:hover {
-    color: #9e9e9e;
+    color: #F0F0FF;
     
 
 }
@@ -161,4 +224,28 @@ h4 {
     padding: 10px 15px;
     font-family: BigBlueRegular;
     border-radius: 0px 0px 3px 3px;
+}
+
+@media (max-width: 850px){
+    header .navigation {
+        display: none;
+    }
+
+    .mobile-navigation {
+        display: block;
+    }
+    #menu-button {
+        visibility: visible;
+        display: block;
+    }
+    #hamburger-icon {
+        display: block;
+    }
+}
+
+
+@media (max-width: 600px){
+    header {
+        padding: 8px 40px;
+    }
 }

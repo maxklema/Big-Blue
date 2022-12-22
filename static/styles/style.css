@@ -66,6 +66,7 @@ header a {
     opacity: 0.98;
     background-color: #3185f3;
     display: none;
+    transition: display 3.5s ease-in-out;
 }
 
 
@@ -513,7 +514,6 @@ body p {
 
     .mobile-navigation {
         display: block;
-        visibility: visible;
     }
     #menu-button {
         visibility: visible;
