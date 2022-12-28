@@ -264,6 +264,29 @@ html, body {
     background-color: white;
 }
 
+#profile-banner-form label img{
+    max-height: 250px;
+    max-width: 400px;
+    border: 0.5px solid #c0c0c0;
+    padding: 10px 10px;
+    border-radius: 10px;
+    background-color: #f3f3f391;
+    margin-bottom: 20px;
+    
+}
+
+#label-ten img {
+    margin-bottom: 0px !important;
+}
+
+#profile-banner-form label input {
+    appearance: none;
+}
+
+#label-one {
+    margin-left: -2px;
+}
+
 @media (max-width: 760px){
     .main-frame {
         width: 550px;

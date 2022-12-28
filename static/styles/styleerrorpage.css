@@ -141,6 +141,11 @@ header .mobile-navigation {
 
 }
 
+html, body {
+    height: 100%;
+    background-color: #eeeeee;
+}
+
 header .navigation li {
     list-style: none;
     margin: 0px 15px;

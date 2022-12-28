@@ -33,7 +33,8 @@
             <div class="main-frame">
                 <div class="left-side">
                     <a style="cursor: pointer;" onclick="myFunctionTwo()">Basic Info</a><br>
-                    <a style="cursor: pointer; margin-top: 5px;" onclick="myFunction()">Profile Picture</a>
+                    <a style="cursor: pointer; margin-top: 5px;" onclick="myFunction()">Profile Picture</a><br>
+                    <a style="cursor: pointer; margin-top: 5px;" onclick="myFunctionThree()">Banner</a>
                 </div>
                 <div class="right-side">
                     <form method=POST name="Form" id="info-form" action="/edit_user_profile">
@@ -59,6 +60,55 @@
 
                     </form>
 
+                    <form method=post id="profile-banner-form" enctype=multipart/form-data action="/upload_profile_pic" style="display: none;">
+                        <h3>Profile Banner</h3><br>
+                        <label id="label-one" for="banner-one">
+                            <input onclick="bannerselect();" id="banner-one" type="radio" name="banner1" value="Big Blue Default">
+                            <img id="banner-img-one" src="{{ url_for('static', filename='logo graphics/BigBluebanner.png') }}" alt="">
+                        </label>
+                        <label id="label-two" for="banner-two">
+                            <input onclick="bannerselect();" id="banner-two" type="radio" name="banner2" value="Big Blue Default" checked>
+                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner2.png') }}" alt="">
+                        </label>
+                        <label id="label-three" for="banner-three">
+                            <input onclick="bannerselect();" id="banner-three" type="radio" name="banner3" value="Big Blue Default">
+                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner3.png') }}" alt="">
+                        </label>
+                        <label id="label-four" for="banner-four">
+                            <input onclick="bannerselect();" id="banner-four" type="radio" name="banner4" value="Big Blue Default">
+                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner4.png') }}" alt="">
+                        </label>
+                        <label id="label-five" for="banner-five">
+                            <input onclick="bannerselect();" id="banner-five" type="radio" name="banner5" value="Big Blue Default">
+                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner5.png') }}" alt="">
+                        </label>
+                        <label id="label-six" for="banner-six">
+                            <input onclick="bannerselect();" id="banner-six" type="radio" name="banner6" value="Big Blue Default">
+                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner6.png') }}" alt="">
+                        </label>
+                        <label id="label-seven" for="banner-seven">
+                            <input onclick="bannerselect();" id="banner-seven" type="radio" name="banner7" value="Big Blue Default">
+                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner7.png') }}" alt="">
+                        </label>
+                        <label id="label-eight" for="banner-eight">
+                            <input onclick="bannerselect();" id="banner-eight" type="radio" name="banner8" value="Big Blue Default">
+                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner8.png') }}" alt="">
+                        </label>
+                        <label id="label-nine" for="banner-nine">
+                            <input onclick="bannerselect();" id="banner-nine" type="radio" name="banner9" value="Big Blue Default">
+                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner9.png') }}" alt="">
+                        </label>
+                        <label id="label-ten" for="banner-ten">
+                            <input onclick="bannerselect();" id="banner-ten" type="radio" name="banner10" value="Big Blue Default">
+                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner10.png') }}" alt="">
+                        </label>
+
+                        <input id="form-submit" type=submit value="Select Banner">
+
+
+
+                    </form>
+
                     
                     
                     
@@ -69,6 +119,25 @@
         </div>
 
     <script>
+
+
+        function bannerselect() {
+
+            const labels = document.querySelectorAll('label');
+
+            for (const label of labels) {
+    
+                const radio = label.querySelector('input[type="radio"]');
+                
+                if (radio.checked) {
+    
+                    const img = label.querySelector('img');
+                    
+                    img.style.backgroundColor = "#99b8e0";
+                    img.style.borderColor = "#1d59a8";
+                }
+            }
+        }
 
         function validateForm() {
             var a = document.forms["Form"]["name"].value;
@@ -123,11 +192,19 @@
         function myFunction() {
             document.getElementById("profile-picture-form").style.display = "block";
             document.getElementById("info-form").style.display = "none";
+            document.getElementById("profile-banner-form").style.display = "none";
         }
 
         function myFunctionTwo() {
             document.getElementById("profile-picture-form").style.display = "none";
+            document.getElementById("profile-banner-form").style.display = "none";
             document.getElementById("info-form").style.display = "block";
+        }
+
+        function myFunctionThree() {
+            document.getElementById("profile-picture-form").style.display = "none";
+            document.getElementById("info-form").style.display = "none";
+            document.getElementById("profile-banner-form").style.display = "block";
         }
         
         function checkFullName(){
