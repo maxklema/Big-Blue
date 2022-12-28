@@ -35,8 +35,9 @@ class users(db.Model):
     team = db.Column(db.String(25))
     verified = db.Column(db.Integer)
     pic = db.Column(db.String)
+    banner = db.Column(db.String)
 
-    def __init__(self, name, username, password, email, rank, gender, bio, team, verified, pic):
+    def __init__(self, name, username, password, email, rank, gender, bio, team, verified, pic, banner):
         self.name = name
         self.username = username
         self.password = password
@@ -47,6 +48,7 @@ class users(db.Model):
         self.team = team
         self.verified = verified
         self.pic = pic
+        self.banner = banner
 
 class course(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -559,7 +561,7 @@ def create_account():
             return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.", data=found_user)
 
         try: 
-            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png")
+            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png", "BigBluebanner.png")
             db.session.add(new_user)
             db.session.commit()
 
@@ -601,6 +603,18 @@ def edit_user_profile():
 
         return render_template("dashboard.html", data=found_user)
     return redirect(url_for('error', msg="Something went wrong. Please try again!"))
+
+
+@app.route("/choose_banner", methods=["POST"])
+def choose_banner():
+    found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    if request.method == "POST" and 'active_user' in session:
+        found_user.banner = request.form['banner']
+        db.session.commit()
+
+        return render_template("dashboard.html", data=found_user)
+    return redirect(url_for('error', msg="Something went wrong. Please try again!"))
+
 
 @app.route("/upload_profile_pic", methods=["POST"])
 def upload_profile_pic():
