@@ -63,44 +63,44 @@
                     <form method=post id="profile-banner-form" enctype=multipart/form-data action="/upload_profile_pic" style="display: none;">
                         <h3>Profile Banner</h3><br>
                         <label id="label-one" for="banner-one">
-                            <input onclick="bannerselect();" id="banner-one" type="radio" name="banner1" value="Big Blue Default">
+                            <input onclick="bannerselect('one');" id="banner-one" type="radio" name="banner1" value="Big Blue Default">
                             <img id="banner-img-one" src="{{ url_for('static', filename='logo graphics/BigBluebanner.png') }}" alt="">
                         </label>
                         <label id="label-two" for="banner-two">
-                            <input onclick="bannerselect();" id="banner-two" type="radio" name="banner2" value="Big Blue Default" checked>
-                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner2.png') }}" alt="">
+                            <input onclick="bannerselect('two');" id="banner-two" type="radio" name="banner2" value="Big Blue Default" checked>
+                            <img id="banner-img-two" src="{{ url_for('static', filename='logo graphics/BigBlueBanner2.png') }}" alt="">
                         </label>
                         <label id="label-three" for="banner-three">
-                            <input onclick="bannerselect();" id="banner-three" type="radio" name="banner3" value="Big Blue Default">
-                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner3.png') }}" alt="">
+                            <input onclick="bannerselect('three');" id="banner-three" type="radio" name="banner3" value="Big Blue Default">
+                            <img id="banner-img-three" src="{{ url_for('static', filename='logo graphics/BigBlueBanner3.png') }}" alt="">
                         </label>
                         <label id="label-four" for="banner-four">
-                            <input onclick="bannerselect();" id="banner-four" type="radio" name="banner4" value="Big Blue Default">
-                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner4.png') }}" alt="">
+                            <input onclick="bannerselect('four');" id="banner-four" type="radio" name="banner4" value="Big Blue Default">
+                            <img id="banner-img-four" src="{{ url_for('static', filename='logo graphics/BigBlueBanner4.png') }}" alt="">
                         </label>
                         <label id="label-five" for="banner-five">
-                            <input onclick="bannerselect();" id="banner-five" type="radio" name="banner5" value="Big Blue Default">
-                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner5.png') }}" alt="">
+                            <input onclick="bannerselect('five');" id="banner-five" type="radio" name="banner5" value="Big Blue Default">
+                            <img id="banner-img-five" src="{{ url_for('static', filename='logo graphics/BigBlueBanner5.png') }}" alt="">
                         </label>
                         <label id="label-six" for="banner-six">
-                            <input onclick="bannerselect();" id="banner-six" type="radio" name="banner6" value="Big Blue Default">
-                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner6.png') }}" alt="">
+                            <input onclick="bannerselect('six');" id="banner-six" type="radio" name="banner6" value="Big Blue Default">
+                            <img id="banner-img-six" src="{{ url_for('static', filename='logo graphics/BigBlueBanner6.png') }}" alt="">
                         </label>
                         <label id="label-seven" for="banner-seven">
-                            <input onclick="bannerselect();" id="banner-seven" type="radio" name="banner7" value="Big Blue Default">
-                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner7.png') }}" alt="">
+                            <input onclick="bannerselect('seven');" id="banner-seven" type="radio" name="banner7" value="Big Blue Default">
+                            <img id="banner-img-seven" src="{{ url_for('static', filename='logo graphics/BigBlueBanner7.png') }}" alt="">
                         </label>
                         <label id="label-eight" for="banner-eight">
-                            <input onclick="bannerselect();" id="banner-eight" type="radio" name="banner8" value="Big Blue Default">
-                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner8.png') }}" alt="">
+                            <input onclick="bannerselect('eight');" id="banner-eight" type="radio" name="banner8" value="Big Blue Default">
+                            <img id="banner-img-eight" src="{{ url_for('static', filename='logo graphics/BigBlueBanner8.png') }}" alt="">
                         </label>
                         <label id="label-nine" for="banner-nine">
-                            <input onclick="bannerselect();" id="banner-nine" type="radio" name="banner9" value="Big Blue Default">
-                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner9.png') }}" alt="">
+                            <input onclick="bannerselect('nine');" id="banner-nine" type="radio" name="banner9" value="Big Blue Default">
+                            <img id="banner-img-nine" src="{{ url_for('static', filename='logo graphics/BigBlueBanner9.png') }}" alt="">
                         </label>
                         <label id="label-ten" for="banner-ten">
-                            <input onclick="bannerselect();" id="banner-ten" type="radio" name="banner10" value="Big Blue Default">
-                            <img src="{{ url_for('static', filename='logo graphics/BigBlueBanner10.png') }}" alt="">
+                            <input onclick="bannerselect('ten');" id="banner-ten" type="radio" name="banner10" value="Big Blue Default">
+                            <img id="banner-img-ten" src="{{ url_for('static', filename='logo graphics/BigBlueBanner10.png') }}" alt="">
                         </label>
 
                         <input id="form-submit" type=submit value="Select Banner">
@@ -121,22 +121,38 @@
     <script>
 
 
-        function bannerselect() {
+        function bannerselect(banner) {
+            //array of all banners
+            banner_list=['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+            
+            //checks radiobutton onclick
+            for (i = 0; i < banner_list.length; i++){
+                if (banner == banner_list[i]){
+                    radioButton = document.getElementById("banner-"+banner);
+                    radioButton.checked=true;
 
-            const labels = document.querySelectorAll('label');
+                    //gets image by ID and changes background and border color
+                    bannerImage = document.getElementById("banner-img-"+banner);
+                    bannerImage.style.borderColor="#408aed";
+                    bannerImage.style.backgroundColor="#9bbce8";
 
-            for (const label of labels) {
-    
-                const radio = label.querySelector('input[type="radio"]');
-                
-                if (radio.checked) {
-    
-                    const img = label.querySelector('img');
-                    
-                    img.style.backgroundColor = "#99b8e0";
-                    img.style.borderColor = "#1d59a8";
+
+                } else if (banner != banner_list[i]) {
+                    radioButton = document.getElementById("banner-"+banner_list[i]);
+                    radioButton.checked=false;
+
+                    //gets image by ID and changes background and border color
+                    bannerImage = document.getElementById("banner-img-"+banner_list[i]);
+                    bannerImage.style.borderColor="#c0c0c0";
+                    bannerImage.style.backgroundColor="#f3f3f391";
                 }
             }
+
+
+
+
+
+
         }
 
         function validateForm() {
