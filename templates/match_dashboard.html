@@ -108,7 +108,7 @@
                         </div>
 
                         <div>
-                            <h4>{{item.course_name}}</h4>
+                            <h4>{{item.match_course}}</h4>
                         </div>
                     </div>
 
@@ -142,7 +142,11 @@
                         </div>
                     </div>
 
-                    <button id="button-begin">Start Match</button>
+                    {% for i in course_data %}
+                        {% if i.course_name == item.match_course %}
+                            <button id="button-begin"><a  href="/start_match/{{item._id}}/{{i._id}}">Start Match</a></button>
+                        {% endif %}
+                    {% endfor %}
 
                 </div>        
             {% endfor %}

@@ -485,7 +485,9 @@ def edit_match(match_to_edit):
                 found_match.teams1 = ezfix
                 found_match.total_players = request.form['numberofplayers']
                 found_match.match_name = request.form['matchname']
-                found_match.course_name = request.form['coursename']
+                found_match.match_course = request.form['coursename']
+
+                print(request.form['coursename'])
                 found_match.start_time = request.form['starttime']
                 found_match.end_time = request.form['endtime']
                 found_match.match_password = request.form['matchpassword']
@@ -675,9 +677,10 @@ def admin():
 @app.route("/match_dashboard")
 def match_dashboard():
     if 'active_user' in session and session['active_user'][2] == 'coach':
+        found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
         found_match = match.query.filter_by(created_by=session['active_user'][0]).all()
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
-        return render_template("match_dashboard.html", data=found_user, match_data=found_match)
+        return render_template("match_dashboard.html", course_data=found_course, data=found_user, match_data=found_match)
     return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/course_dashboard")

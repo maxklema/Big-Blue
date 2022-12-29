@@ -111,7 +111,7 @@
                     <select name="coursename" id="coursename">
                         <option name="coursename" value="course-name">Default Course</option>
                         {% for item in course_data[::1] %}
-                            <option name="coursename" value="course-name">{{item.course_name}}</option>
+                            <option name="coursename" value="{{item.course_name}}">{{item.course_name}}</option>
                         {% endfor %}
                     </select><br>
                     <label id="note" for="">Note: You can create courses in the course dashboard</label>

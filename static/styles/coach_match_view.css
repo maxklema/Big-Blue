@@ -204,8 +204,6 @@ body, html {
     font-family: bigBlueRegular;
 }
 
-.code-container 
-
 .page-container {
     display: flex;
     justify-content: space-between;
