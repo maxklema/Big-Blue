@@ -1,21 +1,79 @@
 {% extends "indexcontent.html" %}
 {% block content %}
 
-<title>Big Blue | Match View</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">        
-    {% for player in data['players'] %}
-        <h3>{{player}} | Team: {{data['players'][player]['team']}}</h3>
-        <details>
-            <ul>
-                {% for strokes in data['players'][player]['scores'] %}
-                    <li>
-                        Hole: {{strokes}}: {{data['players'][player]['scores'][strokes]}}
-                    </li>
-                {% endfor %}
-            </ul>
-    </details>
-    {% endfor %}
-    <hr>
+
+
+<!--
+box for each person
+edit button next to each hole
+par
+score in relation to par
++1 thru nine before expanding
+kick players
+match duration
+refresh button
+match statistics
+    - overall running total
+    - players completed
+    - match code
+message all players ()
+- waiting
+end match (side)
+
+-->
+
+
+<title>Match View | Big Blue</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/coach_match_view.css') }}">  
+    <div class="page-container">
+        <div class="player-cards">
+            {% for player in data['players'] %}
+            <div class="match-card">
+                <div class="card-header-info">
+                    <div class="card-user-information">
+                        <h2>{{player}}</h2>
+                        <h5>{{data['players'][player]['team']}}</h5>
+                    </div>
+                    <div class="card-general-stats">
+                        <h3>+3 thru 2</h3>
+                    </div>
+                </div>
+                <details>
+                    <ul>
+                        {% for strokes in data['players'][player]['scores'] %}
+                            <li>
+                                Hole: {{strokes}}: {{data['players'][player]['scores'][strokes]}}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </details>
+            </div>
+            {% endfor %}
+        </div> 
+        <div class="match-information">
+            <div class="code-container">
+                <h3>Match Code: 192372</h3>
+                <p>Share this with your players and spectators to join the match</p>
+                <div>
+                    <div>
+                        <button>Copy Code</button>
+                    </div>
+                    <div>
+                        <button>Copy Link</button>
+                    </div>
+                </div>
+            </div>
+            <div class="code-container">
+
+            </div>
+        </div>
+    </div>
+          
+
+
+
+
+    
         
 
 
