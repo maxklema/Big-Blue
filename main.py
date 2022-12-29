@@ -358,13 +358,25 @@ def joincode():
             if found_match.match_password == "":
                 print('No password!')
                 #route to live player dashboard
-            return redirect(url_for('box_office', match1=found_match))
+            return redirect(url_for('box_office', match1=found_match._id))
         return render_template("join_code_page.html", data="We can't find that match... Please check your join code and try again.")
     return render_template("join_code_page.html", data=None)
 
 @app.route("/box_office/<match1>", methods=['GET', 'POST'])
 def box_office(match1):
-    return render_template('box_office.html', data=None)
+    match1 = match.query.filter_by(_id=match1).first()
+    if request.method == 'POST':
+        password = request.form['password_entry']
+        name = request.form['name_entry']
+        if password == match1.match_password and not sanitize_inputs(name):
+            try:
+                Scoring.add_to_lobby(match1._id, request.form['name_entry'])
+            except:
+                return redirect(url_for('error', msg="Sorry. This match is not yet live. Please check with your match administrator for more information."))
+            return redirect(url_for('active_match_view', json_data_input=match1._id))
+        else:
+            return redirect(url_for("error", msg='Sorry. Your password was incorrect or your name was inapropriate. Please try again!'))
+    return render_template('box_office.html', data=match1.match_name, data1=None)
 
 @app.route("/")
 def index():
@@ -697,7 +709,7 @@ def start_match(match_id, course_id):
             found_match.event_type, 
             found_match._id
         )
-        return "Working!", 200 #Send to live coach dashboard once developed
+        return redirect(url_for("active_match_view", json_data_input=found_match._id))
     else:
         return redirect(url_for('error', msg='You do not have access to this site.'))
 
@@ -717,10 +729,16 @@ def change_verified_status(admin, user, verified):
     else:
         return 'Sorry, you do not have access to this site.'
 
-@app.route("/active_match_view/<json_data>")
-def active_match_view(json_data):
-    json_data = Scoring.return_data("11")
-    return render_template("active_match_view.html", data=json_data)
+@app.route("/active_match_view/<json_data_input>")
+def active_match_view(json_data_input):
+    json_data = Scoring.return_data(json_data_input)
+    if 'active_user' in session and session['active_user'][2] == 'coach':
+        return render_template("active_match_view.html", data=json_data, rank=session['active_user'][2])
+    elif 'active_player' in session:
+        return render_template("active_match_view.html", data=json_data, rank='player')
+    else:
+        #here, we are going to return just the data of the match but nothing will be editable
+        return redirect(url_for('error', msg="This page is not yet accessible to non-members. Please try again later."))
 
 @app.route("/create_course", methods=['GET', 'POST'])
 def create_course():

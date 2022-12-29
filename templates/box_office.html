@@ -1,13 +1,13 @@
-{% if data.rank == 'coach' %}
+{% if data1 == 'coach' %}
     {% extends "indexcontentcoachlogin.html" %}   
-{% elif data.rank == 'player' %}
+{% elif data1 == 'player' %}
     {% extends "indexcontentplayerlogin.html" %}  
 {% else %}
     {% extends "indexcontent.html" %}
 {% endif %}
 {% block content %}
 
-<title>Big Blue | Home</title>
+<title>Big Blue | Box Office</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">        
 
     <body>
@@ -16,10 +16,12 @@
             <form action="#" method="post">
                 <img src="{{ url_for('static', filename='logo graphics/whistle.png') }}" alt="">
                 {% if data %}
-                <label for="joincode-box"></label><br>
+                <label>You are joining: {{data}}</label><br>
                 {% endif %}
                 <label for="joincode-box">Enter Match Password:</label><br>
-                <input placeholder="xxxxxx" type="text" id="joincode-box" name="code_entry"></input><br>
+                <input placeholder="xxxxxx" type="text" id="joincode-box" name="password_entry"></input><br>
+                <label for="joincode-box">Your Name: </label><br>
+                <input placeholder="Tiger Woods" type="text" id="joincode-box" name="name_entry"></input><br>
                 <input type="submit" value="Join Match" name="submit-joincode" id="joincode-submit-button">
             </form>
         </div>
