@@ -719,6 +719,7 @@ def active_match():
 def start_match(match_id, course_id):
     found_match = match.query.filter_by(_id=match_id).first()
     found_course = course.query.filter_by(_id=course_id).first()
+    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     print(session['active_user'][0], found_match.created_by)
     if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][0] == found_course.created_by:
         Scoring.create_json(
@@ -733,9 +734,8 @@ def start_match(match_id, course_id):
             found_match.match_type,
             found_match._id
         )
-        return redirect(url_for("active_match_view", json_data_input=found_match._id))
-    else:
-        return redirect(url_for('error', msg='You do not have access to this site.'))
+        return render_template("active_match_view", data=found_user, json_data_input=found_match._id)
+    return redirect(url_for('error', data=found_user, msg='You do not have access to this site.'))
 
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):
@@ -757,6 +757,7 @@ def change_verified_status(admin, user, verified):
 def active_match_view(json_data_input):
     json_data = Scoring.return_data(json_data_input)
     scores = []
+    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     if json_data['match_info']['gamemode'] == 'Match Play':
         players_used = []
         for player in json_data["players"]:
@@ -769,13 +770,13 @@ def active_match_view(json_data_input):
         scores = Scoring.calc_match_results(json_data['match_info']['id'])
 
     if 'active_user' in session and session['active_user'][2] == 'coach':
-        return render_template("active_match_view.html", data=json_data, scoring_data = scores, rank=session['active_user'][2])
+        return render_template("active_match_view.html", data=found_user, playerdata=json_data, scoring_data = scores, rank=session['active_user'][2])
     elif 'active_player' in session:
-        return render_template("active_match_view.html", data=json_data, scoring_data = scores, rank='player')
+        return render_template("active_match_view.html", data=found_user, playerdata=json_data, scoring_data = scores, rank='player')
     else:
         #here, we are going to return just the data of the match but nothing will be editable
         #however it is not working yet
-        return redirect(url_for('error', msg="This page is not yet accessible to non-members. Please try again later."))
+        return redirect(url_for('error', userdata=found_user, msg="This page is not yet accessible to non-members. Please try again later."))
 
 @app.route("/create_course", methods=['GET', 'POST'])
 def create_course():

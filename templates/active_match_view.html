@@ -1,4 +1,10 @@
-{% extends "indexcontent.html" %}
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}  
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
 {% block content %}
 
 
@@ -30,13 +36,13 @@ end match (side)
 
         <!-- Player Cards -->
         <div class="player-cards">
-            {% for player in data['players'] %}
+            {% for player in playerdata['players'] %}
             <div class="match-card">
                     <summary>
                         <div class="card-header-info">
                             <div class="card-user-information">
                                 <h2>{{player}}</h2>
-                                <h5>{{data['players'][player]['team']}}</h5>
+                                <h5>{{playerdata['players'][player]['team']}}</h5>
                             </div>
                             <div class="card-general-stats">
                                 <h3>+3 thru 2</h3>
@@ -44,13 +50,13 @@ end match (side)
                         </div>
                     </summary><details class="custom-details">
                         <summary>Score Details</summary>
-                        {% for strokes in data['players'][player]['scores'] %}
+                        {% for strokes in playerdata['players'][player]['scores'] %}
                             <div class="player-score-per-hole">
                                 <div class="player-score-per-hole-left-side">
                                     <p>Hole {{strokes}} (Par #)</p>
-                                    <input type="number" id="player_score_{{player}}_{{strokes}}" name="" value="{{data['players'][player]['scores'][strokes]}}">
+                                    <input type="number" id="player_score_{{player}}_{{strokes}}" name="" value="{{playerdata['players'][player]['scores'][strokes]}}">
                                 </div>
-                                <a id="player_input_form" href='' onclick="this.href = '/edit_score/{{data['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update Hole {{strokes}}</a>
+                                <a id="player_input_form" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update Hole {{strokes}}</a>
                             </div>    
                         {% endfor %}
                 </details>
@@ -81,13 +87,13 @@ end match (side)
                 <img id="golfer-icon" src="{{ url_for('static', filename='logo graphics/golfericon.png') }}" alt="">
                 <h3>Players in Lobby</h3>
                 <div class="player-in-lobby-container">
-                    {% for waiting in data['lobby'] %}
+                    {% for waiting in playerdata['lobby'] %}
                     <div class="player-in-lobby">
                         <div id="player-name">
                             <p>{{waiting[0]}} for {{waiting[1]}}</p>
                         </div>
-                        <button id="accept"><a href="/add_player/{{data['match_info']['id']}}/{{waiting[0]}}/{{waiting[1]}}">✓</a></button>
-                        <button id="kick"><a href="/kick_player/{{data['match_info']['id']}}/{{waiting[0]}}">✕</a></button>
+                        <button id="accept"><a href="/add_player/{{playerdata['match_info']['id']}}/{{waiting[0]}}/{{waiting[1]}}">✓</a></button>
+                        <button id="kick"><a href="/kick_player/{{playerdata['match_info']['id']}}/{{waiting[0]}}">✕</a></button>
                     </div>
                     {% endfor %}
                     
