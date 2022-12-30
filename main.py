@@ -792,25 +792,25 @@ def create_course():
 def change_message(filename, message):
     if session['active_user'][2] == 'coach':
         Scoring.change_message(filename, message)
-        active_match_view(filename)
+        return redirect(url_for("active_match_view", json_data_input=filename))
 
-@app.route("/kick_player/<filename>/<player>", methods=['POST'])
-def kick_message(filename, player):
+@app.route("/kick_player/<filename>/<player>")
+def kick_player(filename, player):
     if session['active_user'][2] == 'coach':
         Scoring.kick_player(filename, player)
-        active_match_view(filename)
+        return redirect(url_for("active_match_view", json_data_input=filename))
 
-@app.route("/add_player/<filename>/<team>/<player_name>", methods=['POST'])
+@app.route("/add_player/<filename>/<team>/<player_name>")
 def add_player(filename, team, player_name):
     if session['active_user'][2] == 'coach':
-        Scoring.change_message(filename, team, player_name)
-        active_match_view(filename)
+        Scoring.add_player(filename, team, player_name)
+        return redirect(url_for("active_match_view", json_data_input=filename))
 
-@app.route("/edit_score/<filename>/<player>/<hole>/<new_score>", methods=['POST'])
+@app.route("/edit_score/<filename>/<player>/<hole>/<new_score>")
 def edit_score(filename, player, hole, new_score):
     if session['active_user'][2] == 'coach' or session['active_user'][2] == 'player': #check if this is player
         Scoring.edit_score(filename, player, hole, new_score)
-        active_match_view(filename)
+        return redirect(url_for("active_match_view", json_data_input=filename))
 
 @app.route("/end_match/<filename>")
 def end_match(filename):
@@ -823,7 +823,7 @@ def end_match(filename):
 def change_opponent(filename, player1, player2):
     if session['active_user'][2] == 'coach':
         Scoring.change_opponent(filename, player1, player2)
-        active_match_view(filename)
+        return redirect(url_for("active_match_view", json_data_input=filename))
         
 
 

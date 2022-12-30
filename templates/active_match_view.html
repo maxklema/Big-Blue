@@ -26,30 +26,38 @@ end match (side)
 <title>Match View | Big Blue</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/coach_match_view.css') }}">  
     <div class="page-container">
+
+
+        <!-- Player Cards -->
         <div class="player-cards">
             {% for player in data['players'] %}
             <div class="match-card">
-                <div class="card-header-info">
-                    <div class="card-user-information">
-                        <h2>{{player}}</h2>
-                        <h5>{{data['players'][player]['team']}}</h5>
-                    </div>
-                    <div class="card-general-stats">
-                        <h3>+3 thru 2</h3>
-                    </div>
-                </div>
-                <details>
-                    <ul>
+                    <summary>
+                        <div class="card-header-info">
+                            <div class="card-user-information">
+                                <h2>{{player}}</h2>
+                                <h5>{{data['players'][player]['team']}}</h5>
+                            </div>
+                            <div class="card-general-stats">
+                                <h3>+3 thru 2</h3>
+                            </div>
+                        </div>
+                    </summary><details>
                         {% for strokes in data['players'][player]['scores'] %}
-                            <li>
-                                Hole: {{strokes}}: {{data['players'][player]['scores'][strokes]}}
-                            </li>
+                            <p>Hole: {{strokes}}</p>
+                            <input type="text" id="player_score_{{strokes}}" name="" value="{{data['players'][player]['scores'][strokes]}}">
+                            <a id="player_input_form" href='' onclick="this.href = '/edit_score/{{data['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{strokes}}').value">submit</a>
                         {% endfor %}
-                    </ul>
                 </details>
             </div>
             {% endfor %}
-        </div> 
+        </div>
+        
+        
+        
+
+
+
         <div class="match-information">
 
             <!-- Match Code Container -->
@@ -74,27 +82,16 @@ end match (side)
             <div class="code-container">
                 <h3>Players in Lobby</h3>
                 <div class="player-in-lobby-container">
+                    {% for waiting in data['lobby'] %}
                     <div class="player-in-lobby">
                         <div id="player-name">
-                            <p>John Doe</p>
+                            <p>{{waiting}}</p>
                         </div>
-                        <button id="accept">✓</button>
-                        <button id="kick">✕</button>
+                        <button id="accept"><a href="/add_player/{{data['match_info']['id']}}/{{waiting}}/None">✓</a></button>
+                        <button id="kick"><a href="/kick_player/{{data['match_info']['id']}}/{{waiting}}">✕</a></button>
                     </div>
-                    <div class="player-in-lobby">
-                        <div id="player-name">
-                            <p>Max Klema</p>
-                        </div>
-                        <button id="accept">✓</button>
-                        <button id="kick">✕</button>
-                    </div>
-                    <div class="player-in-lobby">
-                        <div id="player-name">
-                            <p>Dominic DeLuca</p>
-                        </div>
-                        <button id="accept">✓</button>
-                        <button id="kick">✕</button>
-                    </div>
+                    {% endfor %}
+                    
             
 
                 </div>

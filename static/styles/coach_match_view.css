@@ -174,7 +174,7 @@ body, html {
 }
 
 .match-card {
-    max-height: 140px;
+    max-height: 100000px;
     width: 800px;
     padding: 20px 30px;
     background-color: white;
@@ -305,4 +305,8 @@ body, html {
     background: #2176e8;
     border: none;
     cursor: pointer;
+}
+
+.match-card details{
+    background-color: white;
 }
