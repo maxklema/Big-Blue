@@ -167,7 +167,10 @@ class Scoring():
                 del data["players"][player]
             except:
                 try:
-                    data["lobby"].remove(player)
+                    for waiting in data["lobby"]:
+                        if waiting[0] == player:
+                            data["lobby"].remove(waiting)
+                            break
                 except: 
                     pass
 
@@ -189,8 +192,10 @@ class Scoring():
                 
             data["players"][player] = {"team": team, "opponent": None,"scores":holes}
 
-            if player in data["lobby"]:
-                data["lobby"].remove(player)
+            for waiting in data["lobby"]:
+                if waiting[0] == player:
+                    data["lobby"].remove(waiting)
+                    break
 
             file.seek(0)
             json_object = json.dump(data, file, indent=3)
@@ -384,7 +389,7 @@ def box_office(match1):
         name = request.form['name_entry']
         if password == match1.match_password and not sanitize_inputs(name):
             try:
-                Scoring.add_to_lobby(match1._id, request.form['name_entry'])
+                Scoring.add_to_lobby(match1._id, (request.form['name_entry'], request.form['team_select']))
             except:
                 return redirect(url_for('error', msg="Sorry. This match is not yet live. Please check with your match administrator for more information."))
                 session['active_player'] = name
@@ -800,11 +805,7 @@ def change_message(filename, message):
         Scoring.change_message(filename, message)
         return redirect(url_for("active_match_view", json_data_input=filename))
 
-<<<<<<< HEAD
 @app.route("/kick_player/<filename>/<player>")
-=======
-@app.route("/kick_player/<filename>/<player>", methods=['POST'])
->>>>>>> 800f35a3796229b520a39718bc4c8a97a8b7e930
 def kick_player(filename, player):
     if session['active_user'][2] == 'coach':
         Scoring.kick_player(filename, player)

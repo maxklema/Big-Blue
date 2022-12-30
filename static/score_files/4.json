@@ -1,0 +1,21 @@
+{
+   "players": {},
+   "match_info": {
+      "number_holes": "18",
+      "match_name": "Match One",
+      "start_time": "2022-12-30",
+      "end_time": "2022-12-30",
+      "home_team": "Homestead",
+      "away_team": "Leo",
+      "match_type": "Teams",
+      "gamemode": "Stroke Play",
+      "id": 4
+   },
+   "lobby": [
+      [
+         "Max",
+         "Homestead"
+      ]
+   ],
+   "message": ""
+}

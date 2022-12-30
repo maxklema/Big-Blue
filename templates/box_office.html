@@ -24,7 +24,7 @@
                 <input placeholder="Tiger Woods" type="text" id="joincode-box" name="name_entry"></input><br>
                 <label for="joincode-box">Your Team: </label><br>
                 {% if data1[0] == 'Teams' %}
-                <select>
+                <select name="team_select">
                     {% for team in data1[1] %}
                         <option value="{{team}}">{{team}}</option>
                     {% endfor %}

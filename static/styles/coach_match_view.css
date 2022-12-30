@@ -250,7 +250,7 @@ body, html {
 #accept {
     border-radius: 100%;
     background-color: transparent;
-    border: 1px solid rgb(13, 165, 13);
+    border: 1.5px solid rgb(13, 165, 13);
     width: 25px;
     height: 25px;
     margin-left: 5px;
@@ -259,14 +259,26 @@ body, html {
     font-size: 15px;
 }
 
+#accept a {
+    text-decoration: none;
+    color: rgb(13, 165, 13);
+    font-weight: 800;
+}
+
 #kick {
     border-radius: 100%;
     background-color: transparent;
-    border: 1px solid #ca3e3e;
+    border: 1.5px solid #ca3e3e;
     width: 25px;
     height: 25px;
     color: #ca3e3e;
     font-size: 15px;
+}
+
+#kick a {
+    text-decoration: none;
+    color: #ca3e3e;
+    font-weight: 800;
 }
 
 .stat-container {
@@ -309,4 +321,19 @@ body, html {
 
 .match-card details{
     background-color: white;
+}
+
+#code-img {
+    height: 35px;
+    width: 35px;
+}
+
+.code-container img {
+    height: 25px;
+    width: 25px;
+}
+
+#golfer-icon {
+    height: 32px;
+    width: 32px;
 }
