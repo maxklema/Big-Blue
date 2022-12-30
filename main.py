@@ -132,8 +132,8 @@ class match(db.Model):
 
 #Scoring class
 class Scoring():
-    def create_json(filename, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, Id):
-        data = {"players":{},"match_info": {"number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "id": Id},"lobby":[], "message":""}
+    def create_json(filename, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, gamemode, Id):
+        data = {"players":{},"match_info": {"number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message":""}
         #json_string = json
         with open("static/score_files/" + str(filename) + ".json", "a+") as file:
             
@@ -184,11 +184,21 @@ class Scoring():
             elif data["match_info"]["number_holes"] == "18":
                 holes = {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0}
                 
-            data["players"][player] = {"team": team, "scores":holes}
+            data["players"][player] = {"team": team, "opponent": None,"scores":holes}
 
             if player in data["lobby"]:
                 data["lobby"].remove(player)
 
+            file.seek(0)
+            json_object = json.dump(data, file, indent=3)
+            file.truncate()
+    
+    def change_opponent(filename, player1, player2):
+        with open("static/score_files/" + str(filename) + ".json", "r+") as file:
+            file.seek(0)
+            data = json.load(file)
+            data["players"][player1]["opponent"] = player2
+            data["players"][player2]["opponent"] = player1
             file.seek(0)
             json_object = json.dump(data, file, indent=3)
             file.truncate()
@@ -710,6 +720,7 @@ def start_match(match_id, course_id):
             found_match.teams1.split("~")[0], 
             found_match.teams1.split("~")[1], 
             found_match.event_type, 
+            found_match.match_type,
             found_match._id
         )
         return redirect(url_for("active_match_view", json_data_input=found_match._id))
@@ -735,10 +746,22 @@ def change_verified_status(admin, user, verified):
 @app.route("/active_match_view/<json_data_input>")
 def active_match_view(json_data_input):
     json_data = Scoring.return_data(json_data_input)
+    scores = []
+    if json_data['match_info']['gamemode'] == 'Match Play':
+        players_used = []
+        for player in json_data["players"]:
+            if player in players_used:
+                scores.append((player, player["opponent"], Scoring.calc_match_status(json_data['match_info']['id'], player, player["opponent"])))
+                players_used.append(player)
+                players_used.append(player["opponent"])
+
+    elif json_data['match_info']['gamemode'] == 'Stroke Play' and json_data['match_info']['match_type'] == 'Teams':
+        scores = Scoring.calc_match_results(json_data['match_info']['id'])
+
     if 'active_user' in session and session['active_user'][2] == 'coach':
-        return render_template("active_match_view.html", data=json_data, rank=session['active_user'][2])
+        return render_template("active_match_view.html", data=json_data, scoring_data = scores, rank=session['active_user'][2])
     elif 'active_player' in session:
-        return render_template("active_match_view.html", data=json_data, rank='player')
+        return render_template("active_match_view.html", data=json_data, scoring_data = scores, rank='player')
     else:
         #here, we are going to return just the data of the match but nothing will be editable
         return redirect(url_for('error', msg="This page is not yet accessible to non-members. Please try again later."))
@@ -764,6 +787,52 @@ def create_course():
         return render_template("create_course.html", data=found_user)
     else:
         return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
+
+@app.route("/change_message/<filename>/<message>", methods=['POST'])
+def change_message(filename, message):
+    if session['active_user'][2] == 'coach':
+        Scoring.change_message(filename, message)
+        active_match_view(filename)
+
+@app.route("/kick_player/<filename>/<player>", methods=['POST'])
+def kick_message(filename, player):
+    if session['active_user'][2] == 'coach':
+        Scoring.kick_player(filename, player)
+        active_match_view(filename)
+
+@app.route("/add_player/<filename>/<team>/<player_name>", methods=['POST'])
+def add_player(filename, team, player_name):
+    if session['active_user'][2] == 'coach':
+        Scoring.change_message(filename, team, player_name)
+        active_match_view(filename)
+
+@app.route("/edit_score/<filename>/<player>/<hole>/<new_score>", methods=['POST'])
+def edit_score(filename, player, hole, new_score):
+    if session['active_user'][2] == 'coach' or session['active_user'][2] == 'player': #check if this is player
+        Scoring.edit_score(filename, player, hole, new_score)
+        active_match_view(filename)
+
+@app.route("/end_match/<filename>")
+def end_match(filename):
+    #TODO: ARCHIVE DATA
+    if session['active_user'][2] == 'coach':
+        os.remove(filename)
+        return redirect(url_for("index"))
+
+@app.route("/change_opponent/<filename>/<player1>/<player2>")
+def change_opponent(filename, player1, player2):
+    if session['active_user'][2] == 'coach':
+        Scoring.change_opponent(filename, player1, player2)
+        active_match_view(filename)
+        
+
+
+
+
+
+
+
+
 
 
 if __name__ == "__main__":
