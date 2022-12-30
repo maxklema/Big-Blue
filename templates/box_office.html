@@ -22,6 +22,14 @@
                 <input placeholder="xxxxxx" type="text" id="joincode-box" name="password_entry"></input><br>
                 <label for="joincode-box">Your Name: </label><br>
                 <input placeholder="Tiger Woods" type="text" id="joincode-box" name="name_entry"></input><br>
+                <label for="joincode-box">Your Team: </label><br>
+                {% if data1[0] == 'Teams' %}
+                <select>
+                    {% for team in data1[1] %}
+                        <option value="{{team}}">{{team}}</option>
+                    {% endfor %}
+                </select>
+                {% endif %}
                 <input type="submit" value="Join Match" name="submit-joincode" id="joincode-submit-button">
             </form>
         </div>
