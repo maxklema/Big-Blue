@@ -1,97 +1,14 @@
 {
    "players": {},
    "match_info": {
-      "number_holes": "18",
-      "match_name": "Second Match",
-      "start_time": "2022-12-28",
-      "end_time": "2022-12-28",
-      "home_team": "Homestead",
-      "away_team": "Leo",
+      "number_holes": "9",
+      "match_name": "Dom Match",
+      "start_time": "2023-06-05",
+      "end_time": "2023-06-10",
+      "home_team": "Purdue",
+      "away_team": "IU",
       "match_type": "Teams",
-      "id": 2
-   },
-   "lobby": [],
-   "message": ""
-}{
-   "players": {},
-   "match_info": {
-      "number_holes": "18",
-      "match_name": "Second Match",
-      "start_time": "2022-12-28",
-      "end_time": "2022-12-28",
-      "home_team": "Homestead",
-      "away_team": "Leo",
-      "match_type": "Teams",
-      "id": 2
-   },
-   "lobby": [],
-   "message": ""
-}{
-   "players": {},
-   "match_info": {
-      "number_holes": "18",
-      "match_name": "Second Match",
-      "start_time": "2022-12-28",
-      "end_time": "2022-12-28",
-      "home_team": "Homestead",
-      "away_team": "Leo",
-      "match_type": "Teams",
-      "id": 2
-   },
-   "lobby": [],
-   "message": ""
-}{
-   "players": {},
-   "match_info": {
-      "number_holes": "18",
-      "match_name": "Second Match",
-      "start_time": "2022-12-28",
-      "end_time": "2022-12-28",
-      "home_team": "Homestead",
-      "away_team": "Leo",
-      "match_type": "Teams",
-      "id": 2
-   },
-   "lobby": [],
-   "message": ""
-}{
-   "players": {},
-   "match_info": {
-      "number_holes": "18",
-      "match_name": "Second Match",
-      "start_time": "2022-12-28",
-      "end_time": "2022-12-28",
-      "home_team": "Homestead",
-      "away_team": "Leo",
-      "match_type": "Teams",
-      "id": 2
-   },
-   "lobby": [],
-   "message": ""
-}{
-   "players": {},
-   "match_info": {
-      "number_holes": "18",
-      "match_name": "Match Two",
-      "start_time": "2022-12-29",
-      "end_time": "2022-12-29",
-      "home_team": "Homestead",
-      "away_team": "Leo",
-      "match_type": "Teams",
-      "id": 2
-   },
-   "lobby": [],
-   "message": ""
-}{
-   "players": {},
-   "match_info": {
-      "number_holes": "18",
-      "match_name": "Match Two",
-      "start_time": "2022-12-29",
-      "end_time": "2022-12-29",
-      "home_team": "Homestead",
-      "away_team": "Leo",
-      "match_type": "Teams",
+      "gamemode": "Stroke Play",
       "id": 2
    },
    "lobby": [],

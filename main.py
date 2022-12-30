@@ -137,7 +137,10 @@ class Scoring():
         #json_string = json
         with open("static/score_files/" + str(filename) + ".json", "a+") as file:
             
-            print(json.dump(data, file, indent=3))
+            #print(json.dump(data, file, indent=3))
+            file.seek(0)
+            json_object = json.dump(data, file, indent=3)
+            file.truncate()
     def add_to_lobby(filename, player):
         with open("static/score_files/" + str(filename) + ".json", "r+") as file:
             file.seek(0)
@@ -375,6 +378,7 @@ def joincode():
 @app.route("/box_office/<match1>", methods=['GET', 'POST'])
 def box_office(match1):
     match1 = match.query.filter_by(_id=match1).first()
+    eventtype = (match1.event_type, match1.teams1.split("~"))
     if request.method == 'POST':
         password = request.form['password_entry']
         name = request.form['name_entry']
@@ -383,10 +387,11 @@ def box_office(match1):
                 Scoring.add_to_lobby(match1._id, request.form['name_entry'])
             except:
                 return redirect(url_for('error', msg="Sorry. This match is not yet live. Please check with your match administrator for more information."))
+                session['active_player'] = name
             return redirect(url_for('active_match_view', json_data_input=match1._id))
         else:
             return redirect(url_for("error", msg='Sorry. Your password was incorrect or your name was inapropriate. Please try again!'))
-    return render_template('box_office.html', data=match1.match_name, data1=None)
+    return render_template('box_office.html', data=match1.match_name, data1=eventtype)
 
 @app.route("/")
 def index():
@@ -764,6 +769,7 @@ def active_match_view(json_data_input):
         return render_template("active_match_view.html", data=json_data, scoring_data = scores, rank='player')
     else:
         #here, we are going to return just the data of the match but nothing will be editable
+        #however it is not working yet
         return redirect(url_for('error', msg="This page is not yet accessible to non-members. Please try again later."))
 
 @app.route("/create_course", methods=['GET', 'POST'])
@@ -794,7 +800,11 @@ def change_message(filename, message):
         Scoring.change_message(filename, message)
         return redirect(url_for("active_match_view", json_data_input=filename))
 
+<<<<<<< HEAD
 @app.route("/kick_player/<filename>/<player>")
+=======
+@app.route("/kick_player/<filename>/<player>", methods=['POST'])
+>>>>>>> 800f35a3796229b520a39718bc4c8a97a8b7e930
 def kick_player(filename, player):
     if session['active_user'][2] == 'coach':
         Scoring.kick_player(filename, player)
