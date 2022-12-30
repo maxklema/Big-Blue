@@ -175,17 +175,17 @@ body, html {
 
 .match-card {
     max-height: 100000px;
-    width: 800px;
+    width: 600px;
     padding: 20px 30px;
     background-color: white;
     border-radius: 5px;
     margin-bottom: 20px;
+    margin-right: 50px;
 }
 
 .card-header-info {
     display: flex;
     justify-content: space-between;
-    vertical-align: center;
 
 }
 
@@ -207,10 +207,8 @@ body, html {
 
 .page-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 5%;
-    margin-left: 17%;
-    margin-right: 17%;
 }
 
 #copy-code-button {
@@ -337,3 +335,66 @@ body, html {
     height: 32px;
     width: 32px;
 }
+
+details > summary {
+    list-style-type: '► ';
+    color:#2176e8;
+}
+
+details[open] > summary {
+    list-style-type: '▼ ';
+    color:#2176e8;
+}
+
+.card-general-stats {
+    padding: 5px 5px;
+    background-color:#ca3e3e;
+    margin-bottom: 0;
+    max-height: 41px !important;
+}
+
+.card-general-stats h3 {
+    color: white;
+}
+
+.player-score-per-hole {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    vertical-align: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.player-score-per-hole a {
+    margin-top: 10px;
+    padding: 5px 15px;
+    font-size: 15px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.player-score-per-hole-left-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.player-score-per-hole-left-side input{
+    margin-left: 10px;
+    max-width: 50px;
+    text-align: center;
+    padding: 3px 3px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+

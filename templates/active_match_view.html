@@ -42,11 +42,16 @@ end match (side)
                                 <h3>+3 thru 2</h3>
                             </div>
                         </div>
-                    </summary><details>
+                    </summary><details class="custom-details">
+                        <summary>Score Details</summary>
                         {% for strokes in data['players'][player]['scores'] %}
-                            <p>Hole: {{strokes}}</p>
-                            <input type="text" id="player_score_{{player}}_{{strokes}}" name="" value="{{data['players'][player]['scores'][strokes]}}">
-                            <a id="player_input_form" href='' onclick="this.href = '/edit_score/{{data['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">submit</a>
+                            <div class="player-score-per-hole">
+                                <div class="player-score-per-hole-left-side">
+                                    <p>Hole {{strokes}} (Par #)</p>
+                                    <input type="number" id="player_score_{{player}}_{{strokes}}" name="" value="{{data['players'][player]['scores'][strokes]}}">
+                                </div>
+                                <a id="player_input_form" href='' onclick="this.href = '/edit_score/{{data['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update Hole {{strokes}}</a>
+                            </div>    
                         {% endfor %}
                 </details>
             </div>
@@ -121,7 +126,7 @@ end match (side)
                 <p>Messages will appear on both player and spectator screens. You can only have 1 active message at a time.</p>
                 <form action="">
                     <textarea placeholder="Players, don't forget! On hole 7, there is a drop area behind the creek!" name="message" id="coach-message" cols="30" rows="10"></textarea>
-                    <input type="submit">
+                    <input type="submit" value="Send">
                 </form>
     
             </div>
