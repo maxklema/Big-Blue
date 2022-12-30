@@ -51,21 +51,71 @@ end match (side)
             {% endfor %}
         </div> 
         <div class="match-information">
+
+            <!-- Match Code Container -->
             <div class="code-container">
                 <h3>Match Code: 192372</h3>
                 <p>Share this with your players and spectators to join the match</p>
                 <div>
-                    <div>
-                        <button>Copy Code</button>
-                    </div>
-                    <div>
-                        <button>Copy Link</button>
-                    </div>
+                    <button>Copy Code</button>
                 </div>
             </div>
-            <div class="code-container">
 
+            <!-- END Statistics -->
+            <div class="code-container">
+                <h3>End Match</h3>
+                <p>All match statistics will be final upon ending the match. You will not be able to change any data and the match results will be archived.</p>
+                <div>
+                    <button id="start-match-button">End Match</button>
+                </div>
             </div>
+
+            <!-- In Lobby Container -->
+            <div class="code-container">
+                <h3>Players in Lobby</h3>
+                <div class="player-in-lobby-container">
+                    <div class="player-in-lobby">
+                        <div id="player-name">
+                            <p>John Doe</p>
+                        </div>
+                        <button id="accept">✓</button>
+                        <button id="kick">✕</button>
+                    </div>
+                    <div class="player-in-lobby">
+                        <div id="player-name">
+                            <p>Max Klema</p>
+                        </div>
+                        <button id="accept">✓</button>
+                        <button id="kick">✕</button>
+                    </div>
+                    <div class="player-in-lobby">
+                        <div id="player-name">
+                            <p>Dominic DeLuca</p>
+                        </div>
+                        <button id="accept">✓</button>
+                        <button id="kick">✕</button>
+                    </div>
+            
+
+                </div>
+            </div>
+
+            <!-- Match Statistics -->
+            <div class="code-container">
+                <h3>Match Statistics</h3>
+                <hr style="margin-bottom: 5px; margin-top: 5px;">
+                <div class="stat-container">
+                    <h4>Homestead Score</h4>
+                    <p>178</p>
+                </div>
+                <div class="stat-container">
+                    <h4>Leo Score</h4>
+                    <p>179</p>
+                </div>
+            </div>
+
+            
+
         </div>
     </div>
           
