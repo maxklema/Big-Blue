@@ -190,13 +190,14 @@ body, html {
 }
 
 .code-container {
-    height: 200px;
-    width: 400px;
+    max-height: 2000px;
     background-color: white;
     margin-bottom: 20px;
     border-radius: 5px;
     padding: 15px 20px;
     text-align: center;
+    overflow-wrap: break-word;
+    width: 400px;
 }
 
 .code-container p {
@@ -210,4 +211,80 @@ body, html {
     margin-top: 5%;
     margin-left: 17%;
     margin-right: 17%;
+}
+
+.code-container div button {
+    margin-top: 10px;
+    width: 140px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+}
+
+.player-in-lobby {
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.player-in-lobby-container {
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#player-name p {
+    max-width: 200px;
+    overflow-wrap: break-word;
+}
+
+#accept {
+    border-radius: 100%;
+    background-color: transparent;
+    border: 1px solid rgb(13, 165, 13);
+    width: 25px;
+    height: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: rgb(13, 165, 13);
+    font-size: 15px;
+}
+
+#kick {
+    border-radius: 100%;
+    background-color: transparent;
+    border: 1px solid #ca3e3e;
+    width: 25px;
+    height: 25px;
+    color: #ca3e3e;
+    font-size: 15px;
+}
+
+.stat-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 5px;
+}
+
+#start-match-button {
+    margin-top: 10px;
+    width: 150px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background: #ca3e3e;
+    border: none;
+    cursor: pointer;
 }
