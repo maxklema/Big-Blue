@@ -397,4 +397,8 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+#lock-img {
+    height: 25px;
+    width: 25px;
+}
 

@@ -81,6 +81,13 @@ end match (side)
                 </div>
             </div>
 
+            <!-- Match Password Container -->
+            <div class="code-container">
+                <img id="lock-img" src="{{ url_for('static', filename='logo graphics/lock-icon.png') }}" alt="">
+                <h3>Match Password: <span style="color: #2176e8;">{{playerdata['match_info']['match_password']}}</span></h3>
+                <p>Only players need the password</p>
+            </div>
+
 
             <!-- In Lobby Container -->
             <div class="code-container">
