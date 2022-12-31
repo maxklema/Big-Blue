@@ -1,0 +1,16 @@
+{
+   "players": {},
+   "match_info": {
+      "number_holes": "18",
+      "match_name": "Match Eight",
+      "start_time": "2022-12-30",
+      "end_time": "2022-12-30",
+      "home_team": "Hom",
+      "away_team": "sakd",
+      "match_type": "Teams",
+      "gamemode": "Stroke Play",
+      "id": 8
+   },
+   "lobby": [],
+   "message": ""
+}

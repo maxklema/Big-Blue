@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import timedelta, datetime
 from werkzeug.utils import secure_filename
+from flask_socketio import SocketIO
 import string
 import random
 import json
@@ -9,6 +10,7 @@ import os
 import sqlite3
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 
 app.secret_key = "max"
 app.permanent_session_lifetime = timedelta(minutes=600)
@@ -132,8 +134,8 @@ class match(db.Model):
 
 #Scoring class
 class Scoring():
-    def create_json(filename, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, gamemode, Id):
-        data = {"players":{},"match_info": {"number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message":""}
+    def create_json(filename, match_code, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, gamemode, Id, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18):
+        data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": ""}
         #json_string = json
         with open("static/score_files/" + str(filename) + ".json", "a+") as file:
             
@@ -273,6 +275,13 @@ class Scoring():
                 elif player["team"] == team2[0]:
                     team2[1] += Scoring.add_scores(player["scores"])
             return team1, team2
+    def calc_relation_to_par(filename):
+         with open("static/score_files/" + str(filename) + ".json", "r") as file:
+            file.seek(0)
+            data = json.load(file)
+            #NEEDS TO FINISH
+
+
     
     def return_data(filename):
         with open("static/score_files/" + str(filename) + ".json", "r") as file:
@@ -719,11 +728,11 @@ def active_match():
 def start_match(match_id, course_id):
     found_match = match.query.filter_by(_id=match_id).first()
     found_course = course.query.filter_by(_id=course_id).first()
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     print(session['active_user'][0], found_match.created_by)
     if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][0] == found_course.created_by:
         Scoring.create_json(
             found_match._id, 
+            found_match.match_code,
             found_course.course_holes, 
             found_match.match_name, 
             found_match.start_time, 
@@ -732,10 +741,32 @@ def start_match(match_id, course_id):
             found_match.teams1.split("~")[1], 
             found_match.event_type, 
             found_match.match_type,
-            found_match._id
+            found_match._id,
+            found_course.par1,
+            found_course.par2,
+            found_course.par3,
+            found_course.par4,
+            found_course.par5,
+            found_course.par6,
+            found_course.par7,
+            found_course.par8,
+            found_course.par9,
+            found_course.par10,
+            found_course.par11,
+            found_course.par12,
+            found_course.par13,
+            found_course.par14,
+            found_course.par15,
+            found_course.par16,
+            found_course.par17,
+            found_course.par18
+
         )
-        return render_template("active_match_view", data=found_user, json_data_input=found_match._id)
-    return redirect(url_for('error', data=found_user, msg='You do not have access to this site.'))
+        return redirect(url_for("active_match_view", json_data_input=found_match._id))
+    else:
+        return redirect(url_for('error', data=found_user, msg='You do not have access to this site.'))
+    
+   
 
 @app.route("/return_user_data/<password>", methods=['GET'])
 def return_user_data(password):
@@ -757,7 +788,15 @@ def change_verified_status(admin, user, verified):
 def active_match_view(json_data_input):
     json_data = Scoring.return_data(json_data_input)
     scores = []
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    found_user=''
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ''
+
+  
+
+
     if json_data['match_info']['gamemode'] == 'Match Play':
         players_used = []
         for player in json_data["players"]:
@@ -836,18 +875,13 @@ def change_opponent(filename, player1, player2):
     if session['active_user'][2] == 'coach':
         Scoring.change_opponent(filename, player1, player2)
         return redirect(url_for("active_match_view", json_data_input=filename))
-        
 
 
-
-
-
-
-
-
+    
+    
 
 
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-    app.run('0.0.0.0', port=8000, debug=True)
+    socketio.run(app, port=8000, debug=True)

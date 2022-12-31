@@ -53,7 +53,7 @@ end match (side)
                         {% for strokes in playerdata['players'][player]['scores'] %}
                             <div class="player-score-per-hole">
                                 <div class="player-score-per-hole-left-side">
-                                    <p>Hole {{strokes}} (Par #)</p>
+                                    <p>Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
                                     <input type="number" id="player_score_{{player}}_{{strokes}}" name="" value="{{playerdata['players'][player]['scores'][strokes]}}">
                                 </div>
                                 <a id="player_input_form" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update Hole {{strokes}}</a>
@@ -74,7 +74,7 @@ end match (side)
             <!-- Match Code Container -->
             <div class="code-container">
                 <img id="code-img" src="{{ url_for('static', filename='logo graphics/codeicon.png') }}" alt="">
-                <h3>Match Code: tbd</h3>
+                <h3>Match Code: {{playerdata['match_info']['match_code']}}</h3>
                 <p>Share this with your players and spectators to join the match</p>
                 <div>
                     <button id="copy-code-button">❐ Copy Code</button>
@@ -141,6 +141,15 @@ end match (side)
 
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8">
+        
+        
+
+    </script>
+
+    
           
 
 

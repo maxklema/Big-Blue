@@ -1,0 +1,61 @@
+{
+   "players": {},
+   "match_info": {
+      "number_holes": "18",
+      "match_name": "Max's Match",
+      "start_time": "2022-12-30",
+      "end_time": "2022-12-30",
+      "home_team": "Homestead",
+      "away_team": "Dwenger",
+      "match_type": "Teams",
+      "gamemode": "Stroke Play",
+      "id": 5
+   },
+   "lobby": [],
+   "message": ""
+}{
+   "players": {},
+   "match_info": {
+      "number_holes": "18",
+      "match_name": "Max's Match",
+      "start_time": "2022-12-30",
+      "end_time": "2022-12-30",
+      "home_team": "Homestead",
+      "away_team": "Dwenger",
+      "match_type": "Teams",
+      "gamemode": "Stroke Play",
+      "id": 5
+   },
+   "lobby": [],
+   "message": ""
+}{
+   "players": {},
+   "match_info": {
+      "number_holes": "18",
+      "match_name": "New Match",
+      "start_time": "2022-12-30",
+      "end_time": "2022-12-30",
+      "home_team": "Homestead",
+      "away_team": "Leo",
+      "match_type": "Teams",
+      "gamemode": "Stroke Play",
+      "id": 5
+   },
+   "lobby": [],
+   "message": ""
+}{
+   "players": {},
+   "match_info": {
+      "number_holes": "18",
+      "match_name": "New Match",
+      "start_time": "2022-12-30",
+      "end_time": "2022-12-30",
+      "home_team": "Homestead",
+      "away_team": "Leo",
+      "match_type": "Teams",
+      "gamemode": "Stroke Play",
+      "id": 5
+   },
+   "lobby": [],
+   "message": ""
+}

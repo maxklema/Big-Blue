@@ -26,7 +26,7 @@
       "Grayson": {
          "team": "Homestead",
          "scores": {
-            "1": 4,
+            "1": "5",
             "2": 4,
             "3": 4,
             "4": 0,
@@ -49,7 +49,7 @@
       "Max": {
          "team": "Homestead",
          "scores": {
-            "1": "4",
+            "1": "5",
             "2": 4,
             "3": "4",
             "4": 0,
@@ -190,7 +190,7 @@
          "team": "None",
          "opponent": null,
          "scores": {
-            "1": 0,
+            "1": "3",
             "2": 0,
             "3": 0,
             "4": 0,
@@ -244,6 +244,42 @@
       "home_team": "Homestead",
       "away_team": "Carroll",
       "match_type": "Teams",
+      "id": 11
+   },
+   "lobby": [
+
+   ],
+   "message": ""
+}{
+   "players": {},
+   "match_info": {
+      "par1": 4,
+      "par2": 5,
+      "par3": 4,
+      "par4": 3,
+      "par5": 5,
+      "par6": 4,
+      "par7": 3,
+      "par8": 4,
+      "par9": 4,
+      "par10": 4,
+      "par11": 3,
+      "par12": 5,
+      "par13": 4,
+      "par14": 3,
+      "par15": 5,
+      "par16": 4,
+      "par17": 4,
+      "par18": 4,
+      "match_code": "332983",
+      "number_holes": "18",
+      "match_name": "match 7",
+      "start_time": "2022-12-30",
+      "end_time": "2022-12-30",
+      "home_team": "Homestead",
+      "away_team": "Leo",
+      "match_type": "Teams",
+      "gamemode": "Stroke Play",
       "id": 11
    },
    "lobby": [],
