@@ -36,18 +36,31 @@ end match (side)
 
         <!-- Player Cards -->
         <div class="player-cards">
+            {% if playerdata['players'] is defined and playerdata['players']|length == 0 %}
+                <div class="empty-lobby-section">
+                    <img src="{{ url_for('static', filename='logo graphics/empty-golf-cart-icon.png') }}" alt="">
+                    <h5>When You Accept Players, They Will Show Up Here</h5>
+                </div>    
+            
+            {% endif %}
+
             {% for player in playerdata['players'] %}
             <div class="match-card">
                     <summary>
                         <div class="card-header-info">
                             <div class="card-user-information">
-                                <h2>{{player}}</h2>
-                                <h5>{{playerdata['players'][player]['team']}}</h5>
+                                <div>
+                                    <h2>{{player}}</h2>
+                                    <div class="card-general-stats">
+                                        <h3>+3 thru 2</h3>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-general-stats">
-                                <h3>+3 thru 2</h3>
+                            <div class="remove-player-card">
+                                <a href="/kick_player/{{playerdata['match_info']['id']}}/{{player}}">Remove</a>
                             </div>
                         </div>
+                        <h5>{{playerdata['players'][player]['team']}}</h5>
                     </summary><details class="custom-details">
                         <summary>Score Details</summary>
                         {% for strokes in playerdata['players'][player]['scores'] %}

@@ -186,6 +186,7 @@ body, html {
 .card-header-info {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
 }
 
@@ -347,14 +348,13 @@ details[open] > summary {
 }
 
 .card-general-stats {
-    padding: 5px 5px;
-    background-color:#ca3e3e;
-    margin-bottom: 0;
-    max-height: 41px !important;
+   max-height: 37px;
 }
 
 .card-general-stats h3 {
     color: white;
+    padding: 3px 7px;
+    background-color:#ca3e3e;
 }
 
 .player-score-per-hole {
@@ -400,5 +400,41 @@ input::-webkit-inner-spin-button {
 #lock-img {
     height: 25px;
     width: 25px;
+}
+
+.empty-lobby-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    flex-direction: column;
+}
+
+.empty-lobby-section img {
+    width: 200px;
+    height: 200px;
+}
+
+.empty-lobby-section h5 {
+    color: grey;
+}
+
+.card-user-information div{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+.card-user-information div div {
+    margin-left: 10px;
+}
+
+.remove-player-card a {
+    color: #ca3e3eab;
+    border: 2px solid #ca3e3eab;
+    padding: 3px 5px;
+    text-decoration: none;
+    border-radius: 10px;
+    
 }
 
