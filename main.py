@@ -488,7 +488,7 @@ def create_match():
                 db.session.commit()
             except Exception as err:
                 print(err)
-                return redirect(url_for('error', msg="Each match must be assigned to a course. To create a course, navigate to your Course Dashboard!"))
+                return redirect(url_for('error', msg="Each match must be assigned to a course. To create a course, navigate to your Course"))
 
             return redirect(url_for('match_dashboard'))
         
@@ -650,7 +650,7 @@ def edit_user_profile():
 
         db.session.commit()
 
-        return render_template("dashboard.html", data=found_user)
+        return redirect(url_for("dashboard"))
     return redirect(url_for('error', msg="Something went wrong. Please try again!"))
 
 
@@ -661,7 +661,7 @@ def choose_banner():
         found_user.banner = request.form['banner']
         db.session.commit()
 
-        return render_template("dashboard.html", data=found_user)
+        return redirect(url_for("dashboard"))
     return redirect(url_for('error', msg="Something went wrong. Please try again!"))
 
 
@@ -840,7 +840,7 @@ def create_course():
             db.session.commit()
             found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
 
-            return render_template("course_dashboard.html", data=found_user, course_data=found_course, message='Course created sucsessfully!')
+            return redirect(url_for("course_dashboard"))
 
         return render_template("create_course.html", data=found_user)
     else:
