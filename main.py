@@ -488,7 +488,7 @@ def create_match():
                 db.session.commit()
             except Exception as err:
                 print(err)
-                return redirect(url_for('error', msg="There was a problem creating this match. Call 330-550-1057!"))
+                return redirect(url_for('error', msg="Each match must be assigned to a course. To create a course, navigate to your Course Dashboard!"))
 
             return redirect(url_for('match_dashboard'))
         
