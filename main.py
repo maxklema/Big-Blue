@@ -119,8 +119,9 @@ class match(db.Model):
     match_code = db.Column(db.String(6))
     match_password = db.Column(db.String())
     created_by = db.Column(db.String())
+    match_live = db.Column(db.Integer, default=0)
 
-    def __init__(self, match_name, match_course, start_time, end_time, teams1, scores_file, match_code, match_password, event_type, match_type, total_players, created_by):
+    def __init__(self, match_name, match_course, start_time, end_time, teams1, scores_file, match_code, match_password, event_type, match_type, total_players, created_by, match_live):
         self.match_name = match_name
         self.match_course = match_course
         self.start_time = start_time
@@ -133,6 +134,7 @@ class match(db.Model):
         self.match_type = match_type
         self.total_players = total_players
         self.created_by = created_by
+        self.match_live = match_live
 
 #Scoring class
 class Scoring():
@@ -483,7 +485,7 @@ def create_match():
             
 
             try:
-                new_match = match(request.form['matchname'], request.form['coursename'], request.form['starttime'], request.form['endtime'], ezfix, request.form['matchname'], generate_code(6), request.form['matchpassword'], request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0])
+                new_match = match(request.form['matchname'], request.form['coursename'], request.form['starttime'], request.form['endtime'], ezfix, request.form['matchname'], generate_code(6), request.form['matchpassword'], request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0], False)
                 db.session.add(new_match)
                 db.session.commit()
             except Exception as err:
@@ -736,6 +738,11 @@ def start_match(match_id, course_id):
     found_course = course.query.filter_by(_id=course_id).first()
     print(session['active_user'][0], found_match.created_by)
     if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][0] == found_course.created_by:
+        #match_live is updated in database, from 0 (not live) to 1 (live)
+        found_match.match_live = 1
+        db.session.commit()
+        
+        #creates json
         Scoring.create_json(
             found_match._id, 
             found_match.match_code,
