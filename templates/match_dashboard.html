@@ -264,7 +264,7 @@
 
                         {% for i in course_data %}
                             {% if i.course_name == item.match_course %}
-                                <a id="live-match-button" href="/start_match/{{item._id}}/{{i._id}}">View Live Scoring</a>
+                                <a id="live-match-button" href="/active_match_view/{{item._id}}">View Live Scoring</a>
                             {% endif %}
                         {% endfor %}
 
