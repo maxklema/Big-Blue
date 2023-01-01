@@ -17,8 +17,10 @@ app.permanent_session_lifetime = timedelta(minutes=600)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///webdata.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 UPLOAD_FOLDER = 'static/logo graphics/user_photos'
+SCORING_FOLDER = 'static/score_files'
 ALLOWED_EXTENSIONS = {'png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG', 'gif', 'GIF'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['SCORING_FOLDER'] = SCORING_FOLDER
 characters = list(string.digits)
 
 db = SQLAlchemy(app)
@@ -572,6 +574,10 @@ def edit_course(course_to_edit):
 def delete_match(match_to_delete):
     found_match = match.query.filter_by(_id=match_to_delete).first()
     if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
+        #removes json file
+        filename = str(found_match._id) + ".json"
+        os.remove(os.path.join(app.config['SCORING_FOLDER'], str(filename)))
+        #removes match from DB
         db.session.delete(found_match)
         db.session.commit()
         return redirect(url_for("match_dashboard"))
