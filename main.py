@@ -501,7 +501,9 @@ def create_match():
 def edit_match(match_to_edit):
     found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
     found_match = match.query.filter_by(_id=match_to_edit).first()
-    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
+    if found_match.match_live == 1:
+        return redirect(url_for('error', msg="You cannot edit match details of matches that are live!"))
+    elif 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if request.method == "POST":
             for item in request.form:
@@ -575,7 +577,9 @@ def edit_course(course_to_edit):
 @app.route("/delete_match/<match_to_delete>")
 def delete_match(match_to_delete):
     found_match = match.query.filter_by(_id=match_to_delete).first()
-    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
+    if found_match.match_live == 1:
+        return redirect(url_for('error', msg="You cannot delete matches that are live!"))
+    elif 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
         #removes json file
         filename = str(found_match._id) + ".json"
         os.remove(os.path.join(app.config['SCORING_FOLDER'], str(filename)))
@@ -736,12 +740,15 @@ def active_match():
 def start_match(match_id, course_id):
     found_match = match.query.filter_by(_id=match_id).first()
     found_course = course.query.filter_by(_id=course_id).first()
+    found_user = users.query.filter_by(username=session['active_user'][0]).first()
     print(session['active_user'][0], found_match.created_by)
-    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][0] == found_course.created_by:
+    if found_match.match_live == 1:
+        return redirect(url_for('error', data=found_user, msg='This match has already started. Try refreshing your match dashboard to gain access.'))
+    elif 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][0] == found_course.created_by:
         #match_live is updated in database, from 0 (not live) to 1 (live)
         found_match.match_live = 1
         db.session.commit()
-        
+
         #creates json
         Scoring.create_json(
             found_match._id, 

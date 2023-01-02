@@ -12,19 +12,19 @@
 
     <body>
         
-        <div class="form-container">
-            <form action="#" method="post">
+        <div class="player-form-container">
+            <form class="player-join-form" action="#" method="post">
                 <img src="{{ url_for('static', filename='logo graphics/whistle.png') }}" alt="">
                 {% if data %}
-                <label>You are joining: {{data}}</label><br>
+                    <h3 id="match-name-display">You are joining: <span style="color: #1b6cd7;">{{data}}</span></h3>
                 {% endif %}
-                <label for="joincode-box">Enter Match Password:</label><br>
-                <input placeholder="xxxxxx" type="text" id="joincode-box" name="password_entry"></input><br>
-                <label for="joincode-box">Your Name: </label><br>
-                <input placeholder="Tiger Woods" type="text" id="joincode-box" name="name_entry"></input><br>
-                <label for="joincode-box">Your Team: </label><br>
+                <label for="enter-match-textbox">Enter Match Password:</label><br>
+                <input type="password" id="enter-match-textbox" name="password_entry"></input><br>
+                <label for="">Your Name:</label><br>
+                <input placeholder="John Doe" type="text" id="enter-match-textbox" name="name_entry"></input><br>
+                <label for="team-select">Your Team:</label><br>
                 {% if data1[0] == 'Teams' %}
-                <select name="team_select">
+                <select id="team-select" name="team_select">
                     {% for team in data1[1] %}
                         <option value="{{team}}">{{team}}</option>
                     {% endfor %}
