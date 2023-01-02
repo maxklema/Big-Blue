@@ -1,0 +1,33 @@
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}  
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
+{% block content %}
+
+<title>Entering Match | Big Blue </title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/player-spectator.css') }}">        
+
+    <body>
+        
+        <div class="select-container">
+            <div class="select">
+                <h2>I am a..</h2>
+                <a href="">
+                    <img src="{{ url_for('static', filename='logo graphics/person-icon.png') }}" alt="">
+                    <h2>Spectator</h2>
+                </a>
+                <a href="/box_office/{{match_data._id}}">
+                    <img src="{{ url_for('static', filename='logo graphics/person-icon.png') }}" alt="">
+                    <h2>Player</h2>
+                </a>
+            </div>
+        </div>
+
+
+    </body>
+
+
+{% endblock %}

@@ -380,8 +380,22 @@ def edit_profile():
     else:
         return render_template("login.html")
 
+@app.route("/entering_match/<match_code>")
+def entering_match(match_code):
+    found_match = match.query.filter_by(match_code=match_code).first()
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
+    return render_template("player-or-spectator.html", data=found_user, match_data=found_match)
+
+
 @app.route("/joincode", methods=['POST', 'GET'])
 def joincode():
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
     if request.method == 'POST':
         code_entry = request.form['code_entry']
         found_match = match.query.filter_by(match_code=code_entry).first()
@@ -389,7 +403,7 @@ def joincode():
             if found_match.match_password == "":
                 print('No password!')
                 #route to live player dashboard
-            return redirect(url_for('box_office', match1=found_match._id))
+            return redirect(url_for('entering_match', match_code=found_match.match_code))
         return render_template("join_code_page.html", data="We can't find that match... Please check your join code and try again.")
     return render_template("join_code_page.html", data=None)
 
