@@ -873,6 +873,16 @@ def spectator_match_view(json_data_input):
     return render_template("spectator-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
 
 
+@app.route("/player_match_view/<json_data_input>")
+def player_match_view(json_data_input):
+    json_data = Scoring.return_data(json_data_input)
+    scores = Scoring.calc_match_results(json_data['match_info']['id'])
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ''
+    return render_template("player-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
+
 @app.route("/active_match_view/<json_data_input>")
 def active_match_view(json_data_input):
     json_data = Scoring.return_data(json_data_input)
@@ -904,7 +914,7 @@ def active_match_view(json_data_input):
     else:
         #here, we are going to return just the data of the match but nothing will be editable
         #however it is not working yet
-        return redirect(url_for('error', userdata=found_user, msg="This page is not yet accessible to non-members. Please try again later."))
+        return redirect(url_for('player_match_view', userdata=found_user, msg="This page is not yet accessible to non-members. Please try again later."))
 
 @app.route("/create_course", methods=['GET', 'POST'])
 def create_course():

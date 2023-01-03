@@ -1,0 +1,204 @@
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}  
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
+{% block content %}
+
+
+
+<!--
+box for each person
+edit button next to each hole
+par
+score in relation to par
++1 thru nine before expanding
+kick players
+match duration
+refresh button
+match statistics
+    - overall running total
+    - players completed
+    - match code
+message all players ()
+- waiting
+end match (side)
+
+-->
+
+
+<title>Match View | Big Blue</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/coach_match_view.css') }}">  
+    <div class="page-container">
+
+
+
+
+        <!-- Player Cards -->
+        <div class="player-cards">
+            {% if playerdata['players'] is defined and playerdata['players']|length == 0 %}
+                <div class="empty-lobby-section">
+                    <img src="{{ url_for('static', filename='logo graphics/empty-golf-cart-icon.png') }}" alt="">
+                    <h5>When Other Players Are Accepted, They Will Show Up Here</h5>
+                </div>    
+            
+            {% endif %}
+
+            {% for player in playerdata['players'] %}
+            <div class="match-card">
+                    <summary>
+                        <div class="card-header-info">
+                            <div class="card-user-information">
+                                <div>
+                                    <h2>{{player}}</h2>
+                                    <div class="card-general-stats">
+                                        <h3>{{relation_to_par}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="remove-player-card">
+                                <a href="/kick_player/{{playerdata['match_info']['id']}}/{{player}}">Remove</a>
+                            </div>
+                        </div>
+                        <h5>{{playerdata['players'][player]['team']}}</h5>
+                    </summary><details class="custom-details">
+                        <summary>Score Details</summary>
+                        {% for strokes in playerdata['players'][player]['scores'] %}
+                            <div class="player-score-per-hole">
+                                <div class="player-score-per-hole-left-side">
+                                    <p>Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
+                                    <input type="number" id="player_score_{{player}}_{{strokes}}" name="" value="{{playerdata['players'][player]['scores'][strokes]}}">
+                                </div>
+                                <a id="player_input_form" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update Hole {{strokes}}</a>
+                            </div>    
+                        {% endfor %}
+                </details>
+            </div>
+            {% endfor %}
+        </div>
+        
+        
+        
+
+
+
+        <div class="match-information">
+
+
+            <!-- Edit Score -->
+            <div class="edit-score-container">
+                <img src="{{ url_for('static', filename='logo graphics/pencil-icon-darkerblue.png') }}" alt="">
+                <h3>Edit Score <span style="color: #0a4ea7;">Hole 1 (Par 4)</span></h3>
+                <input type="number" placeholder="Type Score for Max" id="type-score-input">
+                <div class="row-one-options">
+                    <button onclick="addPar();" id="par-button">Par</button>
+                    <button onclick="addBirdie();">Birdie</button>
+                    <button onclick="addBogey();" id="bogey-button">Bogey</button>
+                </div>
+                <button id="score-opponent"><a href="">Score Opponent Instead</a></button>
+                <button id="submit-score"><a href="">Submit Max's Score</a></button>
+
+            </div>
+
+            <script>
+                function addPar() {
+                    document.getElementById("type-score-input").value = 4;
+                }
+                function addBogey() {
+                    document.getElementById("type-score-input").value = 5;
+                }
+                function addBirdie() {
+                    document.getElementById("type-score-input").value = 3;
+                }
+            </script>
+
+
+
+            <!-- Coach Message -->
+            <div class="code-container">
+                <img src="{{ url_for('static', filename='logo graphics/messageicon.png') }}" alt="">
+                <h3>Message</h3>
+                <p>Messages from your coach will appear here</p>
+    
+            </div>
+
+            <!-- Match Code Container -->
+            <div class="code-container">
+                <img id="code-img" src="{{ url_for('static', filename='logo graphics/codeicon.png') }}" alt="">
+                <h3 id="match-code-h3">Match Code: {{playerdata['match_info']['match_code']}}</h3>
+                <p>Share this with other players and spectators to join the match!</p>
+                <div>
+                    <button onclick="copyText();" id="copy-code-button">❐ Copy Code</button>
+                </div>
+            </div>
+
+            <!-- Match Password Container -->
+            <div class="code-container">
+                <img id="lock-img" src="{{ url_for('static', filename='logo graphics/lock-icon.png') }}" alt="">
+                <h3>Match Password: <span style="color: #2176e8;">{{playerdata['match_info']['match_password']}}</span></h3>
+            </div>
+
+
+
+            <!-- Match Statistics -->
+            <div class="code-container">
+                <img src="{{ url_for('static', filename='logo graphics/statsicon.png') }}" alt="">
+                <h3>Match Statistics</h3>
+                <hr style="margin-bottom: 5px; margin-top: 5px;">
+                {% for team in scoring_data %}
+                    <div class="stat-container">
+                        <h4>{{team[0]}} Score</h4>
+                        <p>{{team[1]}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+    
+
+            
+
+        </div>
+    </div>
+
+    
+    <script>
+        //from W3 SCHOOLS
+        function copyText() {
+            let textToCopy = document.getElementById("match-code-h3").innerHTML;
+            textToCopy = textToCopy.substring(12,18);
+            navigator.clipboard.writeText(textToCopy);
+
+            animateButton("copy-code-button");
+
+        }
+
+        function animateButton(button_id) {
+            const button = document.getElementById(button_id);
+            const originalText = button.innerHTML;
+            const originalColor = button.style.backgroundColor;
+            button.style.backgroundColor = "#0da50d";
+            button.innerHTML = "Copied!";
+            setTimeout(() => {
+                button.style.backgroundColor = originalColor;
+                button.innerHTML = originalText;
+            }, 300);
+        }
+    </script>
+
+        
+
+
+    
+          
+
+
+
+
+    
+        
+
+
+
+{% endblock %}
