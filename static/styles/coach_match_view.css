@@ -221,6 +221,12 @@ body, html {
     background: #2176e8;
     border: none;
     cursor: pointer;
+    margin-bottom: 5px;
+}
+
+#copy-code-button a {
+    color: white;
+    text-decoration: none;
 }
 
 .player-in-lobby {
@@ -284,7 +290,7 @@ body, html {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 #start-match-button {
@@ -296,6 +302,12 @@ body, html {
     background: #ca3e3e;
     border: none;
     cursor: pointer;
+    margin-bottom: 5px;
+}
+
+#start-match-button a{
+    color: white;
+    text-decoration: none;
 }
 
 .code-container textarea {
@@ -437,4 +449,29 @@ input::-webkit-inner-spin-button {
     border-radius: 10px;
     
 }
+
+@media (max-width: 850px){
+    header .navigation {
+        display: none;
+    }
+
+    .mobile-navigation {
+        display: block;
+    }
+    #menu-button {
+        visibility: visible;
+        display: block;
+    }
+    #hamburger-icon {
+        display: block;
+    }
+}
+
+
+@media (max-width: 600px){
+    header {
+        padding: 8px 40px;
+    }
+}
+
 

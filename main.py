@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import timedelta, datetime
 from werkzeug.utils import secure_filename
 from flask_socketio import SocketIO
+from datetime import datetime
 import string
 import random
 import json
@@ -40,8 +41,10 @@ class users(db.Model):
     verified = db.Column(db.Integer)
     pic = db.Column(db.String)
     banner = db.Column(db.String)
+    first_login = db.Column(db.DateTime, default="2022-06-03 03:15:12.433675")
+    last_login = db.Column(db.DateTime, default="2022-06-03 03:15:12.433675")
 
-    def __init__(self, name, username, password, email, rank, gender, bio, team, verified, pic, banner):
+    def __init__(self, name, username, password, email, rank, gender, bio, team, verified, pic, banner, first_login, last_login):
         self.name = name
         self.username = username
         self.password = password
@@ -53,6 +56,8 @@ class users(db.Model):
         self.verified = verified
         self.pic = pic
         self.banner = banner
+        self.first_login = first_login
+        self.last_login = last_login
 
 class course(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -483,6 +488,8 @@ def login():
 
         if found_user and found_user.username == username_input and found_user.password == password_input:
             session['active_user'] = [found_user.username, found_user.name, found_user.rank]
+            found_user.last_login = datetime.now()
+            db.session.commit()
             return redirect(url_for('dashboard'))
         else:
             return render_template("login.html", data=found_user, message="Username and password were incorrect! Please try again.")
@@ -492,6 +499,16 @@ def login():
 @app.route("/dashboard", methods=['GET', 'POST'])
 def dashboard():
     found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    date_year = str(found_user.first_login)
+    date_year = date_year[0:4]
+
+    date = datetime.strptime(str(found_user.first_login), "%Y-%m-%d %H:%M:%S.%f")
+    month_index = date.month
+
+    list_of_months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    month_name = list_of_months[month_index-1]
+
+
     if 'active_user' in session:
         if request.method == "POST":
             for item in request.form:
@@ -501,10 +518,12 @@ def dashboard():
             found_user.team = request.form['team']
             found_user.name = request.form['name']
             found_user.bio = request.form['bio']
+            
+
 
             db.session.commit()
 
-        return render_template("dashboard.html", data=found_user)
+        return render_template("dashboard.html", month = month_name, year=date_year, data=found_user)
     return redirect(url_for('error', msg="You must login to access this page."))
 
 @app.route("/create_match", methods=['GET', 'POST'])
@@ -653,7 +672,8 @@ def create_account():
             return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.", data=found_user)
 
         try: 
-            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png", "BigBluebanner.png")
+            today_date = datetime.now()
+            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png", "BigBluebanner.png", today_date, today_date)
             db.session.add(new_user)
             db.session.commit()
 
@@ -661,7 +681,7 @@ def create_account():
             new_rank = request.form['rank']
             new_name = request.form['name']
         except:
-            return redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer suport."))
+            return redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer support."))
 
         found_user = users.query.filter_by(username=new_username).first()
         
