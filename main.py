@@ -434,10 +434,14 @@ def box_office(match1):
         password = request.form['password_entry']
         name = request.form['name_entry']
         if password == match1.match_password and not sanitize_inputs(name):
+            if match1.event_type == 'Singles':
+                tuple_data = (request.form['name_entry'], None)
+            elif match1.event_type == 'Teams':
+                tuple_data = (request.form['name_entry'], request.form['team_select'])
             try:
-                Scoring.add_to_lobby(match1._id, (request.form['name_entry'], request.form['team_select']))
+                Scoring.add_to_lobby(match1._id, tuple_data)
             except:
-                return redirect(url_for('error', msg="Sorry. This match is not yet live. Please check with your match administrator for more information."))
+                return redirect(url_for('error', msg="Sorry. This match is not yet live or there was a problem creating a live match file. Please check with your match administrator for more information."))
                 session['active_player'] = name
             return redirect(url_for('active_match_view', json_data_input=match1._id))
         else:
@@ -904,7 +908,7 @@ def create_course():
     else:
         return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
 
-@app.route("/change_message/<filename>/<message>", methods=['POST'])
+@app.route("/change_message/<filename>/<message>")
 def change_message(filename, message):
     if session['active_user'][2] == 'coach':
         Scoring.change_message(filename, message)
@@ -932,7 +936,14 @@ def edit_score(filename, player, hole, new_score):
 def end_match(filename):
     #TODO: ARCHIVE DATA
     if session['active_user'][2] == 'coach':
-        os.remove(filename)
+        try:
+            del session['active_player']
+        except:
+            pass
+        found_match = match.query.filter_by(_id=filename).first()
+        found_match.match_live = 0
+        db.session.commit()
+        os.remove('static/score_files/' + filename + '.json')
         return redirect(url_for("index"))
 
 @app.route("/change_opponent/<filename>/<player1>/<player2>")

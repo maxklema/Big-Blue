@@ -128,7 +128,7 @@ end match (side)
                 <h3>End Match</h3>
                 <p>All match statistics will be final upon ending the match. You will not be able to change any data and the match results will be archived.</p>
                 <div>
-                    <button id="start-match-button">End Match</button>
+                    <button id="start-match-button"><a href="/end_match/{{playerdata['match_info']['id']}}">End Match</a></button>
                 </div>
             </div>
 
@@ -151,8 +151,8 @@ end match (side)
                 <h3>Message</h3>
                 <p>Messages will appear on both player and spectator screens. You can only have 1 active message at a time.</p>
                 <form action="">
-                    <textarea placeholder="Players, don't forget! On hole 7, there is a drop area behind the creek!" name="message" id="coach-message" cols="30" rows="10"></textarea>
-                    <input type="submit" value="Send">
+                    <textarea placeholder="Players, don't forget! On hole 7, there is a drop area behind the creek!" name="message" id="coach-message" cols="30" rows="10" value="{{playerdata['message']}}"></textarea>
+                    <button id="copy-code-button"><a href='' onclick="this.href = '/change_message/{{playerdata["match_info"]["id"]}}/' + document.getElementById('coach-message').value; alert('Message Sent!');">Send</a></button>
                 </form>
     
             </div>
