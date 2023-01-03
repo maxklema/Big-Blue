@@ -451,7 +451,7 @@ def box_office(match1):
             return redirect(url_for('active_match_view', json_data_input=match1._id))
         else:
             return redirect(url_for("error", msg='Sorry. Your password was incorrect or your name was inapropriate. Please try again!'))
-    return render_template('box_office.html', data=match1.match_name, data1=eventtype)
+    return render_template('box_office.html', data=match1, data1=eventtype)
 
 @app.route("/")
 def index():
@@ -873,7 +873,7 @@ def spectator_match_view(json_data_input):
     return render_template("spectator-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
 
 
-@app.route("/player_match_view/<json_data_input>")
+@app.route("/player_match_view/<json_data_input>", methods=['GET', 'POST'])
 def player_match_view(json_data_input):
     json_data = Scoring.return_data(json_data_input)
     scores = Scoring.calc_match_results(json_data['match_info']['id'])
@@ -881,7 +881,11 @@ def player_match_view(json_data_input):
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
     except:
         found_user = ''
+    if request.method =="POST":
+        return redirect(url_for("player_match_view", json_data_input = json_data['match_info']['id']))
     return render_template("player-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
+    
+
 
 @app.route("/active_match_view/<json_data_input>")
 def active_match_view(json_data_input):

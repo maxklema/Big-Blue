@@ -13,10 +13,10 @@
     <body>
         
         <div class="player-form-container">
-            <form class="player-join-form" action="#" method="post">
+            <form class="player-join-form" action="/player_match_view/{{data._id}}" method="post">
                 <img src="{{ url_for('static', filename='logo graphics/whistle.png') }}" alt="">
                 {% if data %}
-                    <h3 id="match-name-display">You are joining: <span style="color: #1b6cd7;">{{data}}</span></h3>
+                    <h3 id="match-name-display">You are joining: <span style="color: #1b6cd7;">{{data.match_name}}</span></h3>
                 {% endif %}
                 <label for="enter-match-textbox">Enter Match Password:</label><br>
                 <input type="password" id="enter-match-textbox" name="password_entry"></input><br>
