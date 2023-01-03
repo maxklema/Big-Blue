@@ -27,6 +27,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/profiledashboard.css') }}">
     </head>
 
+
     <div class="main-container">
         <div class="profile-frame">
             <div class="banner-container">
@@ -62,7 +63,7 @@
             <div class="join-date-and-school-container">
                 <div class="join-date-container">
                     <img src="{{ url_for('static', filename='logo graphics/cake.png') }}" alt="">
-                    <h4 id="join-date">Joined in 2022</h4>
+                    <h4 id="join-date">Joined in {{month }} {{ year }}</h4>
                 </div>
                 <div class="school-name-container">
                     <img id="school-icon"src="{{ url_for('static', filename='logo graphics/schoolicon.png') }}" alt="">
@@ -114,5 +115,7 @@
 
         </div>
     </div>
+
+    
 
 {% endblock %}
