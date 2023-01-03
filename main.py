@@ -179,7 +179,6 @@ class Scoring():
                             break
                 except: 
                     pass
-
             file.seek(0)
             json_object = json.dump(data, file, indent=3)
             file.truncate()
@@ -279,11 +278,31 @@ class Scoring():
                 elif player["team"] == team2[0]:
                     team2[1] += Scoring.add_scores(player["scores"])
             return team1, team2
-    def calc_relation_to_par(filename):
+    def calc_relation_to_par(filename, player):
          with open("static/score_files/" + str(filename) + ".json", "r") as file:
             file.seek(0)
             data = json.load(file)
-            #NEEDS TO FINISH
+            player_score = data["players"][player]["scores"]
+            last_hole = 0
+            current_score = 0
+            current_par = 0
+            for i in range(int(data["match_info"]["number_holes"])):
+                if (player_score[str(i+1)] != 0):
+                    last_hole+=1
+                    current_score += int(player_score[str(i+1)])
+                    current_par += data["match_info"]["par" + str(i+1)]
+                else:
+                    break
+            absolute_relation = str(abs(current_score - current_par))
+            if current_score > current_par:
+                return "+" + absolute_relation + " thru " + str(last_hole)
+            elif current_score < current_par:
+                return "-" + absolute_relation + " thru " + str(last_hole)
+            else:
+                return "E" + " thru " + str(last_hole)
+
+                
+            
 
 
     
@@ -823,6 +842,17 @@ def change_verified_status(admin, user, verified):
     else:
         return 'Sorry, you do not have access to this site.'
 
+@app.route("/spectator_match_view/<json_data_input>")
+def spectator_match_view(json_data_input):
+    json_data = Scoring.return_data(json_data_input)
+    scores = Scoring.calc_match_results(json_data['match_info']['id'])
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ''
+    return render_template("spectator-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
+
+
 @app.route("/active_match_view/<json_data_input>")
 def active_match_view(json_data_input):
     json_data = Scoring.return_data(json_data_input)
@@ -920,6 +950,11 @@ def change_opponent(filename, player1, player2):
     if session['active_user'][2] == 'coach':
         Scoring.change_opponent(filename, player1, player2)
         return redirect(url_for("active_match_view", json_data_input=filename))
+
+@app.route("/calc_relation/<filename>/<player>")
+def calc_relation(filename, player):
+    pass
+
 
 
     
