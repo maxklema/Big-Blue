@@ -908,7 +908,7 @@ def create_course():
     else:
         return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
 
-@app.route("/change_message/<filename>/<message>", methods=['POST'])
+@app.route("/change_message/<filename>/<message>")
 def change_message(filename, message):
     if session['active_user'][2] == 'coach':
         Scoring.change_message(filename, message)
@@ -942,6 +942,7 @@ def end_match(filename):
             pass
         found_match = match.query.filter_by(_id=filename).first()
         found_match.match_live = 0
+        db.session.commit()
         os.remove('static/score_files/' + filename + '.json')
         return redirect(url_for("index"))
 
