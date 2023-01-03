@@ -319,10 +319,6 @@ class Scoring():
 
 #with open("static/score_files/" + filename, "rw") as file:
 
-def object_as_dict(obj):
-    return {c.key: getattr(obj, c.key)
-            for c in SQLAlchemy.inspect(obj).mapper.column_attrs}
-
 def return_admin_data():
     db = sqlite3.connect('instance/webdata.sqlite3')
     data = db.execute("select * from users")
@@ -362,6 +358,13 @@ def verify_user(user: str, verified_input: int):
         print("USER: " + user + " -> VERIFIED: " + verified_input)
     except:
         print("Could not complete this task.")
+
+def match_security(session_type: str, match_id: str) -> bool: #this is for all of the control routes
+    found_match = match.query.filter_by(_id=match_id).first()
+    if 'coach' in session[session_type] and found_match.created_by == session[session_type][0]:
+        return True
+    else:
+        return False
 
 @app.route("/FAQ")
 def FAQ():
@@ -789,10 +792,6 @@ def course_dashboard():
         return render_template("course_dashboard.html", data=found_user, course_data=found_course)
     return redirect(url_for('error', msg="You do not have access to this site."))
 
-@app.route('/active_match/<match_code>')
-def active_match():
-    return '',200
-
 @app.route('/start_match/<match_id>/<course_id>')
 def start_match(match_id, course_id):
     found_match = match.query.filter_by(_id=match_id).first()
@@ -897,9 +896,6 @@ def active_match_view(json_data_input):
     except:
         found_user = ''
 
-  
-
-
     if json_data['match_info']['gamemode'] == 'Match Play':
         players_used = []
         for player in json_data["players"]:
@@ -911,14 +907,10 @@ def active_match_view(json_data_input):
     elif json_data['match_info']['gamemode'] == 'Stroke Play' and json_data['match_info']['match_type'] == 'Teams':
         scores = Scoring.calc_match_results(json_data['match_info']['id'])
 
-    if 'active_user' in session and session['active_user'][2] == 'coach':
+    if match_security('active_user', json_data_input):
         return render_template("active_match_view.html", data=found_user, playerdata=json_data, scoring_data = scores, rank=session['active_user'][2])
-    elif 'active_player' in session:
-        return render_template("active_match_view.html", data=found_user, playerdata=json_data, scoring_data = scores, rank='player')
     else:
-        #here, we are going to return just the data of the match but nothing will be editable
-        #however it is not working yet
-        return redirect(url_for('player_match_view', userdata=found_user, msg="This page is not yet accessible to non-members. Please try again later."))
+        return redirect(url_for('error', userdata=found_user, msg="You do not have access to this site!"))
 
 @app.route("/create_course", methods=['GET', 'POST'])
 def create_course():
@@ -944,32 +936,38 @@ def create_course():
 
 @app.route("/change_message/<filename>/<message>")
 def change_message(filename, message):
-    if session['active_user'][2] == 'coach':
+    if match_security('active_user', filename):
         Scoring.change_message(filename, message)
         return redirect(url_for("active_match_view", json_data_input=filename))
+    else:
+        return redirect(url_for("error", "You do not have access to this method!"))
 
 @app.route("/kick_player/<filename>/<player>")
 def kick_player(filename, player):
-    if session['active_user'][2] == 'coach':
+    if match_security('active_user', filename):
         Scoring.kick_player(filename, player)
         return redirect(url_for("active_match_view", json_data_input=filename))
+    else:
+        return redirect(url_for("error", "You do not have access to this method!"))
 
 @app.route("/add_player/<filename>/<team>/<player_name>")
 def add_player(filename, team, player_name):
-    if session['active_user'][2] == 'coach':
+    if match_security('active_user', filename):
         Scoring.add_player(filename, team, player_name)
         return redirect(url_for("active_match_view", json_data_input=filename))
+    else:
+        return redirect(url_for("error", "You do not have access to this method!"))
 
 @app.route("/edit_score/<filename>/<player>/<hole>/<new_score>")
 def edit_score(filename, player, hole, new_score):
-    if session['active_user'][2] == 'coach' or session['active_user'][2] == 'player': #check if this is player
+    if match_security('active_user', filename) or session['active_user'][2] == 'player' or 'player' in session['active_player']: #check if this is player
         Scoring.edit_score(filename, player, hole, new_score)
         return redirect(url_for("active_match_view", json_data_input=filename))
 
 @app.route("/end_match/<filename>")
 def end_match(filename):
     #TODO: ARCHIVE DATA
-    if session['active_user'][2] == 'coach':
+    if match_security('active_user', filename):
         try:
             del session['active_player']
         except:
@@ -979,12 +977,16 @@ def end_match(filename):
         db.session.commit()
         os.remove('static/score_files/' + filename + '.json')
         return redirect(url_for("index"))
+    else:
+        return redirect(url_for("error", "You do not have access to this method!"))
 
 @app.route("/change_opponent/<filename>/<player1>/<player2>")
 def change_opponent(filename, player1, player2):
-    if session['active_user'][2] == 'coach':
+    if match_security('active_user', filename):
         Scoring.change_opponent(filename, player1, player2)
         return redirect(url_for("active_match_view", json_data_input=filename))
+    else:
+        return redirect(url_for("error", "You do not have access to this method!"))
 
 @app.route("/calc_relation/<filename>/<player>")
 def calc_relation(filename, player):
