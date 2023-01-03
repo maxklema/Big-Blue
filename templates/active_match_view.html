@@ -52,7 +52,7 @@ end match (side)
                                 <div>
                                     <h2>{{player}}</h2>
                                     <div class="card-general-stats">
-                                        <h3>+3 thru 2</h3>
+                                        <h3>{{relation_to_par}}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -87,10 +87,10 @@ end match (side)
             <!-- Match Code Container -->
             <div class="code-container">
                 <img id="code-img" src="{{ url_for('static', filename='logo graphics/codeicon.png') }}" alt="">
-                <h3>Match Code: {{playerdata['match_info']['match_code']}}</h3>
+                <h3 id="match-code-h3">Match Code: {{playerdata['match_info']['match_code']}}</h3>
                 <p>Share this with your players and spectators to join the match</p>
                 <div>
-                    <button id="copy-code-button">❐ Copy Code</button>
+                    <button onclick="copyText();" id="copy-code-button">❐ Copy Code</button>
                 </div>
             </div>
 
@@ -162,12 +162,33 @@ end match (side)
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf-8">
-        
+    
+    <script>
+        //from W3 SCHOOLS
+        function copyText() {
+            let textToCopy = document.getElementById("match-code-h3").innerHTML;
+            textToCopy = textToCopy.substring(12,18);
+            navigator.clipboard.writeText(textToCopy);
+
+            animateButton("copy-code-button");
+
+        }
+
+        function animateButton(button_id) {
+            const button = document.getElementById(button_id);
+            const originalText = button.innerHTML;
+            const originalColor = button.style.backgroundColor;
+            button.style.backgroundColor = "#0da50d";
+            button.innerHTML = "Copied!";
+            setTimeout(() => {
+                button.style.backgroundColor = originalColor;
+                button.innerHTML = originalText;
+            }, 300);
+        }
+    </script>
+
         
 
-    </script>
 
     
           

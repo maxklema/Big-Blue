@@ -84,7 +84,7 @@ end match (side)
                 <h3>Match Code: {{playerdata['match_info']['match_code']}}</h3>
                 <p>Share the match link by clicking the "Copy Link" button below!</p>
                 <div>
-                    <button id="copy-code-button">❐ Copy Link</button>
+                    <button onclick="copyText();" id="copy-code-button">❐ Copy Link</button>
                 </div>
             </div>
 
@@ -114,6 +114,29 @@ end match (side)
 
         </div>
     </div>
+
+    <script>
+        //from W3 SCHOOLS
+        function copyText() {
+            let textToCopy = location;
+            navigator.clipboard.writeText(textToCopy);
+
+            animateButton("copy-code-button");
+
+        }
+
+        function animateButton(button_id) {
+            const button = document.getElementById(button_id);
+            const originalText = button.innerHTML;
+            const originalColor = button.style.backgroundColor;
+            button.style.backgroundColor = "#0da50d";
+            button.innerHTML = "Copied!";
+            setTimeout(() => {
+                button.style.backgroundColor = originalColor;
+                button.innerHTML = originalText;
+            }, 300);
+        }
+    </script>
         
 
 
