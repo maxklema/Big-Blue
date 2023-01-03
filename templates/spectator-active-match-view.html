@@ -1,0 +1,131 @@
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}  
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
+{% block content %}
+
+
+
+<!--
+box for each person
+edit button next to each hole
+par
+score in relation to par
++1 thru nine before expanding
+kick players
+match duration
+refresh button
+match statistics
+    - overall running total
+    - players completed
+    - match code
+message all players ()
+- waiting
+end match (side)
+
+-->
+
+
+<title>Match View | Big Blue</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/coach_match_view.css') }}">  
+    <div class="page-container">
+
+
+        <!-- Player Cards -->
+        <div class="player-cards">
+            {% if playerdata['players'] is defined and playerdata['players']|length == 0 %}
+                <div class="empty-lobby-section">
+                    <img src="{{ url_for('static', filename='logo graphics/empty-golf-cart-icon.png') }}" alt="">
+                    <h5>When Players Join The Match, They Will Show Up Here</h5>
+                </div>    
+            
+            {% endif %}
+
+            {% for player in playerdata['players'] %}
+            <div class="match-card">
+                    <summary>
+                        <div class="card-header-info">
+                            <div class="card-user-information">
+                                <h2>{{player}}</h2>
+                            </div>
+                            <div class="card-general-stats">
+                                <h3>+3 thru 2</h3>
+                            </div>
+                        </div>
+                        <h5>{{playerdata['players'][player]['team']}}</h5>
+                    </summary><details class="custom-details">
+                        <summary>Score Details</summary>
+                        {% for strokes in playerdata['players'][player]['scores'] %}
+                            <div class="player-score-per-hole">
+                                <div class="player-score-per-hole-left-side">
+                                    <p>Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
+                                </div>
+                                <p style="color: #ca3e3e;">{{playerdata['players'][player]['scores'][strokes]}}</p>
+                            </div>    
+                        {% endfor %}
+                </details>
+            </div>
+            {% endfor %}
+        </div>
+        
+        
+        
+
+
+
+        <div class="match-information">
+
+            <!-- Match Code Container -->
+            <div class="code-container">
+                <img id="code-img" src="{{ url_for('static', filename='logo graphics/codeicon.png') }}" alt="">
+                <h3>Match Code: {{playerdata['match_info']['match_code']}}</h3>
+                <p>Share the match link by clicking the "Copy Link" button below!</p>
+                <div>
+                    <button id="copy-code-button">❐ Copy Link</button>
+                </div>
+            </div>
+
+
+
+            <!-- Match Statistics -->
+            <div class="code-container">
+                <img src="{{ url_for('static', filename='logo graphics/statsicon.png') }}" alt="">
+                <h3>Match Statistics</h3>
+                <hr style="margin-bottom: 5px; margin-top: 5px;">
+                {% for team in scoring_data %}
+                    <div class="stat-container">
+                        <h4>{{team[0]}} Score</h4>
+                        <p>{{team[1]}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Coach Message -->
+            <div class="code-container">
+                <img src="{{ url_for('static', filename='logo graphics/messageicon.png') }}" alt="">
+                <h3>Coach Message</h3>
+                <p>No coach message at this time.</p>
+            </div>
+
+            
+
+        </div>
+    </div>
+        
+
+
+    
+          
+
+
+
+
+    
+        
+
+
+
+{% endblock %}

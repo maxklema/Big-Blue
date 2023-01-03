@@ -179,7 +179,6 @@ class Scoring():
                             break
                 except: 
                     pass
-
             file.seek(0)
             json_object = json.dump(data, file, indent=3)
             file.truncate()
@@ -818,6 +817,17 @@ def change_verified_status(admin, user, verified):
         return 'USER: ' + user + " verification status has changed!",200
     else:
         return 'Sorry, you do not have access to this site.'
+
+@app.route("/spectator_match_view/<json_data_input>")
+def spectator_match_view(json_data_input):
+    json_data = Scoring.return_data(json_data_input)
+    scores = Scoring.calc_match_results(json_data['match_info']['id'])
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ''
+    return render_template("spectator-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
+
 
 @app.route("/active_match_view/<json_data_input>")
 def active_match_view(json_data_input):
