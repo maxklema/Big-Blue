@@ -945,7 +945,7 @@ def change_message(filename, message):
         Scoring.change_message(filename, message)
         return redirect(url_for("active_match_view", json_data_input=filename))
     else:
-        return redirect(url_for("error", "You do not have access to this method!"))
+        return redirect(url_for("error", msg="You do not have access to this method!"))
 
 @app.route("/kick_player/<filename>/<player>")
 def kick_player(filename, player):
@@ -953,7 +953,7 @@ def kick_player(filename, player):
         Scoring.kick_player(filename, player)
         return redirect(url_for("active_match_view", json_data_input=filename))
     else:
-        return redirect(url_for("error", "You do not have access to this method!"))
+        return redirect(url_for("error", msg="You do not have access to this method!"))
 
 @app.route("/add_player/<filename>/<team>/<player_name>")
 def add_player(filename, team, player_name):
@@ -961,13 +961,15 @@ def add_player(filename, team, player_name):
         Scoring.add_player(filename, team, player_name)
         return redirect(url_for("active_match_view", json_data_input=filename))
     else:
-        return redirect(url_for("error", "You do not have access to this method!"))
+        return redirect(url_for("error", msg="You do not have access to this method!"))
 
 @app.route("/edit_score/<filename>/<player>/<hole>/<new_score>")
 def edit_score(filename, player, hole, new_score):
     if match_security('active_user', filename) or session['active_user'][2] == 'player' or 'player' in session['active_player']: #check if this is player
         Scoring.edit_score(filename, player, hole, new_score)
         return redirect(url_for("active_match_view", json_data_input=filename))
+    else:
+        return redirect(url_for("error", msg="You do not have access to this method!"))
 
 @app.route("/end_match/<filename>")
 def end_match(filename):
@@ -983,7 +985,7 @@ def end_match(filename):
         os.remove('static/score_files/' + filename + '.json')
         return redirect(url_for("index"))
     else:
-        return redirect(url_for("error", "You do not have access to this method!"))
+        return redirect(url_for("error", msg="You do not have access to this method!"))
 
 @app.route("/change_opponent/<filename>/<player1>/<player2>")
 def change_opponent(filename, player1, player2):
@@ -991,7 +993,7 @@ def change_opponent(filename, player1, player2):
         Scoring.change_opponent(filename, player1, player2)
         return redirect(url_for("active_match_view", json_data_input=filename))
     else:
-        return redirect(url_for("error", "You do not have access to this method!"))
+        return redirect(url_for("error", msg="You do not have access to this method!"))
 
 @app.route("/calc_relation/<filename>/<player>")
 def calc_relation(filename, player):
