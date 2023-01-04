@@ -889,7 +889,11 @@ def player_match_view(json_data_input):
     
 @app.route("/active_match_view/<json_data_input>")
 def active_match_view(json_data_input):
-    json_data = Scoring.return_data(json_data_input)
+    json_data = None
+    try:
+        json_data = Scoring.return_data(json_data_input)
+    except:
+        return redirect(url_for('error', msg='This match is not yet live.'))
     scores = []
     found_user=''
     try:
