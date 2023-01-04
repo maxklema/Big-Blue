@@ -871,7 +871,6 @@ def spectator_match_view(json_data_input):
         found_user = ''
     return render_template("spectator-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
 
-
 @app.route("/player_match_view/<json_data_input>")
 def player_match_view(json_data_input):
     json_data = Scoring.return_data(json_data_input)
