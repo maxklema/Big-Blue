@@ -361,9 +361,12 @@ def verify_user(user: str, verified_input: int):
 
 def match_security(session_type: str, match_id: str) -> bool: #this is for all of the control routes
     found_match = match.query.filter_by(_id=match_id).first()
-    if 'coach' in session[session_type] and found_match.created_by == session[session_type][0]:
-        return True
-    else:
+    try:
+        if 'coach' in session[session_type] and found_match.created_by == session[session_type][0]:
+            return True
+        else:
+            return False
+    except:
         return False
 
 @app.route("/FAQ")
@@ -884,8 +887,6 @@ def player_match_view(json_data_input):
         return redirect(url_for("player_match_view", json_data_input = json_data['match_info']['id']))
     return render_template("player-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
     
-
-
 @app.route("/active_match_view/<json_data_input>")
 def active_match_view(json_data_input):
     json_data = Scoring.return_data(json_data_input)
