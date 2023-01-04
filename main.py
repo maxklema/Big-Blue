@@ -451,9 +451,9 @@ def box_office(match1):
                 tuple_data = (request.form['name_entry'], request.form['team_select'])
             try:
                 Scoring.add_to_lobby(match1._id, tuple_data)
+                session['active_player'] = name
             except:
                 return redirect(url_for('error', msg="Sorry. This match is not yet live or there was a problem creating a live match file. Please check with your match administrator for more information."))
-                session['active_player'] = name
             return redirect(url_for('player_match_view', json_data_input=match1._id))
         else:
             return redirect(url_for("error", msg='Sorry. Your password was incorrect or your name was inapropriate. Please try again!'))
@@ -879,13 +879,15 @@ def spectator_match_view(json_data_input):
 def player_match_view(json_data_input):
     json_data = Scoring.return_data(json_data_input)
     scores = Scoring.calc_match_results(json_data['match_info']['id'])
+    
+
     try:
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
     except:
         found_user = ''
     if request.method =="POST":
-        return redirect(url_for("player_match_view", json_data_input = json_data['match_info']['id']))
-    return render_template("player-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
+        return redirect(url_for("player_match_view", active_player=session['active_player'], json_data_input = json_data['match_info']['id']))
+    return render_template("player-active-match-view.html", active_player=session['active_player'], data=found_user, playerdata=json_data, scoring_data = scores)
     
 @app.route("/active_match_view/<json_data_input>")
 def active_match_view(json_data_input):
@@ -965,9 +967,12 @@ def add_player(filename, team, player_name):
 
 @app.route("/edit_score/<filename>/<player>/<hole>/<new_score>")
 def edit_score(filename, player, hole, new_score):
-    if match_security('active_user', filename) or session['active_user'][2] == 'player' or 'player' in session['active_player']: #check if this is player
+    if match_security('active_user', filename) or session['active_player']: #check if this is player
         Scoring.edit_score(filename, player, hole, new_score)
-        return redirect(url_for("active_match_view", json_data_input=filename))
+        if "active_user" in session:
+            return redirect(url_for("active_match_view", json_data_input=filename))
+        elif "active_player" in session:
+            return redirect(url_for("player_match_view", json_data_input=filename))
     else:
         return redirect(url_for("error", msg="You do not have access to this method!"))
 
@@ -995,9 +1000,10 @@ def change_opponent(filename, player1, player2):
     else:
         return redirect(url_for("error", msg="You do not have access to this method!"))
 
-@app.route("/calc_relation/<filename>/<player>")
+@app.route("/calc_relation/<filename>/<player>", methods=["GET"])
 def calc_relation(filename, player):
-    pass
+    preview = Scoring.calc_relation_to_par(filename, player)
+    return preview, 200
 
 
 
