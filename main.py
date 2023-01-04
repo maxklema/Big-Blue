@@ -454,7 +454,7 @@ def box_office(match1):
             except:
                 return redirect(url_for('error', msg="Sorry. This match is not yet live or there was a problem creating a live match file. Please check with your match administrator for more information."))
                 session['active_player'] = name
-            return redirect(url_for('active_match_view', json_data_input=match1._id))
+            return redirect(url_for('player_match_view', json_data_input=match1._id))
         else:
             return redirect(url_for("error", msg='Sorry. Your password was incorrect or your name was inapropriate. Please try again!'))
     return render_template('box_office.html', data=match1, data1=eventtype)

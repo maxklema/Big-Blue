@@ -107,7 +107,11 @@ end match (side)
             <div class="code-container">
                 <img src="{{ url_for('static', filename='logo graphics/messageicon.png') }}" alt="">
                 <h3>Coach Message</h3>
-                <p>No coach message at this time.</p>
+                {% if not playerdata['message'] %}
+                    <p>There is not a message from the coach yet.</p>
+                {% else %}
+                    <p style="color: #ca3e3e;">"{{playerdata['message']}}"</p>
+                {% endif %}
             </div>
 
             

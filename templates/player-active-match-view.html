@@ -87,40 +87,15 @@ end match (side)
         <div class="match-information">
 
 
-            <!-- Edit Score -->
-            <div class="edit-score-container">
-                <img src="{{ url_for('static', filename='logo graphics/pencil-icon-darkerblue.png') }}" alt="">
-                <h3>Edit Score <span style="color: #0a4ea7;">Hole 1 (Par 4)</span></h3>
-                <input type="number" placeholder="Type Score for Max" id="type-score-input">
-                <div class="row-one-options">
-                    <button onclick="addPar();" id="par-button">Par</button>
-                    <button onclick="addBirdie();">Birdie</button>
-                    <button onclick="addBogey();" id="bogey-button">Bogey</button>
-                </div>
-                <button id="score-opponent"><a href="">Score Opponent Instead</a></button>
-                <button id="submit-score"><a href="">Submit Max's Score</a></button>
-
-            </div>
-
-            <script>
-                function addPar() {
-                    document.getElementById("type-score-input").value = 4;
-                }
-                function addBogey() {
-                    document.getElementById("type-score-input").value = 5;
-                }
-                function addBirdie() {
-                    document.getElementById("type-score-input").value = 3;
-                }
-            </script>
-
-
-
             <!-- Coach Message -->
             <div class="code-container">
                 <img src="{{ url_for('static', filename='logo graphics/messageicon.png') }}" alt="">
                 <h3>Message</h3>
-                <p>Messages from your coach will appear here</p>
+                {% if not playerdata['message'] %}
+                    <p>There is not a message from the coach yet.</p>
+                {% else %}
+                    <p style="color: #ca3e3e;">"{{playerdata['message']}}"</p>
+                {% endif %}
     
             </div>
 
