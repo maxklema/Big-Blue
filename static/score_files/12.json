@@ -31,6 +31,11 @@
       "gamemode": "Stroke Play",
       "id": 12
    },
-   "lobby": [],
+   "lobby": [
+      [
+         "Max",
+         "homestead"
+      ]
+   ],
    "message": ""
 }
