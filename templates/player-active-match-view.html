@@ -59,8 +59,8 @@ end match (side)
 
                             <script>
                                 fetch("/calc_relation/{{playerdata['match_info']['id']}}/{{player}}")
-                                .then(result => document.getElementById("relation_to_par_h3").innerHTML = result);
-
+                                .then(response => response.text())
+                                .then(data => document.getElementById('relation_to_par_h3').innerHTML = data);
                             </script>
                         </div>
                         <h5>{{playerdata['players'][player]['team']}}</h5>

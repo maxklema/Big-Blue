@@ -877,17 +877,20 @@ def spectator_match_view(json_data_input):
 
 @app.route("/player_match_view/<json_data_input>", methods=['GET', 'POST'])
 def player_match_view(json_data_input):
-    json_data = Scoring.return_data(json_data_input)
-    scores = Scoring.calc_match_results(json_data['match_info']['id'])
-    
+    if 'active_player' in session:
+        json_data = Scoring.return_data(json_data_input)
+        scores = Scoring.calc_match_results(json_data['match_info']['id'])
+        
 
-    try:
-        found_user = users.query.filter_by(username=session['active_user'][0]).first()
-    except:
-        found_user = ''
-    if request.method =="POST":
-        return redirect(url_for("player_match_view", active_player=session['active_player'], json_data_input = json_data['match_info']['id']))
-    return render_template("player-active-match-view.html", active_player=session['active_player'], data=found_user, playerdata=json_data, scoring_data = scores)
+        try:
+            found_user = users.query.filter_by(username=session['active_user'][0]).first()
+        except:
+            found_user = ''
+        if request.method =="POST":
+            return redirect(url_for("player_match_view", active_player=session['active_player'], json_data_input = json_data['match_info']['id']))
+        return render_template("player-active-match-view.html", active_player=session['active_player'], data=found_user, playerdata=json_data, scoring_data = scores)
+    else:
+        return redirect(url_for('error', msg='You do not have access to this site until you join a match.'))
     
 @app.route("/active_match_view/<json_data_input>")
 def active_match_view(json_data_input):
@@ -1003,6 +1006,7 @@ def change_opponent(filename, player1, player2):
 @app.route("/calc_relation/<filename>/<player>", methods=["GET"])
 def calc_relation(filename, player):
     preview = Scoring.calc_relation_to_par(filename, player)
+    print(preview)
     return preview, 200
 
 
