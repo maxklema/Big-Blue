@@ -114,6 +114,34 @@
 
 
         </div>
+        <!-- Suggest Users to View/Follow -->
+        <div class="suggested-users">
+            <h3>You may know</h3>
+            {% for i in random_users_list %}
+                <div class="random-user-one">
+                    <a href="/profile/{{i.username}}">
+                        <div>
+                            <img src="{{ url_for('static', filename='logo graphics/user_photos/' + i.pic) }}" alt="">
+                        </div>
+                        <div>
+                            <div class="name-and-verification">
+                                <h4 id="suggested-name">{{i.name}}</h4>
+                                {% if i.verified == 1 %}
+                                    <img id="checkmark" src="{{ url_for('static', filename='logo graphics/normalverify.png') }}" alt="">
+                                {% elif i.verified == 2 %}
+                                    <img id="checkmark" src="{{ url_for('static', filename='logo graphics/verify.png') }}" alt="">
+                                {% endif %}
+                            </div>
+                            <h5>@{{i.username}}</h5>
+                        </div>
+
+
+                    </a>
+                
+
+                </div>
+            {% endfor %}
+        </div>
     </div>
 
     

@@ -515,6 +515,22 @@ def dashboard():
     list_of_months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     month_name = list_of_months[month_index-1]
 
+    #chooses three random users
+    count = users.query.count()
+    random_offset = randint(0, count - 1)
+    random_offset2 = randint(0, count - 1)
+    random_offset3 = randint(0, count - 1)
+    random_user_one = users.query.offset(random_offset).limit(1).first()
+    random_user_two = users.query.offset(random_offset2).limit(1).first()
+    while (random_user_two == random_user_one):
+        random_offset2 = randint(0, count - 1)
+        random_user_two = users.query.offset(random_offset2).limit(1).first() 
+    random_user_three = users.query.offset(random_offset3).limit(1).first()
+    while (random_user_three == random_user_one or random_user_three == random_user_two):
+        random_offset3 = randint(0, count - 1)
+        random_user_three = users.query.offset(random_offset3).limit(1).first() 
+    random_users_list = [random_user_one, random_user_two, random_user_three]
+
 
     if 'active_user' in session:
         if request.method == "POST":
@@ -530,7 +546,7 @@ def dashboard():
 
             db.session.commit()
 
-        return render_template("dashboard.html", month = month_name, year=date_year, data=found_user)
+        return render_template("dashboard.html", month = month_name, random_users_list=random_users_list, year=date_year, data=found_user)
     return redirect(url_for('error', msg="You must login to access this page."))
 
 @app.route("/profile/<user>", methods=['GET', 'POST'])
@@ -568,7 +584,7 @@ def get_user_profile(user):
     random_users_list = [random_user_one, random_user_two, random_user_three]
 
     if (logged_in_user == found_user):
-        return render_template("dashboard.html", month = month_name, year=date_year, data1=found_user, data=found_user)
+        return render_template("dashboard.html", month = month_name, year=date_year, random_users_list=random_users_list, data1=found_user, data=found_user)
     return render_template("user_profile_page.html", month = month_name, year=date_year, random_users_list=random_users_list, data1=found_user, data=logged_in_user)
     
 
