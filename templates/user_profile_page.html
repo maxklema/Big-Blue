@@ -7,7 +7,7 @@
 {% endif %}
 {% block content %}
 
-<title>Big Blue | Box Office</title>
+<title>{{data1.name}} || Big Blue</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/profiledashboard.css') }}">      
 
     <div class="main-container">
@@ -72,7 +72,7 @@
                                     <img id="checkmark" src="{{ url_for('static', filename='logo graphics/verify.png') }}" alt="">
                                 {% endif %}
                             </div>
-                            <h5>@{{i.username}}</h5>
+                            <h5 id="suggested-username">@{{i.username}}</h5>
                         </div>
 
 

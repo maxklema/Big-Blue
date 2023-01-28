@@ -56,6 +56,31 @@ header a {
     background-color: transparent;
 }
 
+header div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#searchbar {
+    margin-left: 10px;
+    width: 400px;
+    height: 35px;
+    border: none;
+    padding: 5px 35px;
+    font-family: bigBlueRegular;
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: white;
+    opacity: .8;
+    background-image: url(../logo\ graphics/searchicon.png);
+    background-size: 17px;
+    background-repeat: no-repeat;
+    background-position: 9px 9px;
+
+
+}
+
 .mobile-hrefs {
     position: fixed;
     top: 0;
@@ -207,6 +232,11 @@ html, body {
 
 #suggest-name {
     overflow: hidden;
+}
+
+#suggested-username {
+    overflow: hidden;
+    font-family: bigBlueRegular;
 }
 
 .random-user-one a {

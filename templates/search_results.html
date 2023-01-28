@@ -1,0 +1,24 @@
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}  
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
+{% block content %}
+
+
+
+
+<title>Search Results | Big Blue</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/search_results.css') }}">      
+
+<div>
+    {% for i in search_query %}
+        <p>{{i.username}}</p>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}
