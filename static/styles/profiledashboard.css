@@ -256,6 +256,7 @@ html, body {
     width: 40px;
     border-radius: 100%;
     margin-right: 15px;
+    object-fit: cover;
 }
 
 .profile-frame {

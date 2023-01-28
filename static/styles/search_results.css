@@ -196,3 +196,105 @@ html, body {
     height: 100%;
     background-color: #eeeeee;
 }
+
+.main-container {
+    display: flex;
+    justify-content: center;
+}
+
+#no-results {
+    height: 300px;
+    width: 300px;
+    margin-top: 5%;
+}
+
+#results {
+    font-size: 20px;
+    font-family: bigBlueMedium;
+    margin-top: 3%;
+    text-align: center;
+}
+
+
+.grid-container {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 355px 355px 355px;
+    row-gap: 50px;
+    column-gap: 20px;
+}
+
+#profile-card {
+    width: 300px;
+    max-height: 200px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    text-decoration: none;
+    color: black;
+}
+
+.profile-pic-and-name-container {
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    padding-bottom: 5px;
+    border-bottom: 0.5px solid grey;
+}
+
+#ppic {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin: auto;
+    object-fit: cover;
+}
+
+#checkmark {
+    width: 17px;
+    height: 17px;
+    margin-left: 5px;
+}
+
+.name-and-verification {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+}
+
+.profile-pic-container {
+    margin-right: 10px;
+}
+
+#suggested-username {
+    font-family: bigBlueRegular;
+}
+
+.card-bio-container {
+    font-family: bigBlueRegular;
+    margin-top: 3px;
+}
+
+.team {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.team img {
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+}
+
+.team p {
+    font-family: bigBlueMedium;
+
+}

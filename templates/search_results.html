@@ -13,11 +13,48 @@
 <title>Search Results | Big Blue</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/search_results.css') }}">      
 
-<div>
-    {% for i in search_query %}
-        <p>{{i.username}}</p>
-    {% endfor %}
-</div>
+{% if search_query.count() == 0 %}
+    <div class="main-container">
+        <img id="no-results" src="{{ url_for('static', filename='logo graphics/no-search-results.png') }}" alt="">
+    </div>
+{% else %}
+    {% set query_length = search_query.count() %}
+    <h2 id="results">{{query_length}} Results for "{{keyword}}"</h2>
+    <div class="main-container">
+        <div class="grid-container">
+            {% for i in search_query %}
+                <a href="/profile/{{i.username}}" id="profile-card">
+                    <div class="profile-pic-and-name-container">
+                        <div class="profile-pic-container">
+                            <img id="ppic" src="{{ url_for('static', filename='logo graphics/user_photos/' + i.pic) }}" alt="">
+                        </div>
+                        <div>
+                            <div class="name-and-verification">
+                                <h4 id="suggested-name">{{i.name}}</h4>
+                                {% if i.verified == 1 %}
+                                    <img id="checkmark" id="checkmark" src="{{ url_for('static', filename='logo graphics/normalverify.png') }}" alt="">
+                                {% elif i.verified == 2 %}
+                                    <img id="checkmark" src="{{ url_for('static', filename='logo graphics/verify.png') }}" alt="">
+                                {% endif %}
+                            </div>
+                            <h5 id="suggested-username">@{{i.username}}</h5>
+                        </div>
+                    </div>
+                    <div class="team">
+                        <img src="{{ url_for('static', filename='logo graphics/location-pin.png') }}" alt="">
+                        <p>{{ i.team|truncate(20) }}</p>
+                    </div>
+                    <p class="card-bio-container">{{ i.bio|truncate(20) }}</p>
+                    
+                </a>    
+            {% endfor %}
+        </div>
+        
+    </div>
+{% endif %}
+
+
+
 
 
 

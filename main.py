@@ -1071,16 +1071,18 @@ def calc_relation(filename, player):
     return preview, 200
 
 
-@app.route("/search", methods=["GET", "POST"])
-def search():
+@app.route("/search/<searchbar>", methods=["GET", "POST"])
+def search(searchbar):
     found_user = ""
     try:
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
     except:
         found_user = ""
-    keyword = request.form['searchbar']
-    search_query = db.session.query(users).filter(users.username.like(f"%{keyword}%"))
-    return render_template("search_results.html", search_query=search_query, data=found_user)
+    keyword = searchbar
+    if (searchbar == ""):
+        keyword = "404"
+    search_query = db.session.query(users).filter(users.username.like(f"%{keyword}%")).limit(100)
+    return render_template("search_results.html", keyword=keyword, search_query=search_query, data=found_user)
     
     
 
