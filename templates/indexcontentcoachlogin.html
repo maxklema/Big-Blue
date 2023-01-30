@@ -30,16 +30,6 @@
                     <input id="searchbar" name="searchbar" type="text" placeholder="search users"></input>
                 </form>
 
-                <script>
-                    document.getElementById("search-form").onsubmit = function() {
-                        var query = document.getElementById("searchbar").value;
-                        if (query == ""){
-                            query = "maxklema";
-                        }
-                        this.action = this.action + query;
-
-                    }
-                </script>
             </div>
             <button id="menu-button" onclick="openMenu();" hidden><h1 class="mobile-navigation" id="hamburger-icon" style="color: white;" hidden>☰</h1></button>
                                             
@@ -50,11 +40,15 @@
                 <button id="close-menu-button" onclick="closeMenu();"><h1>✕</h1></button>
             </div>
             <div class="content-container">
+                <form id="search-form-two" action="/search/" method="post">
+                    <input id="searchbar" name="searchbar" type="text" placeholder="search users"></input>
+                </form>
                 <a href="/match_dashboard">Dashboard</a>
                 <a href="/logout">Logout</a>
                 <a href="/dashboard">{{data.username}}</a>
                 <a href=""><img id="profile-pic" src="{{ url_for('static', filename='logo graphics/user_photos/' + data.pic) }}" alt=""></a>
             </div>
+            
     
         </div> 
 
@@ -103,6 +97,27 @@
 
 
     </body>
+
+    <script>
+        document.getElementById("search-form").onsubmit = function() {
+            var query = document.getElementById("searchbar").value;
+            if (query == ""){
+                query = "maxklema";
+            }
+            this.action = this.action + query;
+
+        }
+
+        document.getElementById("search-form-two").onsubmit = function() {
+            var query = document.getElementById("searchbar").value;
+            if (query == ""){
+                query = "maxklema";
+            }
+            this.action = this.action + query;
+
+        }
+
+    </script>
 
 
 

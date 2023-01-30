@@ -1081,7 +1081,11 @@ def search(searchbar):
     keyword = searchbar
     if (searchbar == ""):
         keyword = "404"
-    search_query = db.session.query(users).filter(users.username.like(f"%{keyword}%")).limit(100)
+    search_query = db.session.query(users).filter(
+        db.or_(
+            users.username.like(f"%{keyword}%"),
+            users.name.like(f"%{keyword}%")
+        )).limit(100)
     return render_template("search_results.html", keyword=keyword, search_query=search_query, data=found_user)
     
     
