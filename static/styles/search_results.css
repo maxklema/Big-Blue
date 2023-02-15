@@ -204,8 +204,9 @@ html, body {
 }
 
 #no-results {
-    height: 300px;
-    width: 300px;
+    height: 250px;
+    width: 250px;
+    margin-top: 5%;
 }
 
 #results {
