@@ -153,6 +153,7 @@ class Scoring():
             file.seek(0)
             json_object = json.dump(data, file, indent=3)
             file.truncate()
+
     def add_to_lobby(filename, player):
         with open("static/score_files/" + str(filename) + ".json", "r+") as file:
             file.seek(0)
@@ -188,7 +189,6 @@ class Scoring():
             file.seek(0)
             json_object = json.dump(data, file, indent=3)
             file.truncate()
-
 
     def add_player(filename, player, team):
         #json.load("test.json")
@@ -264,12 +264,14 @@ class Scoring():
         else:
             status = "AS" + " thru " + str(last_hole)
         return status
+
     def add_scores(data):
         sum = 0
         for hole in data:
             
             sum += int(data[str(hole)])
         return sum
+
     def calc_match_results(filename):
         with open("static/score_files/" + str(filename) + ".json", "r") as file:
             file.seek(0)
@@ -280,10 +282,11 @@ class Scoring():
             for player in data["players"].values():
                 print(player)
                 if player["team"] == team1[0]:
-                    team1[1] += Scoring.add_scores(player['scores'])#UGLY ALG WILL CAUSE ERROR
+                    team1[1] += Scoring.add_scores(player['scores'])
                 elif player["team"] == team2[0]:
                     team2[1] += Scoring.add_scores(player["scores"])
             return team1, team2
+
     def calc_relation_to_par(filename, player):
          with open("static/score_files/" + str(filename) + ".json", "r") as file:
             file.seek(0)
@@ -306,11 +309,6 @@ class Scoring():
                 return "-" + absolute_relation + " thru " + str(last_hole)
             else:
                 return "E" + " thru " + str(last_hole)
-
-                
-            
-
-
     
     def return_data(filename):
         with open("static/score_files/" + str(filename) + ".json", "r") as file:
