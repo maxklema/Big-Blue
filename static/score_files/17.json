@@ -1,63 +1,51 @@
 {
    "players": {
-      "Grayson": {
-         "team": "Homestead",
-         "opponent": "Patrick",
-         "scores": {
-            "1": "5",
-            "2": "2",
-            "3": "3",
-            "4": 0,
-            "5": 0,
-            "6": 0,
-            "7": 0,
-            "8": 0,
-            "9": 0
-         }
-      },
       "Max": {
          "team": "Homestead",
-         "opponent": "Luke",
-         "scores": {
-            "1": "5",
-            "2": "2",
-            "3": "3",
-            "4": 0,
-            "5": 0,
-            "6": 0,
-            "7": 0,
-            "8": 0,
-            "9": 0
-         }
-      },
-      "Patrick": {
-         "team": "Leo",
-         "opponent": "Grayson",
-         "scores": {
-            "1": "5",
-            "2": "2",
-            "3": "3",
-            "4": 0,
-            "5": 0,
-            "6": 0,
-            "7": 0,
-            "8": 0,
-            "9": 0
-         }
-      },
-      "Luke": {
-         "team": "Leo",
          "opponent": "Max",
          "scores": {
-            "1": "5",
-            "2": "2",
-            "3": "3",
+            "1": 0,
+            "2": 0,
+            "3": 0,
             "4": 0,
             "5": 0,
             "6": 0,
             "7": 0,
             "8": 0,
-            "9": 0
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0
+         }
+      },
+      "John": {
+         "team": "Leo",
+         "opponent": null,
+         "scores": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0
          }
       }
    },
@@ -80,19 +68,18 @@
       "par16": 3,
       "par17": 4,
       "par18": 5,
-      "match_code": "518275",
+      "match_code": "429995",
       "match_password": "password",
       "number_holes": "18",
-      "match_name": "Match Play Test",
+      "match_name": "Match Play Two",
       "start_time": "2023-02-19",
       "end_time": "2023-02-19",
       "home_team": "Homestead",
       "away_team": "Leo",
       "match_type": "Teams",
       "gamemode": "Match Play",
-      "id": 16
+      "id": 17
    },
-   "lobby": [
-   ],
+   "lobby": [],
    "message": ""
 }
