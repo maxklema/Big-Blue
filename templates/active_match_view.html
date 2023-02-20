@@ -35,52 +35,63 @@ end match (side)
 
 
         <!-- Player Cards -->
-        <div class="player-cards">
-            {% if playerdata['players'] is defined and playerdata['players']|length == 0 %}
-                <div class="empty-lobby-section">
-                    <img src="{{ url_for('static', filename='logo graphics/empty-golf-cart-icon.png') }}" alt="">
-                    <h5>When You Accept Players, They Will Show Up Here</h5>
-                </div>    
-            
-            {% endif %}
 
-            {% for player in playerdata['players'] %}
-            <div class="match-card">
-                    <summary>
-                        <div class="card-header-info">
-                            <div class="card-user-information">
-                                <div>
-                                    <h2>{{player}}</h2>
-                                    <div class="card-general-stats">
-                                        <h3 id="relation_to_par_h3_{{player}}"></h3>
+
+        <!-- Match View -->
+        {% if playerdata['match_info']['gamemode'] == 'Match Play' %}
+
+        <!-- Stroke Play -->
+
+        {% elif playerdata['match_info']['gamemode'] == 'Stroke Play'%}
+    
+            <div class="player-cards">
+                {% if playerdata['players'] is defined and playerdata['players']|length == 0 %}
+                    <div class="empty-lobby-section">
+                        <img src="{{ url_for('static', filename='logo graphics/empty-golf-cart-icon.png') }}" alt="">
+                        <h5>When You Accept Players, They Will Show Up Here</h5>
+                    </div>    
+                
+                {% endif %}
+
+                {% for player in playerdata['players'] %}
+                <div class="match-card">
+                        <summary>
+                            <div class="card-header-info">
+                                <div class="card-user-information">
+                                    <div>
+                                        <h2>{{player}}</h2>
+                                        <div class="card-general-stats">
+                                            <h3 id="relation_to_par_h3_{{player}}"></h3>
+                                        </div>
+                                        <script>
+                                            fetch("/calc_relation/{{playerdata['match_info']['id']}}/{{player}}")
+                                            .then(response => response.text())
+                                            .then(data => document.getElementById('relation_to_par_h3_{{player}}').innerHTML = data);
+                                        </script>
                                     </div>
-                                    <script>
-                                        fetch("/calc_relation/{{playerdata['match_info']['id']}}/{{player}}")
-                                        .then(response => response.text())
-                                        .then(data => document.getElementById('relation_to_par_h3_{{player}}').innerHTML = data);
-                                    </script>
+                                </div>
+                                <div class="remove-player-card">
+                                    <a href="/kick_player/{{playerdata['match_info']['id']}}/{{player}}">Remove</a>
                                 </div>
                             </div>
-                            <div class="remove-player-card">
-                                <a href="/kick_player/{{playerdata['match_info']['id']}}/{{player}}">Remove</a>
-                            </div>
-                        </div>
-                        <h5>{{playerdata['players'][player]['team']}}</h5>
-                    </summary><details class="custom-details">
-                        <summary>Score Details</summary>
-                        {% for strokes in playerdata['players'][player]['scores'] %}
-                            <div class="player-score-per-hole">
-                                <div class="player-score-per-hole-left-side">
-                                    <p>Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
-                                    <input type="number" id="player_score_{{player}}_{{strokes}}" name="" value="{{playerdata['players'][player]['scores'][strokes]}}">
-                                </div>
-                                <a id="player_input_form" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update Hole {{strokes}}</a>
-                            </div>    
-                        {% endfor %}
-                </details>
+                            <h5>{{playerdata['players'][player]['team']}}</h5>
+                        </summary><details class="custom-details">
+                            <summary>Score Details</summary>
+                            {% for strokes in playerdata['players'][player]['scores'] %}
+                                <div class="player-score-per-hole">
+                                    <div class="player-score-per-hole-left-side">
+                                        <p>Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
+                                        <input type="number" id="player_score_{{player}}_{{strokes}}" name="" value="{{playerdata['players'][player]['scores'][strokes]}}">
+                                    </div>
+                                    <a id="player_input_form" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update Hole {{strokes}}</a>
+                                </div>    
+                            {% endfor %}
+                    </details>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
+
+        {% endif %}
         
         
         
