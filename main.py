@@ -316,7 +316,11 @@ class Scoring():
             data = json.load(file)
             return data
 
-#with open("static/score_files/" + filename, "rw") as file:
+def archive_match(filename):
+    with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "a+") as file:
+        file.seek(0)
+        json_object = json.dump(Scoring.return_data(filename), file, indent=3)
+        file.truncate()
 
 def return_admin_data():
     db = sqlite3.connect('instance/webdata.sqlite3')
@@ -1054,6 +1058,7 @@ def end_match(filename):
         found_match = match.query.filter_by(_id=filename).first()
         found_match.match_live = 0
         db.session.commit()
+        archive_match(filename)
         os.remove('static/score_files/' + filename + '.json')
         return redirect(url_for("index"))
     else:
