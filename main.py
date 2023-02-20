@@ -27,7 +27,14 @@ characters = list(string.digits)
 
 db = SQLAlchemy(app)
 
+class match_archive(db.Model):
+    _id = db.Column("id", db.Integer, primary_key=True)
+    username = db.Column(db.String(100))
+    filename = db.Column(db.String)
 
+    def __init__(self, username, filename):
+        self.username = username
+        self.filename = filename
 
 class users(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -316,7 +323,11 @@ class Scoring():
             data = json.load(file)
             return data
 
-#with open("static/score_files/" + filename, "rw") as file:
+def archive_match(filename):
+    with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "a+") as file:
+        file.seek(0)
+        json_object = json.dump(Scoring.return_data(filename), file, indent=3)
+        file.truncate()
 
 def return_admin_data():
     db = sqlite3.connect('instance/webdata.sqlite3')
@@ -528,6 +539,9 @@ def dashboard():
         random_offset3 = randint(0, count - 1)
         random_user_three = users.query.offset(random_offset3).limit(1).first() 
     random_users_list = [random_user_one, random_user_two, random_user_three]
+
+    #find recent matches
+    #put code here
 
 
     if 'active_user' in session:
@@ -743,7 +757,7 @@ def create_account():
 
         try: 
             today_date = datetime.now()
-            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png", "BigBluebanner.png", today_date, today_date)
+            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png", "BigBluebanner.png", today_date, today_date, 0)
             db.session.add(new_user)
             db.session.commit()
 
@@ -1051,10 +1065,18 @@ def end_match(filename):
             del session['active_player']
         except:
             pass
+
         found_match = match.query.filter_by(_id=filename).first()
         found_match.match_live = 0
+
+        new_entry = match_archive(session['active_user'][0], filename)
+        db.session.add(new_entry)
+
         db.session.commit()
+
+        archive_match(filename)
         os.remove('static/score_files/' + filename + '.json')
+
         return redirect(url_for("index"))
     else:
         return redirect(url_for("error", msg="You do not have access to this method!"))
