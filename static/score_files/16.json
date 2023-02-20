@@ -115,18 +115,18 @@
       "par16": 3,
       "par17": 4,
       "par18": 5,
-      "match_code": "577971",
-      "match_password": "Minecraft",
+      "match_code": "518275",
+      "match_password": "password",
       "number_holes": "18",
-      "match_name": "First Match [Test]",
+      "match_name": "Match Play Test",
       "start_time": "2023-02-19",
       "end_time": "2023-02-19",
-      "home_team": "Homestead",
-      "away_team": "Leo",
-      "match_type": "Teams",
-      "gamemode": "Stroke Play",
+      "home_team": "n/a",
+      "away_team": "n/a",
+      "match_type": "Singles",
+      "gamemode": "Match Play",
       "id": 16
    },
    "lobby": [],
-   "message": "Test"
+   "message": ""
 }
