@@ -704,12 +704,17 @@ def delete_match(match_to_delete):
         return redirect(url_for('error', msg="You cannot delete matches that are live!"))
     elif 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
         #removes json file
-        filename = str(found_match._id) + ".json"
-        os.remove(os.path.join(app.config['SCORING_FOLDER'], str(filename)))
-        #removes match from DB
-        db.session.delete(found_match)
-        db.session.commit()
-        return redirect(url_for("match_dashboard"))
+        try:
+            filename = str(found_match._id) + ".json"
+            os.remove(os.path.join(app.config['SCORING_FOLDER'], str(filename)))
+            #removes match from DB
+            db.session.delete(found_match)
+            db.session.commit()
+            return redirect(url_for("match_dashboard"))
+        except:
+            db.session.delete(found_match)
+            db.session.commit()
+            return redirect(url_for("match_dashboard"))
     return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/delete_course/<course_to_delete>")

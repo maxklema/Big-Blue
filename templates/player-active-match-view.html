@@ -54,13 +54,13 @@ end match (side)
                                 <h2>{{player}}</h2>
                             </div>
                             <div class="card-general-stats">
-                                <h3 id="relation_to_par_h3"></h3>
+                                <h3 id="relation_to_par_h3_{{player}}"></h3>
                             </div>
 
                             <script>
                                 fetch("/calc_relation/{{playerdata['match_info']['id']}}/{{player}}")
                                 .then(response => response.text())
-                                .then(data => document.getElementById('relation_to_par_h3').innerHTML = data);
+                                .then(data => document.getElementById('relation_to_par_h3_{{player}}').innerHTML = data);
                             </script>
                         </div>
                         <h5>{{playerdata['players'][player]['team']}}</h5>

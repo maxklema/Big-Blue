@@ -1,5 +1,78 @@
 {
-   "players": {},
+   "players": {
+      "Dommy": {
+         "team": "Homestead",
+         "opponent": null,
+         "scores": {
+            "1": "3",
+            "2": "2",
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0
+         }
+      },
+      "Grayson": {
+         "team": "Homestead",
+         "opponent": null,
+         "scores": {
+            "1": "4",
+            "2": "3",
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0
+         }
+      },
+      "Max": {
+         "team": "Leo",
+         "opponent": null,
+         "scores": {
+            "1": "1",
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0
+         }
+      }
+   },
    "match_info": {
       "par1": 4,
       "par2": 4,
@@ -19,12 +92,12 @@
       "par16": 3,
       "par17": 4,
       "par18": 5,
-      "match_code": "748922",
-      "match_password": "password",
+      "match_code": "577971",
+      "match_password": "Minecraft",
       "number_holes": "18",
-      "match_name": "My Second Match",
-      "start_time": "2023-01-09",
-      "end_time": "2023-01-09",
+      "match_name": "First Match [Test]",
+      "start_time": "2023-02-19",
+      "end_time": "2023-02-19",
       "home_team": "Homestead",
       "away_team": "Leo",
       "match_type": "Teams",
@@ -32,5 +105,5 @@
       "id": 16
    },
    "lobby": [],
-   "message": ""
+   "message": "Test"
 }
