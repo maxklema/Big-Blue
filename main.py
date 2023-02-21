@@ -31,10 +31,12 @@ class match_archive(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     username = db.Column(db.String(100))
     filename = db.Column(db.String)
+    date_added = db.Column()
 
-    def __init__(self, username, filename):
+    def __init__(self, username, filename, date_added):
         self.username = username
         self.filename = filename
+        self.date_added = date_added
 
 class users(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -329,6 +331,12 @@ def archive_match(filename):
         json_object = json.dump(Scoring.return_data(filename), file, indent=3)
         file.truncate()
 
+def get_archived_match(filename):
+    with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "r") as file:
+        file.seek(0)
+        data = json.load(file)
+        return data
+
 def return_admin_data():
     db = sqlite3.connect('instance/webdata.sqlite3')
     data = db.execute("select * from users")
@@ -541,8 +549,10 @@ def dashboard():
     random_users_list = [random_user_one, random_user_two, random_user_three]
 
     #find recent matches
-    #put code here
-
+    recent_matches = match_archive.query.filter_by(username=session['active_user'][0]).all()
+    recent_matches = [(get_archived_match(thing.filename), thing.date_added) for thing in recent_matches]
+    recent_matches = recent_matches[::-1]
+    print(recent_matches)
 
     if 'active_user' in session:
         if request.method == "POST":
@@ -558,7 +568,7 @@ def dashboard():
 
             db.session.commit()
 
-        return render_template("dashboard.html", month = month_name, random_users_list=random_users_list, year=date_year, data=found_user)
+        return render_template("dashboard.html", month = month_name, random_users_list=random_users_list, recent_matches=recent_matches, year=date_year, data=found_user)
     return redirect(url_for('error', msg="You must login to access this page."))
 
 @app.route("/profile/<user>", methods=['GET', 'POST'])
@@ -599,12 +609,6 @@ def get_user_profile(user):
         return render_template("dashboard.html", month = month_name, year=date_year, random_users_list=random_users_list, data1=found_user, data=found_user)
     return render_template("user_profile_page.html", month = month_name, year=date_year, random_users_list=random_users_list, data1=found_user, data=logged_in_user)
     
-
-
-
-
-
-
 @app.route("/create_match", methods=['GET', 'POST'])
 def create_match():
     found_user = users.query.filter_by(username=session['active_user'][0]).first()
@@ -756,7 +760,7 @@ def create_account():
             return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.", data=found_user)
 
         try: 
-            today_date = datetime.now()
+            today_date = datetime.strptime(str(found_user.first_login), "%Y-%m-%d %H:%M:%S.%f")
             new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png", "BigBluebanner.png", today_date, today_date, 0)
             db.session.add(new_user)
             db.session.commit()
@@ -1069,7 +1073,8 @@ def end_match(filename):
         found_match = match.query.filter_by(_id=filename).first()
         found_match.match_live = 0
 
-        new_entry = match_archive(session['active_user'][0], filename)
+        current_time = datetime.strptime(str(datetime.now()), "%Y%m%d")
+        new_entry = match_archive(session['active_user'][0], filename, current_time)
         db.session.add(new_entry)
 
         db.session.commit()

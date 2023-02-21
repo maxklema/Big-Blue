@@ -107,12 +107,6 @@
                 </a>
             </div>
         </div>
-        <!--
-        <div class="recent-matches-frame">
-            <h3>{{data.name}}'s Recent Matches</h3>
-            <p>Display matches here</p>
-        </div>
-        -->
 
         <!-- Suggest Users to View/Follow -->
         <div class="suggested-users">
@@ -140,6 +134,17 @@
                 
 
                 </div>
+            {% endfor %}
+        </div>
+        
+        <!--You need to write match[0] before accessing any of the json attributes
+        This is because it is in a tuple and needs to be accessed first-->
+        <div class="suggested-users">
+            <h3>Your Recent Matches</h3>
+            <hr>
+            {% for match in recent_matches %}
+                <p color="blue">{{match[1]}}</p> <!--Time that the match ended-->
+                <p>{{match[0]["match_info"]["match_name"]}}</p> <!--Json data from archive!-->
             {% endfor %}
         </div>
     </div>
