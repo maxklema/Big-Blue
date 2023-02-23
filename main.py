@@ -885,6 +885,8 @@ def start_match(match_id, course_id):
     print(session['active_user'][0], found_match.created_by)
     if found_match.match_live == 1:
         return redirect(url_for('error', data=found_user, msg='This match has already started. Try refreshing your match dashboard to gain access.'))
+    elif found_match.match_live == 2:
+         return redirect(url_for('error', data=found_user, msg='This match has finished. Try creating another match.'))
     elif 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][0] == found_course.created_by:
         #match_live is updated in database, from 0 (not live) to 1 (live)
         found_match.match_live = 1
@@ -1071,9 +1073,9 @@ def end_match(filename):
             pass
 
         found_match = match.query.filter_by(_id=filename).first()
-        found_match.match_live = 0
+        found_match.match_live = 2
 
-        current_time = datetime.strptime(str(datetime.now()), "%Y%m%d")
+        current_time = datetime.now()
         new_entry = match_archive(session['active_user'][0], filename, current_time)
         db.session.add(new_entry)
 

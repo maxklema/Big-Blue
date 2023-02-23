@@ -243,7 +243,7 @@ html, body {
     display: flex;
     justify-content: left;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 12px;
 }
 
 .random-user-one a {
@@ -511,6 +511,29 @@ html, body {
     background-color: #2176e8;
     align-items: center;
     color: white;
+}
+
+.recent-match-container {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.reload-icon h1 {
+    color: #2176e8;
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+.past-match-info p {
+    font-size: 15px;
+    font-weight: 200;
+    font-family: bigBlueRegular;
+}
+
+.past-match-info h4 {
+    font-family: bigBlueSemibold;
 }
 
 #dashboard-icon{

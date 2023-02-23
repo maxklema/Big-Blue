@@ -268,6 +268,125 @@
                             {% endif %}
                         {% endfor %}
 
+                    </div> 
+                {% elif item.match_live == 2 %}
+                    <div class="match-container-concluded">
+                        <div id="row-one-concluded">
+                            <div>
+                                <h3>Join Code: {{item.match_code}}</h3>
+                            </div>
+                            <div id="concluded-message">
+                                <h4>Finished</h4>
+                            </div>
+                                
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Name</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_name}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Event Type</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.event_type}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Match Type</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_type}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Home Team</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.teams1.split('~')[0]}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Away Team</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.teams1.split('~')[1]}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Total Spots</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.total_players}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Course Name</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_course}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Start Date</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.start_time}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>End Date</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.end_time}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Match Password</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_password}}</h4>
+                            </div>
+                        </div>
+
+                        {% for i in course_data %}
+                            {% if i.course_name == item.match_course %}
+                                <a id="live-match-button" href="">View Match Results</a>
+                            {% endif %}
+                        {% endfor %}
+
                     </div>   
                 {% endif %}
                      
