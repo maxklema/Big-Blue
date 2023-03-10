@@ -251,7 +251,7 @@ class Scoring():
             second_scores = data["players"][player2]["scores"]
             last_hole=0
             for i in range(int(data["match_info"]["number_holes"])):
-                if (first_scores[str(i+1)] != 0) and (second_scores[str(i+1)] != 0):
+                if (int(first_scores[str(i+1)]) != 0) and (int(second_scores[str(i+1)]) != 0):
                     last_hole+=1
                     if first_scores[str(i+1)] < second_scores[str(i+1)]:
                         score+=1
@@ -259,7 +259,8 @@ class Scoring():
                         score-=1
                 else:
                     break
-        holes_left = int(data["match_info"]["number_holes"])-last_hole
+        print(score)
+        holes_left = int(data["match_info"]["number_holes"]) - last_hole
         if score > 0:
             if score > holes_left:
                 status = player1 + " wins " + str(score) + "&" + str(holes_left)
