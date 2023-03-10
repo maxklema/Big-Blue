@@ -37,7 +37,8 @@ end match (side)
         <!-- Player Cards -->
 
 
-        <!-- Match View -->
+        <!-- Match Play -->
+
         {% if playerdata['match_info']['gamemode'] == 'Match Play' %}
 
         <div class="player-cards">
@@ -57,16 +58,32 @@ end match (side)
             <div class="match-card">
                     <summary>
                         <div class="card-header-info">
-                            <h3>{{player}}</h3>
+
+                        
+                            <div>
+                                <h3>{{player}}</h3>
+                                <h5 class="team_name_header" >{{playerdata['players'][player]['team']}}</h5>
+                            </div>
+                            
+                            <div class="card-general-stats">
+                                <h3>{{scoring_data[0][2]}}</h3>
+                            </div>
+
+                            <div>
+                                <h3>{{playerdata['players'][player]['opponent']}}</h3>
+                                <h5 class="team_name_header" id="opponent_team_header">{{playerdata['match_info']['away_team']}}</h5>
+                            </div>
+
+
                         </div>
-                        <h5>{{playerdata['players'][player]['team']}}</h5>
 
-                        <div class="card-header-info">
-                            <h3>{{playerdata['players'][player]['opponent']}}</h3>
-                        </div>
+        
+                       
+                        
 
-
-                        <form onsubmit="change_form_route" id="change_opponent_form" action="">
+                        
+                        <form onsubmit="change_form_route()" id="change_opponent_form" action="">
+                            <h5>Select {{player}}'s Opponent:</h5>
                             <select id="select_opponent" name="" id="choose-opponent">
                                 {% for opponent in playerdata['players'] %}
                                     {% if playerdata['players'][opponent]['team'] == playerdata['match_info']['away_team']%}
@@ -107,17 +124,29 @@ end match (side)
 
                     </summary><details class="custom-details">
                         <summary>Score Details</summary>
+                        {% set opponent = playerdata['players'][player]['opponent'] %}
                         {% for strokes in playerdata['players'][player]['scores'] %}
                         {% set home_team = playerdata['match_info']['home_team']%}
                         {% set away_team = playerdata['match_info']['away_team']%}
                             <div class="player-score-per-hole">
-                                <div class="player-score-per-hole-left-side">
+                                <div>
                                     <p>Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
-                                    <input type="button" value="{{playerdata['match_info']['home_team']}}">
-                                    <input type="button" value="{{playerdata['match_info']['away_team']}}">
                                 </div>
-                                <p>{{ home_team[0] }}: 0</p>
-                                <p>{{ away_team[0] }}: 0</p>
+                                
+                                <div>
+                                    <div class="team-scores-inner-home">
+                                        <p>{{playerdata['match_info']['home_team']}}</p>
+                                        <input type="number" id="player_score_{{player}}_{{strokes}}" value="{{playerdata['players'][player]['scores'][strokes]}}">
+                                        <a id="" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update</a>
+                                    </div>
+                                    <div class="team-scores-inner-away">
+                                        <p>{{playerdata['match_info']['away_team']}}</p>
+                                        <input type="number" id="player_score_{{opponent}}_{{strokes}}" value="{{playerdata['players'][opponent]['scores'][strokes]}}">
+                                        <a id="" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{opponent}}/{{strokes}}/' + document.getElementById('player_score_{{opponent}}_{{strokes}}').value">Update</a>
+                                    </div>
+                                </div>
+                                
+                                
                             </div>    
                         {% endfor %}
                 </details>
@@ -242,8 +271,8 @@ end match (side)
                 <hr style="margin-bottom: 5px; margin-top: 5px;">
                 {% for team in scoring_data %}
                     <div class="stat-container">
-                        <h4>{{team[0]}} Score</h4>
-                        <p>{{team[1]}}</p>
+                        <h4></h4>
+                        <p></p>
                     </div>
                 {% endfor %}
             </div>

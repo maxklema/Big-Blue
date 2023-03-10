@@ -497,10 +497,7 @@ def error(msg):
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
-    try:
-        found_user = users.query.filter_by(username=session['active_user'][0]).first()
-    except:
-        found_user = ""
+    found_user = ""
     if 'active_user' in session:
         return redirect(url_for('dashboard'))
     if request.method == "POST":
@@ -993,16 +990,19 @@ def active_match_view(json_data_input):
     if json_data['match_info']['gamemode'] == 'Match Play':
         players_used = []
         for player in json_data["players"]:
-            if player in players_used:
-                scores.append((player, player["opponent"], Scoring.calc_match_status(json_data['match_info']['id'], player, player["opponent"])))
-                players_used.append(player)
-                players_used.append(player["opponent"])
+            opponent = json_data["players"][player]["opponent"]
+            scores.append((player, opponent, Scoring.calc_match_status(json_data['match_info']['id'], player, opponent)))
+            print(scores)
+            players_used.append(player)
+            players_used.append(opponent)
+        
 
     elif json_data['match_info']['gamemode'] == 'Stroke Play' and json_data['match_info']['match_type'] == 'Teams':
         scores = Scoring.calc_match_results(json_data['match_info']['id'])
 
     if match_security('active_user', json_data_input):
-        return render_template("active_match_view.html", data=found_user, playerdata=json_data, scoring_data = scores, rank=session['active_user'][2])
+        print(scores)
+        return render_template("active_match_view.html", data=found_user, playerdata=json_data, scoring_data=scores, rank=session['active_user'][2])
     else:
         return redirect(url_for('error', userdata=found_user, msg="You do not have access to this site!"))
 

@@ -235,6 +235,131 @@ html, body {
     width: 400px;
 }
 
+.team_name_header {
+    font-family: bigblueregular;
+}
+
+#opponent_team_header {
+    text-align: right;
+}
+
+#change_opponent_form h5 {
+    margin-top: 10px;
+}
+
+#team_wins_hole_button-home {
+    max-width: 600px;
+    height: 35px;
+    font-size: 15px;
+    padding: 5px 10px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+    font-family: bigBlueBold;
+    margin-left: 10px;
+}
+
+#team_wins_hole_button-away {
+    max-width: 600px;
+    height: 35px;
+    font-size: 15px;
+    padding: 5px 10px;
+    text-align: center;
+    color: white;
+    background: #ca3e3e;
+    border: none;
+    cursor: pointer;
+    font-family: bigBlueBold;
+    margin-left: 10px;
+}
+
+.team-scores-inner-home {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    vertical-align: center;
+    margin-bottom: 8px;
+}
+
+.team-scores-inner-home input {
+    margin-left: 10px;
+    max-width: 50px;
+    text-align: center;
+    padding: 3px 3px;
+}
+
+.team-scores-inner-home a {
+    margin-left: 10px;
+    padding: 5px 15px;
+    font-size: 15px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+.team-scores-inner-away {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+}
+
+.team-scores-inner-away a {
+    margin-left: 10px;
+    padding: 5px 15px;
+    font-size: 15px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.team-scores-inner-away input {
+    margin-left: 10px;
+    max-width: 50px;
+    text-align: center;
+    padding: 3px 3px;
+}
+
+#away-team-score-inner {
+    margin-left: 10px;
+}
+
+
+#change_opponent_form select {
+    height: 35px;
+    width: 200px;
+    padding: 3px;
+    font-size: 15px;
+    border: 0.25px solid black;
+    background-color: white;
+    font-family: bigBlueMedium;
+    margin-bottom: 10px;
+}
+
+#change_opponent_form input {
+    width: 100px;
+    height: 35px;
+    font-size: 15px;
+    padding: 3px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+    font-family: bigBlueBold;
+    margin-left: 10px;
+}
+
 .code-container p {
     margin-top: 5px;
     font-family: bigBlueRegular;
@@ -412,17 +537,7 @@ details[open] > summary {
     margin-top: 20px;
 }
 
-.player-score-per-hole a {
-    margin-top: 10px;
-    padding: 5px 15px;
-    font-size: 15px;
-    text-align: center;
-    color: white;
-    background: #2176e8;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-}
+
 
 .player-score-per-hole-left-side {
     display: flex;
