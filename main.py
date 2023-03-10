@@ -990,11 +990,14 @@ def active_match_view(json_data_input):
     if json_data['match_info']['gamemode'] == 'Match Play':
         players_used = []
         for player in json_data["players"]:
-            opponent = json_data["players"][player]["opponent"]
-            scores.append((player, opponent, Scoring.calc_match_status(json_data['match_info']['id'], player, opponent)))
-            print(scores)
-            players_used.append(player)
-            players_used.append(opponent)
+            try:
+                opponent = json_data["players"][player]["opponent"]
+                scores.append((player, opponent, Scoring.calc_match_status(json_data['match_info']['id'], player, opponent)))
+                print(scores)
+                players_used.append(player)
+                players_used.append(opponent)
+            except:
+                continue
         
 
     elif json_data['match_info']['gamemode'] == 'Stroke Play' and json_data['match_info']['match_type'] == 'Teams':

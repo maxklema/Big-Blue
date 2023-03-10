@@ -139,11 +139,13 @@ end match (side)
                                         <input type="number" id="player_score_{{player}}_{{strokes}}" value="{{playerdata['players'][player]['scores'][strokes]}}">
                                         <a id="" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update</a>
                                     </div>
-                                    <div class="team-scores-inner-away">
-                                        <p>{{playerdata['match_info']['away_team']}}</p>
-                                        <input type="number" id="player_score_{{opponent}}_{{strokes}}" value="{{playerdata['players'][opponent]['scores'][strokes]}}">
-                                        <a id="" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{opponent}}/{{strokes}}/' + document.getElementById('player_score_{{opponent}}_{{strokes}}').value">Update</a>
-                                    </div>
+                                    {% if playerdata['players'][player]['opponent'] != "" %}
+                                        <div class="team-scores-inner-away">
+                                            <p>{{playerdata['match_info']['away_team']}}</p>
+                                            <input type="number" id="player_score_{{opponent}}_{{strokes}}" value="{{playerdata['players'][opponent]['scores'][strokes]}}">
+                                            <a id="" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{opponent}}/{{strokes}}/' + document.getElementById('player_score_{{opponent}}_{{strokes}}').value">Update</a>
+                                        </div>
+                                    {% endif %}
                                 </div>
                                 
                                 
