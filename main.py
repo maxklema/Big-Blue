@@ -1099,8 +1099,8 @@ def calc_relation(filename, player):
     print(preview)
     return preview, 200
 
-@app.route("/calc_match_status/<filename>/<player1>/<player2>", methods=["GET"])
-def calc_match_status(filename, player1, player2):
+@app.route("/calc_match/<filename>/<player1>/<player2>", methods=["GET"])
+def calc_match(filename, player1, player2):
     preview = Scoring.calc_match_status(filename, player1, player2)
     print(preview)
     return preview, 200

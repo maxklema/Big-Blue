@@ -69,7 +69,7 @@ end match (side)
                                     {% if playerdata['players'][player]['opponent'] != "" %}
                                         <h3 id="match_status_h3_{{player}}"></h3>
                                         <script>
-                                            fetch("/calc_match_status/{{playerdata['match_info']['id']}}/{{player}}/playerdata['players'][player]['opponent']")
+                                            fetch("/calc_match/{{playerdata['match_info']['id']}}/{{player}}/playerdata['players'][player]['opponent']")
                                             .then(response => response.text())
                                             .then(data => document.getElementById('match_status_h3_{{player}}').innerHTML = data);
                                         </script>
