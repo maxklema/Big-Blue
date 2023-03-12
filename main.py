@@ -9,6 +9,7 @@ import random
 import json
 import os
 import sqlite3
+import sys
 from random import randint
 
 app = Flask(__name__)
@@ -278,8 +279,8 @@ class Scoring():
     def add_scores(data):
         sum = 0
         for hole in data:
-            
-            sum += int(data[str(hole)])
+            if data[hole] != "":
+                sum += int(data[str(hole)])
         return sum
 
     def calc_match_results(filename):
@@ -325,6 +326,47 @@ class Scoring():
             file.seek(0)
             data = json.load(file)
             return data
+    def get_team_scores(filename):
+        teamscores = {}
+        with open("static/score_files/" + str(filename) + ".json", "r") as file:
+            file.seek(0)
+            data = json.load(file)
+            for player in data["players"].values():
+                if player["team"] in teamscores.keys():
+                    teamscores[player["team"]] += Scoring.add_scores(player['scores'])
+                else:
+                    teamscores[player["team"]] = 0
+                    teamscores[player["team"]] += Scoring.add_scores(player['scores'])
+                    
+            return teamscores
+
+    def get_lowest_team_score(team_scores):
+        lowest_score = 2**31 - 1
+        lowest_teams = []
+        for team in team_scores.keys():
+            if team_scores[team] < lowest_score:
+                lowest_teams = [team]
+                lowest_score = team_scores[team]
+            elif team_scores[team] == lowest_score:
+                lowest_teams.append(team)
+        
+        return (lowest_teams, lowest_score)
+
+    def generate_leader_board(team_scores):
+        leader_board = []
+        for team in team_scores.keys():
+            leader_board.append((team, team_scores[team]))
+        
+        for i in range(len(leader_board)):
+            for j in range(0, len(leader_board) - i - 1):
+                
+                # Range of the leader_boarday is from 0 to n-i-1
+                # Swap the elements if the element found
+                #is greater than the adjacent element
+                if leader_board[j][1] > leader_board[j + 1][1]:
+                    leader_board[j], leader_board[j + 1] = leader_board[j + 1], leader_board[j]
+        return leader_board
+            
 
 def archive_match(filename):
     with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "a+") as file:
