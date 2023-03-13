@@ -1143,8 +1143,11 @@ def calc_relation(filename, player):
 
 @app.route("/calc_match/<filename>/<player1>/<player2>", methods=["GET"])
 def calc_match(filename, player1, player2):
-    preview = Scoring.calc_match_status(filename, player1, player2)
-    print(preview)
+    try:
+        preview = Scoring.calc_match_status(filename, player1, player2)
+        print(preview)
+    except:
+        return redirect(url_for('error', msg="Please enter a integer."))
     return preview, 200
 
 
