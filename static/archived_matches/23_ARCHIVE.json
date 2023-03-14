@@ -1,0 +1,52 @@
+{
+   "players": {
+      "Grayson": {
+         "team": "None",
+         "opponent": null,
+         "scores": {
+            "1": "99",
+            "2": "11",
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0
+         }
+      }
+   },
+   "match_info": {
+      "par1": 2,
+      "par2": 3,
+      "par3": 3,
+      "par4": 4,
+      "par5": 1,
+      "par6": 2,
+      "par7": 2,
+      "par8": 4,
+      "par9": 4,
+      "par10": "",
+      "par11": "",
+      "par12": "",
+      "par13": "",
+      "par14": "",
+      "par15": "",
+      "par16": "",
+      "par17": "",
+      "par18": "",
+      "match_code": "837745",
+      "match_password": "1333",
+      "number_holes": "9",
+      "match_name": "New Test",
+      "start_time": "2023-03-14",
+      "end_time": "2023-03-15",
+      "home_team": "n/a",
+      "away_team": "n/a",
+      "match_type": "Singles",
+      "gamemode": "Stroke Play",
+      "id": 23
+   },
+   "lobby": [],
+   "message": ""
+}

@@ -10,6 +10,7 @@ import json
 import os
 import sqlite3
 import sys
+import re # THIS IS REGEX
 from random import randint
 
 app = Flask(__name__)
@@ -669,7 +670,7 @@ def create_match():
                 db.session.commit()
             except Exception as err:
                 print(err)
-                return redirect(url_for('error', msg="Each match must be assigned to a course. To create a course, navigate to your Course"))
+                return redirect(url_for('error', msg="There was an error in creating your match."))
 
             return redirect(url_for('match_dashboard'))
         
@@ -995,8 +996,12 @@ def spectator_match_view(json_data_input):
 @app.route("/player_match_view/<json_data_input>", methods=['GET', 'POST'])
 def player_match_view(json_data_input):
     if 'active_player' in session:
-        json_data = Scoring.return_data(json_data_input)
-        scores = Scoring.calc_match_results(json_data['match_info']['id'])
+
+        try:
+            json_data = Scoring.return_data(json_data_input)
+            scores = Scoring.calc_match_results(json_data['match_info']['id'])
+        except:
+            return redirect(url_for('error', msg='This match does not exist!'))
         
 
         try:
@@ -1094,7 +1099,11 @@ def add_player(filename, team, player_name):
 @app.route("/edit_score/<filename>/<player>/<hole>/<new_score>")
 def edit_score(filename, player, hole, new_score):
     if match_security('active_user', filename) or session['active_player']: #check if this is player
-        Scoring.edit_score(filename, player, hole, new_score)
+        try:
+            new_score = re.sub('[^\d]', '', new_score)
+            Scoring.edit_score(filename, player, hole, new_score)
+        except:
+            return redirect(url_for('error', msg='Please input a vaild value. Integers are required.'))
         if "active_user" in session:
             return redirect(url_for("active_match_view", json_data_input=filename))
         elif "active_player" in session:
