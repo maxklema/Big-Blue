@@ -67,7 +67,12 @@ end match (side)
                                 
                                 <div class="card-general-stats">
                                     
-                                    <h3>No Opponent</h3>
+                                    <h3 id="match_status_h3_{{player}}"></h3>
+                                        <script>
+                                            fetch("/calc_match/{{playerdata['match_info']['id']}}/{{player}}/{{playerdata['players'][player]['opponent']}}")
+                                            .then(response => response.text())
+                                            .then(data => document.getElementById('match_status_h3_{{player}}').innerHTML = data);
+                                        </script>
                                    
 
                                 </div>

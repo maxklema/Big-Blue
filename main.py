@@ -250,6 +250,8 @@ class Scoring():
             status=""
             score=0
             first_scores = data["players"][player1]["scores"]
+            print(player1)
+            print(player2)
             second_scores = data["players"][player2]["scores"]
             last_hole=0
             for i in range(int(data["match_info"]["number_holes"])):
@@ -1155,11 +1157,11 @@ def calc_relation(filename, player):
 
 @app.route("/calc_match/<filename>/<player1>/<player2>", methods=["GET"])
 def calc_match(filename, player1, player2):
-    try:
-        preview = Scoring.calc_match_status(filename, player1, player2)
-        print(preview)
-    except:
-        return redirect(url_for('error', msg="Please enter a integer."))
+    #try:
+    preview = Scoring.calc_match_status(filename, player1, player2)
+    print(preview)
+    #except:
+        #return redirect(url_for('error', msg="Please enter a integer."))
     return preview, 200
 
 
