@@ -25,10 +25,11 @@
                     <li><a href="/logout">Logout</a></li>
                     <li><a href="/dashboard">{{data.username}}</a></li>
                     <li><a href=""><img id="profile-pic" src="{{ url_for('static', filename='logo_graphics/user_photos/' + data.pic) }}" alt=""></a></li>
+                    <form id="search-form" action="/search/" method="post">
+                        <input id="searchbar" name="searchbar" type="text" placeholder="search users"></input>
+                    </form>
                 </ul>
-                <form id="search-form" action="/search/" method="post">
-                    <input id="searchbar" name="searchbar" type="text" placeholder="search users"></input>
-                </form>
+                
 
             </div>
             <button id="menu-button" onclick="openMenu();" hidden><h1 class="mobile-navigation" id="hamburger-icon" style="color: white;" hidden>☰</h1></button>

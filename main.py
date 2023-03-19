@@ -649,7 +649,7 @@ def get_user_profile(user):
     random_user_three = users.query.offset(random_offset3).limit(1).first()
     while (random_user_one._id == logged_in_user._id):
         random_offset = randint(0, count - 1)
-        random_user_one = users.query.offset(random_offset1).limit(1).first() 
+        random_user_one = users.query.offset(random_offset).limit(1).first() 
     while (random_user_two._id == random_user_one._id or random_user_two._id == logged_in_user._id):
         random_offset2 = randint(0, count - 1)
         random_user_two = users.query.offset(random_offset2).limit(1).first() 
