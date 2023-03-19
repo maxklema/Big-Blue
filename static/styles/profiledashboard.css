@@ -208,7 +208,7 @@ html, body {
 
 .suggested-users {
     width: 300px;
-    max-height: 270px;
+    max-height: 230px;
     background-color: white;
     margin-bottom: 5%;
     border-radius: 5px;
@@ -807,7 +807,7 @@ html, body {
 
 }
 
-@media (max-width: 1160px){
+@media (max-width: 1200px){
     header .navigation {
         display: none;
     }

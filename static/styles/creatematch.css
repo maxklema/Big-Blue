@@ -543,6 +543,9 @@ input[type=number]{
     .end-date{
         margin-top: 20px;
     }
+    .row-seven input {
+        width: 230px;
+    }
 
     #password-one {
         width: 300px;
