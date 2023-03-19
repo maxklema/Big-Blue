@@ -9,6 +9,8 @@ import random
 import json
 import os
 import sqlite3
+import sys
+import re # THIS IS REGEX
 from random import randint
 
 app = Flask(__name__)
@@ -278,8 +280,8 @@ class Scoring():
     def add_scores(data):
         sum = 0
         for hole in data:
-            
-            sum += int(data[str(hole)])
+            if data[hole] != "":
+                sum += int(data[str(hole)])
         return sum
 
     def calc_match_results(filename):
@@ -325,6 +327,47 @@ class Scoring():
             file.seek(0)
             data = json.load(file)
             return data
+    def get_team_scores(filename):
+        teamscores = {}
+        with open("static/score_files/" + str(filename) + ".json", "r") as file:
+            file.seek(0)
+            data = json.load(file)
+            for player in data["players"].values():
+                if player["team"] in teamscores.keys():
+                    teamscores[player["team"]] += Scoring.add_scores(player['scores'])
+                else:
+                    teamscores[player["team"]] = 0
+                    teamscores[player["team"]] += Scoring.add_scores(player['scores'])
+                    
+            return teamscores
+
+    def get_lowest_team_score(team_scores):
+        lowest_score = 2**31 - 1
+        lowest_teams = []
+        for team in team_scores.keys():
+            if team_scores[team] < lowest_score:
+                lowest_teams = [team]
+                lowest_score = team_scores[team]
+            elif team_scores[team] == lowest_score:
+                lowest_teams.append(team)
+        
+        return (lowest_teams, lowest_score)
+
+    def generate_leader_board(team_scores):
+        leader_board = []
+        for team in team_scores.keys():
+            leader_board.append((team, team_scores[team]))
+        
+        for i in range(len(leader_board)):
+            for j in range(0, len(leader_board) - i - 1):
+                
+                # Range of the leader_boarday is from 0 to n-i-1
+                # Swap the elements if the element found
+                #is greater than the adjacent element
+                if leader_board[j][1] > leader_board[j + 1][1]:
+                    leader_board[j], leader_board[j + 1] = leader_board[j + 1], leader_board[j]
+        return leader_board
+            
 
 def archive_match(filename):
     with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "a+") as file:
@@ -627,7 +670,7 @@ def create_match():
                 db.session.commit()
             except Exception as err:
                 print(err)
-                return redirect(url_for('error', msg="Each match must be assigned to a course. To create a course, navigate to your Course"))
+                return redirect(url_for('error', msg="There was an error in creating your match."))
 
             return redirect(url_for('match_dashboard'))
         
@@ -847,9 +890,12 @@ def logout():
         return redirect(url_for('index'))
     return redirect(url_for('error', msg="How can you log out... if you are not logged in?"))
 
-@app.route("/admin")
-def admin():
-    return render_template("admin.html")
+@app.route("/admin/<password>")
+def admin(password):
+    if password == "aW1wdmVyc3VzZHdhcmY":
+        return render_template("admin.html")
+    else:
+        return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/match_dashboard")
 def match_dashboard():
@@ -953,8 +999,12 @@ def spectator_match_view(json_data_input):
 @app.route("/player_match_view/<json_data_input>", methods=['GET', 'POST'])
 def player_match_view(json_data_input):
     if 'active_player' in session:
-        json_data = Scoring.return_data(json_data_input)
-        scores = Scoring.calc_match_results(json_data['match_info']['id'])
+
+        try:
+            json_data = Scoring.return_data(json_data_input)
+            scores = Scoring.calc_match_results(json_data['match_info']['id'])
+        except:
+            return redirect(url_for('error', msg='This match does not exist!'))
         
 
         try:
@@ -1052,7 +1102,11 @@ def add_player(filename, team, player_name):
 @app.route("/edit_score/<filename>/<player>/<hole>/<new_score>")
 def edit_score(filename, player, hole, new_score):
     if match_security('active_user', filename) or session['active_player']: #check if this is player
-        Scoring.edit_score(filename, player, hole, new_score)
+        try:
+            new_score = re.sub('[^\d]', '', new_score)
+            Scoring.edit_score(filename, player, hole, new_score)
+        except:
+            return redirect(url_for('error', msg='Please input a vaild value. Integers are required.'))
         if "active_user" in session:
             return redirect(url_for("active_match_view", json_data_input=filename))
         elif "active_player" in session:
@@ -1101,8 +1155,11 @@ def calc_relation(filename, player):
 
 @app.route("/calc_match/<filename>/<player1>/<player2>", methods=["GET"])
 def calc_match(filename, player1, player2):
-    preview = Scoring.calc_match_status(filename, player1, player2)
-    print(preview)
+    try:
+        preview = Scoring.calc_match_status(filename, player1, player2)
+        print(preview)
+    except:
+        return redirect(url_for('error', msg="Please enter a integer."))
     return preview, 200
 
 

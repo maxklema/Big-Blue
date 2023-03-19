@@ -1,11 +1,20 @@
 {
    "players": {
+<<<<<<< HEAD
       "Maxwell Klema": {
          "team": "None",
          "opponent": null,
          "scores": {
             "1": 0,
             "2": 0,
+=======
+      "Grayson": {
+         "team": "None",
+         "opponent": null,
+         "scores": {
+            "1": "99",
+            "2": "11",
+>>>>>>> 5bf42ecdc880f7f94a271e2f26d6cfa56f79f719
             "3": 0,
             "4": 0,
             "5": 0,
@@ -17,6 +26,7 @@
       }
    },
    "match_info": {
+<<<<<<< HEAD
       "par1": 4,
       "par2": 4,
       "par3": 5,
@@ -26,6 +36,17 @@
       "par7": 3,
       "par8": 4,
       "par9": 5,
+=======
+      "par1": 2,
+      "par2": 3,
+      "par3": 3,
+      "par4": 4,
+      "par5": 1,
+      "par6": 2,
+      "par7": 2,
+      "par8": 4,
+      "par9": 4,
+>>>>>>> 5bf42ecdc880f7f94a271e2f26d6cfa56f79f719
       "par10": "",
       "par11": "",
       "par12": "",
@@ -35,6 +56,7 @@
       "par16": "",
       "par17": "",
       "par18": "",
+<<<<<<< HEAD
       "match_code": "530736",
       "match_password": "password",
       "number_holes": "9",
@@ -45,6 +67,18 @@
       "away_team": "n/a",
       "match_type": "Singles",
       "gamemode": "Match Play",
+=======
+      "match_code": "837745",
+      "match_password": "1333",
+      "number_holes": "9",
+      "match_name": "New Test",
+      "start_time": "2023-03-14",
+      "end_time": "2023-03-15",
+      "home_team": "n/a",
+      "away_team": "n/a",
+      "match_type": "Singles",
+      "gamemode": "Stroke Play",
+>>>>>>> 5bf42ecdc880f7f94a271e2f26d6cfa56f79f719
       "id": 23
    },
    "lobby": [],
