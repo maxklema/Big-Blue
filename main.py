@@ -564,6 +564,7 @@ def login():
 @app.route("/dashboard", methods=['GET', 'POST'])
 def dashboard():
     found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    logged_in_user = found_user
     date_year = str(found_user.first_login)
     date_year = date_year[0:4]
 
@@ -580,11 +581,14 @@ def dashboard():
     random_offset3 = randint(0, count - 1)
     random_user_one = users.query.offset(random_offset).limit(1).first()
     random_user_two = users.query.offset(random_offset2).limit(1).first()
-    while (random_user_two == random_user_one):
+    random_user_three = users.query.offset(random_offset3).limit(1).first()
+    while (random_user_one._id == logged_in_user._id):
+        random_offset = randint(0, count - 1)
+        random_user_one = users.query.offset(random_offset).limit(1).first() 
+    while (random_user_two._id == random_user_one._id or random_user_two._id == logged_in_user._id):
         random_offset2 = randint(0, count - 1)
         random_user_two = users.query.offset(random_offset2).limit(1).first() 
-    random_user_three = users.query.offset(random_offset3).limit(1).first()
-    while (random_user_three == random_user_one or random_user_three == random_user_two):
+    while (random_user_three._id == random_user_one._id or random_user_three._id == random_user_two._id or random_user_three._id == logged_in_user._id):
         random_offset3 = randint(0, count - 1)
         random_user_three = users.query.offset(random_offset3).limit(1).first() 
     random_users_list = [random_user_one, random_user_two, random_user_three]
@@ -628,6 +632,9 @@ def get_user_profile(user):
         return redirect(url_for('error', msg="Sorry, that user does not exist."))
 
     logged_in_user = users.query.filter_by(username=session['active_user'][0]).first()
+    print(logged_in_user.name)
+    if logged_in_user.username == user:
+        return redirect(url_for('dashboard'))
     
 
     #chooses three random users
@@ -637,17 +644,18 @@ def get_user_profile(user):
     random_offset3 = randint(0, count - 1)
     random_user_one = users.query.offset(random_offset).limit(1).first()
     random_user_two = users.query.offset(random_offset2).limit(1).first()
-    while (random_user_two == random_user_one):
+    random_user_three = users.query.offset(random_offset3).limit(1).first()
+    while (random_user_one._id == logged_in_user._id):
+        random_offset = randint(0, count - 1)
+        random_user_one = users.query.offset(random_offset1).limit(1).first() 
+    while (random_user_two._id == random_user_one._id or random_user_two._id == logged_in_user._id):
         random_offset2 = randint(0, count - 1)
         random_user_two = users.query.offset(random_offset2).limit(1).first() 
-    random_user_three = users.query.offset(random_offset3).limit(1).first()
-    while (random_user_three == random_user_one or random_user_three == random_user_two):
+    while (random_user_three._id == random_user_one._id or random_user_three._id == random_user_two._id or random_user_three._id == logged_in_user._id):
         random_offset3 = randint(0, count - 1)
         random_user_three = users.query.offset(random_offset3).limit(1).first() 
     random_users_list = [random_user_one, random_user_two, random_user_three]
 
-    if (logged_in_user == found_user):
-        return render_template("dashboard.html", month = month_name, year=date_year, random_users_list=random_users_list, data1=found_user, data=found_user)
     return render_template("user_profile_page.html", month = month_name, year=date_year, random_users_list=random_users_list, data1=found_user, data=logged_in_user)
     
 @app.route("/create_match", methods=['GET', 'POST'])
