@@ -1159,6 +1159,18 @@ def calc_match(filename, player1, player2):
         return redirect(url_for('error', msg="Please enter a integer."))
     return preview, 200
 
+@app.route("/lowest_team_score/<filename>", methods=["GET"])
+def lowest_team_score(filename):
+    try:
+        preview = Scoring.get_lowest_team_score(Scoring.get_team_scores(filename))
+    except:
+        return redirect(url_for('error', msg="There was an error in calculating the lowest team score."))
+
+    if len(preview[0]) > 1:
+        return_string = ', '.join(preview[0])
+        return return_string, 200
+    else:
+        return preview[0][0]
 
 @app.route("/search/<searchbar>", methods=["GET", "POST"])
 def search(searchbar):
