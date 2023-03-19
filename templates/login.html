@@ -10,7 +10,7 @@
         <title>Big Blue | Login</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/stylelogin.css') }}">
 
-        <link rel="shortcut icon" href="{{ url_for('static', filename='/logo graphics/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='/logo_graphics/favicon.ico') }}">
 
     </head>
 
@@ -23,7 +23,7 @@
 
         <div id="form-container">
             <form action="/login" method="post">
-                <img src="{{ url_for('static', filename='logo graphics/basicgolfer.png') }}" alt="">
+                <img src="{{ url_for('static', filename='logo_graphics/basicgolfer.png') }}" alt="">
                 <h3>Sign in to Big Blue</h3>
                 {% if message %}
                     <h5 id="error">{{message}}</h5>    

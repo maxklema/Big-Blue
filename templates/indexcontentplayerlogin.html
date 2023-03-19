@@ -9,7 +9,7 @@
     <head>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo graphics/favicon.ico') }}">
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo_graphics/favicon.ico') }}">
 
     </head>
 
@@ -17,12 +17,12 @@
 
         <header>
             <a href="/">
-                <img id="logo-image" src="{{ url_for('static', filename='logo graphics/BigBlue_NewLogo-White.png') }}" class="logo">
+                <img id="logo-image" src="{{ url_for('static', filename='logo_graphics/BigBlue_NewLogo-White.png') }}" class="logo">
             </a>
             <ul class="navigation">
                 <li><a href="/logout">Logout</a></li>
                 <li><a href="/dashboard">{{data.username}}</a></li>
-                <li><a href=""><img id="profile-pic" src="{{ url_for('static', filename='logo graphics/user_photos/' + data.pic) }}" alt=""></a></li>
+                <li><a href=""><img id="profile-pic" src="{{ url_for('static', filename='logo_graphics/user_photos/' + data.pic) }}" alt=""></a></li>
             </ul>
 
 

@@ -10,7 +10,7 @@
 <!-- 
 
 {% if data.verified == True %}
-                                <img src="{{ url_for('static', filename='logo graphics/verify.png') }}" alt="">
+                                <img src="{{ url_for('static', filename='logo_graphics/verify.png') }}" alt="">
                             {% else %}
                                 <p style="font-size:xx-small;"> **Not verified</p>
                             {% endif %}
@@ -31,17 +31,17 @@
     <div class="main-container">
         <div class="profile-frame">
             <div class="banner-container">
-                <img id="banner" src="{{ url_for('static', filename='logo graphics/' + data.banner) }}" alt="">
+                <img id="banner" src="{{ url_for('static', filename='logo_graphics/' + data.banner) }}" alt="">
             </div>
             <div class="profile-picture-container">
-                <img id="profilepicture" src="{{ url_for('static', filename='logo graphics/user_photos/' + data.pic) }}" alt="">
+                <img id="profilepicture" src="{{ url_for('static', filename='logo_graphics/user_photos/' + data.pic) }}" alt="">
             </div>
             <div class="username-and-verification-container">
                 <h3>{{data.name}}</h3>
                 {% if data.verified == 1 %}
-                    <img src="{{ url_for('static', filename='logo graphics/normalverify.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='logo_graphics/normalverify.png') }}" alt="">
                 {% elif data.verified == 2 %}
-                    <img src="{{ url_for('static', filename='logo graphics/verify.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='logo_graphics/verify.png') }}" alt="">
                 {% endif %}
 
             </div>
@@ -62,11 +62,11 @@
 
             <div class="join-date-and-school-container">
                 <div class="join-date-container">
-                    <img src="{{ url_for('static', filename='logo graphics/cake.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='logo_graphics/cake.png') }}" alt="">
                     <h4 id="join-date">Joined in {{month }} {{ year }}</h4>
                 </div>
                 <div class="school-name-container">
-                    <img id="school-icon"src="{{ url_for('static', filename='logo graphics/schoolicon.png') }}" alt="">
+                    <img id="school-icon"src="{{ url_for('static', filename='logo_graphics/schoolicon.png') }}" alt="">
                     <h4>{{data.team}}</h4>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                 <a id="match-dashboard-href" href="/match_dashboard">
                     <button>
                         <div class="match-dashboard-container">
-                            <!--<img id="dashboard-icon" src="{{ url_for('static', filename='logo graphics/dashboardicon.png') }}" alt="">-->
+                            <!--<img id="dashboard-icon" src="{{ url_for('static', filename='logo_graphics/dashboardicon.png') }}" alt="">-->
                             <h3>Dashboard</h3>
                         </div>
                     </button>
@@ -92,7 +92,7 @@
                 <a id="add-new-course-href" href="/create_course">
                     <button>
                         <div class="add-new-course-container">
-                            <!--<img src="{{ url_for('static', filename='logo graphics/golfholeicon.png') }}" alt="">-->
+                            <!--<img src="{{ url_for('static', filename='logo_graphics/golfholeicon.png') }}" alt="">-->
                             <h3>Add New Course</h3>
                         </div>
                     </button>
@@ -100,7 +100,7 @@
                 <a id="edit-profile-href" href="/dashboard/edit_profile">
                     <button>
                         <div class="edit-profile-container">
-                            <!--<img src="{{ url_for('static', filename='logo graphics/penciliconprofile.png') }}" alt="">-->
+                            <!--<img src="{{ url_for('static', filename='logo_graphics/penciliconprofile.png') }}" alt="">-->
                             <h3>Edit Profile</h3>
                         </div>
                     </button>
@@ -142,15 +142,15 @@
                     <div class="random-user-one">
                         <a href="/profile/{{i.username}}">
                             <div>
-                                <img src="{{ url_for('static', filename='logo graphics/user_photos/' + i.pic) }}" alt="">
+                                <img src="{{ url_for('static', filename='logo_graphics/user_photos/' + i.pic) }}" alt="">
                             </div>
                             <div>
                                 <div class="name-and-verification">
                                     <h4 id="suggested-name">{{i.name}}</h4>
                                     {% if i.verified == 1 %}
-                                        <img id="checkmark" src="{{ url_for('static', filename='logo graphics/normalverify.png') }}" alt="">
+                                        <img id="checkmark" src="{{ url_for('static', filename='logo_graphics/normalverify.png') }}" alt="">
                                     {% elif i.verified == 2 %}
-                                        <img id="checkmark" src="{{ url_for('static', filename='logo graphics/verify.png') }}" alt="">
+                                        <img id="checkmark" src="{{ url_for('static', filename='logo_graphics/verify.png') }}" alt="">
                                     {% endif %}
                                 </div>
                                 <h5 id="suggested-username">@{{i.username}}</h5>

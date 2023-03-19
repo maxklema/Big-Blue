@@ -38,7 +38,7 @@ end match (side)
         <div class="player-cards">
             {% if playerdata['players'] is defined and playerdata['players']|length == 0 %}
                 <div class="empty-lobby-section">
-                    <img src="{{ url_for('static', filename='logo graphics/empty-golf-cart-icon.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='logo_graphics/empty-golf-cart-icon.png') }}" alt="">
                     <h5>When Players Join The Match, They Will Show Up Here</h5>
                 </div>    
             
@@ -85,7 +85,7 @@ end match (side)
 
             <!-- Match Code Container -->
             <div class="code-container">
-                <img id="code-img" src="{{ url_for('static', filename='logo graphics/codeicon.png') }}" alt="">
+                <img id="code-img" src="{{ url_for('static', filename='logo_graphics/codeicon.png') }}" alt="">
                 <h3>Match Code: {{playerdata['match_info']['match_code']}}</h3>
                 <p>Share the match link by clicking the "Copy Link" button below!</p>
                 <div>
@@ -97,7 +97,7 @@ end match (side)
 
             <!-- Match Statistics -->
             <div class="code-container">
-                <img src="{{ url_for('static', filename='logo graphics/statsicon.png') }}" alt="">
+                <img src="{{ url_for('static', filename='logo_graphics/statsicon.png') }}" alt="">
                 <h3>Match Statistics</h3>
                 <hr style="margin-bottom: 5px; margin-top: 5px;">
                 {% for team in scoring_data %}
@@ -110,7 +110,7 @@ end match (side)
 
             <!-- Coach Message -->
             <div class="code-container">
-                <img src="{{ url_for('static', filename='logo graphics/messageicon.png') }}" alt="">
+                <img src="{{ url_for('static', filename='logo_graphics/messageicon.png') }}" alt="">
                 <h3>Coach Message</h3>
                 {% if not playerdata['message'] %}
                     <p>There is not a message from the coach yet.</p>

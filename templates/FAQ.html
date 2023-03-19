@@ -14,7 +14,7 @@
 <body onload="OnLoad();">
     
     <div class="header-information">
-        <img src="{{ url_for('static', filename='logo graphics/faq-banner.png') }}">
+        <img src="{{ url_for('static', filename='logo_graphics/faq-banner.png') }}">
     </div>
 
     <h4>⸻   General   ⸻</h4>
@@ -205,7 +205,7 @@
 
 function OnLoad(){
     var logo = document.getElementById("logo-image")
-    logo.src = "{{ url_for('static', filename='logo graphics/BigBlue-BlueLogo.png') }}";
+    logo.src = "{{ url_for('static', filename='logo_graphics/BigBlue-BlueLogo.png') }}";
 }
 
 

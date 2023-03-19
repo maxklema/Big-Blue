@@ -20,7 +20,7 @@ app.secret_key = "max"
 app.permanent_session_lifetime = timedelta(minutes=600)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///webdata.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-UPLOAD_FOLDER = 'static/logo graphics/user_photos'
+UPLOAD_FOLDER = 'static/logo_graphics/user_photos'
 SCORING_FOLDER = 'static/score_files'
 ALLOWED_EXTENSIONS = {'png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG', 'gif', 'GIF'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER

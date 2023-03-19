@@ -26,7 +26,7 @@
         </div>
         {% if match_data is defined and match_data|length == 0 %}
             <div class="no-matches">
-                <img src="{{ url_for('static', filename='logo graphics/nomatchesimage.png') }}">
+                <img src="{{ url_for('static', filename='logo_graphics/nomatchesimage.png') }}">
             </div>
         {% endif %}
         <div class="grid-container">
@@ -38,8 +38,8 @@
                                 <h3>Join Code: {{item.match_code}}</h3>
                             </div>
                             <div id="action-icons">
-                                <a href="/edit_match/{{item._id}}"><img src="{{ url_for('static', filename='logo graphics/pencilicon.png') }}"></a>
-                                <a href="/delete_match/{{item._id}}"><img src="{{ url_for('static', filename='logo graphics/trashcan.png') }}"></a>
+                                <a href="/edit_match/{{item._id}}"><img src="{{ url_for('static', filename='logo_graphics/pencilicon.png') }}"></a>
+                                <a href="/delete_match/{{item._id}}"><img src="{{ url_for('static', filename='logo_graphics/trashcan.png') }}"></a>
                             </div>
                         </div>
 

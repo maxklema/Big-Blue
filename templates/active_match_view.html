@@ -44,7 +44,7 @@ end match (side)
         <div class="player-cards">
             {% if playerdata['players'] is defined and playerdata['players']|length == 0 %}
                 <div class="empty-lobby-section">
-                    <img src="{{ url_for('static', filename='logo graphics/empty-golf-cart-icon.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='logo_graphics/empty-golf-cart-icon.png') }}" alt="">
                     <h5>When You Accept Players, They Will Show Up Here</h5>
                 </div>    
             
@@ -176,7 +176,7 @@ end match (side)
             <div class="player-cards">
                 {% if playerdata['players'] is defined and playerdata['players']|length == 0 %}
                     <div class="empty-lobby-section">
-                        <img src="{{ url_for('static', filename='logo graphics/empty-golf-cart-icon.png') }}" alt="">
+                        <img src="{{ url_for('static', filename='logo_graphics/empty-golf-cart-icon.png') }}" alt="">
                         <h5>When You Accept Players, They Will Show Up Here</h5>
                     </div>    
                 
@@ -231,7 +231,7 @@ end match (side)
 
             <!-- Match Code Container -->
             <div class="code-container">
-                <img id="code-img" src="{{ url_for('static', filename='logo graphics/codeicon.png') }}" alt="">
+                <img id="code-img" src="{{ url_for('static', filename='logo_graphics/codeicon.png') }}" alt="">
                 <h3 id="match-code-h3">Match Code: {{playerdata['match_info']['match_code']}}</h3>
                 <p>Share this with your players and spectators to join the match</p>
                 <div>
@@ -241,7 +241,7 @@ end match (side)
 
             <!-- Match Password Container -->
             <div class="code-container">
-                <img id="lock-img" src="{{ url_for('static', filename='logo graphics/lock-icon.png') }}" alt="">
+                <img id="lock-img" src="{{ url_for('static', filename='logo_graphics/lock-icon.png') }}" alt="">
                 <h3>Match Password: <span style="color: #2176e8;">{{playerdata['match_info']['match_password']}}</span></h3>
                 <p>Only players need the password</p>
             </div>
@@ -249,7 +249,7 @@ end match (side)
 
             <!-- In Lobby Container -->
             <div class="code-container">
-                <img id="golfer-icon" src="{{ url_for('static', filename='logo graphics/golfericon.png') }}" alt="">
+                <img id="golfer-icon" src="{{ url_for('static', filename='logo_graphics/golfericon.png') }}" alt="">
                 <h3>Players in Lobby</h3>
                 <div class="player-in-lobby-container">
                     {% for waiting in playerdata['lobby'] %}
@@ -279,7 +279,7 @@ end match (side)
 
             <!-- Match Statistics -->
             <div class="code-container">
-                <img src="{{ url_for('static', filename='logo graphics/statsicon.png') }}" alt="">
+                <img src="{{ url_for('static', filename='logo_graphics/statsicon.png') }}" alt="">
                 <h3>Match Statistics</h3>
                 <hr style="margin-bottom: 5px; margin-top: 5px;">
                 {% for team in scoring_data %}
@@ -292,7 +292,7 @@ end match (side)
 
             <!-- Coach Message -->
             <div class="code-container">
-                <img src="{{ url_for('static', filename='logo graphics/messageicon.png') }}" alt="">
+                <img src="{{ url_for('static', filename='logo_graphics/messageicon.png') }}" alt="">
                 <h3>Message</h3>
                 <p>Messages will appear on both player and spectator screens. You can only have 1 active message at a time.</p>
                 <form action="">

@@ -25,7 +25,7 @@
     <body onload="onload()">
         <div class="form-container">
             <form action="/edit_course/{{editing._id}}" method="post">
-                <img id="form-image-edit" src="{{ url_for('static', filename='logo graphics/editmatchicon.png') }}" alt="">
+                <img id="form-image-edit" src="{{ url_for('static', filename='logo_graphics/editmatchicon.png') }}" alt="">
                 <h3>Edit Your Course</h3>
                 {% if message %}
                     <h5 id="error">{{message}}</h5>
