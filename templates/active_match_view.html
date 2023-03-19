@@ -66,16 +66,9 @@ end match (side)
                                 </div>
                                 
                                 <div class="card-general-stats">
-                                    {% if playerdata['players'][player]['opponent'] != "" %}
-                                        <h3 id="match_status_h3_{{player}}"></h3>
-                                        <script>
-                                            fetch("/calc_match/{{playerdata['match_info']['id']}}/{{player}}/playerdata['players'][player]['opponent']")
-                                            .then(response => response.text())
-                                            .then(data => document.getElementById('match_status_h3_{{player}}').innerHTML = data);
-                                        </script>
-                                    {% else %}
-                                        <h3>No Opponent</h3>
-                                    {% endif %}
+                                    
+                                    <h3>No Opponent</h3>
+                                   
 
                                 </div>
 
@@ -104,7 +97,7 @@ end match (side)
                                     {% endfor %}
                                 </select>
 
-                                <a id="" href='' onclick="this.href = '/change_opponent/{{playerdata['match_info']['id']}}/{{player}}/' + document.getElementById('select_opponent_{{player}}').value">Update</a>
+                                <a id="" href='' onclick="this.href = '/change_opponent/{{playerdata['match_info']['id']}}/{{player}}/' + document.getElementById('select_opponent_{{player}}').value">Select</a>
                                 
 
                             </form>
@@ -149,7 +142,7 @@ end match (side)
                                     <div>
                                         <div class="team-scores-inner-home">
                                             <p>{{playerdata['match_info']['home_team']}}</p>
-                                            <input type="number" id="player_score_{{player}}_{{strokes}}" value="{{playerdata['players'][player]['scores'][strokes]}}">
+                                            <input type="number" min="0" step="1" id="player_score_{{player}}_{{strokes}}" value="{{playerdata['players'][player]['scores'][strokes]}}">
                                             <a id="" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update</a>
                                         </div>
                                         {% if playerdata['players'][player]['opponent'] != "" %}

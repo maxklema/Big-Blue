@@ -1,0 +1,52 @@
+{
+   "players": {
+      "Maxwell Klema": {
+         "team": "None",
+         "opponent": null,
+         "scores": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0
+         }
+      }
+   },
+   "match_info": {
+      "par1": 4,
+      "par2": 4,
+      "par3": 5,
+      "par4": 4,
+      "par5": 3,
+      "par6": 4,
+      "par7": 3,
+      "par8": 4,
+      "par9": 5,
+      "par10": "",
+      "par11": "",
+      "par12": "",
+      "par13": "",
+      "par14": "",
+      "par15": "",
+      "par16": "",
+      "par17": "",
+      "par18": "",
+      "match_code": "530736",
+      "match_password": "password",
+      "number_holes": "9",
+      "match_name": "Match Play Test 3",
+      "start_time": "2023-03-18",
+      "end_time": "2023-03-18",
+      "home_team": "n/a",
+      "away_team": "n/a",
+      "match_type": "Singles",
+      "gamemode": "Match Play",
+      "id": 23
+   },
+   "lobby": [],
+   "message": ""
+}
