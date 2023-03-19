@@ -890,9 +890,12 @@ def logout():
         return redirect(url_for('index'))
     return redirect(url_for('error', msg="How can you log out... if you are not logged in?"))
 
-@app.route("/admin")
-def admin():
-    return render_template("admin.html")
+@app.route("/admin/<password>")
+def admin(password):
+    if password == "aW1wdmVyc3VzZHdhcmY":
+        return render_template("admin.html")
+    else:
+        return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/match_dashboard")
 def match_dashboard():
