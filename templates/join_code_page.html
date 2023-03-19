@@ -7,6 +7,16 @@
 {% endif %}
 {% block content %}
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2TLMVLX5EB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2TLMVLX5EB');
+</script>
+
 <title>Big Blue | Home</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">        
 
