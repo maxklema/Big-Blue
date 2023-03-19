@@ -360,6 +360,18 @@ html, body {
     margin-left: 10px;
 }
 
+#change_opponent_form a {
+    margin-left: 10px;
+    padding: 5px 15px;
+    font-size: 15px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
 .code-container p {
     margin-top: 5px;
     font-family: bigBlueRegular;

@@ -212,7 +212,7 @@ class Scoring():
             elif data["match_info"]["number_holes"] == "18":
                 holes = {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0}
                 
-            data["players"][player] = {"team": team, "opponent": None,"scores":holes}
+            data["players"][player] = {"team": team, "opponent": "","scores":holes}
 
             for waiting in data["lobby"]:
                 if waiting[0] == player:
