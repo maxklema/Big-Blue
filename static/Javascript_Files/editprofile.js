@@ -105,6 +105,7 @@ function validateForm() {
 function myFunction() {
     document.getElementById("profile-picture-form").style.display = "block";
     document.getElementById("info-form").style.display = "none";
+    document.getElementById("delete-account-form").style.display = "none";
     document.getElementById("profile-banner-form").style.display = "none";
 }
 
@@ -112,12 +113,21 @@ function myFunctionTwo() {
     document.getElementById("profile-picture-form").style.display = "none";
     document.getElementById("profile-banner-form").style.display = "none";
     document.getElementById("info-form").style.display = "block";
+    document.getElementById("delete-account-form").style.display = "none";
 }
 
 function myFunctionThree() {
     document.getElementById("profile-picture-form").style.display = "none";
     document.getElementById("info-form").style.display = "none";
     document.getElementById("profile-banner-form").style.display = "block";
+    document.getElementById("delete-account-form").style.display = "none";
+}
+
+function myFunctionFour() {
+    document.getElementById("profile-picture-form").style.display = "none";
+    document.getElementById("info-form").style.display = "none";
+    document.getElementById("profile-banner-form").style.display = "none";
+    document.getElementById("delete-account-form").style.display = "block";
 }
 
 function checkFullName(){

@@ -44,7 +44,8 @@
                 <div class="left-side">
                     <a style="cursor: pointer;" onclick="myFunctionTwo()">Basic Info</a><br>
                     <a style="cursor: pointer; margin-top: 5px;" onclick="myFunction()">Profile Picture</a><br>
-                    <a style="cursor: pointer; margin-top: 5px;" onclick="myFunctionThree()">Banner</a>
+                    <a style="cursor: pointer; margin-top: 5px;" onclick="myFunctionThree()">Profile Banner</a>
+                    <a style="cursor: pointer; margin-top: 5px;" onclick="myFunctionFour()">Delete Account</a>
                 </div>
                 <div class="right-side">
                     <form method=POST name="Form" id="info-form" action="/edit_user_profile">
@@ -113,10 +114,16 @@
                             <img id="banner-img-ten" src="{{ url_for('static', filename='logo_graphics/BigBlueBanner10.png') }}" alt="">
                         </label>
 
-                        <input id="form-submit" type=submit value="Select Banner">
+                        <input id="form-submit" type="submit" value="Select Banner">
 
 
 
+                    </form>
+
+                    <form action="/delete_account" id="delete-account-form" enctype=multipart/form-data style="display: none;">
+                        <h3>Delete Account</h3><br>
+                        <p>Clicking the "Delete Account" Button will result in a permanent account deletion. This action cannot be undone.</p><br>
+                        <input type="submit" name="Delete Account" id="delete-account-button" value="Delete Account">
                     </form>
 
                     

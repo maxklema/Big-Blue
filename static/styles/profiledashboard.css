@@ -213,7 +213,7 @@ html, body {
     margin-bottom: 5%;
     border-radius: 5px;
     padding: 10px 20px;
-    overflow: hidden;
+    overflow: ellipsis;
 }
 
 .recent-matches {

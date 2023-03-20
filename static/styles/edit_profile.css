@@ -273,6 +273,22 @@ html, body {
     background-color: white;
 }
 
+#delete-account-form p {
+    font-family: BigBlueRegular;
+}
+
+#delete-account-form input {
+    width: 170px;
+    height: 30px;
+    font-size: 15px;
+    text-align: center;
+    color: white;
+    background: #ca3e3e;
+    border: none;
+    cursor: pointer;
+    margin-top: 0px;
+}
+
 #form-submit {
     width: 130px;
     height: 30px;
@@ -354,6 +370,20 @@ html, body {
         margin-bottom: 20px;
         width: 200px;
     }
+    #delete-account-form input {
+        width: 170px;
+        height: 30px;
+        font-size: 15px;
+        text-align: center;
+        color: white;
+        background: #ca3e3e;
+        border: none;
+        cursor: pointer;
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+        margin-bottom: 20px;
+    }
 
 
 }
@@ -373,6 +403,17 @@ html, body {
     #hamburger-icon {
         display: block;
     }
+    #profile-banner-form label img{
+        max-height: 250px;
+        max-width: 300px;
+        border: 0.5px solid #c0c0c0;
+        padding: 10px 10px;
+        border-radius: 10px;
+        background-color: #f3f3f391;
+        margin-bottom: 2px;
+        
+    }
+    
 }
 
 
