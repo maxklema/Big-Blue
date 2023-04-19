@@ -291,6 +291,19 @@ html, body {
     padding: 3px 3px;
 }
 
+#player_input_form {
+    margin-top: 10px;
+    padding: 5px 15px;
+    font-size: 15px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 5px;
+    text-decoration: none;
+}
+
 .team-scores-inner-home a {
     margin-left: 10px;
     padding: 5px 15px;
@@ -704,6 +717,37 @@ input::-webkit-inner-spin-button {
     color: white;
 }
 
+@media (max-width: 1203px){
+    .page-container {
+        flex-direction: column-reverse;
+    }
+
+    .page-container-parent {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .match-card {
+        width: 350px;
+        margin-right: 0;
+    }
+
+    .code-container {
+        max-height: 2000px;
+        background-color: white;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        padding: 15px 20px;
+        text-align: center;
+        overflow-wrap: break-word;
+        width: 350px;
+    }
+    .empty-lobby-section {
+        width: 350px;
+    }
+
+
+}
 
 @media (max-width: 850px){
     header .navigation {

@@ -39,6 +39,7 @@ end match (side)
 
 <title>Match View | Big Blue</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/coach_match_view.css') }}">  
+<div class="page-container-parent">
     <div class="page-container">
 
 
@@ -223,7 +224,7 @@ end match (side)
                                         <p>Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
                                         <input type="number" id="player_score_{{player}}_{{strokes}}" name="" value="{{playerdata['players'][player]['scores'][strokes]}}">
                                     </div>
-                                    <a id="player_input_form" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update Hole {{strokes}}</a>
+                                    <a id="player_input_form" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update {{strokes}}</a>
                                 </div>    
                             {% endfor %}
                     </details>
@@ -317,7 +318,7 @@ end match (side)
 
         </div>
     </div>
-
+</div>
     
     <script>
         //from W3 SCHOOLS
