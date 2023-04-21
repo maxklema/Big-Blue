@@ -293,13 +293,38 @@ class Scoring():
                 data = json.load(file)
                 team1 = [data["match_info"]["home_team"], 0]
                 team2 = [data["match_info"]["away_team"], 0]
+                team1_list = []
+                team2_list = []
+                team1_total = 0
+                team2_total = 0
+
 
                 for player in data["players"].values():
                     print(player)
                     if player["team"] == team1[0]:
-                        team1[1] += Scoring.add_scores(player['scores'])
+                        team1_list.append(Scoring.add_scores(player['scores']))
                     elif player["team"] == team2[0]:
-                        team2[1] += Scoring.add_scores(player["scores"])
+                        team2_list.append(Scoring.add_scores(player['scores']))
+                team1_list.sort()
+                team2_list.sort()
+                print(team1_list, team2_list)
+                for i in team1_list:
+                    print(i)
+                    if team1_list.index(i) <= 3:
+                        print("here????")
+                        team1_total += i
+                        print(team1_total, team2_total)
+                for i in team2_list:
+                    if team2_list.index(i) <= 3:
+                        print("here????")
+                        team2_total += i
+                        print(team1_total, team2_total)
+
+                
+
+                team1[1] += team1_total
+                team2[1] += team2_total
+
                 return team1, team2
         except:
              with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "r") as file:
@@ -307,13 +332,38 @@ class Scoring():
                 data = json.load(file)
                 team1 = [data["match_info"]["home_team"], 0]
                 team2 = [data["match_info"]["away_team"], 0]
+                team1_list = []
+                team2_list = []
+                team1_total = 0
+                team2_total = 0
+
 
                 for player in data["players"].values():
                     print(player)
                     if player["team"] == team1[0]:
-                        team1[1] += Scoring.add_scores(player['scores'])
+                        team1_list.append(Scoring.add_scores(player['scores']))
                     elif player["team"] == team2[0]:
-                        team2[1] += Scoring.add_scores(player["scores"])
+                        team2_list.append(Scoring.add_scores(player['scores']))
+                team1_list.sort()
+                team2_list.sort()
+                print(team1_list, team2_list)
+                for i in team1_list:
+                    print(i)
+                    if team1_list.index(i) <= 3:
+                        print("here????")
+                        team1_total += i
+                        print(team1_total, team2_total)
+                for i in team2_list:
+                    if team2_list.index(i) <= 3:
+                        print("here????")
+                        team2_total += i
+                        print(team1_total, team2_total)
+
+                
+
+                team1[1] += team1_total
+                team2[1] += team2_total
+
                 return team1, team2
 
     def calc_relation_to_par(filename, player):
@@ -377,27 +427,34 @@ class Scoring():
             data = json.load(file)
             return data
     def get_team_scores(filename):
-        teamscores = {}
-        individual_scores = []
-        total = 0
-        with open("static/score_files/" + str(filename) + ".json", "r") as file:
-            file.seek(0)
-            data = json.load(file)
-            for player in data["players"].values():
-                if player["team"] in teamscores.keys():
-                    teamscores[player["team"]] += Scoring.add_scores(player['scores'])
-                    individual_scores.append(Scoring.add_scores(player['scores']))
-                else:
-                    teamscores[player["team"]] = 0
-                    teamscores[player["team"]] += Scoring.add_scores(player['scores'])
-                    individual_scores.append(Scoring.add_scores(player['scores']))
-            individual_scores.sort()
-            for i in individual_scores:
-                if i <= 4:
-                    total += individual_scores[i]
-                
+        try:
+            teamscores = {}
+            with open("static/score_files/" + str(filename) + ".json", "r") as file:
+                file.seek(0)
+                data = json.load(file)
+                for player in data["players"].values():
+                    if player["team"] in teamscores.keys():
+                        teamscores[player["team"]] += Scoring.add_scores(player['scores'])
+                    else:
+                        teamscores[player["team"]] = 0
+                        teamscores[player["team"]] += Scoring.add_scores(player['scores'])
                     
-            return teamscores
+                        
+                return teamscores
+        except:
+            teamscores = {}
+            with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "r") as file:
+                file.seek(0)
+                data = json.load(file)
+                for player in data["players"].values():
+                    if player["team"] in teamscores.keys():
+                        teamscores[player["team"]] += Scoring.add_scores(player['scores'])
+                    else:
+                        teamscores[player["team"]] = 0
+                        teamscores[player["team"]] += Scoring.add_scores(player['scores'])
+                    
+                        
+                return teamscores
 
     def get_lowest_team_score(team_scores):
         lowest_score = 2**31 - 1
