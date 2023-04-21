@@ -1,0 +1,152 @@
+{
+    "players": {
+       "Karson": {
+          "team": "Homestead",
+          "opponent": "",
+          "scores": {
+             "1": "3",
+             "2": "3",
+             "3": "4",
+             "4": "5",
+             "5": "3",
+             "6": "5",
+             "7": "4",
+             "8": "4",
+             "9": "6"
+          }
+       },
+       "Jack": {
+          "team": "Homestead",
+          "opponent": "",
+          "scores": {
+             "1": "4",
+             "2": "5",
+             "3": "5",
+             "4": "5",
+             "5": "4",
+             "6": "6",
+             "7": "3",
+             "8": "4",
+             "9": "7"
+          }
+       },
+       "Noah": {
+          "team": "Homestead",
+          "opponent": "",
+          "scores": {
+             "1": "5",
+             "2": "5",
+             "3": "6",
+             "4": "7",
+             "5": "3",
+             "6": "5",
+             "7": "4",
+             "8": "5",
+             "9": "7"
+          }
+       },
+       "Caden": {
+          "team": "Homestead",
+          "opponent": "",
+          "scores": {
+             "1": "3",
+             "2": "4",
+             "3": "5",
+             "4": "4",
+             "5": "3",
+             "6": "5",
+             "7": "4",
+             "8": "4",
+             "9": "5"
+          }
+       },
+       "Ryan": {
+          "team": "Homestead",
+          "opponent": "",
+          "scores": {
+             "1": "3",
+             "2": "3",
+             "3": "6",
+             "4": "4",
+             "5": "3",
+             "6": "3",
+             "7": "3",
+             "8": "4",
+             "9": "6"
+          }
+       },
+       "Grant": {
+          "team": "Homestead",
+          "opponent": "",
+          "scores": {
+             "1": "4",
+             "2": "4",
+             "3": "6",
+             "4": "4",
+             "5": "5",
+             "6": "8",
+             "7": "4",
+             "8": "4",
+             "9": "6"
+          }
+       }
+    },
+    "match_info": {
+       "par1": 4,
+       "par2": 4,
+       "par3": 5,
+       "par4": 4,
+       "par5": 3,
+       "par6": 4,
+       "par7": 3,
+       "par8": 4,
+       "par9": 5,
+       "par10": "",
+       "par11": "",
+       "par12": "",
+       "par13": "",
+       "par14": "",
+       "par15": "",
+       "par16": "",
+       "par17": "",
+       "par18": "",
+       "match_code": "463800",
+       "match_password": "password",
+       "number_holes": "9",
+       "match_name": "Homestead vs. Warsaw",
+       "start_time": "2023-04-20",
+       "end_time": "2023-04-20",
+       "home_team": "Homestead",
+       "away_team": "Warsaw",
+       "match_type": "Teams",
+       "gamemode": "Stroke Play",
+       "id": 29
+    },
+    "lobby": [
+       [
+          "Grant Drummond",
+          "Homestead"
+       ],
+       [
+          "Ryan Parker",
+          "Homestead"
+       ],
+       [
+          "Noah lancz",
+          "Homestead"
+       ],
+       [
+          "Grant",
+          "Homestead"
+       ],
+       [
+          "Grabt",
+          "Homestead"
+       ],
+       [
+          "Grant",
+          "Homestead"
+       ]
+    ],
+    "message": "This match is archived from 4/20/23."
+ }

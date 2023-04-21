@@ -287,59 +287,115 @@ class Scoring():
         return sum
 
     def calc_match_results(filename):
-        with open("static/score_files/" + str(filename) + ".json", "r") as file:
-            file.seek(0)
-            data = json.load(file)
-            team1 = [data["match_info"]["home_team"], 0]
-            team2 = [data["match_info"]["away_team"], 0]
+        try: 
+            with open("static/score_files/" + str(filename) + ".json", "r") as file:
+                file.seek(0)
+                data = json.load(file)
+                team1 = [data["match_info"]["home_team"], 0]
+                team2 = [data["match_info"]["away_team"], 0]
 
-            for player in data["players"].values():
-                print(player)
-                if player["team"] == team1[0]:
-                    team1[1] += Scoring.add_scores(player['scores'])
-                elif player["team"] == team2[0]:
-                    team2[1] += Scoring.add_scores(player["scores"])
-            return team1, team2
+                for player in data["players"].values():
+                    print(player)
+                    if player["team"] == team1[0]:
+                        team1[1] += Scoring.add_scores(player['scores'])
+                    elif player["team"] == team2[0]:
+                        team2[1] += Scoring.add_scores(player["scores"])
+                return team1, team2
+        except:
+             with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "r") as file:
+                file.seek(0)
+                data = json.load(file)
+                team1 = [data["match_info"]["home_team"], 0]
+                team2 = [data["match_info"]["away_team"], 0]
+
+                for player in data["players"].values():
+                    print(player)
+                    if player["team"] == team1[0]:
+                        team1[1] += Scoring.add_scores(player['scores'])
+                    elif player["team"] == team2[0]:
+                        team2[1] += Scoring.add_scores(player["scores"])
+                return team1, team2
 
     def calc_relation_to_par(filename, player):
-         with open("static/score_files/" + str(filename) + ".json", "r") as file:
-            file.seek(0)
-            data = json.load(file)
-            player_score = data["players"][player]["scores"]
-            last_hole = 0
-            current_score = 0
-            current_par = 0
-            for i in range(int(data["match_info"]["number_holes"])):
-                if (player_score[str(i+1)] != 0):
-                    last_hole+=1
-                    current_score += int(player_score[str(i+1)])
-                    current_par += data["match_info"]["par" + str(i+1)]
+        try:
+            with open("static/score_files/" + str(filename) + ".json", "r") as file:
+                file.seek(0)
+                data = json.load(file)
+                player_score = data["players"][player]["scores"]
+                last_hole = 0
+                current_score = 0
+                current_par = 0
+                for i in range(int(data["match_info"]["number_holes"])):
+                    if (player_score[str(i+1)] != 0):
+                        last_hole+=1
+                        current_score += int(player_score[str(i+1)])
+                        current_par += data["match_info"]["par" + str(i+1)]
+                    else:
+                        break
+                absolute_relation = str(abs(current_score - current_par))
+                if last_hole == int(data["match_info"]["number_holes"]):
+                    return "F: " + str(current_score)
+                elif current_score > current_par:
+                    return "+" + absolute_relation + " thru " + str(last_hole)
+                elif current_score < current_par:
+                    return "-" + absolute_relation + " thru " + str(last_hole)
                 else:
-                    break
-            absolute_relation = str(abs(current_score - current_par))
-            if current_score > current_par:
-                return "+" + absolute_relation + " thru " + str(last_hole)
-            elif current_score < current_par:
-                return "-" + absolute_relation + " thru " + str(last_hole)
-            else:
-                return "E" + " thru " + str(last_hole)
+                    return "E" + " thru " + str(last_hole)
+        except:
+            with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "r") as file:
+                file.seek(0)
+                data = json.load(file)
+                player_score = data["players"][player]["scores"]
+                last_hole = 0
+                current_score = 0
+                current_par = 0
+                for i in range(int(data["match_info"]["number_holes"])):
+                    if (player_score[str(i+1)] != 0):
+                        last_hole+=1
+                        current_score += int(player_score[str(i+1)])
+                        current_par += data["match_info"]["par" + str(i+1)]
+                    else:
+                        break
+                absolute_relation = str(abs(current_score - current_par))
+                if last_hole == int(data["match_info"]["number_holes"]):
+                    return "F: " + str(current_score)
+                elif current_score > current_par:
+                    return "+" + absolute_relation + " thru " + str(last_hole)
+                elif current_score < current_par:
+                    return "-" + absolute_relation + " thru " + str(last_hole)
+                else:
+                    return "E" + " thru " + str(last_hole)
     
     def return_data(filename):
         with open("static/score_files/" + str(filename) + ".json", "r") as file:
             file.seek(0)
             data = json.load(file)
             return data
+    def return_archive_data(filename):
+        with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "r") as file:
+            file.seek(0)
+            data = json.load(file)
+            return data
     def get_team_scores(filename):
         teamscores = {}
+        individual_scores = []
+        total = 0
         with open("static/score_files/" + str(filename) + ".json", "r") as file:
             file.seek(0)
             data = json.load(file)
             for player in data["players"].values():
                 if player["team"] in teamscores.keys():
                     teamscores[player["team"]] += Scoring.add_scores(player['scores'])
+                    individual_scores.append(Scoring.add_scores(player['scores']))
                 else:
                     teamscores[player["team"]] = 0
                     teamscores[player["team"]] += Scoring.add_scores(player['scores'])
+                    individual_scores.append(Scoring.add_scores(player['scores']))
+            individual_scores.sort()
+            for i in individual_scores:
+                if i <= 4:
+                    total += individual_scores[i]
+                
                     
             return teamscores
 
@@ -997,7 +1053,10 @@ def change_verified_status(admin, user, verified):
 
 @app.route("/spectator_match_view/<json_data_input>")
 def spectator_match_view(json_data_input):
-    json_data = Scoring.return_data(json_data_input)
+    try:
+        json_data = Scoring.return_data(json_data_input)
+    except:
+        json_data=Scoring.return_archive_data(json_data_input)
     scores = Scoring.calc_match_results(json_data['match_info']['id'])
     try:
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
