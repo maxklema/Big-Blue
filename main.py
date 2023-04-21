@@ -1112,14 +1112,23 @@ def change_verified_status(admin, user, verified):
 def spectator_match_view(json_data_input):
     try:
         json_data = Scoring.return_data(json_data_input)
+        scores = Scoring.calc_match_results(json_data['match_info']['id'])
+        try:
+            found_user = users.query.filter_by(username=session['active_user'][0]).first()
+        except:
+            found_user = ''
+        return render_template("spectator-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
     except:
-        json_data=Scoring.return_archive_data(json_data_input)
-    scores = Scoring.calc_match_results(json_data['match_info']['id'])
-    try:
-        found_user = users.query.filter_by(username=session['active_user'][0]).first()
-    except:
-        found_user = ''
-    return render_template("spectator-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
+        try:
+            json_data = Scoring.return_archive_data(json_data_input)
+            scores = Scoring.calc_match_results(json_data['match_info']['id'])
+            try:
+                found_user = users.query.filter_by(username=session['active_user'][0]).first()
+            except:
+                found_user = ''
+            return render_template("spectator-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
+        except:
+            return redirect(url_for('error', msg='This match does not exist!'))
 
 
 @app.route("/player_match_view/<json_data_input>", methods=['GET', 'POST'])
