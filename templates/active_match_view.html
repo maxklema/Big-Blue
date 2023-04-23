@@ -70,7 +70,7 @@ end match (side)
 
                             
                                 <div >
-                                    <h3 id="player-name">{{player}}</h3>
+                                    <h3 id="player-name">{{player | replace('%20', ' ')}}</h3>
                                     <h5 class="team_name_header" >{{playerdata['players'][player]['team']}}</h5>
                                 </div>
                                 
@@ -200,7 +200,7 @@ end match (side)
                             <div class="card-header-info">
                                 <div class="card-user-information">
                                     <div>
-                                        <h2>{{player}}</h2>
+                                        <h2>{{player | replace('%20', ' ')}}</h2>
                                         <div class="card-general-stats">
                                             <h3 id="relation_to_par_h3_{{player}}"></h3>
                                         </div>
@@ -269,8 +269,12 @@ end match (side)
                         <div id="player-name">
                             <p>{{waiting[0]}} for {{waiting[1]}}</p>
                         </div>
-                        <button id="accept"><a href="/add_player/{{playerdata['match_info']['id']}}/{{waiting[0]}}/{{waiting[1]}}">✓</a></button>
-                        <button id="kick"><a onclick="kick_function()" href="/kick_player/{{playerdata['match_info']['id']}}/{{waiting[0]}}">✕</a></button>
+                       
+                            <button id="accept"><a href="/add_player/{{playerdata['match_info']['id']}}/{{waiting[0]}}/{{waiting[1]}}">✓</a></button>
+                           
+                            
+                            <button id="kick"><a onclick="kick_function()" href="/kick_player/{{playerdata['match_info']['id']}}/{{waiting[0]}}">✕</a></button>
+                        
                     </div>
                     {% endfor %}
                     

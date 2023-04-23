@@ -67,7 +67,7 @@ end match (side)
 
                             
                                 <div >
-                                    <h3 id="player-name">{{player}}</h3>
+                                    <h3 id="player-name">{{player | replace('%20', ' ') }}</h3>
                                     <h5 class="team_name_header" >{{playerdata['players'][player]['team']}}</h5>
                                 </div>
                                 
@@ -180,7 +180,7 @@ end match (side)
                         <summary>
                             <div class="card-header-info">
                                 <div class="card-user-information">
-                                    <h2>{{player}}</h2>
+                                    <h2>{{player | replace('%20', ' ') }}</h2>
                                 </div>
                                 <div class="card-general-stats">
                                     <h3 id="relation_to_par_h3_{{player}}"></h3>
@@ -195,7 +195,7 @@ end match (side)
                             <h5>{{playerdata['players'][player]['team']}}</h5>
                         </summary><details class="custom-details">
                             <summary>Score Details</summary>
-                            {% if active_player == player %}
+                            {% if active_player == player.replace('%20', ' ') %}
                                 {% for strokes in playerdata['players'][player]['scores'] %}
                                     <div class="player-score-per-hole">
                                         <div class="player-score-per-hole-left-side">
@@ -295,7 +295,7 @@ end match (side)
                 {% if not playerdata['message'] %}
                     <p>There is not a message from the coach yet.</p>
                 {% else %}
-                    <p style="color: #ca3e3e;">"{{playerdata['message']}}"</p>
+                    <p style="color: #ca3e3e;">"{{playerdata['message'] | replace('%20', ' ') }}"</p>
                 {% endif %}
     
             </div>

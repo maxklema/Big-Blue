@@ -1218,15 +1218,16 @@ def change_message(filename, message):
     else:
         return redirect(url_for("error", msg="You do not have access to this method!"))
 
-@app.route("/kick_player/<filename>/<player>")
+@app.route("/kick_player/<filename>/<player>", methods=['GET', 'POST'])
 def kick_player(filename, player):
     if match_security('active_user', filename):
+        player = player.replace("%20", " ")
         Scoring.kick_player(filename, player)
         return redirect(url_for("active_match_view", json_data_input=filename))
     else:
         return redirect(url_for("error", msg="You do not have access to this method!"))
 
-@app.route("/add_player/<filename>/<team>/<player_name>")
+@app.route("/add_player/<filename>/<team>/<player_name>", methods=['GET', 'POST'])
 def add_player(filename, team, player_name):
     if match_security('active_user', filename):
         Scoring.add_player(filename, team, player_name)
