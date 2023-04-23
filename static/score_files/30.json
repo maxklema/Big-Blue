@@ -1,6 +1,6 @@
 {
    "players": {
-      "Maxwell Klema": {
+      "Jake": {
          "team": "Homestead",
          "opponent": "",
          "scores": {
@@ -56,6 +56,11 @@
       "gamemode": "Stroke Play",
       "id": 30
    },
-   "lobby": [],
+   "lobby": [
+      [
+         "Maxwell%20Klema",
+         "Homestead"
+      ]
+   ],
    "message": "this is a test message"
 }

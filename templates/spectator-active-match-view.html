@@ -44,8 +44,140 @@ end match (side)
 <div class="page-container-parent">
     <div class="page-container">
 
+        <!-- Match Play -->
 
-        <!-- Player Cards -->
+        {% if playerdata['match_info']['gamemode'] == 'Match Play' %}
+
+        <div class="player-cards">
+            {% if playerdata['players'] is defined and playerdata['players']|length == 0 %}
+                <div class="empty-lobby-section">
+                    <img src="{{ url_for('static', filename='logo_graphics/empty-golf-cart-icon.png') }}" alt="">
+                    <h5>When You Accept Players, They Will Show Up Here</h5>
+                </div>    
+            
+            {% endif %}
+
+            
+
+            {% for player in playerdata['players'] %}
+            
+                {% if playerdata['players'][player]['team'] == playerdata['match_info']['home_team']%}
+                <div class="match-card">
+                        <summary>
+                            <div class="card-header-info">
+
+                            
+                                <div >
+                                    <h3 id="player-name">{{player}}</h3>
+                                    <h5 class="team_name_header" >{{playerdata['players'][player]['team']}}</h5>
+                                </div>
+                                
+                                <div class="card-general-stats">
+                                    
+                                    {% if playerdata['players'][player]['opponent'] != "" %}
+                                        <h3 id="match_status_h3_{{player}}"></h3>
+                                            <script>
+                                                fetch("/calc_match/{{playerdata['match_info']['id']}}/{{player}}/{{playerdata['players'][player]['opponent']}}")
+                                                .then(response => response.text())
+                                                .then(data => document.getElementById('match_status_h3_{{player}}').innerHTML = data);
+                                            </script>
+                                    {% else %}
+                                        <h3 id="match_status_h3_{{player}}">No Opponent</h3>
+                                   {% endif %}
+
+                                </div>
+
+                                
+
+                                <div>
+                                    <h3>{{playerdata['players'][player]['opponent']}}</h3>
+                                    <h5 class="team_name_header" id="opponent_team_header">{{playerdata['match_info']['away_team']}}</h5>
+                                </div>
+
+
+                            </div>
+
+
+                        </summary><details class="custom-details">
+                            <summary>Score Details</summary>
+                            {% set opponent = playerdata['players'][player]['opponent'] %}
+                            {% for strokes in playerdata['players'][player]['scores'] %}
+                            {% set home_team = playerdata['match_info']['home_team']%}
+                            {% set away_team = playerdata['match_info']['away_team']%}
+                                <div class="player-score-per-hole">
+                                    <div>
+                                        <p>Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="team-scores-inner-home">
+                                            <p>{{playerdata['match_info']['home_team']}}: <span style="color: #ca3e3e;">{{playerdata['players'][player]['scores'][strokes]}}</span></p>
+                                        </div>
+                                        {% if playerdata['players'][player]['opponent'] != "" %}
+                                            <div class="team-scores-inner-away">
+                                                <p>{{playerdata['match_info']['away_team']}}: <span style="color: #ca3e3e;">{{playerdata['players'][opponent]['scores'][strokes]}}</span></p>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    
+                                </div>    
+                            {% endfor %}
+                    </details>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+
+        <!-- Stroke Play -->
+
+        {% elif playerdata['match_info']['gamemode'] == 'Stroke Play'%}
+    
+            <div class="player-cards">
+                {% if playerdata['players'] is defined and playerdata['players']|length == 0 %}
+                    <div class="empty-lobby-section">
+                        <img src="{{ url_for('static', filename='logo_graphics/empty-golf-cart-icon.png') }}" alt="">
+                        <h5>When Players Join The Match, They Will Show Up Here</h5>
+                    </div>    
+                
+                {% endif %}
+
+                {% for player in playerdata['players'] %}
+                <div class="match-card">
+                        <summary>
+                            <div class="card-header-info">
+                                <div class="card-user-information">
+                                    <h2>{{player}}</h2>
+                                </div>
+                                <div class="card-general-stats">
+                                    <h3 id="relation_to_par_h3_{{player}}"></h3>
+                                </div>
+                                <script>
+                                    fetch("/calc_relation/{{playerdata['match_info']['id']}}/{{player}}")
+                                    .then(response => response.text())
+                                    .then(data => document.getElementById('relation_to_par_h3_{{player}}').innerHTML = data);
+                                </script>
+                            </div>
+                            <h5>{{playerdata['players'][player]['team']}}</h5>
+                        </summary><details class="custom-details">
+                            <summary>Score Details</summary>
+                            {% for strokes in playerdata['players'][player]['scores'] %}
+                                <div class="player-score-per-hole">
+                                    <div class="player-score-per-hole-left-side">
+                                        <p>Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
+                                    </div>
+                                    <p style="color: #ca3e3e;">{{playerdata['players'][player]['scores'][strokes]}}</p>
+                                </div>    
+                            {% endfor %}
+                    </details>
+                </div>
+                {% endfor %}
+            </div>
+
+        {% endif %}
+
+        <!-- Player Cards
         <div class="player-cards">
             {% if playerdata['players'] is defined and playerdata['players']|length == 0 %}
                 <div class="empty-lobby-section">
@@ -85,7 +217,7 @@ end match (side)
                 </details>
             </div>
             {% endfor %}
-        </div>
+        </div>-->
         
         
         
@@ -112,10 +244,12 @@ end match (side)
                 <h3>Match Statistics</h3>
                 <hr style="margin-bottom: 5px; margin-top: 5px;">
                 {% for team in scoring_data %}
-                    <div class="stat-container">
-                        <h4>{{team[0]}} Score</h4>
-                        <p>{{team[1]}}</p>
-                    </div>
+                    {% if playerdata['match_info']['gamemode'] == 'Stroke Play' %}
+                        <div class="stat-container">
+                            <h4>{{team[0]}} Score</h4>
+                            <p>{{team[1]}}</p>
+                        </div>
+                    {% endif %}
                 {% endfor %}
             </div>
 

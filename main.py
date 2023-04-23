@@ -11,7 +11,6 @@ import os
 import sqlite3
 import sys
 import re # THIS IS REGEX
-import urllib.parse
 from random import randint
 
 app = Flask(__name__)
@@ -1148,11 +1147,7 @@ def player_match_view(json_data_input):
         except:
             found_user = ''
         if request.method =="POST":
-            for player in json_data['players']:
-                player = urllib.parse.unquote(player)
             return redirect(url_for("player_match_view", active_player=session['active_player'], json_data_input = json_data['match_info']['id']))
-        for player in json_data['players']:
-                player = urllib.parse.unquote(player)
         return render_template("player-active-match-view.html", active_player=session['active_player'], data=found_user, playerdata=json_data, scoring_data = scores)
     else:
         return redirect(url_for('error', msg='You do not have access to this site until you join a match.'))
