@@ -61,17 +61,14 @@ end match (side)
 
             {% for player in playerdata['players'] %}
             
-                {% if playerdata['players'][player]['team'] == playerdata['match_info']['home_team']%}
+                {% if playerdata['players'][player]['team'] == playerdata['match_info']['home_team'] %}
                 <div class="match-card">
                         <summary>
+
+                          
+
                             <div class="card-header-info">
 
-                            
-                                <div >
-                                    <h3 id="player-name">{{player | replace('%20', ' ') }}</h3>
-                                    <h5 class="team_name_header" >{{playerdata['players'][player]['team']}}</h5>
-                                </div>
-                                
                                 <div class="card-general-stats">
                                     
                                     {% if playerdata['players'][player]['opponent'] != "" %}
@@ -83,39 +80,78 @@ end match (side)
                                             </script>
                                     {% else %}
                                         <h3 id="match_status_h3_{{player}}">No Opponent</h3>
-                                   {% endif %}
+                                {% endif %}
+
+                                </div>  
+
+                                <div class="both-player-cards">
+
+                                    <div class="card-home-player">
+                                        <h3 id="player-name">{{player | replace('%20', ' ') }}</h3>
+                                        <h5 class="team_name_header" >{{playerdata['players'][player]['team']}}</h5>
+                                    </div>
+    
+                                    <div class="card-away-player">
+                                        <h3>{{playerdata['players'][player]['opponent']}}</h3>
+                                        <h5 class="team_name_header" id="opponent_team_header">{{playerdata['match_info']['away_team']}}</h5>
+                                    </div>
 
                                 </div>
 
-                                
 
-                                <div>
-                                    <h3>{{playerdata['players'][player]['opponent']}}</h3>
-                                    <h5 class="team_name_header" id="opponent_team_header">{{playerdata['match_info']['away_team']}}</h5>
-                                </div>
 
 
                             </div>
 
+                            <script>
+                                function change_form_route() {
+                                    // Get the selected opponent
+                                    var opponent = document.getElementById("select_opponent").value;
+                                    alert(opponent);
+                            
+                                    // Change the form action to include the selected opponent
+                                    var form = document.getElementById("change_opponent_form");
+                                    form.action = "/change_opponent/{{playerdata['match_info']['id']}}/{{player}}/" + opponent;
+                                    alert(form.action)
+                                    // Submit the form
+                                    form.submit();
+                            
+                                    // Prevent the default form submission behavior
+                                    return false;
+                                }
+                            </script>
+                        
 
                         </summary><details class="custom-details">
                             <summary>Score Details</summary>
                             {% set opponent = playerdata['players'][player]['opponent'] %}
-                            {% for strokes in playerdata['players'][player]['scores'] %}
                             {% set home_team = playerdata['match_info']['home_team']%}
                             {% set away_team = playerdata['match_info']['away_team']%}
+                            {% for strokes in playerdata['players'][player]['scores'] %}
                                 <div class="player-score-per-hole">
                                     <div>
-                                        <p>Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
+                                        <p id="inner-hole-data">Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
                                     </div>
                                     
                                     <div>
                                         <div class="team-scores-inner-home">
-                                            <p>{{playerdata['match_info']['home_team']}}: <span style="color: #ca3e3e;">{{playerdata['players'][player]['scores'][strokes]}}</span></p>
+                                            {% if active_player == player %}
+                                                <p id="inner-hole-data">{{playerdata['match_info']['home_team']}}</p>
+                                                <input type="number" min="0" step="1" id="player_score_{{player}}_{{strokes}}" value="{{playerdata['players'][player]['scores'][strokes]}}">
+                                                <a id="" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update</a>
+                                            {% else %}
+                                                <p>{{playerdata['match_info']['home_team']}}: <span style="color: #ca3e3e;">{{playerdata['players'][player]['scores'][strokes]}}</span></p>
+                                            {% endif %}
                                         </div>
                                         {% if playerdata['players'][player]['opponent'] != "" %}
                                             <div class="team-scores-inner-away">
-                                                <p>{{playerdata['match_info']['away_team']}}: <span style="color: #ca3e3e;">{{playerdata['players'][opponent]['scores'][strokes]}}</span></p>
+                                                {% if active_player == player.replace('%20', ' ') %}
+                                                    <p id="inner-hole-data">{{playerdata['match_info']['away_team']}}</p>
+                                                    <input type="number" id="player_score_{{opponent}}_{{strokes}}" value="{{playerdata['players'][opponent]['scores'][strokes]}}">
+                                                    <a id="" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{opponent}}/{{strokes}}/' + document.getElementById('player_score_{{opponent}}_{{strokes}}').value">Update</a>
+                                                {% else %}
+                                                    <p>{{playerdata['match_info']['away_team']}}: <span style="color: #ca3e3e;">{{playerdata['players'][opponent]['scores'][strokes]}}</span></p>
+                                                {% endif %}
                                             </div>
                                         {% endif %}
                                     </div>

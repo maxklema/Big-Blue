@@ -69,11 +69,6 @@ end match (side)
                             <div class="card-header-info">
 
                             
-                                <div >
-                                    <h3 id="player-name">{{player | replace('%20', ' ')}}</h3>
-                                    <h5 class="team_name_header" >{{playerdata['players'][player]['team']}}</h5>
-                                </div>
-                                
                                 <div class="card-general-stats">
                                     
                                     {% if playerdata['players'][player]['opponent'] != "" %}
@@ -85,15 +80,22 @@ end match (side)
                                             </script>
                                     {% else %}
                                         <h3 id="match_status_h3_{{player}}">No Opponent</h3>
-                                   {% endif %}
+                                {% endif %}
 
-                                </div>
+                                </div>  
 
-                                
+                                <div class="both-player-cards">
 
-                                <div>
-                                    <h3>{{playerdata['players'][player]['opponent']}}</h3>
-                                    <h5 class="team_name_header" id="opponent_team_header">{{playerdata['match_info']['away_team']}}</h5>
+                                    <div class="card-home-player">
+                                        <h3 id="player-name">{{player | replace('%20', ' ') }}</h3>
+                                        <h5 class="team_name_header" >{{playerdata['players'][player]['team']}}</h5>
+                                    </div>
+    
+                                    <div class="card-away-player">
+                                        <h3>{{playerdata['players'][player]['opponent']}}</h3>
+                                        <h5 class="team_name_header" id="opponent_team_header">{{playerdata['match_info']['away_team']}}</h5>
+                                    </div>
+
                                 </div>
 
 
@@ -153,18 +155,18 @@ end match (side)
                             {% set away_team = playerdata['match_info']['away_team']%}
                                 <div class="player-score-per-hole">
                                     <div>
-                                        <p>Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
+                                        <p id="inner-hole-data">Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
                                     </div>
                                     
                                     <div>
                                         <div class="team-scores-inner-home">
-                                            <p>{{playerdata['match_info']['home_team']}}</p>
+                                            <p id="inner-hole-data">{{playerdata['match_info']['home_team']}}</p>
                                             <input type="number" min="0" step="1" id="player_score_{{player}}_{{strokes}}" value="{{playerdata['players'][player]['scores'][strokes]}}">
                                             <a id="" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update</a>
                                         </div>
                                         {% if playerdata['players'][player]['opponent'] != "" %}
                                             <div class="team-scores-inner-away">
-                                                <p>{{playerdata['match_info']['away_team']}}</p>
+                                                <p id="inner-hole-data">{{playerdata['match_info']['away_team']}}</p>
                                                 <input type="number" id="player_score_{{opponent}}_{{strokes}}" value="{{playerdata['players'][opponent]['scores'][strokes]}}">
                                                 <a id="" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{opponent}}/{{strokes}}/' + document.getElementById('player_score_{{opponent}}_{{strokes}}').value">Update</a>
                                             </div>

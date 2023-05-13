@@ -219,9 +219,15 @@ html, body {
 
 .card-header-info {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
 
+}
+
+.both-player-cards {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 10px;
 }
 
 .code-container {
@@ -545,6 +551,8 @@ details[open] > summary {
 
 .card-general-stats {
    max-height: 37px;
+   margin-bottom: 10px;
+   width: fit-content;
 }
 
 .card-general-stats h3 {
@@ -745,6 +753,16 @@ input::-webkit-inner-spin-button {
     .empty-lobby-section {
         width: 350px;
     }
+
+    #inner-hole-data {
+        font-size: 12px;
+    }
+    
+
+    
+
+
+
 
 
 }
