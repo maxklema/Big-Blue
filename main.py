@@ -1165,7 +1165,10 @@ def change_verified_status(admin, user, verified):
 def spectator_match_view(json_data_input):
     try:
         json_data = Scoring.return_data(json_data_input)
-        scores = Scoring.calc_match_results(json_data['match_info']['id'])
+        if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
+                scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
+        else:
+            scores = Scoring.calc_match_results(json_data['match_info']['id'])
         try:
             found_user = users.query.filter_by(username=session['active_user'][0]).first()
         except:
@@ -1187,10 +1190,14 @@ def spectator_match_view(json_data_input):
 @app.route("/player_match_view/<json_data_input>", methods=['GET', 'POST'])
 def player_match_view(json_data_input):
     if 'active_player' in session:
+        scores = []
 
         try:
-            json_data = Scoring.return_data(json_data_input)
-            scores = Scoring.calc_match_results(json_data['match_info']['id'])
+            if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
+                scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
+                json_data = Scoring.return_data(json_data_input)
+            else:
+                scores = Scoring.calc_match_results(json_data['match_info']['id'])
         except:
             return redirect(url_for('error', msg='This match does not exist!'))
         
