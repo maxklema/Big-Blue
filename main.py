@@ -250,8 +250,6 @@ class Scoring():
             status=""
             score=0
             first_scores = data["players"][player1]["scores"]
-            print(player1)
-            print(player2)
             second_scores = data["players"][player2]["scores"]
             last_hole=0
             for i in range(int(data["match_info"]["number_holes"])):
@@ -263,16 +261,15 @@ class Scoring():
                         score-=1
                 else:
                     break
-        print(score)
         holes_left = int(data["match_info"]["number_holes"]) - last_hole
         if score > 0:
             if score > holes_left:
-                status = player1 + " wins " + str(score) + "&" + str(holes_left)
+                status = player1 + " wins " + str(score) + " & " + str(holes_left)
             else:
                 status= player1 + " is up " + str(score) + " thru " + str(last_hole)
         elif score < 0:
             if abs(score) > holes_left:
-                status = player2 + " wins " + str(abs(score)) + "&" + str(holes_left)
+                status = player2 + " wins " + str(abs(score)) + " & " + str(holes_left)
             else:
                 status= player2 + " is up " + str(abs(score)) + " thru " + str(last_hole)
         else:
@@ -285,6 +282,65 @@ class Scoring():
             if data[hole] != "":
                 sum += int(data[str(hole)])
         return sum
+
+
+    def calc_match_play_results(filename):
+        try:
+            with open("static/score_files/" + str(filename) + ".json", "r") as file:
+                file.seek(0)
+                data = json.load(file)
+                team1 = [data["match_info"]["home_team"], 0]
+                team2 = [data["match_info"]["away_team"], 0]
+                team1_total = 0
+                team2_total = 0
+                for player in data["players"]:
+                    if data["players"][player]["team"] == team1[0]:
+                        print(player)
+                        match_status = Scoring.calc_match_status(filename, player, data["players"][player]["opponent"])
+                        print(match_status)
+                        if (match_status.startswith(player + " wins")):
+                            team1_total += 1
+                        elif (match_status.startswith(data["players"][player]["opponent"] + " wins")):
+                            team2_total += 1
+                        elif (match_status.startswith("AS thru " + data['match_info']['number_holes'])):
+                            team1_total += 0.5
+                            team2_total += 0.5
+
+                team1[1] += team1_total
+                team2[1] += team2_total
+
+                print("TEAM ONE TOTAL: " + str(team1_total))
+
+                return team1, team2
+        except:
+            with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "r") as file:
+                file.seek(0)
+                data = json.load(file)
+                team1 = [data["match_info"]["home_team"], 0]
+                team2 = [data["match_info"]["away_team"], 0]
+                team1_total = 0
+                team2_total = 0
+                for player in data["players"]:
+                    if data["players"][player]["team"] == team1[0]:
+                        print(player)
+                        match_status = Scoring.calc_match_status(filename, player, data["players"][player]["opponent"])
+                        print(match_status)
+                        if (match_status.startswith(player + " wins")):
+                            team1_total += 1
+                        elif (match_status.startswith(data["players"][player]["opponent"] + " wins")):
+                            team2_total += 1
+                        elif (match_status.startswith("AS thru " + data['match_info']['number_holes'])):
+                            team1_total += 0.5
+                            team2_total += 0.5
+
+                team1[1] += team1_total
+                team2[1] += team2_total
+
+                print("TEAM ONE TOTAL: " + str(team1_total))
+
+                return team1, team2
+
+
 
     def calc_match_results(filename):
         try: 
@@ -300,7 +356,6 @@ class Scoring():
 
 
                 for player in data["players"].values():
-                    print(player)
                     if player["team"] == team1[0]:
                         team1_list.append(Scoring.add_scores(player['scores']))
                     elif player["team"] == team2[0]:
@@ -313,12 +368,10 @@ class Scoring():
                     if team1_list.index(i) <= 3:
                         print("here????")
                         team1_total += i
-                        print(team1_total, team2_total)
                 for i in team2_list:
                     if team2_list.index(i) <= 3:
                         print("here????")
                         team2_total += i
-                        print(team1_total, team2_total)
 
                 
 
@@ -1166,13 +1219,13 @@ def active_match_view(json_data_input):
     except:
         found_user = ''
 
-    if json_data['match_info']['gamemode'] == 'Match Play':
+    if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
+        scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
+        print(scores)
         players_used = []
         for player in json_data["players"]:
             try:
                 opponent = json_data["players"][player]["opponent"]
-                scores.append((player, opponent, Scoring.calc_match_status(json_data['match_info']['id'], player, opponent)))
-                print(scores)
                 players_used.append(player)
                 players_used.append(opponent)
             except:
@@ -1183,7 +1236,6 @@ def active_match_view(json_data_input):
         scores = Scoring.calc_match_results(json_data['match_info']['id'])
 
     if match_security('active_user', json_data_input):
-        print(scores)
         return render_template("active_match_view.html", data=found_user, playerdata=json_data, scoring_data=scores, rank=session['active_user'][2])
     else:
         return redirect(url_for('error', userdata=found_user, msg="You do not have access to this site!"))
