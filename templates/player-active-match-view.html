@@ -327,12 +327,10 @@ end match (side)
                 <h3>Match Statistics</h3>
                 <hr style="margin-bottom: 5px; margin-top: 5px;">
                 {% for team in scoring_data %}
-                    {% if playerdata['match_info']['gamemode'] == 'Stroke Play' %}
-                        <div class="stat-container">
-                            <h4>{{team[0]}} Score</h4>
-                            <p>{{team[1]}}</p>
-                        </div>
-                    {% endif %}
+                    <div class="stat-container">
+                        <h4>{{team[0]}} Score</h4>
+                        <p>{{team[1]}}</p>
+                    </div>
                 {% endfor %}
             </div>
 

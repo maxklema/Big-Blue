@@ -230,6 +230,7 @@ html, body {
     margin-bottom: 10px;
 }
 
+
 .code-container {
     max-height: 2000px;
     background-color: white;
@@ -734,11 +735,43 @@ input::-webkit-inner-spin-button {
         display: flex;
         justify-content: center;
     }
+
+    .card-home-player {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .card-away-player {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .both-player-cards {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        margin-bottom: 10px;
+        margin-top: 30px;
+    }
+    
+    .card-away-player h3 {
+        font-size: 16px;
+    }
+
+    .card-home-player h3 {
+        font-size: 16px;
+    }
+
+    .team_name_header {
+        font-size: 11px;
+    }
     
     .match-card {
         width: 350px;
         margin-right: 0;
     }
+
+    
 
     .code-container {
         max-height: 2000px;

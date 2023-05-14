@@ -261,20 +261,21 @@ class Scoring():
                         score-=1
                 else:
                     break
-        holes_left = int(data["match_info"]["number_holes"]) - last_hole
-        if score > 0:
-            if score > holes_left:
-                status = player1 + " wins " + str(score) + " & " + str(holes_left)
+            holes_left = int(data["match_info"]["number_holes"]) - last_hole
+            if score > 0:
+                if score > holes_left:
+                    status = player1 + " wins " + str(score) + " & " + str(holes_left)
+                else:
+                    status= player1 + " is up " + str(score) + " thru " + str(last_hole)
+            elif score < 0:
+                if abs(score) > holes_left:
+                    status = player2 + " wins " + str(abs(score)) + " & " + str(holes_left)
+                else:
+                    status= player2 + " is up " + str(abs(score)) + " thru " + str(last_hole)
             else:
-                status= player1 + " is up " + str(score) + " thru " + str(last_hole)
-        elif score < 0:
-            if abs(score) > holes_left:
-                status = player2 + " wins " + str(abs(score)) + " & " + str(holes_left)
-            else:
-                status= player2 + " is up " + str(abs(score)) + " thru " + str(last_hole)
-        else:
-            status = "AS" + " thru " + str(last_hole)
-        return status
+                status = "AS" + " thru " + str(last_hole)
+            
+            return status
 
     def add_scores(data):
         sum = 0
@@ -294,10 +295,8 @@ class Scoring():
                 team1_total = 0
                 team2_total = 0
                 for player in data["players"]:
-                    if data["players"][player]["team"] == team1[0]:
-                        print(player)
+                    if data["players"][player]["team"] == team1[0] and data["players"][player]["opponent"] != "":
                         match_status = Scoring.calc_match_status(filename, player, data["players"][player]["opponent"])
-                        print(match_status)
                         if (match_status.startswith(player + " wins")):
                             team1_total += 1
                         elif (match_status.startswith(data["players"][player]["opponent"] + " wins")):
@@ -309,7 +308,6 @@ class Scoring():
                 team1[1] += team1_total
                 team2[1] += team2_total
 
-                print("TEAM ONE TOTAL: " + str(team1_total))
 
                 return team1, team2
         except:
@@ -322,9 +320,7 @@ class Scoring():
                 team2_total = 0
                 for player in data["players"]:
                     if data["players"][player]["team"] == team1[0]:
-                        print(player)
                         match_status = Scoring.calc_match_status(filename, player, data["players"][player]["opponent"])
-                        print(match_status)
                         if (match_status.startswith(player + " wins")):
                             team1_total += 1
                         elif (match_status.startswith(data["players"][player]["opponent"] + " wins")):
@@ -1163,25 +1159,37 @@ def change_verified_status(admin, user, verified):
 
 @app.route("/spectator_match_view/<json_data_input>")
 def spectator_match_view(json_data_input):
+    scores = []
     try:
         json_data = Scoring.return_data(json_data_input)
-        if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
-                scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
-        else:
-            scores = Scoring.calc_match_results(json_data['match_info']['id'])
         try:
             found_user = users.query.filter_by(username=session['active_user'][0]).first()
+            if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
+                    scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
+            else:
+                scores = Scoring.calc_match_results(json_data['match_info']['id'])
         except:
             found_user = ''
+            if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
+                    scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
+            else:
+                scores = Scoring.calc_match_results(json_data['match_info']['id'])
         return render_template("spectator-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
     except:
         try:
             json_data = Scoring.return_archive_data(json_data_input)
-            scores = Scoring.calc_match_results(json_data['match_info']['id'])
             try:
                 found_user = users.query.filter_by(username=session['active_user'][0]).first()
+                if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
+                    scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
+                else:
+                    scores = Scoring.calc_match_results(json_data['match_info']['id'])
             except:
                 found_user = ''
+                if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
+                    scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
+                else:
+                    scores = Scoring.calc_match_results(json_data['match_info']['id'])
             return render_template("spectator-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
         except:
             return redirect(url_for('error', msg='This match does not exist!'))
@@ -1190,16 +1198,23 @@ def spectator_match_view(json_data_input):
 @app.route("/player_match_view/<json_data_input>", methods=['GET', 'POST'])
 def player_match_view(json_data_input):
     if 'active_player' in session:
-        scores = []
-
+        json_data = None
         try:
-            if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
+            json_data = Scoring.return_data(json_data_input)
+        except:
+            return redirect(url_for('error', msg='This match is not yet live.'))
+
+        
+        if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
+            try:
                 scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
                 json_data = Scoring.return_data(json_data_input)
-            else:
-                scores = Scoring.calc_match_results(json_data['match_info']['id'])
-        except:
-            return redirect(url_for('error', msg='This match does not exist!'))
+                print(scores)
+            except:
+                json_data = Scoring.return_data(json_data_input)
+        else:
+            scores = Scoring.calc_match_results(json_data['match_info']['id'])
+        
         
 
         try:
@@ -1228,7 +1243,6 @@ def active_match_view(json_data_input):
 
     if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
         scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
-        print(scores)
         players_used = []
         for player in json_data["players"]:
             try:

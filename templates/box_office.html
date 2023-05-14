@@ -31,7 +31,7 @@
                 <label for="enter-match-textbox">Enter Match Password:</label><br>
                 <input type="password" id="enter-match-textbox" name="password_entry"></input><br>
                 <label for="">Your Name:</label><br>
-                <input placeholder="John Doe" type="text" id="enter-match-textbox" name="name_entry" maxlength="25"></input><br>
+                <input placeholder="John Doe" type="text" id="enter-match-textbox" pattern="[a-zA-Z0-9\s]+" name="name_entry" maxlength="25"></input><br>
                 <label for="team-select">Your Team:</label><br>
                 {% if data1[0] == 'Teams' %}
                 <select id="team-select" name="team_select">
