@@ -244,38 +244,74 @@ class Scoring():
                 file.truncate()
 
     def calc_match_status(filename, player1, player2):
-        with open("static/score_files/" + str(filename) + ".json", "r") as file:
-            file.seek(0)
-            data = json.load(file)
-            status=""
-            score=0
-            first_scores = data["players"][player1]["scores"]
-            second_scores = data["players"][player2]["scores"]
-            last_hole=0
-            for i in range(int(data["match_info"]["number_holes"])):
-                if (int(first_scores[str(i+1)]) != 0) and (int(second_scores[str(i+1)]) != 0):
-                    last_hole+=1
-                    if first_scores[str(i+1)] < second_scores[str(i+1)]:
-                        score+=1
-                    elif second_scores[str(i+1)] < first_scores[str(i+1)]:
-                        score-=1
+        try:
+            with open("static/score_files/" + str(filename) + ".json", "r") as file:
+                file.seek(0)
+                data = json.load(file)
+                status=""
+                score=0
+                first_scores = data["players"][player1]["scores"]
+                second_scores = data["players"][player2]["scores"]
+                last_hole=0
+                for i in range(int(data["match_info"]["number_holes"])):
+                    if (int(first_scores[str(i+1)]) != 0) and (int(second_scores[str(i+1)]) != 0):
+                        last_hole+=1
+                        if first_scores[str(i+1)] < second_scores[str(i+1)]:
+                            score+=1
+                        elif second_scores[str(i+1)] < first_scores[str(i+1)]:
+                            score-=1
+                    else:
+                        break
+                holes_left = int(data["match_info"]["number_holes"]) - last_hole
+                if score > 0:
+                    if score > holes_left:
+                        status = player1 + " wins " + str(score) + " & " + str(holes_left)
+                    else:
+                        status= player1 + " up " + str(score) + " thru " + str(last_hole)
+                elif score < 0:
+                    if abs(score) > holes_left:
+                        status = player2 + " wins " + str(abs(score)) + " & " + str(holes_left)
+                    else:
+                        status= player2 + " up " + str(abs(score)) + " thru " + str(last_hole)
                 else:
-                    break
-            holes_left = int(data["match_info"]["number_holes"]) - last_hole
-            if score > 0:
-                if score > holes_left:
-                    status = player1 + " wins " + str(score) + " & " + str(holes_left)
+                    status = "AS" + " thru " + str(last_hole)
+                
+                return status
+        except:
+            with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "r") as file:
+                file.seek(0)
+                data = json.load(file)
+                status=""
+                score=0
+                first_scores = data["players"][player1]["scores"]
+                second_scores = data["players"][player2]["scores"]
+                last_hole=0
+                for i in range(int(data["match_info"]["number_holes"])):
+                    if (int(first_scores[str(i+1)]) != 0) and (int(second_scores[str(i+1)]) != 0):
+                        last_hole+=1
+                        if first_scores[str(i+1)] < second_scores[str(i+1)]:
+                            score+=1
+                        elif second_scores[str(i+1)] < first_scores[str(i+1)]:
+                            score-=1
+                    else:
+                        break
+                holes_left = int(data["match_info"]["number_holes"]) - last_hole
+                if score > 0:
+                    if score > holes_left:
+                        status = player1 + " wins " + str(score) + " & " + str(holes_left)
+                    else:
+                        status= player1 + " up " + str(score) + " thru " + str(last_hole)
+                elif score < 0:
+                    if abs(score) > holes_left:
+                        status = player2 + " wins " + str(abs(score)) + " & " + str(holes_left)
+                    else:
+                        status= player2 + " up " + str(abs(score)) + " thru " + str(last_hole)
                 else:
-                    status= player1 + " up " + str(score) + " thru " + str(last_hole)
-            elif score < 0:
-                if abs(score) > holes_left:
-                    status = player2 + " wins " + str(abs(score)) + " & " + str(holes_left)
-                else:
-                    status= player2 + " up " + str(abs(score)) + " thru " + str(last_hole)
-            else:
-                status = "AS" + " thru " + str(last_hole)
-            
-            return status
+                    status = "AS" + " thru " + str(last_hole)
+                
+                return status
+
+
 
     def add_scores(data):
         sum = 0
@@ -1200,7 +1236,7 @@ def spectator_match_view(json_data_input):
                     scores = Scoring.calc_match_results(json_data['match_info']['id'])
             return render_template("spectator-active-match-view.html", data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
         except:
-            return redirect(url_for('error', msg='This match does not exist!'))
+            return redirect(url_for('error', msg='This match does not exist!!!!'))
 
 
 @app.route("/player_match_view/<json_data_input>", methods=['GET', 'POST'])

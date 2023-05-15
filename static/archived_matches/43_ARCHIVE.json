@@ -1,0 +1,232 @@
+{
+   "players": {
+      "Dominic": {
+         "team": "Homestead",
+         "opponent": "Tyler%20Faust",
+         "scores": {
+            "1": "4",
+            "2": "4",
+            "3": "4",
+            "4": "3",
+            "5": "3",
+            "6": "4",
+            "7": 0,
+            "8": 0,
+            "9": 0
+         }
+      },
+      "Caden%20": {
+         "team": "Homestead",
+         "opponent": "",
+         "scores": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0
+         }
+      },
+      "Tyler%20Faust": {
+         "team": "Spartans",
+         "opponent": "Dominic",
+         "scores": {
+            "1": "5",
+            "2": "4",
+            "3": "6",
+            "4": "4",
+            "5": "3",
+            "6": "5",
+            "7": 0,
+            "8": 0,
+            "9": 0
+         }
+      },
+      "grant%20drummond": {
+         "team": "Spartans",
+         "opponent": "",
+         "scores": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0
+         }
+      },
+      "Ryan%20Parker": {
+         "team": "Homestead",
+         "opponent": "",
+         "scores": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0
+         }
+      },
+      "Brandt%20Colglazier": {
+         "team": "Homestead",
+         "opponent": "Trace",
+         "scores": {
+            "1": "4",
+            "2": "4",
+            "3": "6",
+            "4": "5",
+            "5": "4",
+            "6": "6",
+            "7": 0,
+            "8": 0,
+            "9": "6"
+         }
+      },
+      "Trace": {
+         "team": "Spartans",
+         "opponent": "Brandt%20Colglazier",
+         "scores": {
+            "1": "5",
+            "2": "4",
+            "3": "6",
+            "4": "5",
+            "5": "3",
+            "6": "5",
+            "7": "4",
+            "8": "6",
+            "9": 0
+         }
+      },
+      "Jack%20Spurgeon": {
+         "team": "Homestead",
+         "opponent": "",
+         "scores": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0
+         }
+      },
+      "Karson": {
+         "team": "Spartans",
+         "opponent": "Noah%20Lancz",
+         "scores": {
+            "1": "4",
+            "2": "3",
+            "3": "9",
+            "4": "3",
+            "5": "4",
+            "6": "3",
+            "7": "3",
+            "8": "4",
+            "9": "5"
+         }
+      },
+      "Noah%20Lancz": {
+         "team": "Homestead",
+         "opponent": "Karson",
+         "scores": {
+            "1": "4",
+            "2": "4",
+            "3": "5",
+            "4": "3",
+            "5": "3",
+            "6": "5",
+            "7": "3",
+            "8": "5",
+            "9": "5"
+         }
+      }
+   },
+   "match_info": {
+      "par1": 4,
+      "par2": 4,
+      "par3": 5,
+      "par4": 4,
+      "par5": 3,
+      "par6": 4,
+      "par7": 3,
+      "par8": 4,
+      "par9": 5,
+      "par10": "",
+      "par11": "",
+      "par12": "",
+      "par13": "",
+      "par14": "",
+      "par15": "",
+      "par16": "",
+      "par17": "",
+      "par18": "",
+      "match_code": "974686",
+      "match_password": "Best",
+      "number_holes": "9",
+      "match_name": "Fourball Practice",
+      "start_time": "2023-05-15",
+      "end_time": "2023-05-15",
+      "home_team": "Homestead",
+      "away_team": "Spartans",
+      "match_type": "Teams",
+      "gamemode": "Match Play",
+      "id": 43
+   },
+   "lobby": [
+      [
+         "Caden ",
+         "Homestead"
+      ],
+      [
+         "Brandt Colglazier",
+         "Homestead"
+      ],
+      [
+         "Jack Spurgeon",
+         "Homestead"
+      ],
+      [
+         "Jack Burda",
+         "Spartans"
+      ],
+      [
+         "grant drummond",
+         "Spartans"
+      ],
+      [
+         "Ryan Parker",
+         "Homestead"
+      ],
+      [
+         "Noah Lancz",
+         "Homestead"
+      ],
+      [
+         "Tyler Faust",
+         "Spartans"
+      ],
+      [
+         "Brandt Colglazier",
+         "Homestead"
+      ],
+      [
+         "Karson",
+         "Spartans"
+      ],
+      [
+         "Noah Lancz",
+         "Homestead"
+      ]
+   ],
+   "message": ""
+}
