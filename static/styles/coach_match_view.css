@@ -392,6 +392,34 @@ html, body {
     text-decoration: none;
 }
 
+.match-name-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.match-owner {
+    display: flex;
+    align-items: center;
+}
+
+#match_owner_name {
+    margin-top: 0px;
+}
+
+#verification {
+    height: 15px;
+    width: 15px;
+    background-color: white;
+    margin-left: 5px;
+}
+
+#info-img {
+    height: 23px;
+    width: 23px;
+}
+
 .code-container p {
     margin-top: 5px;
     font-family: bigBlueRegular;

@@ -272,7 +272,27 @@ end match (side)
                 </div>
             </div>
 
-
+            <!-- Match Information Container -->
+            <div class="code-container">
+                <img id="info-img" src="{{ url_for('static', filename='logo_graphics/info_icon.png') }}" alt="">
+                <hr style="margin-bottom: 5px; margin-top: 5px;">
+                <div class="match-name-info">
+                    <h4>Match Name:</h4>
+                    <p>{{playerdata['match_info']['match_name']}}</p>
+                </div>
+                <div class="match-name-info">
+                    <h4>Match Creator:</h4>
+                    <div class="match-owner">
+                        <p id="match_owner_name">@{{data1.username}}</p>
+                        {% if data1.verified == 1 %}
+                            <img id="verification" src="{{ url_for('static', filename='logo_graphics/normalverify.png') }}" alt="">
+                        {% elif data1.verified == 2 %}
+                            <img id="verification" src="{{ url_for('static', filename='logo_graphics/verify.png') }}" alt="">
+                        {% endif %}
+                    </div>
+                    
+                </div>
+            </div>
 
             <!-- Match Statistics -->
             <div class="code-container">
@@ -297,6 +317,8 @@ end match (side)
                     <p style="color: #ca3e3e;">"{{playerdata['message'] | replace('%20', ' ') }}"</p>
                 {% endif %}
             </div>
+
+            
 
             
 
