@@ -1182,7 +1182,7 @@ def spectator_match_view(json_data_input):
                     scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
             else:
                 scores = Scoring.calc_match_results(json_data['match_info']['id'])
-        return render_template("spectator-active-match-view.html", data=found_user, playerdata=json_data, scoring_data = scores)
+        return render_template("spectator-active-match-view.html", data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
     except:
         try:
             json_data = Scoring.return_archive_data(json_data_input)
