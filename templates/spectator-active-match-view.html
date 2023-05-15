@@ -76,7 +76,7 @@ end match (side)
                                             <script>
                                                 fetch("/calc_match/{{playerdata['match_info']['id']}}/{{player}}/{{playerdata['players'][player]['opponent']}}")
                                                 .then(response => response.text())
-                                                .then(data => document.getElementById('match_status_h3_{{player}}').innerHTML = data);
+                                                .then(data => document.getElementById('match_status_h3_{{player}}').innerHTML = data.replace(/%20/g, ' '));
                                             </script>
                                     {% else %}
                                         <h3 id="match_status_h3_{{player}}">No Opponent</h3>
@@ -92,7 +92,7 @@ end match (side)
                                     </div>
     
                                     <div class="card-away-player">
-                                        <h3>{{playerdata['players'][player]['opponent']}}</h3>
+                                        <h3>{{playerdata['players'][player]['opponent'] | replace('%20', ' ')}}</h3>
                                         <h5 class="team_name_header" id="opponent_team_header">{{playerdata['match_info']['away_team']}}</h5>
                                     </div>
 

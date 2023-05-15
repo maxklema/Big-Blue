@@ -76,7 +76,7 @@ end match (side)
                                             <script>
                                                 fetch("/calc_match/{{playerdata['match_info']['id']}}/{{player}}/{{playerdata['players'][player]['opponent']}}")
                                                 .then(response => response.text())
-                                                .then(data => document.getElementById('match_status_h3_{{player}}').innerHTML = data);
+                                                .then(data => document.getElementById('match_status_h3_{{player}}').innerHTML = data.replace(/%20/g, ' '));
                                             </script>
                                     {% else %}
                                         <h3 id="match_status_h3_{{player}}">No Opponent</h3>
@@ -92,7 +92,7 @@ end match (side)
                                     </div>
     
                                     <div class="card-away-player">
-                                        <h3>{{playerdata['players'][player]['opponent']}}</h3>
+                                        <h3>{{playerdata['players'][player]['opponent'] | replace('%20', ' ')}}</h3>
                                         <h5 class="team_name_header" id="opponent_team_header">{{playerdata['match_info']['away_team']}}</h5>
                                     </div>
 
@@ -107,11 +107,11 @@ end match (side)
 
                             
                             <form onsubmit="change_form_route()" id="change_opponent_form" action="">
-                                <h5>Select {{player}}'s Opponent:</h5>
+                                <h5>Select {{player | replace('%20', ' ') }}'s Opponent:</h5>
                                 <select id="select_opponent_{{player}}" name="" id="choose-opponent">
                                     {% for opponent in playerdata['players'] %}
                                         {% if playerdata['players'][opponent]['team'] == playerdata['match_info']['away_team']%}
-                                            <option>{{opponent}}</option>
+                                            <option>{{opponent | replace('%20', ' ')}}</option>
                                         {% endif %}
                                     {% endfor %}
                                 </select>
