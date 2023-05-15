@@ -275,13 +275,14 @@ end match (side)
             <!-- Match Information Container -->
             <div class="code-container">
                 <img id="info-img" src="{{ url_for('static', filename='logo_graphics/info_icon.png') }}" alt="">
+                <h3>Match Information</h3>
                 <hr style="margin-bottom: 5px; margin-top: 5px;">
                 <div class="match-name-info">
-                    <h4>Match Name:</h4>
+                    <h4>Name:</h4>
                     <p>{{playerdata['match_info']['match_name']}}</p>
                 </div>
                 <div class="match-name-info">
-                    <h4>Match Creator:</h4>
+                    <h4>Creator:</h4>
                     <div class="match-owner">
                         <p id="match_owner_name">@{{data1.username}}</p>
                         {% if data1.verified == 1 %}
