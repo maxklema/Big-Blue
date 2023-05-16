@@ -356,14 +356,17 @@ class Scoring():
                 team2_total = 0
                 for player in data["players"]:
                     if data["players"][player]["team"] == team1[0]:
-                        match_status = Scoring.calc_match_status(filename, player, data["players"][player]["opponent"])
-                        if (match_status.startswith(player + " wins")):
-                            team1_total += 1
-                        elif (match_status.startswith(data["players"][player]["opponent"] + " wins")):
-                            team2_total += 1
-                        elif (match_status.startswith("AS thru " + data['match_info']['number_holes'])):
-                            team1_total += 0.5
-                            team2_total += 0.5
+                        try:
+                            match_status = Scoring.calc_match_status(filename, player, data["players"][player]["opponent"])
+                            if (match_status.startswith(player + " wins")):
+                                team1_total += 1
+                            elif (match_status.startswith(data["players"][player]["opponent"] + " wins")):
+                                team2_total += 1
+                            elif (match_status.startswith("AS thru " + data['match_info']['number_holes'])):
+                                team1_total += 0.5
+                                team2_total += 0.5
+                        except:
+                            continue
 
                 team1[1] += team1_total
                 team2[1] += team2_total
