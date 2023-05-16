@@ -322,6 +322,10 @@ end match (side)
                     <p>{{playerdata['match_info']['match_name']}}</p>
                 </div>
                 <div class="match-name-info">
+                    <h4>Date:</h4>
+                    <p>{{date | replace("-", "/")}}</p>
+                </div>
+                <div class="match-name-info">
                     <h4>Creator:</h4>
                     <div class="match-owner">
                         <p id="match_owner_name">@{{data1.username}}</p>
