@@ -26,6 +26,84 @@
     font-family: bigBlueBold;
 }
 
+footer {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap !important;
+}
+
+footer div {
+    max-width: 1500px;
+    margin-bottom: 1%;
+}
+
+footer div hr {
+    margin-bottom: 3%;
+}
+
+footer div div {
+    margin-top: 2%;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap !important;
+    border-top: 1px solid rgb(185, 185, 185);
+    
+    
+}
+
+footer div div div {
+    border-top: 0px;
+}
+
+footer div div a{
+    text-decoration: none;
+    color: #3185f3;
+    font-size: 13px;
+    font-family: bigBlueRegular;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-top: 0px;
+
+}
+
+footer div div div p {
+    font-size: 13px;
+    color: #808080;
+    font-family: bigBlueRegular;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-top: 0px;
+}
+
+#twitter_href {
+    margin-right: 0px;
+}
+
+#basic-golfer-image {
+    max-height: 30px;
+    max-width: 30px;
+}
+
+#footer-divider {
+    height: 1px;
+    border: none;
+    background-color: rgb(194, 194, 194);
+}
+
+
+@media (max-width: 1000px){
+    footer div div {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .big-blue-copyright {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+}
+
 
 header {
     top: 0;
