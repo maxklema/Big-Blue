@@ -69,7 +69,7 @@ end match (side)
 
                             <div class="card-header-info">
 
-                                <div class="card-general-stats">
+                                <div class="card-general-stats-spectator-player">
                                     
                                     {% if playerdata['players'][player]['opponent'] != "" %}
                                         <h3 id="match_status_h3_{{player}}"></h3>
@@ -84,7 +84,7 @@ end match (side)
 
                                 </div>  
 
-                                <div class="both-player-cards">
+                                <div class="both-player-cards-spectator-player">
 
                                     <div class="card-home-player">
                                         <h3 id="player-name">{{player | replace('%20', ' ') }}</h3>
