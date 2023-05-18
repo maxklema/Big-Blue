@@ -80,6 +80,11 @@
       "gamemode": "Match Play",
       "id": 36
    },
-   "lobby": [],
+   "lobby": [
+      [
+         "Max",
+         "homestead"
+      ]
+   ],
    "message": ""
 }
