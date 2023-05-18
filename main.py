@@ -188,8 +188,13 @@ class Scoring():
             file.seek(0)
             data = json.load(file)
             try:
-                del data["players"][player]
+                player = player.replace(' ', '%20')
+                try:
+                    del data["players"][player]
+                except:
+                    del data["players"][player]
             except:
+                player = player.replace('%20', ' ')
                 try:
                     for waiting in data["lobby"]:
                         if waiting[0] == player:
