@@ -588,6 +588,7 @@ html, body {
     justify-content: space-between;
     flex-direction: row;
     margin-bottom: 0px;
+    align-items: center;
 }
 
 #start-match-button {
@@ -659,13 +660,17 @@ details[open] > summary {
 .card-general-stats {
    max-height: 37px;
    margin-bottom: 10px;
-   width: fit-content;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
 }
 
 .card-general-stats h3 {
     color: white;
     padding: 3px 7px;
     background-color:#ca3e3e;
+    margin-right: 5px;
+    flex-wrap: wrap;
 }
 
 .player-score-per-hole {
@@ -845,11 +850,13 @@ input::-webkit-inner-spin-button {
     .card-home-player {
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
     
     .card-away-player {
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 
     .both-player-cards {
@@ -897,6 +904,9 @@ input::-webkit-inner-spin-button {
         font-size: 12px;
     }
     
+    #change_opponent_form a {
+        margin-left: 0px;
+      }
 
     
 

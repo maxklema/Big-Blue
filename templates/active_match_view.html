@@ -82,6 +82,10 @@ end match (side)
                                         <h3 id="match_status_h3_{{player}}">No Opponent</h3>
                                 {% endif %}
 
+                                    <div class="remove-player-card">
+                                        <a href="/kick_player/{{playerdata['match_info']['id']}}/{{player}}">Remove</a>
+                                    </div>
+
                                 </div>  
 
                                 <div class="both-player-cards">
@@ -116,7 +120,7 @@ end match (side)
                                     {% endfor %}
                                 </select>
 
-                                <a id="" href='' onclick="this.href = '/change_opponent/{{playerdata['match_info']['id']}}/{{player}}/' + document.getElementById('select_opponent_{{player}}').value">Select</a>
+                                <a id="select-button" href='' onclick="this.href = '/change_opponent/{{playerdata['match_info']['id']}}/{{player}}/' + document.getElementById('select_opponent_{{player}}').value">Select</a>
                                 
 
                             </form>
