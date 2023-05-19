@@ -69,7 +69,7 @@ class users(db.Model):
         self.pic = pic
         self.banner = banner
         self.first_login = first_login
-        self.last_login = last_login
+        self.last_login = last_logins
 
 class course(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -244,6 +244,7 @@ class Scoring():
             data = json.load(file)
             if player in data["players"]: #POSSIBLE PLACE FOR ERRORS
                 data["players"][player]["scores"][str(hole)] = new_score
+                print("NEW SCORE:" + new_score)
                 file.seek(0)
                 json_object = json.dump(data, file, indent=3)
                 file.truncate()
@@ -261,13 +262,14 @@ class Scoring():
                 for i in range(int(data["match_info"]["number_holes"])):
                     if (int(first_scores[str(i+1)]) != 0) and (int(second_scores[str(i+1)]) != 0):
                         last_hole+=1
-                        if first_scores[str(i+1)] < second_scores[str(i+1)]:
+                        if int(first_scores[str(i+1)]) < int(second_scores[str(i+1)]):
                             score+=1
-                        elif second_scores[str(i+1)] < first_scores[str(i+1)]:
+                        elif int(second_scores[str(i+1)]) < int(first_scores[str(i+1)]):
                             score-=1
                     else:
                         break
                 holes_left = int(data["match_info"]["number_holes"]) - last_hole
+                print(score)
                 if score > 0:
                     if score > holes_left:
                         status = player1 + " wins " + str(score) + " & " + str(holes_left)
@@ -293,10 +295,11 @@ class Scoring():
                 last_hole=0
                 for i in range(int(data["match_info"]["number_holes"])):
                     if (int(first_scores[str(i+1)]) != 0) and (int(second_scores[str(i+1)]) != 0):
+                        print(int(first_scores[str(i+1)]), int(second_scores[str(i+1)]))
                         last_hole+=1
-                        if first_scores[str(i+1)] < second_scores[str(i+1)]:
+                        if int(first_scores[str(i+1)]) < int(second_scores[str(i+1)]):
                             score+=1
-                        elif second_scores[str(i+1)] < first_scores[str(i+1)]:
+                        elif int(second_scores[str(i+1)]) < int(first_scores[str(i+1)]):
                             score-=1
                     else:
                         break
