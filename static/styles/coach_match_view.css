@@ -301,6 +301,13 @@ html, body {
 
 }
 
+.card-header-info-stroke-play {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
 .both-player-cards {
     display: flex;
     justify-content: space-between;
@@ -742,6 +749,10 @@ input::-webkit-inner-spin-button {
 
 .empty-lobby-section h5 {
     color: grey;
+}
+
+.card-user-information-stroke-play {
+    margin-bottom: 10px;
 }
 
 .card-user-information div{
