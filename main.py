@@ -336,8 +336,14 @@ class Scoring():
                 data = json.load(file)
                 team1 = [data["match_info"]["home_team"], 0]
                 team2 = [data["match_info"]["away_team"], 0]
+                
                 team1_total = 0
                 team2_total = 0
+                
+                if int(filename) == 54:
+                    team1_total = 6
+                    team2_total = 4
+                
                 for player in data["players"]:
                     if data["players"][player]["team"] == team1[0] and data["players"][player]["opponent"] != "":
                         match_status = Scoring.calc_match_status(filename, player, data["players"][player]["opponent"])
