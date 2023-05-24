@@ -210,7 +210,7 @@ end match (side)
                                     .then(response => response.text())
                                     .then(data => {
                                         document.getElementById('relation_to_par_h3_{{player}}').innerHTML = data;
-                                        if (data.includes('37')) {
+                                        if (data.includes('-')) {
                                             // Data includes a "-" sign
                                             document.getElementById('relation_to_par_h3_{{player}}').style.backgroundColor = 'white';
                                             document.getElementById('relation_to_par_h3_{{player}}').style.color = 'black';

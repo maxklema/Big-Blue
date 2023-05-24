@@ -188,43 +188,91 @@ end match (side)
                 {% endif %}
 
                 {% for player in playerdata['players'] %}
-                <div class="match-card">
+                <div class="match-card" id="match-card-{{player}}">
                         <summary>
-                            <div class="card-header-info">
-                                <div class="card-user-information">
-                                    <h2>{{player | replace('%20', ' ') }}</h2>
+                            <div class="card-header-info-stroke-play">
+                                <div class="card-user-information-stroke-play">
+                                    <h2 id="{{player}}_name_h2">{{player | replace('%20', ' ') }}</h2>
+                                    <h5 id="{{player}}_team_h5">{{playerdata['players'][player]['team']}}</h5>
                                 </div>
                                 <div class="card-general-stats">
                                     <h3 id="relation_to_par_h3_{{player}}"></h3>
                                 </div>
-
-                                <script>
-                                    fetch("/calc_relation/{{playerdata['match_info']['id']}}/{{player}}")
-                                    .then(response => response.text())
-                                    .then(data => document.getElementById('relation_to_par_h3_{{player}}').innerHTML = data);
-                                </script>
+                                
                             </div>
-                            <h5>{{playerdata['players'][player]['team']}}</h5>
-                        </summary><details class="custom-details">
-                            <summary>Score Details</summary>
+                              
+                        </summary><details class="custom-details" id="score_details_{{player}}">
+                            <summary id="{{player}}_score_details_text">Score Details</summary>
                             {% if active_player == player.replace('%20', ' ') %}
                                 {% for strokes in playerdata['players'][player]['scores'] %}
                                     <div class="player-score-per-hole">
                                         <div class="player-score-per-hole-left-side">
-                                            <p>Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
+                                            <p id="hole_{{player}}_{{strokes}}">Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
                                             <input type="number" id="player_score_{{player}}_{{strokes}}" name="" value="{{playerdata['players'][player]['scores'][strokes]}}">
                                         </div>
-                                        <a id="player_input_form" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update {{strokes}}</a>
-                                    </div>    
+                                        <a id="{{player}}_{{strokes}}_input_form" href='' onclick="this.href = '/edit_score/{{playerdata['match_info']['id']}}/{{player}}/{{strokes}}/' + document.getElementById('player_score_{{player}}_{{strokes}}').value">Update {{strokes}}</a>
+                                       
+
+                                    </div>
+                                    <script>
+                                        fetch("/calc_relation/{{playerdata['match_info']['id']}}/{{player}}")
+                                        .then(response => response.text())
+                                        .then(data => {
+                                            document.getElementById('relation_to_par_h3_{{player}}').innerHTML = data;
+                                            if (data.includes('-')) {
+                                                // Data includes a "-" sign
+                                                document.getElementById('relation_to_par_h3_{{player}}').style.backgroundColor = 'white';
+                                                document.getElementById('relation_to_par_h3_{{player}}').style.color = 'black';
+                                                //document.getElementById('score_on_hole_{{player}}_{{strokes}}').style.color = 'white';
+                                                document.getElementById('hole_{{player}}_{{strokes}}').style.color = 'white';
+                                                document.getElementById('{{player}}_name_h2').style.color = 'white';
+                                                document.getElementById('{{player}}_team_h5').style.color = 'white';
+                                                document.getElementById('{{player}}_score_details_text').style.color = '#c4d9f5';
+                                                document.getElementById('{{player}}_{{strokes}}_input_form').style.backgroundColor = '#c4d9f5';
+                                                document.getElementById('{{player}}_{{strokes}}_input_form').style.color = 'black';
+
+                                                var element = document.getElementById('match-card-{{player}}');
+                                                element.style.backgroundImage = 'linear-gradient(to bottom, #FF6600, #FF0000, #FF0000 100%, #990000)';
+                                                var elementTwo = document.getElementById('score_details_{{player}}');
+                                                elementTwo.style.backgroundColor = 'transparent';
+                                            } 
+                                        });
+                                    </script>
+                                    
                                 {% endfor %}
                             {% else %}
                                 {% for strokes in playerdata['players'][player]['scores'] %}
                                     <div class="player-score-per-hole">
                                         <div class="player-score-per-hole-left-side">
-                                            <p>Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
+                                            <p id="hole_{{player}}_{{strokes}}">Hole {{strokes}} (Par {{playerdata['match_info']['par' + strokes|string]}})</p>
                                         </div>
-                                        <p style="color: #ca3e3e;">{{playerdata['players'][player]['scores'][strokes]}}</p>
-                                    </div>      
+                                        <p style="color: #ca3e3e;" id="score_on_hole_{{player}}_{{strokes}}">{{playerdata['players'][player]['scores'][strokes]}}</p>
+                                        
+                                    </div>
+                                    <script>
+                                        fetch("/calc_relation/{{playerdata['match_info']['id']}}/{{player}}")
+                                        .then(response => response.text())
+                                        .then(data => {
+                                            document.getElementById('relation_to_par_h3_{{player}}').innerHTML = data;
+                                            if (data.includes('-')) {
+                                                // Data includes a "-" sign
+                                                document.getElementById('relation_to_par_h3_{{player}}').style.backgroundColor = 'white';
+                                                document.getElementById('relation_to_par_h3_{{player}}').style.color = 'black';
+                                                document.getElementById('score_on_hole_{{player}}_{{strokes}}').style.color = 'white';
+                                                document.getElementById('hole_{{player}}_{{strokes}}').style.color = 'white';
+                                                document.getElementById('{{player}}_name_h2').style.color = 'white';
+                                                document.getElementById('{{player}}_team_h5').style.color = 'white';
+                                                document.getElementById('{{player}}_score_details_text').style.color = '#c4d9f5';
+                                               
+
+                                                var element = document.getElementById('match-card-{{player}}');
+                                                element.style.backgroundImage = 'linear-gradient(to bottom, #FF6600, #FF0000, #FF0000 100%, #990000)';
+                                                var elementTwo = document.getElementById('score_details_{{player}}');
+                                                elementTwo.style.backgroundColor = 'transparent';
+                                            } 
+                                        });
+                                    </script>
+                                      
                                 {% endfor %}
                             {% endif %}
                     

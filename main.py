@@ -509,8 +509,10 @@ class Scoring():
                     else:
                         break
                 absolute_relation = str(abs(current_score - current_par))
-                if last_hole == int(data["match_info"]["number_holes"]):
-                    return "F: " + str(current_score)
+                if ((last_hole == int(data["match_info"]["number_holes"])) and (current_score < current_par)):
+                    return "F: " + str(current_score) + " (-" + absolute_relation + ")"
+                elif ((last_hole == int(data["match_info"]["number_holes"])) and (current_score > current_par)):
+                    return "F: " + str(current_score) + " (+" + absolute_relation + ")"
                 elif current_score > current_par:
                     return "+" + absolute_relation + " thru " + str(last_hole)
                 elif current_score < current_par:

@@ -279,11 +279,12 @@ html, body {
     max-height: 100000px;
     width: 600px;
     padding: 20px 30px;
-    background-color: white;
+    background: white;
     border-radius: 5px;
     margin-bottom: 20px;
     margin-right: 50px;
 }
+
 
 .card-container {
     max-height: 100000px;
@@ -391,7 +392,7 @@ html, body {
     padding: 3px 3px;
 }
 
-#player_input_form {
+.player-score-per-hole a {
     margin-top: 10px;
     padding: 5px 15px;
     font-size: 15px;
@@ -765,6 +766,10 @@ input::-webkit-inner-spin-button {
     margin-left: 10px;
 }
 
+.remove-player-card {
+    margin-bottom: 15px;
+}
+
 .remove-player-card a {
     color: #ca3e3eab;
     border: 2px solid #ca3e3eab;
@@ -922,6 +927,7 @@ input::-webkit-inner-spin-button {
         width: 350px;
         margin-right: 0;
     }
+
 
     
 
