@@ -365,6 +365,18 @@ body p {
     margin-top: 20px;
 }
 
+.tos-style-container {
+    background-color: white;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 10px;
+}
+
+.tos-style {
+    padding: 30px 60px;
+}
 
 .Login-or-create-account-div p {
     background-color: white;
