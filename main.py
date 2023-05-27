@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 from flask_socketio import SocketIO
 from datetime import datetime
 import string
+import hashingalg
 import random
 import json
 import os
@@ -15,7 +16,6 @@ from random import randint
 
 app = Flask(__name__)
 socketio = SocketIO(app)
-
 app.secret_key = "max"
 app.permanent_session_lifetime = timedelta(minutes=600)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///webdata.sqlite3'
@@ -28,6 +28,7 @@ app.config['SCORING_FOLDER'] = SCORING_FOLDER
 characters = list(string.digits)
 
 db = SQLAlchemy(app)
+
 
 class match_archive(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -69,7 +70,7 @@ class users(db.Model):
         self.pic = pic
         self.banner = banner
         self.first_login = first_login
-        self.last_login = last_logins
+        self.last_login = last_login
 
 class course(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -770,7 +771,7 @@ def login():
         found_user = users.query.filter_by(username=username_input).first()
         
 
-        if found_user and found_user.username == username_input and found_user.password == password_input:
+        if found_user and found_user.username == username_input and found_user.password == hashingalg.hashPassword(password_input):
             session['active_user'] = [found_user.username, found_user.name, found_user.rank]
             found_user.last_login = datetime.now()
             db.session.commit()
@@ -1026,7 +1027,9 @@ def create_account():
             return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.", data=found_user)
         try: 
             today_date = datetime.now()
-            new_user = users(request.form['name'], request.form['username'], request.form['password'], request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png", "BigBluebanner.png", today_date, today_date)
+            password = hashingalg.hashPassword(request.form['password'])
+            print(password)
+            new_user = users(request.form['name'], request.form['username'], password, request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png", "BigBluebanner.png", today_date, today_date)
             db.session.add(new_user)
             db.session.commit()
             new_username = request.form['username']
