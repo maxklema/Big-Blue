@@ -690,6 +690,22 @@ def about():
         found_user = ""
     return render_template("about.html", data=found_user)
 
+@app.route("/termsofservice")
+def termsofservice():
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
+    return render_template("termsofservice.html", data=found_user)
+
+@app.route("/privacypolicy")
+def privacypolicy():
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
+    return render_template("privacypolicy.html", data=found_user)
+
 @app.route("/chooseprofilepicture")
 def chooseprofilepicture():
     if 'active_user' in session:
