@@ -166,6 +166,17 @@ class Scoring():
             json_object = json.dump(data, file, indent=3)
             file.truncate()
 
+    def new_create_json(filename, match_code, match_password, number_holes, match_name, start_time, end_time, num_teams, teams, match_type, gamemode, Id, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18):
+        data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "match_password": match_password, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "team_scores": {}, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": ""}
+        for team in teams:
+            data["teams"][team] = 0
+        with open("static/score_files/" + str(filename) + ".json", "a+") as file:
+            
+            #print(json.dump(data, file, indent=3))
+            file.seek(0)
+            json_object = json.dump(data, file, indent=3)
+            file.truncate()
+
     def add_to_lobby(filename, player):
         with open("static/score_files/" + str(filename) + ".json", "r+") as file:
             file.seek(0)
@@ -272,12 +283,18 @@ class Scoring():
                 holes_left = int(data["match_info"]["number_holes"]) - last_hole
                 print(score)
                 if score > 0:
-                    if score > holes_left:
+                    if holes_left == 0:
+                        
+                        status = player1 + " wins " + str(score) + " up"
+                    elif score > holes_left:
                         status = player1 + " wins " + str(score) + " & " + str(holes_left)
                     else:
                         status= player1 + " up " + str(score) + " thru " + str(last_hole)
                 elif score < 0:
-                    if abs(score) > holes_left:
+                    if holes_left == 0:
+                        
+                        status = player2 + " wins " + str(abs(score)) + " up"
+                    elif abs(score) > holes_left:
                         status = player2 + " wins " + str(abs(score)) + " & " + str(holes_left)
                     else:
                         status= player2 + " up " + str(abs(score)) + " thru " + str(last_hole)
@@ -306,12 +323,18 @@ class Scoring():
                         break
                 holes_left = int(data["match_info"]["number_holes"]) - last_hole
                 if score > 0:
-                    if score > holes_left:
+                    if holes_left == 0:
+                        
+                        status = player1 + " wins " + str(score) + " up"
+                    elif score > holes_left:
                         status = player1 + " wins " + str(score) + " & " + str(holes_left)
                     else:
                         status= player1 + " up " + str(score) + " thru " + str(last_hole)
                 elif score < 0:
-                    if abs(score) > holes_left:
+                    if holes_left == 0:
+                        
+                        status = player2 + " wins " + str(abs(score)) + " up"
+                    elif abs(score) > holes_left:
                         status = player2 + " wins " + str(abs(score)) + " & " + str(holes_left)
                     else:
                         status= player2 + " up " + str(abs(score)) + " thru " + str(last_hole)
