@@ -1,0 +1,90 @@
+{
+   "players": {
+      "Max%20and%20Dom": {
+         "team": "Homestead",
+         "opponent": "Luke%20and%20Mike",
+         "scores": {
+            "1": "7",
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0
+         }
+      },
+      "Luke%20and%20Mike": {
+         "team": "Leo",
+         "opponent": "Max%20and%20Dom",
+         "scores": {
+            "1": "6",
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0
+         }
+      }
+   },
+   "match_info": {
+      "par1": 4,
+      "par2": 4,
+      "par3": 5,
+      "par4": 4,
+      "par5": 3,
+      "par6": 4,
+      "par7": 3,
+      "par8": 4,
+      "par9": 5,
+      "par10": 4,
+      "par11": 4,
+      "par12": 5,
+      "par13": 4,
+      "par14": 3,
+      "par15": 4,
+      "par16": 3,
+      "par17": 4,
+      "par18": 5,
+      "match_code": "734731",
+      "match_password": "password",
+      "number_holes": "18",
+      "match_name": "Match Play Practice 2",
+      "start_time": "2023-05-15",
+      "end_time": "2023-05-15",
+      "home_team": "Homestead",
+      "away_team": "Leo",
+      "match_type": "Teams",
+      "gamemode": "Match Play",
+      "id": 42
+   },
+   "lobby": [
+      [
+         "Luke and Mike",
+         "Leo"
+      ]
+   ],
+   "message": "Test%20Message"
+}

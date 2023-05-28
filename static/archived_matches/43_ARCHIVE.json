@@ -2,7 +2,7 @@
    "players": {
       "Dominic": {
          "team": "Homestead",
-         "opponent": "Tyler Faust",
+         "opponent": "Tyler%20Faust",
          "scores": {
             "1": "4",
             "2": "4",
@@ -15,7 +15,7 @@
             "9": 0
          }
       },
-      "Caden": {
+      "Caden%20": {
          "team": "Homestead",
          "opponent": "",
          "scores": {
@@ -30,7 +30,7 @@
             "9": 0
          }
       },
-      "Tyler Faust": {
+      "Tyler%20Faust": {
          "team": "Spartans",
          "opponent": "Dominic",
          "scores": {
@@ -45,7 +45,7 @@
             "9": 0
          }
       },
-      "grant drummond": {
+      "grant%20drummond": {
          "team": "Spartans",
          "opponent": "",
          "scores": {
@@ -60,7 +60,7 @@
             "9": 0
          }
       },
-      "Ryan Parker": {
+      "Ryan%20Parker": {
          "team": "Homestead",
          "opponent": "",
          "scores": {
@@ -75,7 +75,7 @@
             "9": 0
          }
       },
-      "Brandt Colglazier": {
+      "Brandt%20Colglazier": {
          "team": "Homestead",
          "opponent": "Trace",
          "scores": {
@@ -92,7 +92,7 @@
       },
       "Trace": {
          "team": "Spartans",
-         "opponent": "Brandt Colglazier",
+         "opponent": "Brandt%20Colglazier",
          "scores": {
             "1": "5",
             "2": "4",
@@ -105,7 +105,7 @@
             "9": 0
          }
       },
-      "Jack Spurgeon": {
+      "Jack%20Spurgeon": {
          "team": "Homestead",
          "opponent": "",
          "scores": {
@@ -122,7 +122,7 @@
       },
       "Karson": {
          "team": "Spartans",
-         "opponent": "Noah Lancz",
+         "opponent": "Noah%20Lancz",
          "scores": {
             "1": "4",
             "2": "3",
@@ -135,7 +135,7 @@
             "9": "5"
          }
       },
-      "Noah Lancz": {
+      "Noah%20Lancz": {
          "team": "Homestead",
          "opponent": "Karson",
          "scores": {

@@ -17,7 +17,7 @@
   gtag('config', 'G-2TLMVLX5EB');
 </script>
 
-<title>{{data1.name}} || Big Blue</title>
+<title>{{data1.name}} | Big Blue</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/profiledashboard.css') }}">      
 
     <div class="main-container-parent">
@@ -66,34 +66,62 @@
                 </div>
             </div>
 
-            <!-- Suggest Users to View/Follow -->
-            <div class="suggested-users">
-                <h3>You may know</h3>
-                {% for i in random_users_list %}
-                    <div class="random-user-one">
-                        <a href="/profile/{{i.username}}">
-                            <div>
-                                <img src="{{ url_for('static', filename='logo_graphics/user_photos/' + i.pic) }}" alt="">
-                            </div>
-                            <div>
-                                <div class="name-and-verification">
-                                    <h4 id="suggested-name">{{i.name}}</h4>
-                                    {% if i.verified == 1 %}
-                                        <img id="checkmark" src="{{ url_for('static', filename='logo_graphics/normalverify.png') }}" alt="">
-                                    {% elif i.verified == 2 %}
-                                        <img id="checkmark" src="{{ url_for('static', filename='logo_graphics/verify.png') }}" alt="">
-                                    {% endif %}
-                                </div>
-                                <h5 id="suggested-username">@{{i.username}}</h5>
-                            </div>
+            <div class="suggested-users-and-recent-matches">
 
-
-                        </a>
+                <!--You need to write match[0] before accessing any of the json attributes
+                This is because it is in a tuple and needs to be accessed first-->
+                <div class="recent-matches">
+                    <h3>{{(data1.name).split(' ')[0]}}'s Recent Matches</h3>
                     
+                    {% for match in recent_matches[:2] %}
+                        <a href="/spectator_match_view/{{match[0]['match_info']['id']}}" class="recent-match-container">
+                        
+                            <div class="reload-icon">
+                                <h1>⟲</h1>
+                            </div>
+                            <div class="past-match-info">
+                                <h4>{{match[0]["match_info"]["match_name"]}}</h4> <!--Json data from archive!-->
+                                <p color="blue">{{match[1]}}</p> <!--Time that the match ended-->
+                            </div>
+                                
+                            
+                        </a>
+                        
+                        
+                        
+                    {% endfor %}
+                </div>
 
-                    </div>
-                {% endfor %}
+                <!-- Suggest Users to View/Follow -->
+                <div class="suggested-users">
+                    <h3>You may know</h3>
+                    {% for i in random_users_list %}
+                        <div class="random-user-one">
+                            <a href="/profile/{{i.username}}">
+                                <div>
+                                    <img src="{{ url_for('static', filename='logo_graphics/user_photos/' + i.pic) }}" alt="">
+                                </div>
+                                <div>
+                                    <div class="name-and-verification">
+                                        <h4 id="suggested-name">{{i.name}}</h4>
+                                        {% if i.verified == 1 %}
+                                            <img id="checkmark" src="{{ url_for('static', filename='logo_graphics/normalverify.png') }}" alt="">
+                                        {% elif i.verified == 2 %}
+                                            <img id="checkmark" src="{{ url_for('static', filename='logo_graphics/verify.png') }}" alt="">
+                                        {% endif %}
+                                    </div>
+                                    <h5 id="suggested-username">@{{i.username}}</h5>
+                                </div>
+
+
+                            </a>
+                        
+
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
+            
 
 
         </div>

@@ -889,6 +889,11 @@ def get_user_profile(user):
         month_name = list_of_months[month_index-1]
     except:
         return redirect(url_for('error', msg="Sorry, that user does not exist."))
+    
+    #find recent matches
+    recent_matches = match_archive.query.filter_by(username=user).all()
+    recent_matches = [(get_archived_match(thing.filename), thing.date_added) for thing in recent_matches]
+    recent_matches = recent_matches[::-1]
 
     logged_in_user = users.query.filter_by(username=session['active_user'][0]).first()
     print(logged_in_user.name)
@@ -915,7 +920,7 @@ def get_user_profile(user):
         random_user_three = users.query.offset(random_offset3).limit(1).first() 
     random_users_list = [random_user_one, random_user_two, random_user_three]
 
-    return render_template("user_profile_page.html", month = month_name, year=date_year, random_users_list=random_users_list, data1=found_user, data=logged_in_user)
+    return render_template("user_profile_page.html", month = month_name, recent_matches=recent_matches, year=date_year, random_users_list=random_users_list, data1=found_user, data=logged_in_user)
     
 @app.route("/create_match", methods=['GET', 'POST'])
 def create_match():

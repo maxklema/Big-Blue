@@ -605,6 +605,7 @@ html, body {
     display: flex;
     flex-direction: row;
     align-items: center;
+    text-decoration: none;
 }
 
 .reload-icon h1 {
@@ -613,14 +614,24 @@ html, body {
     margin-right: 10px;
 }
 
+.recent-match-container a {
+    text-decoration: none;
+}
+
+.past-match-info {
+    flex-direction: row;
+}
+
 .past-match-info p {
     font-size: 15px;
     font-weight: 200;
     font-family: bigBlueRegular;
+    color: black;
 }
 
 .past-match-info h4 {
     font-family: bigBlueSemibold;
+    color: black;
 }
 
 #dashboard-icon{

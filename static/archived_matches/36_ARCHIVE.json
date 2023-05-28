@@ -1,34 +1,10 @@
 {
    "players": {
-      "John Doe": {
-         "team": "leo",
-         "opponent": "John",
-         "scores": {
-            "1": "100",
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0,
-            "7": 0,
-            "8": 0,
-            "9": 0,
-            "10": 0,
-            "11": 0,
-            "12": 0,
-            "13": 0,
-            "14": 0,
-            "15": 0,
-            "16": 0,
-            "17": 0,
-            "18": 0
-         }
-      },
       "John": {
-         "team": "homestead",
-         "opponent": "John Doe",
+         "team": "Homestead",
+         "opponent": "",
          "scores": {
-            "1": "8",
+            "1": 0,
             "2": 0,
             "3": 0,
             "4": 0,
@@ -68,23 +44,18 @@
       "par16": 3,
       "par17": 4,
       "par18": 5,
-      "match_code": "959081",
+      "match_code": "034874",
       "match_password": "password",
       "number_holes": "18",
-      "match_name": "test match",
-      "start_time": "2023-05-15",
-      "end_time": "2023-05-15",
-      "home_team": "homestead",
-      "away_team": "leo",
+      "match_name": "Match Play Test 6",
+      "start_time": "2023-05-13",
+      "end_time": "2023-05-13",
+      "home_team": "Homestead",
+      "away_team": "Leo",
       "match_type": "Teams",
       "gamemode": "Match Play",
       "id": 36
    },
-   "lobby": [
-      [
-         "Max",
-         "homestead"
-      ]
-   ],
+   "lobby": [],
    "message": ""
 }

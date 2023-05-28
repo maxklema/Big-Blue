@@ -130,7 +130,8 @@
                     <h3>Your Recent Matches</h3>
                     
                     {% for match in recent_matches[:2] %}
-                        <div class="recent-match-container">
+                        <a href="/spectator_match_view/{{match[0]['match_info']['id']}}" class="recent-match-container">
+                            
                             <div class="reload-icon">
                                 <h1>⟲</h1>
                             </div>
@@ -138,7 +139,9 @@
                                 <h4>{{match[0]["match_info"]["match_name"]}}</h4> <!--Json data from archive!-->
                                 <p color="blue">{{match[1]}}</p> <!--Time that the match ended-->
                             </div>
-                        </div>
+                                
+                            
+                        </a>
                         
                         
                         
