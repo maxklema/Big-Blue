@@ -22,6 +22,9 @@
                 <li><a href="/joincode">Join Match</a></li>
                 <li><a href="/login">Login</a></li>
                 <li><a href="/about">About</a></li>
+                <form id="search-form" action="/search/" method="post">
+                    <input id="searchbar" name="searchbar" type="text" placeholder="search users"></input>
+                </form>
             </ul>
             <button id="menu-button" onclick="openMenu();" hidden><h1 class="mobile-navigation" id="hamburger-icon" style="color: white;" hidden>☰</h1></button>
                                             
@@ -40,6 +43,16 @@
         </div> 
 
         <script>
+
+            document.getElementById("search-form").onsubmit = function() {
+                var query = document.getElementById("searchbar").value;
+                if (query == ""){
+                    query = "maxklema";
+                }
+                this.action = this.action + query;
+
+            }
+
             let button = document.getElementById("menu-button")
             let mobile_header_menu = document.getElementsByClassName("mobile-hrefs")[0];
 
@@ -54,6 +67,8 @@
 
             window.addEventListener('resize', onWindowResize);
 
+            
+            
             function onWindowResize() {
                 if (window.matchMedia("(max-width: 850px)").matches) {
                     document.getElementById("menu-button").removeAttribute("hidden");
@@ -89,9 +104,6 @@
                     <a href="/joincode">Join Match</a>
                     <a href="/login">Login</a>
                     <a href="/create_account">Sign Up</a>
-                    <a href="/dashboard">Profile</a>
-                    <a href="/match_dashboard">Match Dashboard</a>
-                    <a href="/course_dashboard">Course Dashboard</a>
                     <a href="https://twitter.com/bigbluegolfapp" id="twitter_href">Twitter</a>
                 </div>
 

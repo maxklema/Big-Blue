@@ -24,9 +24,51 @@
                 <li><a href="/dashboard">{{data.username}}</a></li>
                 <li><a href=""><img id="profile-pic" src="{{ url_for('static', filename='logo_graphics/user_photos/' + data.pic) }}" alt=""></a></li>
             </ul>
-
-
         </header>
+
+        <div class="mobile-hrefs">
+            <div class="close-button-container">
+                <button id="close-menu-button" onclick="closeMenu();"><h1>✕</h1></button>
+            </div>
+            <div class="content-container">
+                <a href="/joincode">Join Match</a>
+                <a href="/dashboard">{{data.username}}</a>
+                <a href="/logout">Logout</a>
+                
+            </div>
+    
+        </div> 
+
+
+
+        <script>
+            let button = document.getElementById("menu-button")
+            let mobile_header_menu = document.getElementsByClassName("mobile-hrefs")[0];
+
+            function openMenu() {
+                mobile_header_menu.style.display = "block";
+            }
+
+            function closeMenu() {
+                let mobile_header_menu = document.getElementsByClassName("mobile-hrefs")[0];
+                mobile_header_menu.style.display = "none";
+            }
+
+            window.addEventListener('resize', onWindowResize);
+
+            function onWindowResize() {
+                if (window.matchMedia("(max-width: 850px)").matches) {
+                    document.getElementById("menu-button").removeAttribute("hidden");
+                    document.getElementById("hamburger-icon").removeAttribute("hidden");
+                } 
+                
+                else if (window.matchMedia("(min-width: 850px)").matches) {
+                    document.getElementById("menu-button").setAttribute("hidden", "");
+                    document.getElementById("hamburger-icon").setAttribute("hidden", "");
+                }
+            }
+        </script>
+
 
         {% block content %}
             
@@ -61,9 +103,6 @@
                     <a href="/joincode">Join Match</a>
                     <a href="/login">Login</a>
                     <a href="/create_account">Sign Up</a>
-                    <a href="/dashboard">Profile</a>
-                    <a href="/match_dashboard">Match Dashboard</a>
-                    <a href="/course_dashboard">Course Dashboard</a>
                     <a href="https://twitter.com/bigbluegolfapp" id="twitter_href">Twitter</a>
                 </div>
 

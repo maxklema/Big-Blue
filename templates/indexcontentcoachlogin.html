@@ -41,13 +41,10 @@
                 <button id="close-menu-button" onclick="closeMenu();"><h1>✕</h1></button>
             </div>
             <div class="content-container">
-                <form id="search-form-two" action="/search/" method="post">
-                    <input id="searchbar" name="searchbar" type="text" placeholder="search users"></input>
-                </form>
                 <a href="/match_dashboard">Dashboard</a>
+                <a href="/search/{{data.username}}">Search</a>
                 <a href="/logout">Logout</a>
                 <a href="/dashboard">{{data.username}}</a>
-                <a href=""><img id="profile-pic" src="{{ url_for('static', filename='logo_graphics/user_photos/' + data.pic) }}" alt=""></a>
             </div>
             
     
@@ -114,9 +111,6 @@
                     <a href="/joincode">Join Match</a>
                     <a href="/login">Login</a>
                     <a href="/create_account">Sign Up</a>
-                    <a href="/dashboard">Profile</a>
-                    <a href="/match_dashboard">Match Dashboard</a>
-                    <a href="/course_dashboard">Course Dashboard</a>
                     <a href="https://twitter.com/bigbluegolfapp" id="twitter_href">Twitter</a>
                 </div>
 

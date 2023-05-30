@@ -894,31 +894,41 @@ def get_user_profile(user):
     recent_matches = match_archive.query.filter_by(username=user).all()
     recent_matches = [(get_archived_match(thing.filename), thing.date_added) for thing in recent_matches]
     recent_matches = recent_matches[::-1]
-
-    logged_in_user = users.query.filter_by(username=session['active_user'][0]).first()
-    print(logged_in_user.name)
-    if logged_in_user.username == user:
-        return redirect(url_for('dashboard'))
     
-
-    #chooses three random users
-    count = users.query.count()
-    random_offset = randint(0, count - 1)
-    random_offset2 = randint(0, count - 1)
-    random_offset3 = randint(0, count - 1)
-    random_user_one = users.query.offset(random_offset).limit(1).first()
-    random_user_two = users.query.offset(random_offset2).limit(1).first()
-    random_user_three = users.query.offset(random_offset3).limit(1).first()
-    while (random_user_one._id == logged_in_user._id):
+    try:
+        logged_in_user = users.query.filter_by(username=session['active_user'][0]).first()
+        print(logged_in_user.name)
+        if logged_in_user.username == user:
+            return redirect(url_for('dashboard'))
+        else:
+            #chooses three random users
+            count = users.query.count()
+            random_offset = randint(0, count - 1)
+            random_offset2 = randint(0, count - 1)
+            random_offset3 = randint(0, count - 1)
+            random_user_one = users.query.offset(random_offset).limit(1).first()
+            random_user_two = users.query.offset(random_offset2).limit(1).first()
+            random_user_three = users.query.offset(random_offset3).limit(1).first()
+            while (random_user_one._id == logged_in_user._id):
+                random_offset = randint(0, count - 1)
+                random_user_one = users.query.offset(random_offset).limit(1).first() 
+            while (random_user_two._id == random_user_one._id or random_user_two._id == logged_in_user._id):
+                random_offset2 = randint(0, count - 1)
+                random_user_two = users.query.offset(random_offset2).limit(1).first() 
+            while (random_user_three._id == random_user_one._id or random_user_three._id == random_user_two._id or random_user_three._id == logged_in_user._id):
+                random_offset3 = randint(0, count - 1)
+                random_user_three = users.query.offset(random_offset3).limit(1).first() 
+            random_users_list = [random_user_one, random_user_two, random_user_three]
+    except:
+        logged_in_user = None
+        count = users.query.count()
         random_offset = randint(0, count - 1)
-        random_user_one = users.query.offset(random_offset).limit(1).first() 
-    while (random_user_two._id == random_user_one._id or random_user_two._id == logged_in_user._id):
         random_offset2 = randint(0, count - 1)
-        random_user_two = users.query.offset(random_offset2).limit(1).first() 
-    while (random_user_three._id == random_user_one._id or random_user_three._id == random_user_two._id or random_user_three._id == logged_in_user._id):
         random_offset3 = randint(0, count - 1)
-        random_user_three = users.query.offset(random_offset3).limit(1).first() 
-    random_users_list = [random_user_one, random_user_two, random_user_three]
+        random_user_one = users.query.offset(random_offset).limit(1).first()
+        random_user_two = users.query.offset(random_offset2).limit(1).first()
+        random_user_three = users.query.offset(random_offset3).limit(1).first()
+        random_users_list = [random_user_one, random_user_two, random_user_three]
 
     return render_template("user_profile_page.html", month = month_name, recent_matches=recent_matches, year=date_year, random_users_list=random_users_list, data1=found_user, data=logged_in_user)
     
@@ -1532,7 +1542,6 @@ def search(searchbar):
             users.name.like(f"%{keyword}%")
         )).limit(100)
     return render_template("search_results.html", keyword=keyword, search_query=search_query, data=found_user)
-    
     
 
 

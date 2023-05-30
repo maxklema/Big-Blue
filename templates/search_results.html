@@ -21,6 +21,26 @@
 <title>Search Results | Big Blue</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/search_results.css') }}">      
 
+
+    <div class="search-bar-container">
+        <form id="search-box-form" action="/search/" method="post">
+            <input id="searchbox" name="searchbar" type="text" placeholder="Find Users"></input>
+            <input type="submit" name="search-button" id="search-button" value="Search">
+        </form>
+    </div>
+
+    <script>
+
+        document.getElementById("search-box-form").onsubmit = function() {
+            var query = document.getElementById("searchbox").value;
+            if (query == ""){
+                query = "maxklema";
+            }
+            this.action = this.action + query;
+
+        }
+    </script>
+
 {% if search_query.count() == 0 %}
     <div class="main-container">
         <img id="no-results" src="{{ url_for('static', filename='logo_graphics/no-search-results.png') }}" alt="">
