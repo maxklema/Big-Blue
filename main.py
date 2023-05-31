@@ -1282,11 +1282,19 @@ def spectator_match_view(json_data_input):
         found_match = match.query.filter_by(_id=json_data_input).first()
         match_owner = found_match.created_by
         match_date = found_match.start_time
+        match_course = found_match.match_course
+        found_course = course.query.filter_by(created_by=match_owner).first()
+        match_location = found_course.city
+        print("LOCATION: " + match_location)
         found_match_owner = users.query.filter_by(username=match_owner).first()
     except:
         found_match = match_archive.query.filter_by(_id=json_data_input).first()
         match_owner = found_match.created_by
         match_date = found_match.start_time
+        match_course = found_match.match_course
+        found_course = course.query.filter_by(created_by=match_owner).first()
+        match_location = found_course.city
+        print("LOCATION: " + match_location)
         found_match_owner = users.query.filter_by(username=match_owner).first()
     try:
         json_data = Scoring.return_data(json_data_input)
@@ -1302,7 +1310,7 @@ def spectator_match_view(json_data_input):
                     scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
             else:
                 scores = Scoring.calc_match_results(json_data['match_info']['id'])
-        return render_template("spectator-active-match-view.html", date=match_date, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
+        return render_template("spectator-active-match-view.html", date=match_date, course=match_course, city=match_location, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
     except:
         try:
             json_data = Scoring.return_archive_data(json_data_input)
@@ -1318,7 +1326,7 @@ def spectator_match_view(json_data_input):
                     scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
                 else:
                     scores = Scoring.calc_match_results(json_data['match_info']['id'])
-            return render_template("spectator-active-match-view.html", date=match_date, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
+            return render_template("spectator-active-match-view.html", date=match_date, course=match_course, city=match_location, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
         except:
             return redirect(url_for('error', msg='This match does not exist!'))
 
@@ -1331,11 +1339,19 @@ def player_match_view(json_data_input):
             found_match = match.query.filter_by(_id=json_data_input).first()
             match_owner = found_match.created_by
             match_date = found_match.start_time
+            match_course = found_match.match_course
+            found_course = course.query.filter_by(created_by=match_owner).first()
+            match_location = found_course.city
+            print("LOCATION: " + match_location)
             found_match_owner = users.query.filter_by(username=match_owner).first()
         except:
             found_match = match_archive.query.filter_by(_id=json_data_input).first()
             match_owner = found_match.created_by
             match_date = found_match.start_time
+            match_course = found_match.match_course
+            found_course = course.query.filter_by(created_by=match_owner).first()
+            match_location = found_course.city
+            print("LOCATION: " + match_location)
             found_match_owner = users.query.filter_by(username=match_owner).first()
         try:
             json_data = Scoring.return_data(json_data_input)
@@ -1360,8 +1376,8 @@ def player_match_view(json_data_input):
         except:
             found_user = ''
         if request.method =="POST":
-            return redirect(url_for("player_match_view", date=match_date, data1=found_match_owner, active_player=session['active_player'], json_data_input = json_data['match_info']['id']))
-        return render_template("player-active-match-view.html", date=match_date, data1=found_match_owner, active_player=session['active_player'], data=found_user, playerdata=json_data, scoring_data = scores)
+            return redirect(url_for("player_match_view", date=match_date, course=match_course, city=match_location, data1=found_match_owner, active_player=session['active_player'], json_data_input = json_data['match_info']['id']))
+        return render_template("player-active-match-view.html", date=match_date, course=match_course, city=match_location, data1=found_match_owner, active_player=session['active_player'], data=found_user, playerdata=json_data, scoring_data = scores)
     else:
         return redirect(url_for('error', msg='You do not have access to this site until you join a match.'))
     
@@ -1372,11 +1388,19 @@ def active_match_view(json_data_input):
         found_match = match.query.filter_by(_id=json_data_input).first()
         match_owner = found_match.created_by
         match_date = found_match.start_time
+        match_course = found_match.match_course
+        found_course = course.query.filter_by(created_by=match_owner).first()
+        match_location = found_course.city
+        print("LOCATION: " + match_location)
         found_match_owner = users.query.filter_by(username=match_owner).first()
     except:
         found_match = match_archive.query.filter_by(_id=json_data_input).first()
         match_owner = found_match.created_by
         match_date = found_match.start_time
+        match_course = found_match.match_course
+        found_course = course.query.filter_by(created_by=match_owner).first()
+        match_location = found_course.city
+        print("LOCATION: " + match_location)
         found_match_owner = users.query.filter_by(username=match_owner).first()
     try:
         json_data = Scoring.return_data(json_data_input)
@@ -1405,7 +1429,7 @@ def active_match_view(json_data_input):
         scores = Scoring.calc_match_results(json_data['match_info']['id'])
 
     if match_security('active_user', json_data_input):
-        return render_template("active_match_view.html", date=match_date, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data=scores, rank=session['active_user'][2])
+        return render_template("active_match_view.html", date=match_date,  course=match_course, city=match_location, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data=scores, rank=session['active_user'][2])
     else:
         return redirect(url_for('error', userdata=found_user, msg="You do not have access to this site!"))
 

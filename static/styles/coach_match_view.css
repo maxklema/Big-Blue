@@ -688,14 +688,14 @@ details[open] > summary {
 .card-general-stats-spectator-player h3 {
     color: white;
     padding: 3px 7px;
-    background-color:#ca3e3e;
+    background-color:rgb(13, 165, 13);
 }
 
 
 .card-general-stats h3 {
     color: white;
     padding: 3px 7px;
-    background-color:#ca3e3e;
+    background-color:rgb(13, 165, 13);
     margin-right: 5px;
     flex-wrap: wrap;
 }
