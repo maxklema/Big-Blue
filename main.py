@@ -509,8 +509,10 @@ class Scoring():
                     else:
                         break
                 absolute_relation = str(abs(current_score - current_par))
-                if last_hole == int(data["match_info"]["number_holes"]):
-                    return "F: " + str(current_score)
+                if ((last_hole == int(data["match_info"]["number_holes"])) and (current_score < current_par)):
+                    return "F: " + str(current_score) + " (-" + absolute_relation + ")"
+                elif ((last_hole == int(data["match_info"]["number_holes"])) and (current_score > current_par)):
+                    return "F: " + str(current_score) + " (+" + absolute_relation + ")"
                 elif current_score > current_par:
                     return "+" + absolute_relation + " thru " + str(last_hole)
                 elif current_score < current_par:
@@ -1301,13 +1303,13 @@ def spectator_match_view(json_data_input):
         try:
             found_user = users.query.filter_by(username=session['active_user'][0]).first()
             if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
-                    scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
+                scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
             else:
                 scores = Scoring.calc_match_results(json_data['match_info']['id'])
         except:
             found_user = ''
             if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
-                    scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
+                scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
             else:
                 scores = Scoring.calc_match_results(json_data['match_info']['id'])
         return render_template("spectator-active-match-view.html", date=match_date, course=match_course, city=match_location, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
