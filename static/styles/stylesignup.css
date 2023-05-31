@@ -282,7 +282,7 @@ html, body {
     margin-bottom: 5%;
 }
 
-body form {
+.create-form {
     width: 690px;
     padding: 20px 30px;
     background-color: white;
@@ -290,7 +290,7 @@ body form {
     margin-bottom: 5%;
 }
 
-body form div div input {
+.create-form div div input {
     height: 40px;
     width: 300px;
     padding: 5px;
@@ -300,7 +300,7 @@ body form div div input {
     font-family: bigBlueMedium;
 }
 
-body form div div label {
+.create-form div div label {
     background-color: white;
 }
 
@@ -549,7 +549,7 @@ body form div div label {
     .full-team {
         margin-bottom: 20px;
     }
-    body form {
+    .create-form {
         width: 355px;
     }
 
