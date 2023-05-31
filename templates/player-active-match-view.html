@@ -221,20 +221,8 @@ end match (side)
                                             document.getElementById('relation_to_par_h3_{{player}}').innerHTML = data;
                                             if (data.includes('-')) {
                                                 // Data includes a "-" sign
-                                                document.getElementById('relation_to_par_h3_{{player}}').style.backgroundColor = 'white';
-                                                document.getElementById('relation_to_par_h3_{{player}}').style.color = 'black';
-                                                //document.getElementById('score_on_hole_{{player}}_{{strokes}}').style.color = 'white';
-                                                document.getElementById('hole_{{player}}_{{strokes}}').style.color = 'white';
-                                                document.getElementById('{{player}}_name_h2').style.color = 'white';
-                                                document.getElementById('{{player}}_team_h5').style.color = 'white';
-                                                document.getElementById('{{player}}_score_details_text').style.color = '#c4d9f5';
-                                                document.getElementById('{{player}}_{{strokes}}_input_form').style.backgroundColor = '#c4d9f5';
-                                                document.getElementById('{{player}}_{{strokes}}_input_form').style.color = 'black';
-
-                                                var element = document.getElementById('match-card-{{player}}');
-                                                element.style.backgroundImage = 'linear-gradient(to bottom, #FF6600, #FF0000, #FF0000 100%, #990000)';
-                                                var elementTwo = document.getElementById('score_details_{{player}}');
-                                                elementTwo.style.backgroundColor = 'transparent';
+                                                document.getElementById('relation_to_par_h3_{{player}}').style.backgroundImage = 'linear-gradient(to bottom, #FF6600, #FF0000, #FF0000 100%, #990000)';
+                                                document.getElementById('relation_to_par_h3_{{player}}').style.color = 'white';
                                             } 
                                         });
                                     </script>
@@ -256,19 +244,8 @@ end match (side)
                                             document.getElementById('relation_to_par_h3_{{player}}').innerHTML = data;
                                             if (data.includes('-')) {
                                                 // Data includes a "-" sign
-                                                document.getElementById('relation_to_par_h3_{{player}}').style.backgroundColor = 'white';
-                                                document.getElementById('relation_to_par_h3_{{player}}').style.color = 'black';
-                                                document.getElementById('score_on_hole_{{player}}_{{strokes}}').style.color = 'white';
-                                                document.getElementById('hole_{{player}}_{{strokes}}').style.color = 'white';
-                                                document.getElementById('{{player}}_name_h2').style.color = 'white';
-                                                document.getElementById('{{player}}_team_h5').style.color = 'white';
-                                                document.getElementById('{{player}}_score_details_text').style.color = '#c4d9f5';
-                                               
-
-                                                var element = document.getElementById('match-card-{{player}}');
-                                                element.style.backgroundImage = 'linear-gradient(to bottom, #FF6600, #FF0000, #FF0000 100%, #990000)';
-                                                var elementTwo = document.getElementById('score_details_{{player}}');
-                                                elementTwo.style.backgroundColor = 'transparent';
+                                                document.getElementById('relation_to_par_h3_{{player}}').style.backgroundImage = 'linear-gradient(to bottom, #FF6600, #FF0000, #FF0000 100%, #990000)';
+                                                document.getElementById('relation_to_par_h3_{{player}}').style.color = 'white';
                                             } 
                                         });
                                     </script>
@@ -384,6 +361,14 @@ end match (side)
                         {% endif %}
                     </div>
                     
+                </div>
+                <div class="match-name-info">
+                    <h4>Course</h4>
+                    <p>{{course | replace("-", "/")}}</p>
+                </div>
+                <div class="match-name-info">
+                    <h4>Location</h4>
+                    <p>{{city| replace("-", "/")}}</p>
                 </div>
             </div>
 
