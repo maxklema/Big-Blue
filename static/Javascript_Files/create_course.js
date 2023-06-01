@@ -565,3 +565,116 @@ function hideparholes(){
     
     
 }
+
+function hideparholes_handicap(){
+    var value = document.getElementById("number-holes").value
+    
+    if (value != "18"){
+        
+        
+        document.getElementById("holepar10").value = "";
+        document.getElementById("holepar10").style.display = "none";
+        document.getElementById("label-10").style.display = "none";
+
+        document.getElementById("holepar11").value = "";
+        document.getElementById("holepar11").style.display = "none";
+        document.getElementById("label-11").style.display = "none";
+
+        document.getElementById("holepar12").value = "";
+        document.getElementById("holepar12").style.display = "none";
+        document.getElementById("label-12").style.display = "none";
+
+        document.getElementById("holepar13").value = "";
+        document.getElementById("holepar13").style.display = "none";
+        document.getElementById("label-13").style.display = "none";
+
+        document.getElementById("holepar14").value = "";
+        document.getElementById("holepar14").style.display = "none";
+        document.getElementById("label-14").style.display = "none";
+
+        document.getElementById("holepar15").value = "";
+        document.getElementById("holepar15").style.display = "none";
+        document.getElementById("label-15").style.display = "none";
+
+        document.getElementById("holepar16").value = "";
+        document.getElementById("holepar16").style.display = "none";
+        document.getElementById("label-16").style.display = "none";
+
+        document.getElementById("holepar17").value = "";
+        document.getElementById("holepar17").style.display = "none";
+        document.getElementById("label-17").style.display = "none";
+
+        document.getElementById("holepar18").value = "";
+        document.getElementById("holepar18").style.display = "none";
+        document.getElementById("label-18").style.display = "none";
+
+        document.getElementById("row-twelve").style.display = "none";
+        document.getElementById("row-thirteen").style.display = "none";
+        document.getElementById("row-fourteen").style.display = "none";
+        document.getElementById("row-fifteen").style.display = "none";
+        document.getElementById("row-sixteen").style.display = "none";
+        document.getElementById("row-seventeen").style.display = "none";
+        document.getElementById("row-eighteen").style.display = "none";
+        document.getElementById("row-nineteen").style.display = "none";
+        document.getElementById("row-twenty").style.display = "none";
+
+        document.getElementById("row-eleven").style.marginBottom = "40px";
+
+        document.getElementById("inner-div").style.display = "none";
+        document.getElementById("inner-divTwo").style.display = "none";
+
+
+    } else if (document.getElementById("number-holes").value == "18"){
+        document.getElementById("holepar10").style.display = "";
+        document.getElementById("label-10").style.display = "";
+
+        //document.getElementById("holepar11").value = "";
+        document.getElementById("holepar11").style.display = "";
+        document.getElementById("label-11").style.display = "";
+
+        //document.getElementById("holepar12").value = "";
+        document.getElementById("holepar12").style.display = "";
+        document.getElementById("label-12").style.display = "";
+
+        //document.getElementById("holepar13").value = "";
+        document.getElementById("holepar13").style.display = "";
+        document.getElementById("label-13").style.display = "";
+
+        //document.getElementById("holepar14").value = "";
+        document.getElementById("holepar14").style.display = "";
+        document.getElementById("label-14").style.display = "";
+
+        //document.getElementById("holepar15").value = "";
+        document.getElementById("holepar15").style.display = "";
+        document.getElementById("label-15").style.display = "";
+
+        //document.getElementById("holepar16").value = "";
+        document.getElementById("holepar16").style.display = "";
+        document.getElementById("label-16").style.display = "";
+
+        //document.getElementById("holepar17").value = "";
+        document.getElementById("holepar17").style.display = "";
+        document.getElementById("label-17").style.display = "";
+
+        //document.getElementById("holepar18").value = "";
+        document.getElementById("holepar18").style.display = "";
+        document.getElementById("label-18").style.display = "";
+
+        document.getElementById("row-twelve").style.display = "flex";
+        document.getElementById("row-thirteen").style.display = "flex";
+        document.getElementById("row-fourteen").style.display = "flex";
+        document.getElementById("row-fifteen").style.display = "flex";
+        document.getElementById("row-sixteen").style.display = "flex";
+        document.getElementById("row-seventeen").style.display = "flex";
+        document.getElementById("row-eighteen").style.display = "flex";
+        document.getElementById("row-nineteen").style.display = "flex";
+        document.getElementById("row-twenty").style.display = "flex";
+
+        document.getElementById("row-eleven").style.marginBottom = "0px";
+        
+        document.getElementById("inner-div").style.display = "";
+        document.getElementById("inner-divTwo").style.display = "";
+    }
+    
+    
+}
