@@ -19,11 +19,21 @@
             <a href="/">
                 <img id="logo-image" src="{{ url_for('static', filename='logo_graphics/BigBlue_NewLogo-White.png') }}" class="logo">
             </a>
-            <ul class="navigation">
-                <li><a href="/logout">Logout</a></li>
-                <li><a href="/dashboard">{{data.username}}</a></li>
-                <li><a href=""><img id="profile-pic" src="{{ url_for('static', filename='logo_graphics/user_photos/' + data.pic) }}" alt=""></a></li>
-            </ul>
+            <div>
+                <ul class="navigation">
+                    <li><a href="/match_dashboard">Dashboard</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="/dashboard">{{data.username}}</a></li>
+                    <li><a href=""><img id="profile-pic" src="{{ url_for('static', filename='logo_graphics/user_photos/' + data.pic) }}" alt=""></a></li>
+                    <form id="search-form" action="/search/" method="post">
+                        <input id="searchbar" name="searchbar" type="text" placeholder="search users"></input>
+                    </form>
+                </ul>
+                
+
+            </div>
+            <button id="menu-button" onclick="openMenu();" hidden><h1 class="mobile-navigation" id="hamburger-icon" style="color: white;" hidden>☰</h1></button>
+                                            
         </header>
 
         <div class="mobile-hrefs">
@@ -115,6 +125,26 @@
 
     </footer>
 
+    <script>
+        document.getElementById("search-form").onsubmit = function() {
+            var query = document.getElementById("searchbar").value;
+            if (query == ""){
+                query = "maxklema";
+            }
+            this.action = this.action + query;
+
+        }
+
+        document.getElementById("search-form-two").onsubmit = function() {
+            var query = document.getElementById("searchbar").value;
+            if (query == ""){
+                query = "maxklema";
+            }
+            this.action = this.action + query;
+
+        }
+
+    </script>
 
 
 

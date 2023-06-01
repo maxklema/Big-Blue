@@ -462,6 +462,115 @@ input[type=number] {
     background-color: white;
 }
 
+#row-twelve{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+#row-twelve div {
+    background-color: white;
+}
+
+#row-thirteen {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+#row-thirteen div {
+    background-color: white;
+}
+
+#row-fourteen {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+#row-fourteen div {
+    background-color: white;
+}
+
+#row-fifteen {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+#row-fifteen div {
+    background-color: white;
+}
+
+#row-sixteen {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+#row-sixteen div {
+    background-color: white;
+}
+
+#row-seventeen {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+#row-seventeen div {
+    background-color: white;
+}
+
+#row-eighteen {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+#row-eighteen div {
+    background-color: white;
+}
+
+#row-nineteen {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+#row-nineteen div {
+    background-color: white;
+}
+
+#row-twenty {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    justify-content: space-between;
+    background-color: white;
+}
+
+#row-twenty div {
+    background-color: white;
+}
+
 #add-course-button {
     width: 300px;
     height: 40px;
@@ -474,7 +583,6 @@ input[type=number] {
     margin-left: auto;
     margin-right: auto;
     display: block;
-    margin-top: 40px;
     margin-bottom: 20px;
     font-family: bigBlueBold;
 }
@@ -578,8 +686,47 @@ input[type=number] {
         flex-direction: column;
     }
 
+    #row-twelve {
+        flex-direction: column;
+    }
+
+    #row-thirteen {
+        flex-direction: column;
+    }
+
+    #row-fourteen {
+        flex-direction: column;
+    }
+
+    #row-fifteen {
+        flex-direction: column;
+    }
+
+    #row-sixteen {
+        flex-direction: column;
+    }
+
+    #row-seventeen {
+        flex-direction: column;
+    }
+
+    #row-eighteen{
+        flex-direction: column;
+    }
+
+    #row-nineteen {
+        flex-direction: column;
+    }
+
+    #row-twenty {
+        flex-direction: column;
+    }
+
     #inner-div {
         margin-top: 20px;
+    }
+    #add-course-button {
+       margin-top: 30px;
     }
 }
 

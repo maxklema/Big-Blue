@@ -32,137 +32,392 @@
 
     <body>
         <div class="form-container">
-            <form action="/create_course" method="post">
-                <img src="{{ url_for('static', filename='logo_graphics/golfcart.png') }}" alt="">
-                <h3>Add a New Course</h3>
-                {% if message %}
-                    <h5 id="error">{{message}}</h5>
-                    <script>
-                        if (document.getElementById("error").innerHTML == "Course created sucsessfully!"){
-                            document.getElementById("error").style.color = "#2176e8";
-                        }
-                    </script>   
-                {% endif %}
-                <div class="row-one">
-                    <div>
-                        <label for="number-holes">Number of Holes</label><br>
-                        <select onfocusout="hideparholes()" name="numberholes" id="number-holes">
-                            <option name="numberholes" value="18">18</option>
-                            <option name="numberholes" value="9">9</option>
-                        </select>
+            {% if data.rank == 'coach' %}
+                <form action="/create_course" method="post">
+                    <img src="{{ url_for('static', filename='logo_graphics/golfcart.png') }}" alt="">
+                    <h3>Add a New Course</h3>
+                    {% if message %}
+                        <h5 id="error">{{message}}</h5>
+                        <script>
+                            if (document.getElementById("error").innerHTML == "Course created sucsessfully!"){
+                                document.getElementById("error").style.color = "#2176e8";
+                            }
+                        </script>   
+                    {% endif %}
+                    <div class="row-one">
+                        <div>
+                            <label for="number-holes">Number of Holes</label><br>
+                            <select onfocusout="hideparholes()" name="numberholes" id="number-holes">
+                                <option name="numberholes" value="18">18</option>
+                                <option name="numberholes" value="9">9</option>
+                            </select>
+                        </div>
+                        <div class="responsive-one">
+                            <label for="course-name">Course Name</label><br>
+                            <input onfocusout="hidename()" maxlength="30" type="text" name="course-name" id="course-name">
+                        </div>
                     </div>
-                    <div class="responsive-one">
-                        <label for="course-name">Course Name</label><br>
-                        <input onfocusout="hidename()" maxlength="30" type="text" name="course-name" id="course-name">
+                    <div class="row-two">
+                        <label for="city">City or Address</label><br>
+                        <input onfocusout="hidecity()" placeholder="EX: 11502 Illinois Rd, Fort Wayne, IN 46814" maxlength="100" type="text" name="city" id="city">
                     </div>
-                </div>
-                <div class="row-two">
-                    <label for="city">City or Address</label><br>
-                    <input onfocusout="hidecity()" placeholder="EX: 11502 Illinois Rd, Fort Wayne, IN 46814" maxlength="100" type="text" name="city" id="city">
-                </div>
-                <div class="row-three">
-                    <div>
-                        <label for="holepar1">Hole 1 Par</label><br>
-                        <input onfocusout="hideparone()" maxlength="1" type="number" name="holepar1" id="holepar1">
+                    <div class="row-three">
+                        <div>
+                            <label for="holepar1">Hole 1 Par</label><br>
+                            <input onfocusout="hideparone()" maxlength="1" type="number" name="holepar1" id="holepar1">
+                        </div>
+                        <div class="responsive-three">
+                            <label for="holepar2">Hole 2 Par</label><br>
+                            <input onfocusout="hidepartwo()" maxlength="1" type="number" name="holepar2" id="holepar2">
+                        </div>
                     </div>
-                    <div class="responsive-three">
-                        <label for="holepar2">Hole 2 Par</label><br>
-                        <input onfocusout="hidepartwo()" maxlength="1" type="number" name="holepar2" id="holepar2">
+                    <div class="row-four">
+                        <div>
+                            <label for="holepar3">Hole 3 Par</label><br>
+                            <input onfocusout="hideparthree()" maxlength="1" type="number" name="holepar3" id="holepar3">
+                        </div>
+                        <div class="responsive-four">
+                            <label for="holepar4">Hole 4 Par</label><br>
+                            <input onfocusout="hideparfour()" maxlength="1" type="number" name="holepar4" id="holepar4">
+                        </div>
                     </div>
-                </div>
-                <div class="row-four">
-                    <div>
-                        <label for="holepar3">Hole 3 Par</label><br>
-                        <input onfocusout="hideparthree()" maxlength="1" type="number" name="holepar3" id="holepar3">
+                    <div class="row-five">
+                        <div>
+                            <label for="holepar5">Hole 5 Par</label><br>
+                            <input onfocusout="hideparfive()" maxlength="1" type="number" name="holepar5" id="holepar5">
+                        </div>
+                        <div class="responsive-five">
+                            <label for="holepar6">Hole 6 Par</label><br>
+                            <input onfocusout="hideparsix()" maxlength="1" type="number" name="holepar6" id="holepar6">
+                        </div>
                     </div>
-                    <div class="responsive-four">
-                        <label for="holepar4">Hole 4 Par</label><br>
-                        <input onfocusout="hideparfour()" maxlength="1" type="number" name="holepar4" id="holepar4">
+                    <div class="row-six">
+                        <div>
+                            <label for="holepar7">Hole 7 Par</label><br>
+                            <input onfocusout="hideparseven()" maxlength="1" type="number" name="holepar7" id="holepar7">
+                        </div>
+                        <div class="responsive-six">
+                            <label for="holepar8">Hole 8 Par</label><br>
+                            <input onfocusout="hidepareight()" maxlength="1" type="number" name="holepar8" id="holepar8">
+                        </div>
                     </div>
-                </div>
-                <div class="row-five">
-                    <div>
-                        <label for="holepar5">Hole 5 Par</label><br>
-                        <input onfocusout="hideparfive()" maxlength="1" type="number" name="holepar5" id="holepar5">
+                    <div class="row-seven">
+                        <div>
+                            <label for="holepar9">Hole 9 Par</label><br>
+                            <input onfocusout="hideparnine()" maxlength="1" type="number" name="holepar9" id="holepar9">
+                        </div>
+                        <div class="responsive-seven">
+                            <label id="label-10" for="holepar10">Hole 10 Par</label><br>
+                            <input onfocusout="hideparten()" maxlength="1" type="number" name="holepar10" id="holepar10">
+                        </div>
                     </div>
-                    <div class="responsive-five">
-                        <label for="holepar6">Hole 6 Par</label><br>
-                        <input onfocusout="hideparsix()" maxlength="1" type="number" name="holepar6" id="holepar6">
+                    <div id="row-eight">
+                        <div id="inner-divTwo">
+                            <label id="label-11" for="holepar11">Hole 11 Par</label><br>
+                            <input onfocusout="hidepareleven()" maxlength="1" type="number" name="holepar11" id="holepar11">
+                        </div>
+                        <div id="inner-div">
+                            <label id="label-12" for="holepar12">Hole 12 Par</label><br>
+                            <input onfocusout="hidepartwelve()" maxlength="1" type="number" name="holepar12" id="holepar12">
+                        </div>
                     </div>
-                </div>
-                <div class="row-six">
-                    <div>
-                        <label for="holepar7">Hole 7 Par</label><br>
-                        <input onfocusout="hideparseven()" maxlength="1" type="number" name="holepar7" id="holepar7">
+                    <div id="row-nine">
+                        <div id="inner-divTwo">
+                            <label id="label-13" for="holepar13">Hole 13 Par</label><br>
+                            <input onfocusout="hideparthirteen()" maxlength="1" type="number" name="holepar13" id="holepar13">
+                        </div>
+                        <div id="inner-div">
+                            <label id="label-14" for="holepar14">Hole 14 Par</label><br>
+                            <input onfocusout="hideparfourteen()" maxlength="1" type="number" name="holepar14" id="holepar14">
+                        </div>
                     </div>
-                    <div class="responsive-six">
-                        <label for="holepar8">Hole 8 Par</label><br>
-                        <input onfocusout="hidepareight()" maxlength="1" type="number" name="holepar8" id="holepar8">
+                    <div id="row-ten">
+                        <div id="inner-divTwo">
+                            <label id="label-15" for="holepar15">Hole 15 Par</label><br>
+                            <input onfocusout="hideparfifteen()" maxlength="1" type="number" name="holepar15" id="holepar15">
+                        </div>
+                        <div id="inner-div">
+                            <label id="label-16" for="holepar16">Hole 16 Par</label><br>
+                            <input onfocusout="hideparsixteen()" maxlength="1" type="number" name="holepar16" id="holepar16">
+                        </div>
                     </div>
-                </div>
-                <div class="row-seven">
-                    <div>
-                        <label for="holepar9">Hole 9 Par</label><br>
-                        <input onfocusout="hideparnine()" maxlength="1" type="number" name="holepar9" id="holepar9">
+                    <div id="row-eleven">
+                        <div id="inner-divTwo">
+                            <label id="label-17" for="holepar17">Hole 17 Par</label><br>
+                            <input onfocusout="hideparseventeen()" maxlength="1" type="number" name="holepar17" id="holepar17">
+                        </div>
+                        <div id="inner-div">
+                            <label id="label-18" for="holepar18">Hole 18 Par</label><br>
+                            <input onfocusout="hidepareightteen()" maxlength="1" type="number" name="holepar18" id="holepar18">
+                        </div>
                     </div>
-                    <div class="responsive-seven">
-                        <label id="label-10" for="holepar10">Hole 10 Par</label><br>
-                        <input onfocusout="hideparten()" maxlength="1" type="number" name="holepar10" id="holepar10">
-                    </div>
-                </div>
-                <div id="row-eight">
-                    <div id="inner-divTwo">
-                        <label id="label-11" for="holepar11">Hole 11 Par</label><br>
-                        <input onfocusout="hidepareleven()" maxlength="1" type="number" name="holepar11" id="holepar11">
-                    </div>
-                    <div id="inner-div">
-                        <label id="label-12" for="holepar12">Hole 12 Par</label><br>
-                        <input onfocusout="hidepartwelve()" maxlength="1" type="number" name="holepar12" id="holepar12">
-                    </div>
-                </div>
-                <div id="row-nine">
-                    <div id="inner-divTwo">
-                        <label id="label-13" for="holepar13">Hole 13 Par</label><br>
-                        <input onfocusout="hideparthirteen()" maxlength="1" type="number" name="holepar13" id="holepar13">
-                    </div>
-                    <div id="inner-div">
-                        <label id="label-14" for="holepar14">Hole 14 Par</label><br>
-                        <input onfocusout="hideparfourteen()" maxlength="1" type="number" name="holepar14" id="holepar14">
-                    </div>
-                </div>
-                <div id="row-ten">
-                    <div id="inner-divTwo">
-                        <label id="label-15" for="holepar15">Hole 15 Par</label><br>
-                        <input onfocusout="hideparfifteen()" maxlength="1" type="number" name="holepar15" id="holepar15">
-                    </div>
-                    <div id="inner-div">
-                        <label id="label-16" for="holepar16">Hole 16 Par</label><br>
-                        <input onfocusout="hideparsixteen()" maxlength="1" type="number" name="holepar16" id="holepar16">
-                    </div>
-                </div>
-                <div id="row-eleven">
-                    <div id="inner-divTwo">
-                        <label id="label-17" for="holepar17">Hole 17 Par</label><br>
-                        <input onfocusout="hideparseventeen()" maxlength="1" type="number" name="holepar17" id="holepar17">
-                    </div>
-                    <div id="inner-div">
-                        <label id="label-18" for="holepar18">Hole 18 Par</label><br>
-                        <input onfocusout="hidepareightteen()" maxlength="1" type="number" name="holepar18" id="holepar18">
-                    </div>
-                </div>
 
-                <input type="submit" onclick="return validateForm()" value="Add Course" id="add-course-button">
-                
-                <script src="{{ url_for('static', filename='Javascript_Files/create_course.js') }}">
-
-
-
-                </script>
+                    <input type="submit" onclick="return validateForm()" value="Add Course" id="add-course-button">
+                    
+                    <script src="{{ url_for('static', filename='Javascript_Files/create_course.js') }}">
 
 
 
+                    </script>
 
-            </form>
+
+
+
+                </form>
+            {% elif data.rank == 'player' %}
+                <form action="/create_course" method="post">
+                    <img src="{{ url_for('static', filename='logo_graphics/golfcart.png') }}" alt="">
+                    <h3>Add a New Course</h3>
+                    <p style="font-family: bigBlueRegular; font-size: 15px; text-align: center;">Note: To calculate handicap, you must fill out the slope rating, course rating, and each hole's handicap. It is also best to create three courses: front nine, back nine, and all 18 holes.</p>
+                    {% if message %}
+                        <h5 id="error">{{message}}</h5>
+                        <script>
+                            if (document.getElementById("error").innerHTML == "Course created sucsessfully!"){
+                                document.getElementById("error").style.color = "#2176e8";
+                            }
+                        </script>   
+                    {% endif %}
+
+                    <div class="row-one">
+                        <div>
+                            <label for="number-holes">Number of Holes</label><br>
+                            <select onfocusout="hideparholes_handicap()" name="numberholes" id="number-holes">
+                                <option name="numberholes" value="18">18</option>
+                                <option name="numberholes" value="9">9</option>
+                            </select>
+                        </div>
+                        <div class="responsive-one">
+                            <label for="course-name">Course Name</label><br>
+                            <input onfocusout="hidename()" maxlength="30" type="text" name="course-name" id="course-name">
+                        </div>
+                    </div>
+
+                    <div class="row-two">
+                        <label for="city">City or Address</label><br>
+                        <input onfocusout="hidecity()" placeholder="EX: 11502 Illinois Rd, Fort Wayne, IN 46814" maxlength="100" type="text" name="city" id="city">
+                    </div>
+
+                    <div class="row-three">
+                        <div>
+                            <label for="course_rating">Course Rating</label><br>
+                            <input placeholder="EX: 71.7" type="number" name="course_rating" id="course_rating">
+                        </div>
+                        <div class="responsive-three">
+                            <label for="slope_rating">Slope Rating</label><br>
+                            <input placeholder="EX: 133" type="number" name="slope_rating" id="slope_rating">
+                        </div>
+                    </div>
+
+                    <div class="row-three">
+                        <div>
+                            <label for="holepar1">Hole 1 Par</label><br>
+                            <input onfocusout="hideparone()" maxlength="1" type="number" name="holepar1" id="holepar1">
+                        </div>
+                        <div class="responsive-three">
+                            <label for="handicap_one">Hole 1 Handicap</label><br>
+                            <input type="number" name="handicap_one" id="handicap_one">
+                        </div>
+                    </div>
+
+                    <div class="row-four">
+                        <div>
+                            <label for="holepar2">Hole 2 Par</label><br>
+                            <input onfocusout="hidepartwo()" maxlength="1" type="number" name="holepar2" id="holepar2">
+                        </div>
+                        <div class="responsive-four">
+                            <label for="handicap_two">Hole 2 Handicap</label><br>
+                            <input type="number" name="handicap_two" id="handicap_two">
+                        </div>
+                    </div>
+
+                    <div class="row-five">
+                        <div>
+                            <label for="holepar3">Hole 3 Par</label><br>
+                            <input onfocusout="hideparthree()" maxlength="1" type="number" name="holepar3" id="holepar3">
+                        </div>
+                        <div class="responsive-five">
+                            <label for="handicap_three">Hole 3 Handicap</label><br>
+                            <input type="number" name="handicap_three" id="handicap_three">
+                        </div>
+                    </div>
+
+                    <div class="row-six">
+                        <div>
+                            <label for="holepar4">Hole 4 Par</label><br>
+                            <input onfocusout="hideparfour()" maxlength="1" type="number" name="holepar4" id="holepar4">
+                        </div>
+                        <div class="responsive-seven">
+                            <label for="handicap_four">Hole 4 Handicap</label><br>
+                            <input type="number" name="handicap_four" id="handicap_four">
+                        </div>
+                    </div>
+
+                    <div class="row-seven">
+                        <div>
+                            <label for="holepar5">Hole 5 Par</label><br>
+                            <input onfocusout="hideparfive()" maxlength="1" type="number" name="holepar5" id="holepar5">
+                        </div>
+                        <div class="responsive-seven">
+                            <label for="handicap_five">Hole 5 Handicap</label><br>
+                            <input type="number" name="handicap_five" id="handicap_five">
+                        </div>
+                    </div>
+                    <div id="row-eight">
+                        <div>
+                            <label for="holepar6">Hole 6 Par</label><br>
+                            <input onfocusout="hideparsix()" maxlength="1" type="number" name="holepar6" id="holepar6">
+                        </div>
+                        <div class="responsive-seven">
+                            <label for="handicap_six">Hole 6 Handicap</label><br>
+                            <input type="number" name="handicap_six" id="handicap_six">
+                        </div>
+                    </div>
+
+                    <div id="row-nine">
+                        <div>
+                            <label for="holepar7">Hole 7 Par</label><br>
+                            <input onfocusout="hideparseven()" maxlength="1" type="number" name="holepar7" id="holepar7">
+                        </div>
+                        <div class="responsive-seven">
+                            <label for="handicap_seven">Hole 7 Handicap</label><br>
+                            <input type="number" name="handicap_seven" id="handicap_seven">
+                        </div>
+                    </div>
+
+                    <div id="row-ten">
+                        <div>
+                            <label for="holepar8">Hole 8 Par</label><br>
+                            <input onfocusout="hidepareight()" maxlength="1" type="number" name="holepar8" id="holepar8">
+                        </div>
+                        <div class="responsive-seven">
+                            <label for="handicap_eight">Hole 8 Handicap</label><br>
+                            <input type="number" name="handicap_eight" id="handicap_eight">
+                        </div>
+                    </div>
+
+                    <div id="row-eleven">
+                        <div>
+                            <label for="holepar9">Hole 9 Par</label><br>
+                            <input onfocusout="hideparnine()" maxlength="1" type="number" name="holepar9" id="holepar9">
+                        </div>
+                        <div class="responsive-seven">
+                            <label for="handicap_nine">Hole 9 Handicap</label><br>
+                            <input type="number" name="handicap_nine" id="handicap_nine">
+                        </div>
+                    </div>
+
+                    <div id="row-twelve">
+                        <div>
+                            <label id="label-10" for="holepar10">Hole 10 Par</label><br>
+                            <input onfocusout="hideparten()" maxlength="1" type="number" name="holepar10" id="holepar10">
+                        </div>
+                        <div class="responsive-seven">
+                            <label for="handicap_ten">Hole 10 Handicap</label><br>
+                            <input type="number" name="handicap_ten" id="handicap_ten">
+                        </div>
+                    </div>
+
+                    <div id="row-thirteen">
+                        <div>
+                            <label id="label-11" for="holepar11">Hole 11 Par</label><br>
+                            <input onfocusout="hidepareleven()" maxlength="1" type="number" name="holepar11" id="holepar11">
+                        </div>
+                        <div class="responsive-seven">
+                            <label for="handicap_eleven">Hole 11 Handicap</label><br>
+                            <input type="number" name="handicap_eleven" id="handicap_eleven">
+                        </div>
+                    </div>
+
+                    <div id="row-fourteen">
+                        <div>
+                            <label id="label-12" for="holepar12">Hole 12 Par</label><br>
+                            <input onfocusout="hidepartwelve()" maxlength="1" type="number" name="holepar12" id="holepar12">
+                        </div>
+                        <div class="responsive-seven">
+                            <label for="handicap_twelve">Hole 12 Handicap</label><br>
+                            <input type="number" name="handicap_twelve" id="handicap_twelve">
+                        </div>
+                    </div>
+
+                    <div id="row-fifteen">
+                        <div>
+                            <label id="label-13" for="holepar13">Hole 13 Par</label><br>
+                            <input onfocusout="hideparthirteen()" maxlength="1" type="number" name="holepar13" id="holepar13">
+                        </div>
+                        <div class="responsive-seven">
+                            <label for="handicap_thirteen">Hole 13 Handicap</label><br>
+                            <input type="number" name="handicap_thirteen" id="handicap_thirteen">
+                        </div>
+                    </div>
+
+                    <div id="row-sixteen">
+                        <div>
+                            <label id="label-14" for="holepar14">Hole 14 Par</label><br>
+                            <input onfocusout="hideparfourteen()" maxlength="1" type="number" name="holepar14" id="holepar14">
+                        </div>
+                        <div class="responsive-seven">
+                            <label for="handicap_fourteen">Hole 14 Handicap</label><br>
+                            <input type="number" name="handicap_fourteen" id="handicap_fourteen">
+                        </div>
+                    </div>
+
+                    <div id="row-seventeen">
+                        <div>
+                            <label id="label-15" for="holepar15">Hole 15 Par</label><br>
+                            <input onfocusout="hideparfifteen()" maxlength="1" type="number" name="holepar15" id="holepar15">
+                        </div>
+                        <div class="responsive-seven">
+                            <label for="handicap_fifteen">Hole 15 Handicap</label><br>
+                            <input type="number" name="handicap_fifteen" id="handicap_fifteen">
+                        </div>
+                    </div>
+
+                    <div id="row-eighteen">
+                        <div>
+                            <label id="label-16" for="holepar16">Hole 16 Par</label><br>
+                            <input onfocusout="hideparsixteen()" maxlength="1" type="number" name="holepar16" id="holepar16">
+                        </div>
+                        <div class="responsive-seven">
+                            <label for="handicap_sixteen">Hole 16 Handicap</label><br>
+                            <input type="number" name="handicap_sixteen" id="handicap_sixteen">
+                        </div>
+                    </div>
+
+                    <div id="row-nineteen">
+                        <div>
+                            <label id="label-17" for="holepar17">Hole 17 Par</label><br>
+                            <input onfocusout="hideparseventeen()" maxlength="1" type="number" name="holepar17" id="holepar17">
+                        </div>
+                        <div class="responsive-seven">
+                            <label for="handicap_seventeen">Hole 17 Handicap</label><br>
+                            <input type="number" name="handicap_seventeen" id="handicap_seventeen">
+                        </div>
+                    </div>
+
+                    <div id="row-twenty">
+                        <div>
+                            <label id="label-18" for="holepar18">Hole 18 Par</label><br>
+                            <input onfocusout="hidepareightteen()" maxlength="1" type="number" name="holepar18" id="holepar18">
+                        </div>
+                        <div class="responsive-seven">
+                            <label id="handicaplabel_eighteen" for="handicap_eighteen">Hole 18 Handicap</label><br>
+                            <input type="number" name="handicap_eighteen" id="handicap_eighteen">
+                        </div>
+                    </div>
+
+                    <input type="submit" onclick="return validateForm()" value="Add Course" id="add-course-button">
+                    
+                    <script src="{{ url_for('static', filename='Javascript_Files/create_course.js') }}">
+
+
+
+                    </script>
+
+
+
+
+                </form>
+            {% endif %}
         </div>
 
     </body>

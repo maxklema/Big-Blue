@@ -1437,7 +1437,7 @@ def active_match_view(json_data_input):
 
 @app.route("/create_course", methods=['GET', 'POST'])
 def create_course():
-    if 'active_user' in session and session['active_user'][2] == 'coach':
+    if 'active_user' in session:
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if request.method =="POST":
 
