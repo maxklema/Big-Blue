@@ -1055,11 +1055,13 @@ def edit_match(match_to_edit):
 @app.route("/edit_course/<course_to_edit>", methods=["POST", "GET"])
 def edit_course(course_to_edit):
     found_course = course.query.filter_by(_id=course_to_edit).first()
-    if 'active_user' in session and session['active_user'][0] == found_course.created_by and session['active_user'][2] == "coach":
+    if 'active_user' in session and session['active_user'][0] == found_course.created_by:
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if request.method == "POST":
             found_course.course_name = request.form['course-name']
             found_course.course_holes = request.form['numberholes']
+            found_course.course_rating = request.form['course_rating']
+            found_course.slope_rating = request.form['slope_rating']
             found_course.par1 = request.form['holepar1']
             found_course.par2 = request.form['holepar2']
             found_course.par3 = request.form['holepar3']
@@ -1078,6 +1080,24 @@ def edit_course(course_to_edit):
             found_course.par16 = request.form['holepar16']
             found_course.par17 = request.form['holepar17']
             found_course.par18 = request.form['holepar18']
+            found_course.handicap1 = request.form['handicap_one']
+            found_course.handicap2 = request.form['handicap_two']
+            found_course.handicap3 = request.form['handicap_three']
+            found_course.handicap4 = request.form['handicap_four']
+            found_course.handicap5 = request.form['handicap_five']
+            found_course.handicap6 = request.form['handicap_six']
+            found_course.handicap7 = request.form['handicap_seven']
+            found_course.handicap8 = request.form['handicap_eight']
+            found_course.handicap9 = request.form['handicap_nine']
+            found_course.handicap10 = request.form['handicap_ten']
+            found_course.handicap11 = request.form['handicap_eleven']
+            found_course.handicap12 = request.form['handicap_twelve']
+            found_course.handicap13 = request.form['handicap_thirteen']
+            found_course.handicap14 = request.form['handicap_fourteen']
+            found_course.handicap15 = request.form['handicap_fifteen']
+            found_course.handicap16 = request.form['handicap_sixteen']
+            found_course.handicap17 = request.form['handicap_seventeen']
+            found_course.handicap18 = request.form['handicap_eighteen']
             found_course.city = request.form['city']
             found_course.bio = ""
         
@@ -1111,7 +1131,7 @@ def delete_match(match_to_delete):
 @app.route("/delete_course/<course_to_delete>")
 def delete_course(course_to_delete):
     found_course = course.query.filter_by(_id=course_to_delete).first()
-    if 'active_user' in session and session['active_user'][0] == found_course.created_by and session['active_user'][2] == "coach":
+    if 'active_user' in session and session['active_user'][0] == found_course.created_by:
         db.session.delete(found_course)
         db.session.commit()
         return redirect(url_for("course_dashboard"))
@@ -1244,7 +1264,7 @@ def match_dashboard():
 
 @app.route("/course_dashboard")
 def course_dashboard():
-    if 'active_user' in session and session['active_user'][2] == 'coach':
+    if 'active_user' in session:
         found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         return render_template("course_dashboard.html", data=found_user, course_data=found_course)
@@ -1492,7 +1512,7 @@ def create_course():
                         return render_template("create_course.html", message='Your values were either blank or inapropriate. Please try again.')
 
 
-                course_entry = course(request.form["course-name"], request.form["numberholes"], request.form["holepar1"], request.form["holepar2"], request.form["holepar3"], request.form["holepar4"], request.form["holepar5"], request.form["holepar6"], request.form["holepar7"], request.form["holepar8"], request.form["holepar9"], request.form["holepar10"], request.form["holepar11"], request.form["holepar12"], request.form["holepar13"], request.form["holepar14"], request.form["holepar15"], request.form["holepar16"], request.form["holepar17"], request.form["holepar18"], request.form['city'], '', session['active_user'][0])
+                course_entry = course(request.form["course-name"], request.form["numberholes"], 0.0, 0.0, request.form["holepar1"], '', request.form["holepar2"], '', request.form["holepar3"], '', request.form["holepar4"], '', request.form["holepar5"], '', request.form["holepar6"], '', request.form["holepar7"], '', request.form["holepar8"], '', request.form["holepar9"], '', request.form["holepar10"], '', request.form["holepar11"], '', request.form["holepar12"], '', request.form["holepar13"], '', request.form["holepar14"], '', request.form["holepar15"], '', request.form["holepar16"], '', request.form["holepar17"], '', request.form["holepar18"], '', request.form['city'], '', session['active_user'][0])
                 db.session.add(course_entry)
                 db.session.commit()
                 found_course = course.query.filter_by(created_by=session['active_user'][0]).all()

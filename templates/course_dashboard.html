@@ -30,7 +30,11 @@
             </div>
             <div class="hero-buttons">
                 <a href="/create_course">New Course</a>
-                <a href="/match_dashboard">Match Dashboard</a>
+                {% if data.rank == 'coach' %}
+                    <a href="/match_dashboard">Match Dashboard</a>
+                {% elif data.rank == 'player' %}
+                    <a href="/">Solo Dashboard</a>
+                {% endif %}
             </div>
         </div>
         {% if course_data is defined and course_data|length == 0 %}
@@ -39,7 +43,252 @@
             </div>
         {% endif %}
         <div class="grid-container">
-            {% for item in course_data[::-1] %}
+            {% if data.rank == 'coach' %}
+                {% for item in course_data[::-1] %}
+                    <div class="match-container">
+                        <div id="row-one">
+                            <div class="course-name-container">
+                                <h3>{{item.course_name}}</h3>
+                            </div>
+                            <div id="action-icons">
+                                <a href="/edit_course/{{item._id}}"><img src="{{ url_for('static', filename='logo_graphics/pencilicon.png') }}"></a>
+                                <a href="/delete_course/{{item._id}}"><img src="{{ url_for('static', filename='logo_graphics/trashcan.png') }}"></a>
+                            </div>
+                        </div>
+
+                        <div class="row-div">
+                            <div>
+                                <h4>Location</h4>
+                            </div>
+
+                            <div class="location-container">
+                                <h4>{{item.city}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 1</h4>
+                            </div>
+
+                            <div>
+                                <h4>Par {{item.par1}}</h4>
+                            </div>
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 2</h4>
+                            </div>
+
+                            <div>
+                                <h4>Par {{item.par2}}</h4>
+                            </div>
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 3</h4>
+                            </div>
+
+                            <div>
+                                <h4>Par {{item.par3}}</h4>
+                            </div>
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 4</h4>
+                            </div>
+
+                            <div>
+                                <h4>Par {{item.par4}}</h4>
+                            </div>
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 5</h4>
+                            </div>
+
+                            <div>
+                                <h4>Par {{item.par5}}</h4>
+                            </div>
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 6</h4>
+                            </div>
+
+                            <div>
+                                <h4>Par {{item.par6}}</h4>
+                            </div>
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 7</h4>
+                            </div>
+
+                            <div>
+                                <h4>Par {{item.par7}}</h4>
+                            </div>
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 8</h4>
+                            </div>
+
+                            <div>
+                                <h4>Par {{item.par8}}</h4>
+                            </div>
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 9</h4>
+                            </div>
+
+                            <div>
+                                <h4>Par {{item.par9}}</h4>
+                            </div>
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 10</h4>
+                            </div>
+
+                            {% if item.par10 == "" %}
+                                <div>
+                                    <h4>-</h4>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <h4>Par {{item.par10}}</h4>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 11</h4>
+                            </div>
+
+                            {% if item.par11 == "" %}
+                                <div>
+                                    <h4>-</h4>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <h4>Par {{item.par11}}</h4>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 12</h4>
+                            </div>
+
+                            {% if item.par12 == "" %}
+                                <div>
+                                    <h4>-</h4>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <h4>Par {{item.par12}}</h4>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 13</h4>
+                            </div>
+
+                            {% if item.par13 == "" %}
+                                <div>
+                                    <h4>-</h4>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <h4>Par {{item.par13}}</h4>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 14</h4>
+                            </div>
+
+                            {% if item.par14 == "" %}
+                                <div>
+                                    <h4>-</h4>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <h4>Par {{item.par14}}</h4>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 15</h4>
+                            </div>
+
+                            {% if item.par15 == "" %}
+                                <div>
+                                    <h4>-</h4>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <h4>Par {{item.par15}}</h4>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 16</h4>
+                            </div>
+
+                            {% if item.par16 == "" %}
+                                <div>
+                                    <h4>-</h4>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <h4>Par {{item.par16}}</h4>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 17</h4>
+                            </div>
+
+                            {% if item.par17 == "" %}
+                                <div>
+                                    <h4>-</h4>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <h4>Par {{item.par17}}</h4>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="row-div">
+                            <div>
+                                <h4>Hole 18</h4>
+                            </div>
+
+                            {% if item.par18 == "" %}
+                                <div>
+                                    <h4>-</h4>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <h4>Par {{item.par18}}</h4>
+                                </div>
+                            {% endif %}
+                        </div>
+
+
+
+                    </div>        
+                {% endfor %}
+            {% elif data.rank == 'player' %}
+                {% for item in course_data[::-1] %}
                 <div class="match-container">
                     <div id="row-one">
                         <div class="course-name-container">
@@ -63,11 +312,31 @@
 
                     <div class="row-div">
                         <div>
+                            <h4>Course Rating</h4>
+                        </div>
+
+                        <div class="location-container">
+                            <h4>{{item.course_rating}}</h4>
+                        </div>
+                    </div>
+
+                    <div class="row-div">
+                        <div>
+                            <h4>Slope Rating</h4>
+                        </div>
+
+                        <div class="location-container">
+                            <h4>{{item.slope_rating}}</h4>
+                        </div>
+                    </div>
+
+                    <div class="row-div">
+                        <div>
                             <h4>Hole 1</h4>
                         </div>
 
                         <div>
-                            <h4>Par {{item.par1}}</h4>
+                            <h4>Par {{item.par2}} | H: {{item.handicap1}}</h4>
                         </div>
                     </div>
                     <div class="row-div">
@@ -76,7 +345,7 @@
                         </div>
 
                         <div>
-                            <h4>Par {{item.par2}}</h4>
+                            <h4>Par {{item.par2}} | H: {{item.handicap2}}</h4>
                         </div>
                     </div>
                     <div class="row-div">
@@ -85,7 +354,7 @@
                         </div>
 
                         <div>
-                            <h4>Par {{item.par3}}</h4>
+                            <h4>Par {{item.par3}} | H: {{item.handicap3}}</h4>
                         </div>
                     </div>
                     <div class="row-div">
@@ -94,7 +363,7 @@
                         </div>
 
                         <div>
-                            <h4>Par {{item.par4}}</h4>
+                            <h4>Par {{item.par4}} | H: {{item.handicap4}}</h4>
                         </div>
                     </div>
                     <div class="row-div">
@@ -103,7 +372,7 @@
                         </div>
 
                         <div>
-                            <h4>Par {{item.par5}}</h4>
+                            <h4>Par {{item.par5}} | H: {{item.handicap5}}</h4>
                         </div>
                     </div>
                     <div class="row-div">
@@ -112,7 +381,7 @@
                         </div>
 
                         <div>
-                            <h4>Par {{item.par6}}</h4>
+                            <h4>Par {{item.par6}} | H: {{item.handicap6}}</h4>
                         </div>
                     </div>
                     <div class="row-div">
@@ -121,7 +390,7 @@
                         </div>
 
                         <div>
-                            <h4>Par {{item.par7}}</h4>
+                            <h4>Par {{item.par7}} | H: {{item.handicap7}}</h4>
                         </div>
                     </div>
                     <div class="row-div">
@@ -130,7 +399,7 @@
                         </div>
 
                         <div>
-                            <h4>Par {{item.par8}}</h4>
+                            <h4>Par {{item.par8}} | H: {{item.handicap8}}</h4>
                         </div>
                     </div>
                     <div class="row-div">
@@ -139,7 +408,7 @@
                         </div>
 
                         <div>
-                            <h4>Par {{item.par9}}</h4>
+                            <h4>Par {{item.par9}} | H: {{item.handicap9}}</h4>
                         </div>
                     </div>
                     <div class="row-div">
@@ -153,7 +422,7 @@
                             </div>
                         {% else %}
                             <div>
-                                <h4>Par {{item.par10}}</h4>
+                                <h4>Par {{item.par10}} | H: {{item.handicap10}}</h4>
                             </div>
                         {% endif %}
                     </div>
@@ -168,7 +437,7 @@
                             </div>
                         {% else %}
                             <div>
-                                <h4>Par {{item.par11}}</h4>
+                                <h4>Par {{item.par11}} | H: {{item.handicap11}}</h4>
                             </div>
                         {% endif %}
                     </div>
@@ -183,7 +452,7 @@
                             </div>
                         {% else %}
                             <div>
-                                <h4>Par {{item.par12}}</h4>
+                                <h4>Par {{item.par12}} | H: {{item.handicap12}}</h4>
                             </div>
                         {% endif %}
                     </div>
@@ -198,7 +467,7 @@
                             </div>
                         {% else %}
                             <div>
-                                <h4>Par {{item.par13}}</h4>
+                                <h4>Par {{item.par13}} | H: {{item.handicap13}}</h4>
                             </div>
                         {% endif %}
                     </div>
@@ -213,7 +482,7 @@
                             </div>
                         {% else %}
                             <div>
-                                <h4>Par {{item.par14}}</h4>
+                                <h4>Par {{item.par14}} | H: {{item.handicap14}}</h4>
                             </div>
                         {% endif %}
                     </div>
@@ -228,7 +497,7 @@
                             </div>
                         {% else %}
                             <div>
-                                <h4>Par {{item.par15}}</h4>
+                                <h4>Par {{item.par15}} | H: {{item.handicap15}}</h4>
                             </div>
                         {% endif %}
                     </div>
@@ -243,7 +512,7 @@
                             </div>
                         {% else %}
                             <div>
-                                <h4>Par {{item.par16}}</h4>
+                                <h4>Par {{item.par16}} | H: {{item.handicap16}}</h4>
                             </div>
                         {% endif %}
                     </div>
@@ -258,7 +527,7 @@
                             </div>
                         {% else %}
                             <div>
-                                <h4>Par {{item.par17}}</h4>
+                                <h4>Par {{item.par17}} | H: {{item.handicap17}}</h4>
                             </div>
                         {% endif %}
                     </div>
@@ -273,7 +542,7 @@
                             </div>
                         {% else %}
                             <div>
-                                <h4>Par {{item.par18}}</h4>
+                                <h4>Par {{item.par18}} | H: {{item.handicap18}}</h4>
                             </div>
                         {% endif %}
                     </div>
@@ -282,6 +551,7 @@
 
                 </div>        
             {% endfor %}
+            {% endif %}
         </div>
 
 
