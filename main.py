@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
 from datetime import timedelta, datetime
 from werkzeug.utils import secure_filename
 from flask_socketio import SocketIO
@@ -76,52 +77,95 @@ class course(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     course_name = db.Column(db.String(50))
     course_holes = db.Column(db.String(3))
+    course_rating = db.Column(db.Float)
+    slope_rating = db.Column(db.Float)
     par1 = db.Column(db.Integer)
+    handicap1 = db.Column(db.Integer)
     par2 = db.Column(db.Integer)
+    handicap2 = db.Column(db.Integer)
     par3 = db.Column(db.Integer)
+    handicap3 = db.Column(db.Integer)
     par4 = db.Column(db.Integer)
+    handicap4 = db.Column(db.Integer)
     par5 = db.Column(db.Integer)
+    handicap5 = db.Column(db.Integer)
     par6 = db.Column(db.Integer)
+    handicap6 = db.Column(db.Integer)
     par7 = db.Column(db.Integer)
+    handicap7 = db.Column(db.Integer)
     par8 = db.Column(db.Integer)
+    handicap8 = db.Column(db.Integer)
     par9 = db.Column(db.Integer)
+    handicap9 = db.Column(db.Integer)
     par10 = db.Column(db.Integer)
+    handicap10 = db.Column(db.Integer)
     par11 = db.Column(db.Integer)
+    handicap11 = db.Column(db.Integer)
     par12 = db.Column(db.Integer)
+    handicap12 = db.Column(db.Integer)
     par13 = db.Column(db.Integer)
+    handicap13 = db.Column(db.Integer)
     par14 = db.Column(db.Integer)
+    handicap14 = db.Column(db.Integer)
     par15 = db.Column(db.Integer)
+    handicap15 = db.Column(db.Integer)
     par16 = db.Column(db.Integer)
+    handicap16 = db.Column(db.Integer)
     par17 = db.Column(db.Integer)
+    handicap17 = db.Column(db.Integer)
     par18 = db.Column(db.Integer)
+    handicap18 = db.Column(db.Integer)
     city = db.Column(db.String)
     course_bio = db.Column(db.String(1000))
     created_by = db.Column(db.String)
 
-    def __init__(self, course_name, course_holes, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18, city, course_bio, created_by):
+    def __init__(self, course_name, course_holes, course_rating, slope_rating, par1, handicap1, par2, handicap2, par3, handicap3, par4, handicap4, par5, handicap5, par6, handicap6, par7, handicap7, par8, handicap8, par9, handicap9, par10, handicap10, par11, handicap11, par12, handicap12, par13, handicap13, par14, handicap14, par15, handicap15, par16, handicap16, par17, handicap17, par18, handicap18, city, course_bio, created_by):
         self.course_name = course_name
         self.course_holes = course_holes
+        self.course_rating = course_rating
+        self.slope_rating = slope_rating
         self.par1 = par1
+        self.handicap1 = handicap1
         self.par2 = par2
+        self.handicap2 = handicap2
         self.par3 = par3
+        self.handicap3 = handicap3
         self.par4 = par4
+        self.handicap4 = handicap4
         self.par5 = par5
+        self.handicap5 = handicap5
         self.par6 = par6
+        self.handicap6 = handicap6
         self.par7 = par7
+        self.handicap7 = handicap7
         self.par8 = par8
+        self.handicap8 = handicap8
         self.par9 = par9
+        self.handicap9 = handicap9
         self.par10 = par10
+        self.handicap10 = handicap10
         self.par11 = par11
+        self.handicap11 = handicap11
         self.par12 = par12
+        self.handicap12 = handicap12
         self.par13 = par13
+        self.handicap13 = handicap13
         self.par14 = par14
+        self.handicap14 = handicap14
         self.par15 = par15
+        self.handicap15 = handicap15
         self.par16 = par16
+        self.handicap16 = handicap16
         self.par17 = par17
+        self.handicap17 = handicap17
         self.par18 = par18
+        self.handicap18 = handicap18
         self.city = city
         self.course_bio = course_bio
         self.created_by = created_by
+
+
+
 
 class match(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -1441,17 +1485,33 @@ def create_course():
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if request.method =="POST":
 
-            for item in request.form:
-                if sanitize_inputs(item) or 'numberholes' not in request.form:
-                    return render_template("create_course.html", message='Your values were either blank or inapropriate. Please try again.')
+            if session['active_user'][2] == 'coach':
+
+                for item in request.form:
+                    if sanitize_inputs(item) or 'numberholes' not in request.form:
+                        return render_template("create_course.html", message='Your values were either blank or inapropriate. Please try again.')
 
 
-            course_entry = course(request.form["course-name"], request.form["numberholes"], request.form["holepar1"], request.form["holepar2"], request.form["holepar3"], request.form["holepar4"], request.form["holepar5"], request.form["holepar6"], request.form["holepar7"], request.form["holepar8"], request.form["holepar9"], request.form["holepar10"], request.form["holepar11"], request.form["holepar12"], request.form["holepar13"], request.form["holepar14"], request.form["holepar15"], request.form["holepar16"], request.form["holepar17"], request.form["holepar18"], request.form['city'], '', session['active_user'][0])
-            db.session.add(course_entry)
-            db.session.commit()
-            found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
+                course_entry = course(request.form["course-name"], request.form["numberholes"], request.form["holepar1"], request.form["holepar2"], request.form["holepar3"], request.form["holepar4"], request.form["holepar5"], request.form["holepar6"], request.form["holepar7"], request.form["holepar8"], request.form["holepar9"], request.form["holepar10"], request.form["holepar11"], request.form["holepar12"], request.form["holepar13"], request.form["holepar14"], request.form["holepar15"], request.form["holepar16"], request.form["holepar17"], request.form["holepar18"], request.form['city'], '', session['active_user'][0])
+                db.session.add(course_entry)
+                db.session.commit()
+                found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
 
-            return redirect(url_for("course_dashboard"))
+                return redirect(url_for("course_dashboard"))
+
+            elif session['active_user'][2] == 'player':
+
+                for item in request.form:
+                    if sanitize_inputs(item) or 'numberholes' not in request.form:
+                        return render_template("create_course.html", message='Your values were either blank or inapropriate. Please try again.')
+
+
+                course_entry = course(request.form["course-name"], request.form["numberholes"], request.form['course_rating'], request.form['slope_rating'], request.form["holepar1"], request.form['handicap_one'], request.form["holepar2"], request.form['handicap_two'], request.form["holepar3"], request.form['handicap_three'], request.form["holepar4"], request.form['handicap_four'], request.form["holepar5"], request.form['handicap_five'], request.form["holepar6"], request.form['handicap_six'], request.form["holepar7"], request.form['handicap_seven'], request.form["holepar8"], request.form['handicap_eight'], request.form["holepar9"], request.form['handicap_nine'], request.form["holepar10"], request.form['handicap_ten'], request.form["holepar11"], request.form['handicap_eleven'], request.form["holepar12"], request.form['handicap_twelve'], request.form["holepar13"], request.form['handicap_thirteen'], request.form["holepar14"], request.form['handicap_fourteen'], request.form["holepar15"], request.form['handicap_fifteen'], request.form["holepar16"], request.form['handicap_sixteen'], request.form["holepar17"], request.form['handicap_seventeen'], request.form["holepar18"], request.form['handicap_eighteen'], request.form['city'], '', session['active_user'][0])
+                db.session.add(course_entry)
+                db.session.commit()
+                found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
+
+                return redirect(url_for("course_dashboard"))
 
         return render_template("create_course.html", data=found_user)
     else:
