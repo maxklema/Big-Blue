@@ -17,172 +17,403 @@
   gtag('config', 'G-2TLMVLX5EB');
 </script>
 
-<!-- 
-
-{% if data.verified == True %}
-                                <img src="{{ url_for('static', filename='logo_graphics/verify.png') }}" alt="">
-                            {% else %}
-                                <p style="font-size:xx-small;"> **Not verified</p>
-                            {% endif %}
-
-{{data.name}} // name
-{{data.bio}} // bio
-{{data.team}} //team
-
-
--->
-
+<html>
     <head>
-        <title>Big Blue | Profile</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles/profiledashboard.css') }}">
+        <title>Match Dashboard | Big Blue</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/matchdashboard.css') }}">
     </head>
 
-    <div class="main-container-parent">
-    
-        <div class="main-container">
-            <div class="profile-frame">
-                <div class="banner-container">
-                    <img id="banner" src="{{ url_for('static', filename='logo_graphics/' + data.banner) }}" alt="">
-                </div>
-                <div class="profile-picture-container">
-                    <img id="profilepicture" src="{{ url_for('static', filename='logo_graphics/user_photos/' + data.pic) }}" alt="">
-                </div>
-                <div class="username-and-verification-container">
-                    <h3>{{data.name}}</h3>
-                    {% if data.verified == 1 %}
-                        <img src="{{ url_for('static', filename='logo_graphics/normalverify.png') }}" alt="">
-                    {% elif data.verified == 2 %}
-                        <img src="{{ url_for('static', filename='logo_graphics/verify.png') }}" alt="">
-                    {% endif %}
-
-                </div>
-                <div class="username-and-rank-container">
-                    <h4>@{{data.username}}</h4>
-                    <h4 id="divider">•</h4>
-                    {% if data.rank == "coach" %}
-                        <h4>Coach</h4>
-                    {% else %}
-                        <h4>Player</h4>
-                    {% endif %}
-
-                </div>
-            
-                <div class="bio-container">
-                    <p>{{data.bio}}</p>
-                </div>
-
-                <div class="join-date-and-school-container">
-                    <div class="join-date-container">
-                        <img src="{{ url_for('static', filename='logo_graphics/cake.png') }}" alt="">
-                        <h4 id="join-date">Joined in {{month }} {{ year }}</h4>
-                    </div>
-                    <div class="school-name-container">
-                        <img id="school-icon"src="{{ url_for('static', filename='logo_graphics/schoolicon.png') }}" alt="">
-                        <h4>{{data.team}}</h4>
-                    </div>
-                </div>
-
-                <div class="row-one-buttons">
-                    <a id="match-dashboard-href" href="/match_dashboard">
-                        <button>
-                            <div class="match-dashboard-container">
-                                <!--<img id="dashboard-icon" src="{{ url_for('static', filename='logo_graphics/dashboardicon.png') }}" alt="">-->
-                                <h3>Dashboard</h3>
-                            </div>
-                        </button>
-                    </a>
-                    <a id="create-match-href" href="/create_match">
-                        <button>
-                            <h3>Create Match</h3>
-                        </button>
-                    </a>
-                </div>
-
-
-                <div class="row-two-buttons">
-                    <a id="add-new-course-href" href="/create_course">
-                        <button>
-                            <div class="add-new-course-container">
-                                <!--<img src="{{ url_for('static', filename='logo_graphics/golfholeicon.png') }}" alt="">-->
-                                <h3>Add New Course</h3>
-                            </div>
-                        </button>
-                    </a>
-                    <a id="edit-profile-href" href="/dashboard/edit_profile">
-                        <button>
-                            <div class="edit-profile-container">
-                                <!--<img src="{{ url_for('static', filename='logo_graphics/penciliconprofile.png') }}" alt="">-->
-                                <h3>Edit Profile</h3>
-                            </div>
-                        </button>
-                    </a>
-                </div>
+    <div class="main-container">
+        <div class="heading-info">
+            <div class="hero-info">
+                {% if data.rank == 'coach' %}
+                    <h3>Match Dashboard</h3>
+                    <p>All of your matches in one place</p>
+                {% elif data.rank == 'player' %}
+                    <h3>Solo Dashboard</h3>
+                    <p>All of your rounds in one place</p>
+                {% endif %}
             </div>
-            
-            
-
-            <div class="suggested-users-and-recent-matches">
-
-
-                <!--You need to write match[0] before accessing any of the json attributes
-                This is because it is in a tuple and needs to be accessed first-->
-                <div class="recent-matches">
-                    <h3>Your Recent Matches</h3>
-                    
-                    {% for match in recent_matches[:2] %}
-                        <a href="/spectator_match_view/{{match[0]['match_info']['id']}}" class="recent-match-container">
-                            
-                            <div class="reload-icon">
-                                <h1>⟲</h1>
-                            </div>
-                            <div class="past-match-info">
-                                <h4>{{match[0]["match_info"]["match_name"]}}</h4> <!--Json data from archive!-->
-                                <p color="blue">{{match[1]}}</p> <!--Time that the match ended-->
-                            </div>
-                                
-                            
-                        </a>
-                        
-                        
-                        
-                    {% endfor %}
-                </div>
-
-
-                <!-- Suggest Users to View/Follow -->
-                <div class="suggested-users">
-                    <h3>You may know</h3>
-                    {% for i in random_users_list %}
-                        <div class="random-user-one">
-                            <a href="/profile/{{i.username}}">
-                                <div>
-                                    <img src="{{ url_for('static', filename='logo_graphics/user_photos/' + i.pic) }}" alt="">
-                                </div>
-                                <div>
-                                    <div class="name-and-verification">
-                                        <h4 id="suggested-name">{{i.name}}</h4>
-                                        {% if i.verified == 1 %}
-                                            <img id="checkmark" src="{{ url_for('static', filename='logo_graphics/normalverify.png') }}" alt="">
-                                        {% elif i.verified == 2 %}
-                                            <img id="checkmark" src="{{ url_for('static', filename='logo_graphics/verify.png') }}" alt="">
-                                        {% endif %}
-                                    </div>
-                                    <h5 id="suggested-username">@{{i.username}}</h5>
-                                </div>
-
-
-                            </a>
-                        
-
-                        </div>
-                    {% endfor %}
-                </div>
-
-                
-            
+            <div class="hero-buttons">
+                {% if data.rank == 'coach' %}
+                    <a href="/create_match">New Match</a>
+                {% elif data.rank == 'player' %}
+                    <a href="/create_round">New Round</a>
+                {% endif %}
+                <a href="/course_dashboard">Course Dashboard</a>
             </div>
         </div>
+        {% if match_data is defined and match_data|length == 0 %}
+            <div class="no-matches">
+                <img src="{{ url_for('static', filename='logo_graphics/sleeping_golfer.png') }}">
+            </div>
+        {% endif %}
+        <div class="grid-container">
+            {% for item in match_data[::-1] %}
+                {% if item.match_live == 0 %}
+                    <div class="match-container">
+                        <div id="row-one">
+                            <div>
+                                <h3>Join Code: {{item.match_code}}</h3>
+                            </div>
+                            <div id="action-icons">
+                                <a href="/edit_match/{{item._id}}"><img src="{{ url_for('static', filename='logo_graphics/pencilicon.png') }}"></a>
+                                <a href="/delete_match/{{item._id}}"><img src="{{ url_for('static', filename='logo_graphics/trashcan.png') }}"></a>
+                            </div>
+                        </div>
 
-    </div>        
+                        <div class="row-div">
+                            <div>
+                                <h4>Name</h4>
+                            </div>
 
+                            <div>
+                                <h4>{{item.match_name}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div">
+                            <div>
+                                <h4>Event Type</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.event_type}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div">
+                            <div>
+                                <h4>Match Type</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_type}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div">
+                            <div>
+                                <h4>Home Team</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.teams1.split('~')[0]}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div">
+                            <div>
+                                <h4>Away Team</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.teams1.split('~')[1]}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div">
+                            <div>
+                                <h4>Total Spots</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.total_players}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div">
+                            <div>
+                                <h4>Course Name</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_course}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div">
+                            <div>
+                                <h4>Start Date</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.start_time}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div">
+                            <div>
+                                <h4>End Date</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.end_time}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div">
+                            <div>
+                                <h4>Match Password</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_password}}</h4>
+                            </div>
+                        </div>
+
+                        {% for i in course_data %}
+                            {% if i.course_name == item.match_course %}
+                                <a id="start-match-button" href="/start_match/{{item._id}}/{{i._id}}">Start Match</a>
+                            {% endif %}
+                        {% endfor %}
+
+                    </div>   
+                {% elif item.match_live == 1 %}
+                    <div class="match-container-live">
+                        <div id="row-one-live">
+                            <div>
+                                <h3>Join Code: {{item.match_code}}</h3>
+                            </div>
+                            <div id="live-message">
+                                <h4>⬤ Live</h4>
+                            </div>
+                                
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Name</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_name}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Event Type</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.event_type}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Match Type</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_type}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Home Team</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.teams1.split('~')[0]}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Away Team</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.teams1.split('~')[1]}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Total Spots</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.total_players}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Course Name</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_course}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Start Date</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.start_time}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>End Date</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.end_time}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Match Password</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_password}}</h4>
+                            </div>
+                        </div>
+
+                        {% for i in course_data %}
+                            {% if i.course_name == item.match_course %}
+                                <a id="live-match-button" href="/active_match_view/{{item._id}}">View Live Scoring</a>
+                            {% endif %}
+                        {% endfor %}
+
+                    </div> 
+                {% elif item.match_live == 2 %}
+                    <div class="match-container-concluded">
+                        <div id="row-one-concluded">
+                            <div>
+                                <h3>Join Code: {{item.match_code}}</h3>
+                            </div>
+                            <div id="concluded-message">
+                                <h4>Finished</h4>
+                            </div>
+                                
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Name</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_name}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Event Type</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.event_type}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Match Type</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_type}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Home Team</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.teams1.split('~')[0]}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Away Team</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.teams1.split('~')[1]}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Total Spots</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.total_players}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Course Name</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_course}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Start Date</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.start_time}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>End Date</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.end_time}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row-div-live">
+                            <div>
+                                <h4>Match Password</h4>
+                            </div>
+
+                            <div>
+                                <h4>{{item.match_password}}</h4>
+                            </div>
+                        </div>
+
+                        {% for i in course_data %}
+                            {% if i.course_name == item.match_course %}
+                                <a id="live-match-button" href="">View Match Results</a>
+                            {% endif %}
+                        {% endfor %}
+
+                    </div>   
+                {% endif %}
+                     
+            {% endfor %}
+        </div>
+
+
+    </div>
+
+        
 {% endblock %}

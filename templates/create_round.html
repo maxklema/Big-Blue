@@ -1,0 +1,76 @@
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}  
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
+{% block content %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2TLMVLX5EB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2TLMVLX5EB');
+</script>
+
+<html>
+    <head>
+        <title>Create Round | Big Blue</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/create_round.css') }}">
+    </head>
+
+    <div class="main-container">
+        <form action="/create_round" method="post">
+            <img src="{{ url_for('static', filename='logo_graphics/golf_green.png') }}" alt="">
+            <h2>Create New Round</h2>
+        
+            <!-- Choose Course -->
+            <div class="choose-course">
+                <label for="course_name">Choose Course</label><br>
+                <select name="course_name" id="course_name">
+                    {% for item in course_data[::1] %}
+                        <option name="course_name" value="{{item.course_name}}">{{item.course_name}}</option>
+                    {% endfor %}
+                </select><br>
+            </div>
+           
+
+            <!-- Choose Round Visibility -->
+            <div class="round-visibility">
+                <label for="round_visibility">Round Visibility</label><br>
+                <select name="round_visibility" id="round_visibility">
+                    <option name="round_visibility_public" value="Public">Public</option>
+                    <option name="round_visibility_private" value="Private">Private</option>
+                </select>
+            </div>
+            
+
+            <!-- Count towards Statistics -->
+            <div class="checkbox-input">
+                <input type="checkbox" id="statistics_checkbox">
+                <label for="statistics_checkbox">Check if you want this round to count towards your solo performance statistics</label>
+            </div>
+            
+
+            <!-- Count towards Handicap -->
+            <div class="checkbox-input">
+                <input type="checkbox" id="handicap_checkbox">
+                <label for="handicap_checkbox">Check if you want this round to count towards your handicap calculation</label>
+            </div>
+
+            <!-- Submit Button -->
+            <br><input type="submit" id="submit-button" value="Create Round">
+
+        </form>
+
+    </div>
+
+</html>
+
+
+
+{% endblock %}
