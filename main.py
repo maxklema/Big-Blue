@@ -199,6 +199,142 @@ class match(db.Model):
         self.created_by = created_by
         self.match_live = match_live
 
+class round(db.Model):
+    _id = db.Column("id", db.Integer, primary_key=True)
+    round_course = db.Column(db.String(50))
+    round_visibility = db.Column(db.String(10))
+    count_towards_solo_stats = db.Column(db.String(5))
+    count_towards_handicap = db.Column(db.String(5))
+    date_created = db.Column(db.String(25))
+    date_started = db.Column(db.String(25))
+    date_ended = db.Column(db.String(25))
+    round_live = db.Column(db.String(5))
+    total_scores = db.Column(db.Integer)
+    relation_to_par = db.Column(db.Integer)
+    hole_one_score = db.Column(db.Integer, default=0)
+    hole_two_score = db.Column(db.Integer, default=0)
+    hole_three_score = db.Column(db.Integer, default=0)
+    hole_four_score = db.Column(db.Integer, default=0)
+    hole_five_score = db.Column(db.Integer, default=0)
+    hole_six_score = db.Column(db.Integer, default=0)
+    hole_seven_score = db.Column(db.Integer, default=0)
+    hole_eight_score = db.Column(db.Integer, default=0)
+    hole_nine_score = db.Column(db.Integer, default=0)
+    hole_ten_score = db.Column(db.Integer, default=0)
+    hole_eleven_score = db.Column(db.Integer, default=0)
+    hole_twelve_score = db.Column(db.Integer, default=0)
+    hole_thirteen_score = db.Column(db.Integer, default=0)
+    hole_fourteen_score = db.Column(db.Integer, default=0)
+    hole_fifteen_score = db.Column(db.Integer, default=0)
+    hole_sixteen_score = db.Column(db.Integer, default=0)
+    hole_seventeen_score = db.Column(db.Integer, default=0)
+    hole_eighteen_score = db.Column(db.Integer, default=0)
+    hole_one_putts = db.Column(db.Integer, default=0)
+    hole_two_putts = db.Column(db.Integer, default=0)
+    hole_three_putts = db.Column(db.Integer, default=0)
+    hole_four_putts = db.Column(db.Integer, default=0)
+    hole_five_putts = db.Column(db.Integer, default=0)
+    hole_six_putts = db.Column(db.Integer, default=0)
+    hole_seven_putts = db.Column(db.Integer, default=0)
+    hole_eight_putts = db.Column(db.Integer, default=0)
+    hole_nine_putts = db.Column(db.Integer, default=0)
+    hole_ten_putts = db.Column(db.Integer, default=0)
+    hole_eleven_putts = db.Column(db.Integer, default=0)
+    hole_twelve_putts = db.Column(db.Integer, default=0)
+    hole_thirteen_putts = db.Column(db.Integer, default=0)
+    hole_fourteen_putts = db.Column(db.Integer, default=0)
+    hole_fifteen_putts = db.Column(db.Integer, default=0)
+    hole_sixteen_putts = db.Column(db.Integer, default=0)
+    hole_seventeen_putts = db.Column(db.Integer, default=0)
+    hole_eighteen_putts = db.Column(db.Integer, default=0)
+    hole_one_penalty = db.Column(db.Integer, default=0)
+    hole_two_penalty = db.Column(db.Integer, default=0)
+    hole_three_penalty = db.Column(db.Integer, default=0)
+    hole_four_penalty = db.Column(db.Integer, default=0)
+    hole_five_penalty = db.Column(db.Integer, default=0)
+    hole_six_penalty = db.Column(db.Integer, default=0)
+    hole_seven_penalty = db.Column(db.Integer, default=0)
+    hole_eight_penalty = db.Column(db.Integer, default=0)
+    hole_nine_penalty = db.Column(db.Integer, default=0)
+    hole_ten_penalty = db.Column(db.Integer, default=0)
+    hole_eleven_penalty = db.Column(db.Integer, default=0)
+    hole_twelve_penalty = db.Column(db.Integer, default=0)
+    hole_thirteen_penalty = db.Column(db.Integer, default=0)
+    hole_fourteen_penalty = db.Column(db.Integer, default=0)
+    hole_fifteen_penalty = db.Column(db.Integer, default=0)
+    hole_sixteen_penalty = db.Column(db.Integer, default=0)
+    hole_seventeen_penalty = db.Column(db.Integer, default=0)
+    hole_eighteen_penalty = db.Column(db.Integer, default=0)
+
+    def __init__(self, round_course, round_visibility, count_towards_solo_stats, count_towards_handicap, date_created, date_started, date_ended, round_live, total_scores, relation_to_par, hole_one_score=0, hole_two_score=0, hole_three_score=0, hole_four_score=0, hole_five_score=0, hole_six_score=0, hole_seven_score=0, hole_eight_score=0, hole_nine_score=0, hole_ten_score=0, hole_eleven_score=0, hole_twelve_score=0, hole_thirteen_score=0, hole_fourteen_score=0, hole_fifteen_score=0, hole_sixteen_score=0, hole_seventeen_score=0, hole_eighteen_score=0, hole_one_putts=0, hole_two_putts=0, hole_three_putts=0, hole_four_putts=0, hole_five_putts=0, hole_six_putts=0, hole_seven_putts=0, hole_eight_putts=0, hole_nine_putts=0, hole_ten_putts=0, hole_eleven_putts=0, hole_twelve_putts=0, hole_thirteen_putts=0, hole_fourteen_putts=0, hole_fifteen_putts=0, hole_sixteen_putts=0, hole_seventeen_putts=0, hole_eighteen_putts=0, hole_one_penalty=0, hole_two_penalty=0, hole_three_penalty=0, hole_four_penalty=0, hole_five_penalty=0, hole_six_penalty=0, hole_seven_penalty=0, hole_eight_penalty=0, hole_nine_penalty=0, hole_ten_penalty=0, hole_eleven_penalty=0, hole_twelve_penalty=0, hole_thirteen_penalty=0, hole_fourteen_penalty=0, hole_fifteen_penalty=0, hole_sixteen_penalty=0, hole_seventeen_penalty=0, hole_eighteen_penalty=0):
+        self.round_course = round_course
+        self.round_visibility = round_visibility
+        self.count_towards_solo_stats = count_towards_solo_stats
+        self.count_towards_handicap = count_towards_handicap
+        self.date_created = date_created
+        self.date_started = date_started
+        self.date_ended = date_ended
+        self.round_live = round_live
+        self.total_scores = total_scores
+        self.relation_to_par = relation_to_par
+        self.hole_one_score = hole_one_score
+        self.hole_two_score = hole_two_score
+        self.hole_three_score = hole_three_score
+        self.hole_four_score = hole_four_score
+        self.hole_five_score = hole_five_score
+        self.hole_six_score = hole_six_score
+        self.hole_seven_score = hole_seven_score
+        self.hole_eight_score = hole_eight_score
+        self.hole_nine_score = hole_nine_score
+        self.hole_ten_score = hole_ten_score
+        self.hole_eleven_score = hole_eleven_score
+        self.hole_twelve_score = hole_twelve_score
+        self.hole_thirteen_score = hole_thirteen_score
+        self.hole_fourteen_score = hole_fourteen_score
+        self.hole_fifteen_score = hole_fifteen_score
+        self.hole_sixteen_score = hole_sixteen_score
+        self.hole_seventeen_score = hole_seventeen_score
+        self.hole_eighteen_score = hole_eighteen_score
+        self.hole_one_putts = hole_one_putts
+        self.hole_two_putts = hole_two_putts
+        self.hole_three_putts = hole_three_putts
+        self.hole_four_putts = hole_four_putts
+        self.hole_five_putts = hole_five_putts
+        self.hole_six_putts = hole_six_putts
+        self.hole_seven_putts = hole_seven_putts
+        self.hole_eight_putts = hole_eight_putts
+        self.hole_nine_putts = hole_nine_putts
+        self.hole_ten_putts = hole_ten_putts
+        self.hole_eleven_putts = hole_eleven_putts
+        self.hole_twelve_putts = hole_twelve_putts
+        self.hole_thirteen_putts = hole_thirteen_putts
+        self.hole_fourteen_putts = hole_fourteen_putts
+        self.hole_fifteen_putts = hole_fifteen_putts
+        self.hole_sixteen_putts = hole_sixteen_putts
+        self.hole_seventeen_putts = hole_seventeen_putts
+        self.hole_eighteen_putts = hole_eighteen_putts
+        self.hole_one_penalty = hole_one_penalty
+        self.hole_two_penalty = hole_two_penalty
+        self.hole_three_penalty = hole_three_penalty
+        self.hole_four_penalty = hole_four_penalty
+        self.hole_five_penalty = hole_five_penalty
+        self.hole_six_penalty = hole_six_penalty
+        self.hole_seven_penalty = hole_seven_penalty
+        self.hole_eight_penalty = hole_eight_penalty
+        self.hole_nine_penalty = hole_nine_penalty
+        self.hole_ten_penalty = hole_ten_penalty
+        self.hole_eleven_penalty = hole_eleven_penalty
+        self.hole_twelve_penalty = hole_twelve_penalty
+        self.hole_thirteen_penalty = hole_thirteen_penalty
+        self.hole_fourteen_penalty = hole_fourteen_penalty
+        self.hole_fifteen_penalty = hole_fifteen_penalty
+        self.hole_sixteen_penalty = hole_sixteen_penalty
+        self.hole_seventeen_penalty = hole_seventeen_penalty
+        self.hole_eighteen_penalty = hole_eighteen_penalty
+
+
+
+
 #Scoring class
 class Scoring():
     def create_json(filename, match_code, match_password, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, gamemode, Id, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18):
@@ -770,7 +906,7 @@ def newprofilepicture():
     else:
         return render_template("login.html")
 
-@app.route("/dashboard/edit_profile")
+@app.route("/profile/edit")
 def edit_profile():
     if 'active_user' in session:
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
@@ -849,7 +985,7 @@ def error(msg):
 def login():
     found_user = ""
     if 'active_user' in session:
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('profile'))
     if request.method == "POST":
 
         username_input = request.form['username']
@@ -861,14 +997,14 @@ def login():
             session['active_user'] = [found_user.username, found_user.name, found_user.rank]
             found_user.last_login = datetime.now()
             db.session.commit()
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('profile'))
         else:
             return render_template("login.html", data=found_user, message="Username and password were incorrect! Please try again.")
 
     return render_template("login.html", data=found_user)
 
-@app.route("/dashboard", methods=['GET', 'POST'])
-def dashboard():
+@app.route("/profile", methods=['GET', 'POST'])
+def profile():
     found_user = users.query.filter_by(username=session['active_user'][0]).first()
     logged_in_user = found_user
     date_year = str(found_user.first_login)
@@ -919,7 +1055,7 @@ def dashboard():
 
             db.session.commit()
 
-        return render_template("dashboard.html", month = month_name, random_users_list=random_users_list, recent_matches=recent_matches, year=date_year, data=found_user)
+        return render_template("profile.html", month = month_name, random_users_list=random_users_list, recent_matches=recent_matches, year=date_year, data=found_user)
     return redirect(url_for('error', msg="You must login to access this page."))
 
 @app.route("/profile/<user>", methods=['GET', 'POST'])
@@ -946,7 +1082,7 @@ def get_user_profile(user):
         logged_in_user = users.query.filter_by(username=session['active_user'][0]).first()
         print(logged_in_user.name)
         if logged_in_user.username == user:
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('profile'))
         else:
             #chooses three random users
             count = users.query.count()
@@ -1007,9 +1143,27 @@ def create_match():
                 print(err)
                 return redirect(url_for('error', msg="There was an error in creating your match."))
 
-            return redirect(url_for('match_dashboard'))
+            return redirect(url_for('dashboard'))
         
         return render_template('create_match.html', course_data=found_course, data=found_user)
+    return redirect(url_for('error', msg='You do not have access to this page.'))
+
+@app.route("/create_round", methods=['GET', 'POST'])
+def create_round():
+    found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
+    if 'active_user' in session and session['active_user'][2] == "player":
+        if request.method == "POST":
+            try:
+                new_match = match(request.form['matchname'], request.form['coursename'], request.form['starttime'], request.form['endtime'], ezfix, request.form['matchname'], generate_code(6), request.form['matchpassword'], request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0], False)
+                db.session.add(new_match)
+                db.session.commit()
+            except Exception as err:
+                print(err)
+                return redirect(url_for('error', msg="There was an error in creating your match."))
+
+            return redirect(url_for('dashboard'))
+        return render_template('create_round.html', course_data=found_course, data=found_user)
     return redirect(url_for('error', msg='You do not have access to this page.'))
 
 @app.route("/create_account/email_verification/<email>", methods=["POST", "GET"])
@@ -1090,7 +1244,7 @@ def edit_match(match_to_edit):
             except:
                 redirect(url_for('error', msg="There was a problem adding your match to the database. Please make sure you have inputed all fields. If all else fails, contact customer suport."))
             
-            return redirect(url_for("match_dashboard"))
+            return redirect(url_for("dashboard"))
 
         return render_template('edit_match.html', course_data=found_course, data=found_user, editing=found_match)
 
@@ -1166,11 +1320,11 @@ def delete_match(match_to_delete):
             #removes match from DB
             db.session.delete(found_match)
             db.session.commit()
-            return redirect(url_for("match_dashboard"))
+            return redirect(url_for("dashboard"))
         except:
             db.session.delete(found_match)
             db.session.commit()
-            return redirect(url_for("match_dashboard"))
+            return redirect(url_for("dashboard"))
     return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/delete_course/<course_to_delete>")
@@ -1229,7 +1383,7 @@ def edit_user_profile():
 
         db.session.commit()
 
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("profile"))
     return redirect(url_for('error', msg="Something went wrong. Please try again!"))
 
 
@@ -1240,7 +1394,7 @@ def choose_banner():
         found_user.banner = request.form['banner']
         db.session.commit()
 
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("profile"))
     return redirect(url_for('error', msg="Something went wrong. Please try again!"))
 
 
@@ -1291,13 +1445,13 @@ def admin(password):
     else:
         return redirect(url_for('error', msg="You do not have access to this site."))
 
-@app.route("/match_dashboard")
+@app.route("/dashboard")
 def match_dashboard():
-    if 'active_user' in session and session['active_user'][2] == 'coach':
+    if 'active_user' in session and session['active_user'][2]:
         found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
         found_match = match.query.filter_by(created_by=session['active_user'][0]).all()
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
-        return render_template("match_dashboard.html", course_data=found_course, data=found_user, match_data=found_match)
+        return render_template("dashboard.html", course_data=found_course, data=found_user, match_data=found_match)
     return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/course_dashboard")

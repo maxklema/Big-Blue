@@ -21,9 +21,9 @@
             </a>
             <div>
                 <ul class="navigation">
-                    <li><a href="/match_dashboard">Dashboard</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
                     <li><a href="/logout">Logout</a></li>
-                    <li><a href="/dashboard">{{data.username}}</a></li>
+                    <li><a href="/profile">{{data.username}}</a></li>
                     <li><a href=""><img id="profile-pic" src="{{ url_for('static', filename='logo_graphics/user_photos/' + data.pic) }}" alt=""></a></li>
                     <form id="search-form" action="/search/" method="post">
                         <input id="searchbar" name="searchbar" type="text" placeholder="search users"></input>
@@ -43,7 +43,7 @@
             <div class="content-container">
                 <a href="/joincode">Join Match</a>
                 <a href="/search/{{data.username}}">Search</a>
-                <a href="/dashboard">{{data.username}}</a>
+                <a href="/profile">{{data.username}}</a>
                 <a href="/logout">Logout</a>
                 
             </div>
