@@ -10,6 +10,7 @@ import random
 import json
 import os
 import sqlite3
+import emails1
 import sys
 import re # THIS IS REGEX
 from random import randint
@@ -965,6 +966,50 @@ def create_match():
         return render_template('create_match.html', course_data=found_course, data=found_user)
     return redirect(url_for('error', msg='You do not have access to this page.'))
 
+@app.route("/create_account/email_verification/<email>", methods=["POST", "GET"])
+def email_verification(email):
+    if request.method == 'POST':
+        form_token = request.form['token_input']
+        with open("tokens.json", "r+") as file:
+            data = json.load(file)
+            if form_token in data:
+                new_user = users(
+                    data[form_token][0],
+                    data[form_token][1],
+                    data[form_token][2],
+                    data[form_token][3],
+                    data[form_token][4],
+                    data[form_token][5],
+                    data[form_token][6],
+                    data[form_token][7],
+                    data[form_token][8],
+                    data[form_token][9],
+                    data[form_token][10],
+                    datetime.strptime(data[form_token][11], "%Y-%m-%d %H:%M:%S.%f"),
+                    datetime.strptime(data[form_token][11], "%Y-%m-%d %H:%M:%S.%f")
+                )
+                db.session.add(new_user)
+                db.session.commit()
+                new_username = data[form_token][1]
+                new_rank = data[form_token][4]
+                new_name = data[form_token][0]
+                found_user = users.query.filter_by(username=new_username).first()
+        
+                session['active_user'] = [new_username, new_name, new_rank]
+                del data[form_token]
+                file.seek(0, 0)
+                json.dump(data, file, indent=3)
+                file.truncate()
+        return redirect(url_for('chooseprofilepicture'))
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
+    return render_template("email_verification.html", data=found_user, email=email)
+
+
+
+
 @app.route("/edit_match/<match_to_edit>", methods=["POST", "GET"])
 def edit_match(match_to_edit):
     found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
@@ -1085,22 +1130,15 @@ def create_account():
         found_email = users.query.filter_by(email=request.form['email']).first()
         if found_username or found_email:
             return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.", data=found_user)
-        try: 
-            today_date = datetime.now()
-            password = hashingalg.hashPassword(request.form['password'])
-            print(password)
-            new_user = users(request.form['name'], request.form['username'], password, request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png", "BigBluebanner.png", today_date, today_date)
-            db.session.add(new_user)
-            db.session.commit()
-            new_username = request.form['username']
-            new_rank = request.form['rank']
-            new_name = request.form['name']
-        except:
-            return redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer support."))
-        found_user = users.query.filter_by(username=new_username).first()
         
-        session['active_user'] = [new_username, new_name, new_rank]
-        return redirect(url_for('chooseprofilepicture'))
+        today_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
+        password = hashingalg.hashPassword(request.form['password'])
+        with open('tokens.json', "r+") as file:
+            data = json.load(file)
+            data[emails1.send_validation_email(request.form['email'], request.form['username'])] = [request.form['name'], request.form['username'], password, request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png", "BigBluebanner.png", str(today_date), str(today_date)]
+            file.seek(0, 0)
+            json.dump(data, file, indent=3)
+        return redirect(url_for('email_verification', email=request.form['email']))
     return render_template('create_account.html', data=found_user)
 
 @app.route("/delete_account")

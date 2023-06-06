@@ -20,16 +20,14 @@ def token_generator() -> str:
 
 def send_validation_email(email: str, username1: str):
     token = token_generator()
-    with open('tokens.json', "r+") as file:
-        data = json.load(file)
-        data[username1] = token
-        file.seek(0, 0)
-        json.dump(data, file, indent=3)
-
     send_email(email, "Verify BigBlue.Golf Email", "Hello " + username1 + ". We are excited that you have chosen to join BigBlue.Golf. However, before you can enjoy your account, you must verify your email adress. Please use the following access token to verify your account. \n\nVERIFICATION TOKEN: " + token + "\n\nThanks, \nThe BigBlue.Golf Team.")
+    return token
 
 def send_email(to: str, subject: str, email_content):
     context = ssl.create_default_context()
+    context.check_hostname = False
+    context.verify_mode = ssl.CERT_NONE
+    
 
     msg = EmailMessage()
     msg.set_content(email_content)
@@ -43,5 +41,3 @@ def send_email(to: str, subject: str, email_content):
     server.login(username, password)
     server.send_message(msg)
     server.quit()
-
-send_email("graysonwelch@bigblue.golf", "Test Email", "Some text...")
