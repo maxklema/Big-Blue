@@ -337,7 +337,7 @@ class round(db.Model):
 #Scoring class
 class Scoring():
     def create_json(filename, match_code, match_password, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, gamemode, Id, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18):
-        data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "match_password": match_password, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": ""}
+        data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "match_password": match_password, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": "", "shared_coaches": []}
         #json_string = json
         with open("static/score_files/" + str(filename) + ".json", "a+") as file:
             
@@ -347,12 +347,31 @@ class Scoring():
             file.truncate()
 
     def new_create_json(filename, match_code, match_password, number_holes, match_name, start_time, end_time, num_teams, teams, match_type, gamemode, Id, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18):
-        data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "match_password": match_password, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "team_scores": {}, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": ""}
+        data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "match_password": match_password, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "team_scores": {}, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": "", "shared_coaches": []}
         for team in teams:
             data["teams"][team] = 0
         with open("static/score_files/" + str(filename) + ".json", "a+") as file:
             
             #print(json.dump(data, file, indent=3))
+            file.seek(0)
+            json_object = json.dump(data, file, indent=3)
+            file.truncate()
+
+    def add_shared_coach(filename, coach_username):
+        with open("" + str(filename) + ".json", "r+") as file:
+            file.seek(0)
+            data = json.load(file)
+            data["shared_coaches"].append(coach_username)
+            file.seek(0)
+            json_object = json.dump(data, file, indent=3)
+            file.truncate()
+
+    def remove_shared_coach(filename, coach_username):
+        with open("" + str(filename) + ".json", "r+") as file:
+            file.seek(0)
+            data = json.load(file)
+            if coach_username in data["shared_coaches"]:
+                data["shared_coaches"].remove(coach_username)
             file.seek(0)
             json_object = json.dump(data, file, indent=3)
             file.truncate()
@@ -848,8 +867,17 @@ def verify_user(user: str, verified_input: int):
 
 def match_security(session_type: str, match_id: str) -> bool: #this is for all of the control routes
     found_match = match.query.filter_by(_id=match_id).first()
+    found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    user_verified = False
+    with open("static/score_files/" + str(found_match._id) + ".json", "r") as file:
+        file.seek(0)
+        data = json.load(file)        
+        print(found_user.username)
+        
+        if found_user != "" and found_user.username in data["shared_coaches"]:
+            user_verified = True
     try:
-        if 'coach' in session[session_type] and found_match.created_by == session[session_type][0]:
+        if 'coach' in session[session_type] and (found_match.created_by == session[session_type][0] or user_verified):
             return True
         else:
             return False
@@ -920,6 +948,13 @@ def entering_match(match_code):
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
     except:
         found_user = ""
+    with open("static/score_files/" + str(found_match._id) + ".json", "r") as file:
+        file.seek(0)
+        data = json.load(file)        
+        print(found_user.username)
+        
+        if found_user != "" and found_user.username in data["shared_coaches"]:
+            return redirect(url_for("active_match_view", json_data_input=found_match._id))
     return render_template("player-or-spectator.html", data=found_user, match_data=found_match)
 
 
@@ -1142,7 +1177,7 @@ def create_match():
                 print(err)
                 return redirect(url_for('error', msg="There was an error in creating your match."))
 
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('match_dashboard'))
         
         return render_template('create_match.html', course_data=found_course, data=found_user)
     return redirect(url_for('error', msg='You do not have access to this page.'))
