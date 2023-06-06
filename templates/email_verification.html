@@ -1,0 +1,39 @@
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}  
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
+{% block content %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2TLMVLX5EB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2TLMVLX5EB');
+</script>
+
+<html>
+
+<head>
+    <title>Email Verification | Big Blue</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/stylelogin.css') }}">
+
+    <div>
+        <h3>We sent an email to {{email}}. Enter Code:</h3>
+        <form action="#" method='POST'>
+            <input type="text" name="token_input" id="token_input">
+            <input type="submit">
+        </form>
+    </div>
+
+</head>
+
+
+</html>
+
+{% endblock %}

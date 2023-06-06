@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine
 from datetime import timedelta, datetime
 from werkzeug.utils import secure_filename
 from flask_socketio import SocketIO
@@ -11,6 +10,7 @@ import random
 import json
 import os
 import sqlite3
+import emails1
 import sys
 import re # THIS IS REGEX
 from random import randint
@@ -77,95 +77,52 @@ class course(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     course_name = db.Column(db.String(50))
     course_holes = db.Column(db.String(3))
-    course_rating = db.Column(db.Float)
-    slope_rating = db.Column(db.Float)
     par1 = db.Column(db.Integer)
-    handicap1 = db.Column(db.Integer)
     par2 = db.Column(db.Integer)
-    handicap2 = db.Column(db.Integer)
     par3 = db.Column(db.Integer)
-    handicap3 = db.Column(db.Integer)
     par4 = db.Column(db.Integer)
-    handicap4 = db.Column(db.Integer)
     par5 = db.Column(db.Integer)
-    handicap5 = db.Column(db.Integer)
     par6 = db.Column(db.Integer)
-    handicap6 = db.Column(db.Integer)
     par7 = db.Column(db.Integer)
-    handicap7 = db.Column(db.Integer)
     par8 = db.Column(db.Integer)
-    handicap8 = db.Column(db.Integer)
     par9 = db.Column(db.Integer)
-    handicap9 = db.Column(db.Integer)
     par10 = db.Column(db.Integer)
-    handicap10 = db.Column(db.Integer)
     par11 = db.Column(db.Integer)
-    handicap11 = db.Column(db.Integer)
     par12 = db.Column(db.Integer)
-    handicap12 = db.Column(db.Integer)
     par13 = db.Column(db.Integer)
-    handicap13 = db.Column(db.Integer)
     par14 = db.Column(db.Integer)
-    handicap14 = db.Column(db.Integer)
     par15 = db.Column(db.Integer)
-    handicap15 = db.Column(db.Integer)
     par16 = db.Column(db.Integer)
-    handicap16 = db.Column(db.Integer)
     par17 = db.Column(db.Integer)
-    handicap17 = db.Column(db.Integer)
     par18 = db.Column(db.Integer)
-    handicap18 = db.Column(db.Integer)
     city = db.Column(db.String)
     course_bio = db.Column(db.String(1000))
     created_by = db.Column(db.String)
 
-    def __init__(self, course_name, course_holes, course_rating, slope_rating, par1, handicap1, par2, handicap2, par3, handicap3, par4, handicap4, par5, handicap5, par6, handicap6, par7, handicap7, par8, handicap8, par9, handicap9, par10, handicap10, par11, handicap11, par12, handicap12, par13, handicap13, par14, handicap14, par15, handicap15, par16, handicap16, par17, handicap17, par18, handicap18, city, course_bio, created_by):
+    def __init__(self, course_name, course_holes, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18, city, course_bio, created_by):
         self.course_name = course_name
         self.course_holes = course_holes
-        self.course_rating = course_rating
-        self.slope_rating = slope_rating
         self.par1 = par1
-        self.handicap1 = handicap1
         self.par2 = par2
-        self.handicap2 = handicap2
         self.par3 = par3
-        self.handicap3 = handicap3
         self.par4 = par4
-        self.handicap4 = handicap4
         self.par5 = par5
-        self.handicap5 = handicap5
         self.par6 = par6
-        self.handicap6 = handicap6
         self.par7 = par7
-        self.handicap7 = handicap7
         self.par8 = par8
-        self.handicap8 = handicap8
         self.par9 = par9
-        self.handicap9 = handicap9
         self.par10 = par10
-        self.handicap10 = handicap10
         self.par11 = par11
-        self.handicap11 = handicap11
         self.par12 = par12
-        self.handicap12 = handicap12
         self.par13 = par13
-        self.handicap13 = handicap13
         self.par14 = par14
-        self.handicap14 = handicap14
         self.par15 = par15
-        self.handicap15 = handicap15
         self.par16 = par16
-        self.handicap16 = handicap16
         self.par17 = par17
-        self.handicap17 = handicap17
         self.par18 = par18
-        self.handicap18 = handicap18
         self.city = city
         self.course_bio = course_bio
         self.created_by = created_by
-
-
-
 
 class match(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -198,146 +155,10 @@ class match(db.Model):
         self.created_by = created_by
         self.match_live = match_live
 
-class round(db.Model):
-    _id = db.Column("id", db.Integer, primary_key=True)
-    round_course = db.Column(db.String(50))
-    round_visibility = db.Column(db.String(10))
-    count_towards_solo_stats = db.Column(db.String(5))
-    count_towards_handicap = db.Column(db.String(5))
-    date_created = db.Column(db.String(25))
-    date_started = db.Column(db.String(25))
-    date_ended = db.Column(db.String(25))
-    round_live = db.Column(db.String(5))
-    total_scores = db.Column(db.Integer)
-    relation_to_par = db.Column(db.Integer)
-    hole_one_score = db.Column(db.Integer, default=0)
-    hole_two_score = db.Column(db.Integer, default=0)
-    hole_three_score = db.Column(db.Integer, default=0)
-    hole_four_score = db.Column(db.Integer, default=0)
-    hole_five_score = db.Column(db.Integer, default=0)
-    hole_six_score = db.Column(db.Integer, default=0)
-    hole_seven_score = db.Column(db.Integer, default=0)
-    hole_eight_score = db.Column(db.Integer, default=0)
-    hole_nine_score = db.Column(db.Integer, default=0)
-    hole_ten_score = db.Column(db.Integer, default=0)
-    hole_eleven_score = db.Column(db.Integer, default=0)
-    hole_twelve_score = db.Column(db.Integer, default=0)
-    hole_thirteen_score = db.Column(db.Integer, default=0)
-    hole_fourteen_score = db.Column(db.Integer, default=0)
-    hole_fifteen_score = db.Column(db.Integer, default=0)
-    hole_sixteen_score = db.Column(db.Integer, default=0)
-    hole_seventeen_score = db.Column(db.Integer, default=0)
-    hole_eighteen_score = db.Column(db.Integer, default=0)
-    hole_one_putts = db.Column(db.Integer, default=0)
-    hole_two_putts = db.Column(db.Integer, default=0)
-    hole_three_putts = db.Column(db.Integer, default=0)
-    hole_four_putts = db.Column(db.Integer, default=0)
-    hole_five_putts = db.Column(db.Integer, default=0)
-    hole_six_putts = db.Column(db.Integer, default=0)
-    hole_seven_putts = db.Column(db.Integer, default=0)
-    hole_eight_putts = db.Column(db.Integer, default=0)
-    hole_nine_putts = db.Column(db.Integer, default=0)
-    hole_ten_putts = db.Column(db.Integer, default=0)
-    hole_eleven_putts = db.Column(db.Integer, default=0)
-    hole_twelve_putts = db.Column(db.Integer, default=0)
-    hole_thirteen_putts = db.Column(db.Integer, default=0)
-    hole_fourteen_putts = db.Column(db.Integer, default=0)
-    hole_fifteen_putts = db.Column(db.Integer, default=0)
-    hole_sixteen_putts = db.Column(db.Integer, default=0)
-    hole_seventeen_putts = db.Column(db.Integer, default=0)
-    hole_eighteen_putts = db.Column(db.Integer, default=0)
-    hole_one_penalty = db.Column(db.Integer, default=0)
-    hole_two_penalty = db.Column(db.Integer, default=0)
-    hole_three_penalty = db.Column(db.Integer, default=0)
-    hole_four_penalty = db.Column(db.Integer, default=0)
-    hole_five_penalty = db.Column(db.Integer, default=0)
-    hole_six_penalty = db.Column(db.Integer, default=0)
-    hole_seven_penalty = db.Column(db.Integer, default=0)
-    hole_eight_penalty = db.Column(db.Integer, default=0)
-    hole_nine_penalty = db.Column(db.Integer, default=0)
-    hole_ten_penalty = db.Column(db.Integer, default=0)
-    hole_eleven_penalty = db.Column(db.Integer, default=0)
-    hole_twelve_penalty = db.Column(db.Integer, default=0)
-    hole_thirteen_penalty = db.Column(db.Integer, default=0)
-    hole_fourteen_penalty = db.Column(db.Integer, default=0)
-    hole_fifteen_penalty = db.Column(db.Integer, default=0)
-    hole_sixteen_penalty = db.Column(db.Integer, default=0)
-    hole_seventeen_penalty = db.Column(db.Integer, default=0)
-    hole_eighteen_penalty = db.Column(db.Integer, default=0)
-
-    def __init__(self, round_course, round_visibility, count_towards_solo_stats, count_towards_handicap, date_created, date_started, date_ended, round_live, total_scores, relation_to_par, hole_one_score=0, hole_two_score=0, hole_three_score=0, hole_four_score=0, hole_five_score=0, hole_six_score=0, hole_seven_score=0, hole_eight_score=0, hole_nine_score=0, hole_ten_score=0, hole_eleven_score=0, hole_twelve_score=0, hole_thirteen_score=0, hole_fourteen_score=0, hole_fifteen_score=0, hole_sixteen_score=0, hole_seventeen_score=0, hole_eighteen_score=0, hole_one_putts=0, hole_two_putts=0, hole_three_putts=0, hole_four_putts=0, hole_five_putts=0, hole_six_putts=0, hole_seven_putts=0, hole_eight_putts=0, hole_nine_putts=0, hole_ten_putts=0, hole_eleven_putts=0, hole_twelve_putts=0, hole_thirteen_putts=0, hole_fourteen_putts=0, hole_fifteen_putts=0, hole_sixteen_putts=0, hole_seventeen_putts=0, hole_eighteen_putts=0, hole_one_penalty=0, hole_two_penalty=0, hole_three_penalty=0, hole_four_penalty=0, hole_five_penalty=0, hole_six_penalty=0, hole_seven_penalty=0, hole_eight_penalty=0, hole_nine_penalty=0, hole_ten_penalty=0, hole_eleven_penalty=0, hole_twelve_penalty=0, hole_thirteen_penalty=0, hole_fourteen_penalty=0, hole_fifteen_penalty=0, hole_sixteen_penalty=0, hole_seventeen_penalty=0, hole_eighteen_penalty=0):
-        self.round_course = round_course
-        self.round_visibility = round_visibility
-        self.count_towards_solo_stats = count_towards_solo_stats
-        self.count_towards_handicap = count_towards_handicap
-        self.date_created = date_created
-        self.date_started = date_started
-        self.date_ended = date_ended
-        self.round_live = round_live
-        self.total_scores = total_scores
-        self.relation_to_par = relation_to_par
-        self.hole_one_score = hole_one_score
-        self.hole_two_score = hole_two_score
-        self.hole_three_score = hole_three_score
-        self.hole_four_score = hole_four_score
-        self.hole_five_score = hole_five_score
-        self.hole_six_score = hole_six_score
-        self.hole_seven_score = hole_seven_score
-        self.hole_eight_score = hole_eight_score
-        self.hole_nine_score = hole_nine_score
-        self.hole_ten_score = hole_ten_score
-        self.hole_eleven_score = hole_eleven_score
-        self.hole_twelve_score = hole_twelve_score
-        self.hole_thirteen_score = hole_thirteen_score
-        self.hole_fourteen_score = hole_fourteen_score
-        self.hole_fifteen_score = hole_fifteen_score
-        self.hole_sixteen_score = hole_sixteen_score
-        self.hole_seventeen_score = hole_seventeen_score
-        self.hole_eighteen_score = hole_eighteen_score
-        self.hole_one_putts = hole_one_putts
-        self.hole_two_putts = hole_two_putts
-        self.hole_three_putts = hole_three_putts
-        self.hole_four_putts = hole_four_putts
-        self.hole_five_putts = hole_five_putts
-        self.hole_six_putts = hole_six_putts
-        self.hole_seven_putts = hole_seven_putts
-        self.hole_eight_putts = hole_eight_putts
-        self.hole_nine_putts = hole_nine_putts
-        self.hole_ten_putts = hole_ten_putts
-        self.hole_eleven_putts = hole_eleven_putts
-        self.hole_twelve_putts = hole_twelve_putts
-        self.hole_thirteen_putts = hole_thirteen_putts
-        self.hole_fourteen_putts = hole_fourteen_putts
-        self.hole_fifteen_putts = hole_fifteen_putts
-        self.hole_sixteen_putts = hole_sixteen_putts
-        self.hole_seventeen_putts = hole_seventeen_putts
-        self.hole_eighteen_putts = hole_eighteen_putts
-        self.hole_one_penalty = hole_one_penalty
-        self.hole_two_penalty = hole_two_penalty
-        self.hole_three_penalty = hole_three_penalty
-        self.hole_four_penalty = hole_four_penalty
-        self.hole_five_penalty = hole_five_penalty
-        self.hole_six_penalty = hole_six_penalty
-        self.hole_seven_penalty = hole_seven_penalty
-        self.hole_eight_penalty = hole_eight_penalty
-        self.hole_nine_penalty = hole_nine_penalty
-        self.hole_ten_penalty = hole_ten_penalty
-        self.hole_eleven_penalty = hole_eleven_penalty
-        self.hole_twelve_penalty = hole_twelve_penalty
-        self.hole_thirteen_penalty = hole_thirteen_penalty
-        self.hole_fourteen_penalty = hole_fourteen_penalty
-        self.hole_fifteen_penalty = hole_fifteen_penalty
-        self.hole_sixteen_penalty = hole_sixteen_penalty
-        self.hole_seventeen_penalty = hole_seventeen_penalty
-        self.hole_eighteen_penalty = hole_eighteen_penalty
-
-
-
-
 #Scoring class
 class Scoring():
     def create_json(filename, match_code, match_password, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, gamemode, Id, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18):
-        data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "match_password": match_password, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": "", "shared_coaches": []}
+        data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "match_password": match_password, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": ""}
         #json_string = json
         with open("static/score_files/" + str(filename) + ".json", "a+") as file:
             
@@ -347,31 +168,12 @@ class Scoring():
             file.truncate()
 
     def new_create_json(filename, match_code, match_password, number_holes, match_name, start_time, end_time, num_teams, teams, match_type, gamemode, Id, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18):
-        data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "match_password": match_password, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "team_scores": {}, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": "", "shared_coaches": []}
+        data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "match_password": match_password, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "team_scores": {}, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": ""}
         for team in teams:
             data["teams"][team] = 0
         with open("static/score_files/" + str(filename) + ".json", "a+") as file:
             
             #print(json.dump(data, file, indent=3))
-            file.seek(0)
-            json_object = json.dump(data, file, indent=3)
-            file.truncate()
-
-    def add_shared_coach(filename, coach_username):
-        with open("" + str(filename) + ".json", "r+") as file:
-            file.seek(0)
-            data = json.load(file)
-            data["shared_coaches"].append(coach_username)
-            file.seek(0)
-            json_object = json.dump(data, file, indent=3)
-            file.truncate()
-
-    def remove_shared_coach(filename, coach_username):
-        with open("" + str(filename) + ".json", "r+") as file:
-            file.seek(0)
-            data = json.load(file)
-            if coach_username in data["shared_coaches"]:
-                data["shared_coaches"].remove(coach_username)
             file.seek(0)
             json_object = json.dump(data, file, indent=3)
             file.truncate()
@@ -708,10 +510,8 @@ class Scoring():
                     else:
                         break
                 absolute_relation = str(abs(current_score - current_par))
-                if ((last_hole == int(data["match_info"]["number_holes"])) and (current_score < current_par)):
-                    return "F: " + str(current_score) + " (-" + absolute_relation + ")"
-                elif ((last_hole == int(data["match_info"]["number_holes"])) and (current_score > current_par)):
-                    return "F: " + str(current_score) + " (+" + absolute_relation + ")"
+                if last_hole == int(data["match_info"]["number_holes"]):
+                    return "F: " + str(current_score)
                 elif current_score > current_par:
                     return "+" + absolute_relation + " thru " + str(last_hole)
                 elif current_score < current_par:
@@ -867,17 +667,8 @@ def verify_user(user: str, verified_input: int):
 
 def match_security(session_type: str, match_id: str) -> bool: #this is for all of the control routes
     found_match = match.query.filter_by(_id=match_id).first()
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
-    user_verified = False
-    with open("static/score_files/" + str(found_match._id) + ".json", "r") as file:
-        file.seek(0)
-        data = json.load(file)        
-        print(found_user.username)
-        
-        if found_user != "" and found_user.username in data["shared_coaches"]:
-            user_verified = True
     try:
-        if 'coach' in session[session_type] and (found_match.created_by == session[session_type][0] or user_verified):
+        if 'coach' in session[session_type] and found_match.created_by == session[session_type][0]:
             return True
         else:
             return False
@@ -933,7 +724,7 @@ def newprofilepicture():
     else:
         return render_template("login.html")
 
-@app.route("/profile/edit")
+@app.route("/dashboard/edit_profile")
 def edit_profile():
     if 'active_user' in session:
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
@@ -948,13 +739,6 @@ def entering_match(match_code):
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
     except:
         found_user = ""
-    with open("static/score_files/" + str(found_match._id) + ".json", "r") as file:
-        file.seek(0)
-        data = json.load(file)        
-        print(found_user.username)
-        
-        if found_user != "" and found_user.username in data["shared_coaches"]:
-            return redirect(url_for("active_match_view", json_data_input=found_match._id))
     return render_template("player-or-spectator.html", data=found_user, match_data=found_match)
 
 
@@ -1019,7 +803,7 @@ def error(msg):
 def login():
     found_user = ""
     if 'active_user' in session:
-        return redirect(url_for('profile'))
+        return redirect(url_for('dashboard'))
     if request.method == "POST":
 
         username_input = request.form['username']
@@ -1031,14 +815,14 @@ def login():
             session['active_user'] = [found_user.username, found_user.name, found_user.rank]
             found_user.last_login = datetime.now()
             db.session.commit()
-            return redirect(url_for('profile'))
+            return redirect(url_for('dashboard'))
         else:
             return render_template("login.html", data=found_user, message="Username and password were incorrect! Please try again.")
 
     return render_template("login.html", data=found_user)
 
-@app.route("/profile", methods=['GET', 'POST'])
-def profile():
+@app.route("/dashboard", methods=['GET', 'POST'])
+def dashboard():
     found_user = users.query.filter_by(username=session['active_user'][0]).first()
     logged_in_user = found_user
     date_year = str(found_user.first_login)
@@ -1089,7 +873,7 @@ def profile():
 
             db.session.commit()
 
-        return render_template("profile.html", month = month_name, random_users_list=random_users_list, recent_matches=recent_matches, year=date_year, data=found_user)
+        return render_template("dashboard.html", month = month_name, random_users_list=random_users_list, recent_matches=recent_matches, year=date_year, data=found_user)
     return redirect(url_for('error', msg="You must login to access this page."))
 
 @app.route("/profile/<user>", methods=['GET', 'POST'])
@@ -1116,7 +900,7 @@ def get_user_profile(user):
         logged_in_user = users.query.filter_by(username=session['active_user'][0]).first()
         print(logged_in_user.name)
         if logged_in_user.username == user:
-            return redirect(url_for('profile'))
+            return redirect(url_for('dashboard'))
         else:
             #chooses three random users
             count = users.query.count()
@@ -1182,23 +966,49 @@ def create_match():
         return render_template('create_match.html', course_data=found_course, data=found_user)
     return redirect(url_for('error', msg='You do not have access to this page.'))
 
-@app.route("/create_round", methods=['GET', 'POST'])
-def create_round():
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
-    found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
-    if 'active_user' in session and session['active_user'][2] == "player":
-        if request.method == "POST":
-            try:
-                new_match = match(request.form['matchname'], request.form['coursename'], request.form['starttime'], request.form['endtime'], ezfix, request.form['matchname'], generate_code(6), request.form['matchpassword'], request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0], False)
-                db.session.add(new_match)
+@app.route("/create_account/email_verification/<email>", methods=["POST", "GET"])
+def email_verification(email):
+    if request.method == 'POST':
+        form_token = request.form['token_input']
+        with open("tokens.json", "r+") as file:
+            data = json.load(file)
+            if form_token in data:
+                new_user = users(
+                    data[form_token][0],
+                    data[form_token][1],
+                    data[form_token][2],
+                    data[form_token][3],
+                    data[form_token][4],
+                    data[form_token][5],
+                    data[form_token][6],
+                    data[form_token][7],
+                    data[form_token][8],
+                    data[form_token][9],
+                    data[form_token][10],
+                    datetime.strptime(data[form_token][11], "%Y-%m-%d %H:%M:%S.%f"),
+                    datetime.strptime(data[form_token][11], "%Y-%m-%d %H:%M:%S.%f")
+                )
+                db.session.add(new_user)
                 db.session.commit()
-            except Exception as err:
-                print(err)
-                return redirect(url_for('error', msg="There was an error in creating your match."))
+                new_username = data[form_token][1]
+                new_rank = data[form_token][4]
+                new_name = data[form_token][0]
+                found_user = users.query.filter_by(username=new_username).first()
+        
+                session['active_user'] = [new_username, new_name, new_rank]
+                del data[form_token]
+                file.seek(0, 0)
+                json.dump(data, file, indent=3)
+                file.truncate()
+        return redirect(url_for('chooseprofilepicture'))
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
+    return render_template("email_verification.html", data=found_user, email=email)
 
-            return redirect(url_for('dashboard'))
-        return render_template('create_round.html', course_data=found_course, data=found_user)
-    return redirect(url_for('error', msg='You do not have access to this page.'))
+
+
 
 @app.route("/edit_match/<match_to_edit>", methods=["POST", "GET"])
 def edit_match(match_to_edit):
@@ -1234,7 +1044,7 @@ def edit_match(match_to_edit):
             except:
                 redirect(url_for('error', msg="There was a problem adding your match to the database. Please make sure you have inputed all fields. If all else fails, contact customer suport."))
             
-            return redirect(url_for("dashboard"))
+            return redirect(url_for("match_dashboard"))
 
         return render_template('edit_match.html', course_data=found_course, data=found_user, editing=found_match)
 
@@ -1244,13 +1054,11 @@ def edit_match(match_to_edit):
 @app.route("/edit_course/<course_to_edit>", methods=["POST", "GET"])
 def edit_course(course_to_edit):
     found_course = course.query.filter_by(_id=course_to_edit).first()
-    if 'active_user' in session and session['active_user'][0] == found_course.created_by:
+    if 'active_user' in session and session['active_user'][0] == found_course.created_by and session['active_user'][2] == "coach":
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if request.method == "POST":
             found_course.course_name = request.form['course-name']
             found_course.course_holes = request.form['numberholes']
-            found_course.course_rating = request.form['course_rating']
-            found_course.slope_rating = request.form['slope_rating']
             found_course.par1 = request.form['holepar1']
             found_course.par2 = request.form['holepar2']
             found_course.par3 = request.form['holepar3']
@@ -1269,24 +1077,6 @@ def edit_course(course_to_edit):
             found_course.par16 = request.form['holepar16']
             found_course.par17 = request.form['holepar17']
             found_course.par18 = request.form['holepar18']
-            found_course.handicap1 = request.form['handicap_one']
-            found_course.handicap2 = request.form['handicap_two']
-            found_course.handicap3 = request.form['handicap_three']
-            found_course.handicap4 = request.form['handicap_four']
-            found_course.handicap5 = request.form['handicap_five']
-            found_course.handicap6 = request.form['handicap_six']
-            found_course.handicap7 = request.form['handicap_seven']
-            found_course.handicap8 = request.form['handicap_eight']
-            found_course.handicap9 = request.form['handicap_nine']
-            found_course.handicap10 = request.form['handicap_ten']
-            found_course.handicap11 = request.form['handicap_eleven']
-            found_course.handicap12 = request.form['handicap_twelve']
-            found_course.handicap13 = request.form['handicap_thirteen']
-            found_course.handicap14 = request.form['handicap_fourteen']
-            found_course.handicap15 = request.form['handicap_fifteen']
-            found_course.handicap16 = request.form['handicap_sixteen']
-            found_course.handicap17 = request.form['handicap_seventeen']
-            found_course.handicap18 = request.form['handicap_eighteen']
             found_course.city = request.form['city']
             found_course.bio = ""
         
@@ -1310,17 +1100,17 @@ def delete_match(match_to_delete):
             #removes match from DB
             db.session.delete(found_match)
             db.session.commit()
-            return redirect(url_for("dashboard"))
+            return redirect(url_for("match_dashboard"))
         except:
             db.session.delete(found_match)
             db.session.commit()
-            return redirect(url_for("dashboard"))
+            return redirect(url_for("match_dashboard"))
     return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/delete_course/<course_to_delete>")
 def delete_course(course_to_delete):
     found_course = course.query.filter_by(_id=course_to_delete).first()
-    if 'active_user' in session and session['active_user'][0] == found_course.created_by:
+    if 'active_user' in session and session['active_user'][0] == found_course.created_by and session['active_user'][2] == "coach":
         db.session.delete(found_course)
         db.session.commit()
         return redirect(url_for("course_dashboard"))
@@ -1340,22 +1130,15 @@ def create_account():
         found_email = users.query.filter_by(email=request.form['email']).first()
         if found_username or found_email:
             return render_template('create_account.html', message="Sorry, the email or username you entered is already in use.", data=found_user)
-        try: 
-            today_date = datetime.now()
-            password = hashingalg.hashPassword(request.form['password'])
-            print(password)
-            new_user = users(request.form['name'], request.form['username'], password, request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png", "BigBluebanner.png", today_date, today_date)
-            db.session.add(new_user)
-            db.session.commit()
-            new_username = request.form['username']
-            new_rank = request.form['rank']
-            new_name = request.form['name']
-        except:
-            return redirect(url_for('error', msg="There was a problem adding your account to the database. Please make sure you have inputed all fields. If all else fails. Contact customer support."))
-        found_user = users.query.filter_by(username=new_username).first()
         
-        session['active_user'] = [new_username, new_name, new_rank]
-        return redirect(url_for('chooseprofilepicture'))
+        today_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
+        password = hashingalg.hashPassword(request.form['password'])
+        with open('tokens.json', "r+") as file:
+            data = json.load(file)
+            data[emails1.send_validation_email(request.form['email'], request.form['username'])] = [request.form['name'], request.form['username'], password, request.form['email'], request.form['rank'], request.form['gender'], request.form['bio'], request.form['team'], 0, "defaultprofilepicture.png", "BigBluebanner.png", str(today_date), str(today_date)]
+            file.seek(0, 0)
+            json.dump(data, file, indent=3)
+        return redirect(url_for('email_verification', email=request.form['email']))
     return render_template('create_account.html', data=found_user)
 
 @app.route("/delete_account")
@@ -1380,7 +1163,7 @@ def edit_user_profile():
 
         db.session.commit()
 
-        return redirect(url_for("profile"))
+        return redirect(url_for("dashboard"))
     return redirect(url_for('error', msg="Something went wrong. Please try again!"))
 
 
@@ -1391,7 +1174,7 @@ def choose_banner():
         found_user.banner = request.form['banner']
         db.session.commit()
 
-        return redirect(url_for("profile"))
+        return redirect(url_for("dashboard"))
     return redirect(url_for('error', msg="Something went wrong. Please try again!"))
 
 
@@ -1442,18 +1225,18 @@ def admin(password):
     else:
         return redirect(url_for('error', msg="You do not have access to this site."))
 
-@app.route("/dashboard")
+@app.route("/match_dashboard")
 def match_dashboard():
-    if 'active_user' in session and session['active_user'][2]:
+    if 'active_user' in session and session['active_user'][2] == 'coach':
         found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
         found_match = match.query.filter_by(created_by=session['active_user'][0]).all()
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
-        return render_template("dashboard.html", course_data=found_course, data=found_user, match_data=found_match)
+        return render_template("match_dashboard.html", course_data=found_course, data=found_user, match_data=found_match)
     return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/course_dashboard")
 def course_dashboard():
-    if 'active_user' in session:
+    if 'active_user' in session and session['active_user'][2] == 'coach':
         found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         return render_template("course_dashboard.html", data=found_user, course_data=found_course)
@@ -1537,35 +1320,27 @@ def spectator_match_view(json_data_input):
         found_match = match.query.filter_by(_id=json_data_input).first()
         match_owner = found_match.created_by
         match_date = found_match.start_time
-        match_course = found_match.match_course
-        found_course = course.query.filter_by(created_by=match_owner).first()
-        match_location = found_course.city
-        print("LOCATION: " + match_location)
         found_match_owner = users.query.filter_by(username=match_owner).first()
     except:
         found_match = match_archive.query.filter_by(_id=json_data_input).first()
         match_owner = found_match.created_by
         match_date = found_match.start_time
-        match_course = found_match.match_course
-        found_course = course.query.filter_by(created_by=match_owner).first()
-        match_location = found_course.city
-        print("LOCATION: " + match_location)
         found_match_owner = users.query.filter_by(username=match_owner).first()
     try:
         json_data = Scoring.return_data(json_data_input)
         try:
             found_user = users.query.filter_by(username=session['active_user'][0]).first()
             if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
-                scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
+                    scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
             else:
                 scores = Scoring.calc_match_results(json_data['match_info']['id'])
         except:
             found_user = ''
             if json_data['match_info']['gamemode'] == 'Match Play' and json_data['match_info']['match_type'] == 'Teams':
-                scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
+                    scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
             else:
                 scores = Scoring.calc_match_results(json_data['match_info']['id'])
-        return render_template("spectator-active-match-view.html", date=match_date, course=match_course, city=match_location, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
+        return render_template("spectator-active-match-view.html", date=match_date, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
     except:
         try:
             json_data = Scoring.return_archive_data(json_data_input)
@@ -1581,7 +1356,7 @@ def spectator_match_view(json_data_input):
                     scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
                 else:
                     scores = Scoring.calc_match_results(json_data['match_info']['id'])
-            return render_template("spectator-active-match-view.html", date=match_date, course=match_course, city=match_location, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
+            return render_template("spectator-active-match-view.html", date=match_date, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
         except:
             return redirect(url_for('error', msg='This match does not exist!'))
 
@@ -1594,19 +1369,11 @@ def player_match_view(json_data_input):
             found_match = match.query.filter_by(_id=json_data_input).first()
             match_owner = found_match.created_by
             match_date = found_match.start_time
-            match_course = found_match.match_course
-            found_course = course.query.filter_by(created_by=match_owner).first()
-            match_location = found_course.city
-            print("LOCATION: " + match_location)
             found_match_owner = users.query.filter_by(username=match_owner).first()
         except:
             found_match = match_archive.query.filter_by(_id=json_data_input).first()
             match_owner = found_match.created_by
             match_date = found_match.start_time
-            match_course = found_match.match_course
-            found_course = course.query.filter_by(created_by=match_owner).first()
-            match_location = found_course.city
-            print("LOCATION: " + match_location)
             found_match_owner = users.query.filter_by(username=match_owner).first()
         try:
             json_data = Scoring.return_data(json_data_input)
@@ -1631,8 +1398,8 @@ def player_match_view(json_data_input):
         except:
             found_user = ''
         if request.method =="POST":
-            return redirect(url_for("player_match_view", date=match_date, course=match_course, city=match_location, data1=found_match_owner, active_player=session['active_player'], json_data_input = json_data['match_info']['id']))
-        return render_template("player-active-match-view.html", date=match_date, course=match_course, city=match_location, data1=found_match_owner, active_player=session['active_player'], data=found_user, playerdata=json_data, scoring_data = scores)
+            return redirect(url_for("player_match_view", date=match_date, data1=found_match_owner, active_player=session['active_player'], json_data_input = json_data['match_info']['id']))
+        return render_template("player-active-match-view.html", date=match_date, data1=found_match_owner, active_player=session['active_player'], data=found_user, playerdata=json_data, scoring_data = scores)
     else:
         return redirect(url_for('error', msg='You do not have access to this site until you join a match.'))
     
@@ -1643,19 +1410,11 @@ def active_match_view(json_data_input):
         found_match = match.query.filter_by(_id=json_data_input).first()
         match_owner = found_match.created_by
         match_date = found_match.start_time
-        match_course = found_match.match_course
-        found_course = course.query.filter_by(created_by=match_owner).first()
-        match_location = found_course.city
-        print("LOCATION: " + match_location)
         found_match_owner = users.query.filter_by(username=match_owner).first()
     except:
         found_match = match_archive.query.filter_by(_id=json_data_input).first()
         match_owner = found_match.created_by
         match_date = found_match.start_time
-        match_course = found_match.match_course
-        found_course = course.query.filter_by(created_by=match_owner).first()
-        match_location = found_course.city
-        print("LOCATION: " + match_location)
         found_match_owner = users.query.filter_by(username=match_owner).first()
     try:
         json_data = Scoring.return_data(json_data_input)
@@ -1684,43 +1443,27 @@ def active_match_view(json_data_input):
         scores = Scoring.calc_match_results(json_data['match_info']['id'])
 
     if match_security('active_user', json_data_input):
-        return render_template("active_match_view.html", date=match_date,  course=match_course, city=match_location, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data=scores, rank=session['active_user'][2])
+        return render_template("active_match_view.html", date=match_date, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data=scores, rank=session['active_user'][2])
     else:
         return redirect(url_for('error', userdata=found_user, msg="You do not have access to this site!"))
 
 @app.route("/create_course", methods=['GET', 'POST'])
 def create_course():
-    if 'active_user' in session:
+    if 'active_user' in session and session['active_user'][2] == 'coach':
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if request.method =="POST":
 
-            if session['active_user'][2] == 'coach':
-
-                for item in request.form:
-                    if sanitize_inputs(item) or 'numberholes' not in request.form:
-                        return render_template("create_course.html", message='Your values were either blank or inapropriate. Please try again.')
+            for item in request.form:
+                if sanitize_inputs(item) or 'numberholes' not in request.form:
+                    return render_template("create_course.html", message='Your values were either blank or inapropriate. Please try again.')
 
 
-                course_entry = course(request.form["course-name"], request.form["numberholes"], 0.0, 0.0, request.form["holepar1"], '', request.form["holepar2"], '', request.form["holepar3"], '', request.form["holepar4"], '', request.form["holepar5"], '', request.form["holepar6"], '', request.form["holepar7"], '', request.form["holepar8"], '', request.form["holepar9"], '', request.form["holepar10"], '', request.form["holepar11"], '', request.form["holepar12"], '', request.form["holepar13"], '', request.form["holepar14"], '', request.form["holepar15"], '', request.form["holepar16"], '', request.form["holepar17"], '', request.form["holepar18"], '', request.form['city'], '', session['active_user'][0])
-                db.session.add(course_entry)
-                db.session.commit()
-                found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
+            course_entry = course(request.form["course-name"], request.form["numberholes"], request.form["holepar1"], request.form["holepar2"], request.form["holepar3"], request.form["holepar4"], request.form["holepar5"], request.form["holepar6"], request.form["holepar7"], request.form["holepar8"], request.form["holepar9"], request.form["holepar10"], request.form["holepar11"], request.form["holepar12"], request.form["holepar13"], request.form["holepar14"], request.form["holepar15"], request.form["holepar16"], request.form["holepar17"], request.form["holepar18"], request.form['city'], '', session['active_user'][0])
+            db.session.add(course_entry)
+            db.session.commit()
+            found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
 
-                return redirect(url_for("course_dashboard"))
-
-            elif session['active_user'][2] == 'player':
-
-                for item in request.form:
-                    if sanitize_inputs(item) or 'numberholes' not in request.form:
-                        return render_template("create_course.html", message='Your values were either blank or inapropriate. Please try again.')
-
-
-                course_entry = course(request.form["course-name"], request.form["numberholes"], request.form['course_rating'], request.form['slope_rating'], request.form["holepar1"], request.form['handicap_one'], request.form["holepar2"], request.form['handicap_two'], request.form["holepar3"], request.form['handicap_three'], request.form["holepar4"], request.form['handicap_four'], request.form["holepar5"], request.form['handicap_five'], request.form["holepar6"], request.form['handicap_six'], request.form["holepar7"], request.form['handicap_seven'], request.form["holepar8"], request.form['handicap_eight'], request.form["holepar9"], request.form['handicap_nine'], request.form["holepar10"], request.form['handicap_ten'], request.form["holepar11"], request.form['handicap_eleven'], request.form["holepar12"], request.form['handicap_twelve'], request.form["holepar13"], request.form['handicap_thirteen'], request.form["holepar14"], request.form['handicap_fourteen'], request.form["holepar15"], request.form['handicap_fifteen'], request.form["holepar16"], request.form['handicap_sixteen'], request.form["holepar17"], request.form['handicap_seventeen'], request.form["holepar18"], request.form['handicap_eighteen'], request.form['city'], '', session['active_user'][0])
-                db.session.add(course_entry)
-                db.session.commit()
-                found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
-
-                return redirect(url_for("course_dashboard"))
+            return redirect(url_for("course_dashboard"))
 
         return render_template("create_course.html", data=found_user)
     else:
