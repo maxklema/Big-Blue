@@ -91,11 +91,19 @@
                             </div>
                         </button>
                     </a>
-                    <a id="create-match-href" href="/create_round">
-                        <button>
-                            <h3>Create Round</h3>
-                        </button>
-                    </a>
+                    {% if data.rank == 'coach'%}
+                        <a id="create-match-href" href="/create_match">
+                            <button>
+                                <h3>Create Match</h3>
+                            </button>
+                        </a>
+                    {% elif data.rank == 'player' %}
+                        <a id="create-match-href" href="/create_round">
+                            <button>
+                                <h3>Create Round</h3>
+                            </button>
+                        </a>
+                    {% endif %}
                 </div>
 
 

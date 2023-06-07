@@ -724,7 +724,7 @@ def newprofilepicture():
     else:
         return render_template("login.html")
 
-@app.route("/dashboard/edit_profile")
+@app.route("/profile/edit")
 def edit_profile():
     if 'active_user' in session:
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
@@ -803,7 +803,7 @@ def error(msg):
 def login():
     found_user = ""
     if 'active_user' in session:
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('profile'))
     if request.method == "POST":
 
         username_input = request.form['username']
@@ -815,14 +815,14 @@ def login():
             session['active_user'] = [found_user.username, found_user.name, found_user.rank]
             found_user.last_login = datetime.now()
             db.session.commit()
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('profile'))
         else:
             return render_template("login.html", data=found_user, message="Username and password were incorrect! Please try again.")
 
     return render_template("login.html", data=found_user)
 
-@app.route("/dashboard", methods=['GET', 'POST'])
-def dashboard():
+@app.route("/profile", methods=['GET', 'POST'])
+def profile():
     found_user = users.query.filter_by(username=session['active_user'][0]).first()
     logged_in_user = found_user
     date_year = str(found_user.first_login)
@@ -873,7 +873,7 @@ def dashboard():
 
             db.session.commit()
 
-        return render_template("dashboard.html", month = month_name, random_users_list=random_users_list, recent_matches=recent_matches, year=date_year, data=found_user)
+        return render_template("profile.html", month = month_name, random_users_list=random_users_list, recent_matches=recent_matches, year=date_year, data=found_user)
     return redirect(url_for('error', msg="You must login to access this page."))
 
 @app.route("/profile/<user>", methods=['GET', 'POST'])
@@ -900,7 +900,7 @@ def get_user_profile(user):
         logged_in_user = users.query.filter_by(username=session['active_user'][0]).first()
         print(logged_in_user.name)
         if logged_in_user.username == user:
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('profile'))
         else:
             #chooses three random users
             count = users.query.count()
@@ -938,7 +938,25 @@ def get_user_profile(user):
         random_users_list = [random_user_one, random_user_two, random_user_three]
 
     return render_template("user_profile_page.html", month = month_name, recent_matches=recent_matches, year=date_year, random_users_list=random_users_list, data1=found_user, data=logged_in_user)
-    
+
+@app.route("/create_round", methods=['GET', 'POST'])
+def create_round():
+    found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
+    if 'active_user' in session and session['active_user'][2] == "player":
+        if request.method == "POST":
+            try:
+                new_match = match(request.form['matchname'], request.form['coursename'], request.form['starttime'], request.form['endtime'], ezfix, request.form['matchname'], generate_code(6), request.form['matchpassword'], request.form['eventtype'], request.form['matchtype'], request.form['numberofplayers'], session['active_user'][0], False)
+                db.session.add(new_match)
+                db.session.commit()
+            except Exception as err:
+                print(err)
+                return redirect(url_for('error', msg="There was an error in creating your match."))
+
+            return redirect(url_for('dashboard'))
+        return render_template('create_round.html', course_data=found_course, data=found_user)
+    return redirect(url_for('error', msg='You do not have access to this page.'))
+
 @app.route("/create_match", methods=['GET', 'POST'])
 def create_match():
     found_user = users.query.filter_by(username=session['active_user'][0]).first()
@@ -961,7 +979,7 @@ def create_match():
                 print(err)
                 return redirect(url_for('error', msg="There was an error in creating your match."))
 
-            return redirect(url_for('match_dashboard'))
+            return redirect(url_for('dashboard'))
         
         return render_template('create_match.html', course_data=found_course, data=found_user)
     return redirect(url_for('error', msg='You do not have access to this page.'))
@@ -1070,7 +1088,7 @@ def edit_match(match_to_edit):
             except:
                 redirect(url_for('error', msg="There was a problem adding your match to the database. Please make sure you have inputed all fields. If all else fails, contact customer suport."))
             
-            return redirect(url_for("match_dashboard"))
+            return redirect(url_for("dashboard"))
 
         return render_template('edit_match.html', course_data=found_course, data=found_user, editing=found_match)
 
@@ -1126,11 +1144,11 @@ def delete_match(match_to_delete):
             #removes match from DB
             db.session.delete(found_match)
             db.session.commit()
-            return redirect(url_for("match_dashboard"))
+            return redirect(url_for("dashboard"))
         except:
             db.session.delete(found_match)
             db.session.commit()
-            return redirect(url_for("match_dashboard"))
+            return redirect(url_for("dashboard"))
     return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/delete_course/<course_to_delete>")
@@ -1189,7 +1207,7 @@ def edit_user_profile():
 
         db.session.commit()
 
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("profile"))
     return redirect(url_for('error', msg="Something went wrong. Please try again!"))
 
 
@@ -1200,7 +1218,7 @@ def choose_banner():
         found_user.banner = request.form['banner']
         db.session.commit()
 
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("profile"))
     return redirect(url_for('error', msg="Something went wrong. Please try again!"))
 
 
@@ -1269,13 +1287,13 @@ def send_email_notification(password):
     else:
         return render_template("admin.html", message="Password was incorrect!")
 
-@app.route("/match_dashboard")
-def match_dashboard():
+@app.route("/dashboard")
+def dashboard():
     if 'active_user' in session and session['active_user'][2] == 'coach':
         found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
         found_match = match.query.filter_by(created_by=session['active_user'][0]).all()
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
-        return render_template("match_dashboard.html", course_data=found_course, data=found_user, match_data=found_match)
+        return render_template("dashboard.html", course_data=found_course, data=found_user, match_data=found_match)
     return redirect(url_for('error', msg="You do not have access to this site."))
 
 @app.route("/course_dashboard")
