@@ -18,7 +18,7 @@ from random import randint
 app = Flask(__name__)
 socketio = SocketIO(app)
 app.secret_key = "max"
-app.permanent_session_lifetime = timedelta(minutes=600)
+app.permanent_session_lifetime = timedelta(minutes=720)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///webdata.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 UPLOAD_FOLDER = 'static/logo_graphics/user_photos'
@@ -158,7 +158,7 @@ class match(db.Model):
 #Scoring class
 class Scoring():
     def create_json(filename, match_code, match_password, number_holes, match_name, start_time, end_time, home_team, away_team, match_type, gamemode, Id, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18):
-        data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "match_password": match_password, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": ""}
+        data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "match_password": match_password, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "home_team":home_team, "away_team": away_team, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": "", "shared_coaches": []}
         #json_string = json
         with open("static/score_files/" + str(filename) + ".json", "a+") as file:
             
@@ -168,7 +168,7 @@ class Scoring():
             file.truncate()
 
     def new_create_json(filename, match_code, match_password, number_holes, match_name, start_time, end_time, num_teams, teams, match_type, gamemode, Id, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18):
-        data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "match_password": match_password, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "team_scores": {}, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": ""}
+        data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "match_password": match_password, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "team_scores": {}, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": "", "shared_coaches": []}
         for team in teams:
             data["teams"][team] = 0
         with open("static/score_files/" + str(filename) + ".json", "a+") as file:
@@ -178,6 +178,34 @@ class Scoring():
             json_object = json.dump(data, file, indent=3)
             file.truncate()
 
+    def add_shared_coach(filename, coach_username):
+            with open("static/score_files/" + str(filename) + ".json", "r+") as file:
+                file.seek(0)
+                data = json.load(file)
+                data["shared_coaches"].append(coach_username)
+                file.seek(0)
+                json_object = json.dump(data, file, indent=3)
+                file.truncate()
+
+    def remove_shared_coach(filename, coach_username):
+        with open("static/score_files/" + str(filename) + ".json", "r+") as file:
+            file.seek(0)
+            data = json.load(file)
+            if coach_username in data["shared_coaches"]:
+                data["shared_coaches"].remove(coach_username)
+            file.seek(0)
+            json_object = json.dump(data, file, indent=3)
+            file.truncate()
+
+    def remove_shared_coach(filename, coach_username):
+        with open("static/score_files/" + str(filename) + ".json", "r+") as file:
+            file.seek(0)
+            data = json.load(file)
+            if coach_username in data["shared_coaches"]:
+                data["shared_coaches"].remove(coach_username)
+            file.seek(0)
+            json_object = json.dump(data, file, indent=3)
+            file.truncate()
     def add_to_lobby(filename, player):
         with open("static/score_files/" + str(filename) + ".json", "r+") as file:
             file.seek(0)
@@ -667,8 +695,17 @@ def verify_user(user: str, verified_input: int):
 
 def match_security(session_type: str, match_id: str) -> bool: #this is for all of the control routes
     found_match = match.query.filter_by(_id=match_id).first()
+    found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    user_verified = False
+    with open("static/score_files/" + str(found_match._id) + ".json", "r") as file:
+        file.seek(0)
+        data = json.load(file)        
+        print(found_user.username)
+
+        if found_user != "" and found_user.username in data["shared_coaches"]:
+            user_verified = True
     try:
-        if 'coach' in session[session_type] and found_match.created_by == session[session_type][0]:
+        if 'coach' in session[session_type] and (found_match.created_by == session[session_type][0] or user_verified):
             return True
         else:
             return False
@@ -739,6 +776,13 @@ def entering_match(match_code):
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
     except:
         found_user = ""
+    with open("static/score_files/" + str(found_match._id) + ".json", "r") as file:
+        file.seek(0)
+        data = json.load(file)        
+        print(found_user.username)
+
+        if found_user != "" and found_user.username in data["shared_coaches"]:
+            return redirect(url_for("active_match_view", json_data_input=found_match._id))
     return render_template("player-or-spectator.html", data=found_user, match_data=found_match)
 
 
@@ -989,8 +1033,8 @@ def resend_email(email):
     with open('tokens.json', "r+") as file:
         data = json.load(file)
         target_email = email
-        target_list = None
 
+        #gets key from email value
         for key, value in data.items():
             if isinstance(value, list) and target_email in value:
                 target_key = key
@@ -999,6 +1043,7 @@ def resend_email(email):
         username = data[target_key][1]
 
         new_key = emails1.send_validation_email(email, username)
+        #renames key to new_key
         if target_key in data:
             data[new_key] = data.pop(target_key)
 
@@ -1093,6 +1138,25 @@ def edit_match(match_to_edit):
         return render_template('edit_match.html', course_data=found_course, data=found_user, editing=found_match)
 
     return render_template("error", msg="You do not have access to this site!")
+
+
+@app.route("/add_shared_coach/<filename>/<coach>")
+def add_shared_coach_route(filename, coach):
+    found_match = match.query.filter_by(_id=filename).first()
+    found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
+        Scoring.add_shared_coach(filename, coach)
+        return redirect(url_for("active_match_view", json_data_input=found_match._id))
+    return redirect(url_for('error', msg="You do not have permission to add coaches to this match."))
+
+@app.route("/remove_shared_coach/<filename>/<coach>")
+def remove_shared_coach_route(filename, coach):
+    found_match = match.query.filter_by(_id=filename).first()
+    found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
+        Scoring.remove_shared_coach(filename, coach)
+        return redirect(url_for("active_match_view", json_data_input=found_match._id))
+    return redirect(url_for('error', msg="You do not have permission to add coaches to this match."))
 
 
 @app.route("/edit_course/<course_to_edit>", methods=["POST", "GET"])
@@ -1383,11 +1447,17 @@ def spectator_match_view(json_data_input):
         match_owner = found_match.created_by
         match_date = found_match.start_time
         found_match_owner = users.query.filter_by(username=match_owner).first()
+        match_course = found_match.match_course
+        found_course = course.query.filter_by(created_by=match_owner).first()
+        match_location = found_course.city
     except:
         found_match = match_archive.query.filter_by(_id=json_data_input).first()
         match_owner = found_match.created_by
         match_date = found_match.start_time
         found_match_owner = users.query.filter_by(username=match_owner).first()
+        match_course = found_match.match_course
+        found_course = course.query.filter_by(created_by=match_owner).first()
+        match_location = found_course.city
     try:
         json_data = Scoring.return_data(json_data_input)
         try:
@@ -1402,7 +1472,7 @@ def spectator_match_view(json_data_input):
                     scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
             else:
                 scores = Scoring.calc_match_results(json_data['match_info']['id'])
-        return render_template("spectator-active-match-view.html", date=match_date, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
+        return render_template("spectator-active-match-view.html", date=match_date, course=match_course, city=match_location, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
     except:
         try:
             json_data = Scoring.return_archive_data(json_data_input)
@@ -1418,7 +1488,7 @@ def spectator_match_view(json_data_input):
                     scores = Scoring.calc_match_play_results(json_data['match_info']['id'])
                 else:
                     scores = Scoring.calc_match_results(json_data['match_info']['id'])
-            return render_template("spectator-active-match-view.html", date=match_date, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
+            return render_template("spectator-active-match-view.html", date=match_date, course=match_course, city=match_location, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
         except:
             return redirect(url_for('error', msg='This match does not exist!'))
 
@@ -1432,11 +1502,17 @@ def player_match_view(json_data_input):
             match_owner = found_match.created_by
             match_date = found_match.start_time
             found_match_owner = users.query.filter_by(username=match_owner).first()
+            match_course = found_match.match_course
+            found_course = course.query.filter_by(created_by=match_owner).first()
+            match_location = found_course.city
         except:
             found_match = match_archive.query.filter_by(_id=json_data_input).first()
             match_owner = found_match.created_by
             match_date = found_match.start_time
             found_match_owner = users.query.filter_by(username=match_owner).first()
+            match_course = found_match.match_course
+            found_course = course.query.filter_by(created_by=match_owner).first()
+            match_location = found_course.city
         try:
             json_data = Scoring.return_data(json_data_input)
         except:
@@ -1460,8 +1536,8 @@ def player_match_view(json_data_input):
         except:
             found_user = ''
         if request.method =="POST":
-            return redirect(url_for("player_match_view", date=match_date, data1=found_match_owner, active_player=session['active_player'], json_data_input = json_data['match_info']['id']))
-        return render_template("player-active-match-view.html", date=match_date, data1=found_match_owner, active_player=session['active_player'], data=found_user, playerdata=json_data, scoring_data = scores)
+            return redirect(url_for("player_match_view", date=match_date, course=match_course, city=match_location, data1=found_match_owner, active_player=session['active_player'], json_data_input = json_data['match_info']['id']))
+        return render_template("player-active-match-view.html", date=match_date, course=match_course, city=match_location, data1=found_match_owner, active_player=session['active_player'], data=found_user, playerdata=json_data, scoring_data = scores)
     else:
         return redirect(url_for('error', msg='You do not have access to this site until you join a match.'))
     
@@ -1473,11 +1549,17 @@ def active_match_view(json_data_input):
         match_owner = found_match.created_by
         match_date = found_match.start_time
         found_match_owner = users.query.filter_by(username=match_owner).first()
+        match_course = found_match.match_course
+        found_course = course.query.filter_by(created_by=match_owner).first()
+        match_location = found_course.city
     except:
         found_match = match_archive.query.filter_by(_id=json_data_input).first()
         match_owner = found_match.created_by
         match_date = found_match.start_time
         found_match_owner = users.query.filter_by(username=match_owner).first()
+        match_course = found_match.match_course
+        found_course = course.query.filter_by(created_by=match_owner).first()
+        match_location = found_course.city
     try:
         json_data = Scoring.return_data(json_data_input)
     except:
@@ -1505,7 +1587,7 @@ def active_match_view(json_data_input):
         scores = Scoring.calc_match_results(json_data['match_info']['id'])
 
     if match_security('active_user', json_data_input):
-        return render_template("active_match_view.html", date=match_date, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data=scores, rank=session['active_user'][2])
+        return render_template("active_match_view.html", json_data_input=json_data_input, date=match_date, course=match_course, city=match_location, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data=scores, rank=session['active_user'][2])
     else:
         return redirect(url_for('error', userdata=found_user, msg="You do not have access to this site!"))
 
