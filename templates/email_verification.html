@@ -23,8 +23,9 @@
     <title>Email Verification | Big Blue</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/email_verification.css') }}">
 
+
     <div class="form-container">
-        <form action="#" method='POST'>
+        <form action="/create_account/email_verification/{{email}}" method='POST'>
             <img src="{{ url_for('static', filename='logo_graphics/email.png') }}" alt="">
             <h2>Email Verification</h2>
             <p>We sent an email with a verification code to {{email}}. </p>
@@ -36,12 +37,14 @@
             <input type="submit" id="submit_code_button" value="Verify Email">
         </form>
 
-        <div class="resend-verification-container">
-            <div class="resend-verification">
-                <h5>Don't see the email? <a href="/create_account/email_verification/resend_email/{{email}}">Resend New Verification Code</a>">Resend new one</a></h5>
-            </div>
-        </div>
+
         
+    </div>
+
+    <div class="resend-verification-container">
+        <div class="resend-verification">
+            <h5>Don't see the email? <a href="/create_account/email_verification/resend_email/{{email}}">Resend new one</a></h5>
+        </div>
     </div>
 
 </head>

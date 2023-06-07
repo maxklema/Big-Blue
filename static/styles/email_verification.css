@@ -279,7 +279,7 @@ html, body {
     display: flex;
     justify-content: center;
     margin-top: 5%;
-    margin-bottom: 5%;
+
 }
 
 .form-container form {
@@ -287,6 +287,7 @@ html, body {
     padding: 20px 30px;
     background-color: white;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 .form-container form p {
