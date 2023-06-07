@@ -20,7 +20,7 @@ def token_generator() -> str:
 
 def send_validation_email(email: str, username1: str):
     token = token_generator()
-    send_email(email, "Verify BigBlue.Golf Email", "Hello " + username1 + ". We are excited that you have chosen to join BigBlue.Golf. However, before you can enjoy your account, you must verify your email adress. Please use the following access token to verify your account. \n\nVERIFICATION TOKEN: " + token + "\n\nThanks, \nThe BigBlue.Golf Team.")
+    send_email(email, "Verify BigBlue.Golf Email", "Hello " + username1 + ". We are excited that you have chosen to join BigBlue.Golf. However, before you can enjoy your account, you must verify your email address. Please use the following access token to verify your account. \n\nVERIFICATION TOKEN: " + token + "\n\nThanks, \nThe BigBlue.Golf Team.")
     return token
 
 def send_email(to: str, subject: str, email_content):
