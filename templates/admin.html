@@ -21,8 +21,6 @@
         function tableCreate() {
             const body = document.body, 
             tbl = document.createElement('table');
-
-
             for (let i = 0; i <= Object.keys(data).length; i++) {
                 const tr = tbl.insertRow();
                 for (const j in data[i]) {
@@ -35,12 +33,26 @@
     </script>
 
     <body>
+        <div class="message">
+            {% if message %}
+                <p>{{message}}</p>
+            {% endif %}
+        </div>
         <div id="container">
             <div class="main">
                 <h1>All Users</h1>
+                <p>All users will be shown at the bottom of the screen.</p>
                 <button onclick="tableCreate();">Show user table</button>
-				
 				</div>
+            </div>
+            <hr>
+            <div>
+                <h1>Send Email Notifications</h1>
+                <form method="post" action="/admin/send_email_notification/graysonisthebestcomposer">
+                    <textarea name="content" placeholder="Update all users with email..." cols="100" rows="20"></textarea>
+                    <br>
+                    <input type="submit">
+                </form>
             </div>
         </div>
     </body>

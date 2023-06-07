@@ -1000,6 +1000,8 @@ def email_verification(email):
                 file.seek(0, 0)
                 json.dump(data, file, indent=3)
                 file.truncate()
+            else:
+                return render_template("email_verification.html", data='', email=email, message='Sorry, your token was invalid. Please try again.')
         return redirect(url_for('chooseprofilepicture'))
     try:
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
@@ -1224,6 +1226,24 @@ def admin(password):
         return render_template("admin.html")
     else:
         return redirect(url_for('error', msg="You do not have access to this site."))
+
+@app.route("/admin/send_email_notification/<password>", methods=['POST'])
+def send_email_notification(password):
+    if password == 'graysonisthebestcomposer':
+        conn = sqlite3.connect('instance/webdata.sqlite3')
+        cursor = conn.cursor()
+        cursor.execute('''SELECT * from USERS''')
+        result = cursor.fetchall()
+        for user in result:
+            print("Email sent to: " + user[4])
+            try:
+                emails1.send_email(user[4], 'Update from BigBlue.golf', request.form['content'])
+            except:
+                print("Could not sent email to " + user[4])
+            print('___' + request.form['content'])
+        return render_template("admin.html", message="Messages sent sucsessfuly!")
+    else:
+        return render_template("admin.html", message="Password was incorrect!")
 
 @app.route("/match_dashboard")
 def match_dashboard():
