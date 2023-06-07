@@ -966,6 +966,32 @@ def create_match():
         return render_template('create_match.html', course_data=found_course, data=found_user)
     return redirect(url_for('error', msg='You do not have access to this page.'))
 
+@app.route("/create_account/email_verification/resend_email/<email>")
+def resend_email(email):
+    with open('tokens.json', "r+") as file:
+        data = json.load(file)
+        target_email = email
+        target_list = None
+
+        for key, value in data.items():
+            if isinstance(value, list) and target_email in value:
+                target_key = key
+                break
+
+        username = data[target_key][1]
+
+        new_key = emails1.send_validation_email(email, username)
+        if target_key in data:
+            data[new_key] = data.pop(target_key)
+
+        file.seek(0, 0)
+        json.dump(data, file, indent=3)
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
+    return render_template("email_verification.html", data=found_user, email=email)
+
 @app.route("/create_account/email_verification/<email>", methods=["POST", "GET"])
 def email_verification(email):
     if request.method == 'POST':
@@ -1000,8 +1026,6 @@ def email_verification(email):
                 file.seek(0, 0)
                 json.dump(data, file, indent=3)
                 file.truncate()
-            else:
-                return render_template("email_verification.html", data='', email=email, message='Sorry, your token was invalid. Please try again.')
         return redirect(url_for('chooseprofilepicture'))
     try:
         found_user = users.query.filter_by(username=session['active_user'][0]).first()

@@ -21,14 +21,27 @@
 
 <head>
     <title>Email Verification | Big Blue</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/stylelogin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/email_verification.css') }}">
 
-    <div>
-        <h3>We sent an email to {{email}}. Enter Code:</h3>
+    <div class="form-container">
         <form action="#" method='POST'>
-            <input type="text" name="token_input" id="token_input">
-            <input type="submit">
+            <img src="{{ url_for('static', filename='logo_graphics/email.png') }}" alt="">
+            <h2>Email Verification</h2>
+            <p>We sent an email with a verification code to {{email}}. </p>
+            {% if message %}
+                    <h5 id="error">{{message}}</h5>    
+                {% endif %}
+            <label for="token_input">Enter Code:</label>
+            <input type="text" placeholder="EX: qudUlM" name="token_input" id="token_input"><br>
+            <input type="submit" id="submit_code_button" value="Verify Email">
         </form>
+
+        <div class="resend-verification-container">
+            <div class="resend-verification">
+                <h5>Don't see the email? <a href="/create_account/email_verification/resend_email/{{email}}">Resend New Verification Code</a>">Resend new one</a></h5>
+            </div>
+        </div>
+        
     </div>
 
 </head>
