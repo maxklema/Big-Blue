@@ -33,5 +33,10 @@
    },
    "lobby": [],
    "message": "",
-   "shared_coaches": []
+   "shared_coaches": [
+      "janedoe",
+      "bigblue",
+      "bigblue",
+      "bigblue"
+   ]
 }

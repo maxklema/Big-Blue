@@ -1146,6 +1146,10 @@ def add_shared_coach_route(filename, coach):
     found_user = users.query.filter_by(username=session['active_user'][0]).first()
     if 'active_user' in session and session['active_user'][0] == found_match.created_by and session['active_user'][2] == "coach":
         Scoring.add_shared_coach(filename, coach)
+        coach_user = users.query.filter_by(username=coach).first()
+        coach_email = coach_user.email
+        print(coach_email)
+        emails1.send_email(coach_email, ("@" + str(found_user.username) + " Shared a Match with you!"), ("User @" + str(found_user.username) + " shared a a match titled '" + str(found_match.match_name) + "' with you. This means you can help them manage and edit the match live. \n\nTo access the match's dashboard, you must be logged in, and then enter this join code: " + str(found_match.match_code) + " at https://bigblue.golf/joincode. \n\nThe Bigblue.golf Team\nFort Wayne, Indiana"))
         return redirect(url_for("active_match_view", json_data_input=found_match._id))
     return redirect(url_for('error', msg="You do not have permission to add coaches to this match."))
 
