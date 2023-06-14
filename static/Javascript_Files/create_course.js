@@ -180,7 +180,6 @@ function validateForm(){
                     pareightteen.style.borderColor = "black";
                 }
         
-        
                 return false;
             
         }

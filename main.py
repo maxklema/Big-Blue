@@ -1671,7 +1671,7 @@ def create_course():
                         return render_template("create_course.html", message='Your values were either blank or inapropriate. Please try again.')
 
 
-                course_entry = course(request.form["course-name"], request.form["numberholes"], request.form["holepar1"], request.form["holepar2"], request.form["holepar3"], request.form["holepar4"], request.form["holepar5"], request.form["holepar6"], request.form["holepar7"], request.form["holepar8"], request.form["holepar9"], request.form["holepar10"], request.form["holepar11"], request.form["holepar12"], request.form["holepar13"], request.form["holepar14"], request.form["holepar15"], request.form["holepar16"], request.form["holepar17"], request.form["holepar18"], request.form['city'], '', session['active_user'][0])
+                course_entry = course(request.form["course-name"], request.form["numberholes"], 0.0, 0.0, request.form["holepar1"], '', request.form["holepar2"], '', request.form["holepar3"], '', request.form["holepar4"], '', request.form["holepar5"], '', request.form["holepar6"], '', request.form["holepar7"], '', request.form["holepar8"], '', request.form["holepar9"], '', request.form["holepar10"], '', request.form["holepar11"], '', request.form["holepar12"], '', request.form["holepar13"], '', request.form["holepar14"], '', request.form["holepar15"], '', request.form["holepar16"], '', request.form["holepar17"], '', request.form["holepar18"], '', request.form['city'], '', session['active_user'][0])
                 db.session.add(course_entry)
                 db.session.commit()
                 found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
