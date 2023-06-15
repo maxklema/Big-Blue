@@ -416,6 +416,20 @@ html, body {
     text-decoration: none;
 }
 
+#home-player-golf-claps {
+    font-family: bigBlueRegular;
+    font-size: 12px;
+    color: grey;
+    text-align: left;
+}
+
+#away-player-golf-claps {
+    font-family: bigBlueRegular;
+    font-size: 12px;
+    color: grey;
+    text-align: right;
+}
+
 .team-scores-inner-home a {
     margin-left: 10px;
     padding: 5px 15px;

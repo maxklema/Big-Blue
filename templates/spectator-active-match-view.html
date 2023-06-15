@@ -73,11 +73,11 @@ end match (side)
                                     
                                     {% if playerdata['players'][player]['opponent'] != "" %}
                                         <h3 id="match_status_h3_{{player}}"></h3>
-                                            <script>
+                                            <!--<script>
                                                 fetch("/calc_match/{{playerdata['match_info']['id']}}/{{player}}/{{playerdata['players'][player]['opponent']}}")
                                                 .then(response => response.text())
                                                 .then(data => document.getElementById('match_status_h3_{{player}}').innerHTML = data.replace(/%20/g, ' '));
-                                            </script>
+                                            </script>-->
                                     {% else %}
                                         <h3 id="match_status_h3_{{player}}">No Opponent</h3>
                                 {% endif %}
@@ -87,13 +87,28 @@ end match (side)
                                 <div class="both-player-cards-spectator-player">
 
                                     <div class="card-home-player">
-                                        <h3 id="player-name">{{player | replace('%20', ' ') }}</h3>
-                                        <h5 class="team_name_header" >{{playerdata['players'][player]['team']}}</h5>
+                                        <div>
+                                            <h3 id="player-name">{{player | replace('%20', ' ') }}</h3>
+                                            <h5 class="team_name_header" >{{playerdata['players'][player]['team']}}</h5>
+                                            <p id="home-player-golf-claps">0 Claps</p>
+                                        </div>
+                                        <div>
+                                            <a href="/">Clap!</a>
+                                        </div>
+                                        
                                     </div>
     
                                     <div class="card-away-player">
-                                        <h3>{{playerdata['players'][player]['opponent'] | replace('%20', ' ')}}</h3>
-                                        <h5 class="team_name_header" id="opponent_team_header">{{playerdata['match_info']['away_team']}}</h5>
+                                        <div>
+                                            <h3>{{playerdata['players'][player]['opponent'] | replace('%20', ' ')}}</h3>
+                                            <h5 class="team_name_header" id="opponent_team_header">{{playerdata['match_info']['away_team']}}</h5>
+                                            <p id="away-player-golf-claps">0 Claps</p>
+                                        </div>
+                                        <div>
+                                            <a href="/">Clap!</a>
+                                        </div>
+                                        
+                                       
                                     </div>
 
                                 </div>
