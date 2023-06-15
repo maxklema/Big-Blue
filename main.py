@@ -301,7 +301,7 @@ class Scoring():
             elif data["match_info"]["number_holes"] == "18":
                 holes = {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0}
                 
-            data["players"][player] = {"team": team, "opponent": "","scores":holes}
+            data["players"][player] = {"team": team, "opponent": "","scores":holes,"golf_clap":0}
 
             for waiting in data["lobby"]:
                 if waiting[0] == player:
@@ -682,8 +682,17 @@ class Scoring():
                 if leader_board[j][1] > leader_board[j + 1][1]:
                     leader_board[j], leader_board[j + 1] = leader_board[j + 1], leader_board[j]
         return leader_board
+    
+    def add_golf_clap(filename, player):
+        with open("static/score_files/" + str(filename) + ".json", "r+") as file:
+            file.seek(0)
+            data = json.load(file)
+            if player in data["players"]:
+                data["players"][player]['golf_clap'] += 1
+                file.seek(0)
+                json.dump(data, file, indent=3)
+                file.truncate()
             
-
 def archive_match(filename):
     with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "a+") as file:
         file.seek(0)
@@ -821,8 +830,7 @@ def entering_match(match_code):
         found_user = ""
     with open("static/score_files/" + str(found_match._id) + ".json", "r") as file:
         file.seek(0)
-        data = json.load(file)        
-        print(found_user.username)
+        data = json.load(file)
 
         if found_user != "" and found_user.username in data["shared_coaches"]:
             return redirect(url_for("active_match_view", json_data_input=found_match._id))
@@ -1419,7 +1427,7 @@ def send_email_notification(password):
         return render_template("admin.html", message="Password was incorrect!")
 
 @app.route("/dashboard")
-def match_dashboard():
+def dashboard():
     if 'active_user' in session and session['active_user'][2]:
         found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
         found_match = match.query.filter_by(created_by=session['active_user'][0]).all()
@@ -1814,7 +1822,13 @@ def search(searchbar):
         )).limit(100)
     return render_template("search_results.html", keyword=keyword, search_query=search_query, data=found_user)
     
-
+@app.route("/golf_clap/<filename>/<player>")
+def golf_clap(filename, player):
+    #try:
+    Scoring.add_golf_clap(filename, player)
+    return 'Golf clap added to player: ' + player,200
+    #except:
+        #return 'Could not add golf clap to player: ' + player,500
 
 if __name__ == "__main__":
     with app.app_context():

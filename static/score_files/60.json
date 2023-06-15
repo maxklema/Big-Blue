@@ -1,0 +1,63 @@
+{
+   "players": {
+      "Max": {
+         "team": "None",
+         "opponent": "",
+         "scores": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0
+         },
+         "golf_clap": 6
+      }
+   },
+   "match_info": {
+      "par1": 3,
+      "par2": 3,
+      "par3": 3,
+      "par4": 4,
+      "par5": 4,
+      "par6": 3,
+      "par7": 3,
+      "par8": 3,
+      "par9": 3,
+      "par10": 4,
+      "par11": 4,
+      "par12": 4,
+      "par13": 5,
+      "par14": 3,
+      "par15": 3,
+      "par16": 4,
+      "par17": 4,
+      "par18": 3,
+      "match_code": "342960",
+      "match_password": "123",
+      "number_holes": "18",
+      "match_name": "Test Match 100",
+      "start_time": "0001-01-01",
+      "end_time": "0001-01-01",
+      "home_team": "n/a",
+      "away_team": "n/a",
+      "match_type": "Singles",
+      "gamemode": "Stroke Play",
+      "id": 60
+   },
+   "lobby": [],
+   "message": "",
+   "shared_coaches": []
+}
