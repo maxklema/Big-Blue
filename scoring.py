@@ -12,7 +12,7 @@ class Scoring():
             json_object = json.dump(data, file, indent=3)
             file.truncate()
 
-    def new_create_json(filename, match_code, match_password, number_holes, match_name, start_time, end_time, num_teams, teams, match_type, gamemode, Id, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18):
+    def new_create_json(filename, match_code, match_password, number_holes, match_name, start_time, end_time, num_teams, teams, match_type, gamemode, Id, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12, par13, par14, par15, par16, par17, par18, shotgun_start):
         data = {"players":{}, "match_info": {"par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5, "par6": par6, "par7": par7, "par8": par8, "par9": par9, "par10": par10, "par11": par11, "par12": par12, "par13": par13, "par14": par14, "par15": par15, "par16": par16, "par17": par17, "par18": par18, "match_code": match_code, "match_password": match_password, "number_holes": number_holes, "match_name": match_name, "start_time": start_time, "end_time": end_time, "team_scores": {}, "match_type": match_type, "gamemode": gamemode, "id": Id},"lobby":[], "message": "", "shared_coaches": []}
         for team in teams:
             data["teams"][team] = 0
@@ -42,15 +42,6 @@ class Scoring():
             json_object = json.dump(data, file, indent=3)
             file.truncate()
 
-    def remove_shared_coach(filename, coach_username):
-        with open("static/score_files/" + str(filename) + ".json", "r+") as file:
-            file.seek(0)
-            data = json.load(file)
-            if coach_username in data["shared_coaches"]:
-                data["shared_coaches"].remove(coach_username)
-            file.seek(0)
-            json_object = json.dump(data, file, indent=3)
-            file.truncate()
     def add_to_lobby(filename, player):
         with open("static/score_files/" + str(filename) + ".json", "r+") as file:
             file.seek(0)
@@ -92,7 +83,7 @@ class Scoring():
             json_object = json.dump(data, file, indent=3)
             file.truncate()
 
-    def add_player(filename, player, team):
+    def add_player(filename, player, team, starting_hole=1):
         #json.load("test.json")
         with open("static/score_files/" + str(filename) + ".json", "r+") as file:
             file.seek(0)
@@ -103,7 +94,7 @@ class Scoring():
             elif data["match_info"]["number_holes"] == "18":
                 holes = {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0}
                 
-            data["players"][player] = {"team": team, "opponent": "","scores":holes,"golf_clap":0}
+            data["players"][player] = {"team": team, "opponent": "","scores":holes,"golf_clap":0,"starting_hole":starting_hole}
 
             for waiting in data["lobby"]:
                 if waiting[0] == player:
@@ -375,13 +366,29 @@ class Scoring():
                 last_hole = 0
                 current_score = 0
                 current_par = 0
-                for i in range(int(data["match_info"]["number_holes"])):
-                    if (player_score[str(i+1)] != 0):
+                starting_hole = -1
+                for y in range(1, int(data["match_info"]["number_holes"])+1):
+                    if player_score[str(y)] != 0 and starting_hole == -1:
+                        starting_hole = y
+                        break
+                if starting_hole == -1:
+                    starting_hole = 1
+                for i in range(starting_hole, int(data["match_info"]["number_holes"])+1):
+                    if (player_score[str(i)] != 0):
                         last_hole+=1
-                        current_score += int(player_score[str(i+1)])
-                        current_par += data["match_info"]["par" + str(i+1)]
+                        current_score += int(player_score[str(i)])
+                        current_par += data["match_info"]["par" + str(i)]
                     else:
                         break
+                
+                for k in range(1,starting_hole):
+                    if (player_score[str(k)] != 0):
+                        last_hole+=1
+                        current_score += int(player_score[str(k)])
+                        current_par += data["match_info"]["par" + str(k)]
+                    else:
+                        break
+
                 absolute_relation = str(abs(current_score - current_par))
                 if last_hole == int(data["match_info"]["number_holes"]):
                     return "F: " + str(current_score)
