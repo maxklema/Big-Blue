@@ -133,8 +133,8 @@ class Scoring():
                 data = json.load(file)
                 status=""
                 score=0
-                first_scores = data["players"][player1.replace(' ', '%20')]["scores"]
-                second_scores = data["players"][player2.replace(' ', '%20')]["scores"]
+                first_scores = data["players"][player1]["scores"]
+                second_scores = data["players"][player2]["scores"]
                 last_hole=0
                 for i in range(int(data["match_info"]["number_holes"])):
                     if (int(first_scores[str(i+1)]) != 0) and (int(second_scores[str(i+1)]) != 0):

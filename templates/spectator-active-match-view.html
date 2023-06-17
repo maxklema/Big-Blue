@@ -89,23 +89,77 @@ end match (side)
                                     <div class="card-home-player">
                                         <div>
                                             <h3 id="player-name">{{player | replace('%20', ' ') }}</h3>
-                                            <h5 class="team_name_header" >{{playerdata['players'][player]['team']}}</h5>
-                                            <p id="home-player-golf-claps">0 Claps</p>
+                                            <h5 class="team_name_header" >{{playerdata['players'][player]['team']}} • <span id="home-player-golf-claps">{{playerdata['players'][player]['golf_clap']}} Claps</span></h5>
                                         </div>
                                         <div>
-                                            <a href="/">Clap!</a>
+                                            <button id="golf-clap-button" onclick="beforeAddGolfClapHome({{playerdata['match_info']['id']}})"><img src="{{ url_for('static', filename='logo_graphics/golf_clap_static.png') }}" alt=""></button>
+                                            <script>
+                                                function beforeAddGolfClapHome(filename){
+                                                    let player = document.getElementById('player-name').innerHTML;
+                                                    addGolfClapHome(filename, player)
+                                                }
+
+                                                function addGolfClapHome(filename, player) {
+                                                    fetch(`/golf_clap/${filename}/${player}`)
+                                                        .then(response => {
+                                                        if (response.ok) {
+                                                            let current_golf_claps_innerHTML = document.getElementById('home-player-golf-claps').innerHTML
+                                                            const myArray = current_golf_claps_innerHTML.split(" ")
+                                                            let current_golf_claps = myArray[0]
+                                                            current_golf_claps = parseInt(current_golf_claps)
+                                                            current_golf_claps += 1
+                                                            document.getElementById('home-player-golf-claps').innerHTML = current_golf_claps + " Claps";
+                                                            console.log(`Golf clap added to player: ${player}`);
+                                                            // Perform any additional actions after a successful response
+                                                        } else {
+                                                            console.error(`Failed to add golf clap to player: ${player}`);
+                                                        }
+                                                        })
+                                                        .catch(error => {
+                                                        console.error(`Error adding golf clap: ${error}`);
+                                                        });
+                                                    }
+                                            </script>
                                         </div>
                                         
                                     </div>
     
                                     <div class="card-away-player">
                                         <div>
-                                            <h3>{{playerdata['players'][player]['opponent'] | replace('%20', ' ')}}</h3>
-                                            <h5 class="team_name_header" id="opponent_team_header">{{playerdata['match_info']['away_team']}}</h5>
-                                            <p id="away-player-golf-claps">0 Claps</p>
+                                            {% set opponent = playerdata['players'][player]['opponent'] %}
+                                            <h3 id="away-player-name">{{playerdata['players'][player]['opponent'] | replace('%20', ' ')}}</h3>
+                                            <h5 class="team_name_header" id="opponent_team_header">{{playerdata['match_info']['away_team']}} • <span id="away-player-golf-claps">{{playerdata['players'][opponent]['golf_clap']}} Claps</span></h5>
                                         </div>
                                         <div>
-                                            <a href="/">Clap!</a>
+                                            <button id="golf-clap-button" onclick="beforeAddGolfClapAway({{playerdata['match_info']['id']}})"><img src="{{ url_for('static', filename='logo_graphics/golf_clap_static.png') }}" alt=""></button>
+                                            <script>
+                                                
+                                                function beforeAddGolfClapAway(filename){
+                                                    let player = document.getElementById('away-player-name').innerHTML;
+                                                    addGolfClapAway(filename, player)
+                                                }
+                                                
+                                                function addGolfClapAway(filename, player) {
+                                                    fetch(`/golf_clap/${filename}/${player}`)
+                                                        .then(response => {
+                                                        if (response.ok) {
+                                                            let current_golf_claps_innerHTML = document.getElementById('away-player-golf-claps').innerHTML
+                                                            const myArray = current_golf_claps_innerHTML.split(" ")
+                                                            let current_golf_claps = myArray[0]
+                                                            current_golf_claps = parseInt(current_golf_claps)
+                                                            current_golf_claps += 1
+                                                            document.getElementById('away-player-golf-claps').innerHTML = current_golf_claps + " Claps";
+                                                            console.log(`Golf clap added to player: ${player}`);
+                                                            // Perform any additional actions after a successful response
+                                                        } else {
+                                                            console.error(`Failed to add golf clap to player: ${player}`);
+                                                        }
+                                                        })
+                                                        .catch(error => {
+                                                        console.error(`Error adding golf clap: ${error}`);
+                                                        });
+                                                    }
+                                            </script>
                                         </div>
                                         
                                        
