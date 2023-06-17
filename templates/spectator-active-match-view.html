@@ -256,13 +256,22 @@ end match (side)
                                 <div class="card-user-information-stroke-play">
                                     <h2 id="{{player}}_name_h2">{{player | replace('%20', ' ') }}</h2>
                                     {% if playerdata['match_info']['match_type'] == 'Singles' %}
-                                        <h5 id="golf_claps">{{playerdata['players'][player]['golf_clap']}} Claps</h5>
+                                        <div class="clap-display">
+                                            <h5 id="golf_claps">{{playerdata['players'][player]['golf_clap']}} Claps</h5>
+                                            <button id="golf-clap-button-stroke-play" onclick="beforeAddGolfClapHome({{playerdata['match_info']['id']}})"><img src="{{ url_for('static', filename='logo_graphics/golf_clap_static.png') }}" alt=""></button>
+                                        </div>
+                                        
                                     {% else %}
                                         <h5 id="{{player}}_team_h5">{{playerdata['players'][player]['team']}}</h5>
                                     {% endif %}
-                                    <button onclick="addGolfClap({{playerdata['match_info']['id']}}, 'Max')">Add Golf Clap</button>
+                                    
                                     <script>
-                                        function addGolfClap(filename, player) {
+                                        function beforeAddGolfClapHome(filename){
+                                            let player = document.getElementById('{{player}}_name_h2').innerHTML;
+                                            addGolfClapHome(filename, player)
+                                        }
+
+                                        function addGolfClapHome(filename, player) {
                                             fetch(`/golf_clap/${filename}/${player}`)
                                                 .then(response => {
                                                 if (response.ok) {

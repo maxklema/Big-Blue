@@ -393,6 +393,29 @@ html, body {
     margin-top: 5px;
 }
 
+#golf-clap-button-stroke-play {
+    border-radius: 100%;
+    background-color: #1965c1;
+    border: 1.5px transparent;
+    width: 25px;
+    height: 25px;
+    color: rgb(13, 165, 13);
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+#golf-clap-button-stroke-play img {
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    margin-right: 1px;
+}
+
+.clap-display {
+    display: flex;
+    align-items: center;
+}
+
 #team_wins_hole_button-away {
     max-width: 600px;
     height: 35px;
