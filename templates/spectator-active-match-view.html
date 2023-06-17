@@ -73,11 +73,11 @@ end match (side)
                                     
                                     {% if playerdata['players'][player]['opponent'] != "" %}
                                         <h3 id="match_status_h3_{{player}}"></h3>
-                                            <!--<script>
+                                            <script>
                                                 fetch("/calc_match/{{playerdata['match_info']['id']}}/{{player}}/{{playerdata['players'][player]['opponent']}}")
                                                 .then(response => response.text())
                                                 .then(data => document.getElementById('match_status_h3_{{player}}').innerHTML = data.replace(/%20/g, ' '));
-                                            </script>-->
+                                            </script>
                                     {% else %}
                                         <h3 id="match_status_h3_{{player}}">No Opponent</h3>
                                 {% endif %}
@@ -201,7 +201,34 @@ end match (side)
                             <div class="card-header-info-stroke-play">
                                 <div class="card-user-information-stroke-play">
                                     <h2 id="{{player}}_name_h2">{{player | replace('%20', ' ') }}</h2>
-                                    <h5 id="{{player}}_team_h5">{{playerdata['players'][player]['team']}}</h5>
+                                    {% if playerdata['match_info']['match_type'] == 'Singles' %}
+                                        <h5 id="golf_claps">{{playerdata['players'][player]['golf_clap']}} Claps</h5>
+                                    {% else %}
+                                        <h5 id="{{player}}_team_h5">{{playerdata['players'][player]['team']}}</h5>
+                                    {% endif %}
+                                    <button onclick="addGolfClap({{playerdata['match_info']['id']}}, 'Max')">Add Golf Clap</button>
+                                    <script>
+                                        function addGolfClap(filename, player) {
+                                            fetch(`/golf_clap/${filename}/${player}`)
+                                                .then(response => {
+                                                if (response.ok) {
+                                                    let current_golf_claps_innerHTML = document.getElementById('golf_claps').innerHTML
+                                                    const myArray = current_golf_claps_innerHTML.split(" ")
+                                                    let current_golf_claps = myArray[0]
+                                                    current_golf_claps = parseInt(current_golf_claps)
+                                                    current_golf_claps += 1
+                                                    document.getElementById('golf_claps').innerHTML = current_golf_claps + " Claps";
+                                                    console.log(`Golf clap added to player: ${player}`);
+                                                    // Perform any additional actions after a successful response
+                                                } else {
+                                                    console.error(`Failed to add golf clap to player: ${player}`);
+                                                }
+                                                })
+                                                .catch(error => {
+                                                console.error(`Error adding golf clap: ${error}`);
+                                                });
+                                            }
+                                    </script>
                                 </div>
                                 <div class="card-general-stats">
                                     <h3 id="relation_to_par_h3_{{player}}"></h3>

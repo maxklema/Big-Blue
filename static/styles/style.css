@@ -467,6 +467,27 @@ body p {
     font-family: BigBlueRegular;
 }
 
+#bio-picture {
+    height: 220px;
+    width: 220px;
+    object-fit: cover;
+    object-position: center top;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+
+}
+
+#megaphone {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    max-width: 220px;
+    max-height: 220px;
+    margin-bottom: 30px;
+}
+
 .about-us h3 {
     background-color: white;
     text-align: center;
@@ -486,14 +507,7 @@ body p {
     width: 355px;
 }
 
-.us img {
-    background-color: white;
-    height: 120px;
-    width: 250px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
+
 
 .us h3 {
     background-color: white;

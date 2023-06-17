@@ -25,24 +25,13 @@
         <div class="about-us-container">
             <div class="about-us">
                 <h3>About Big Blue</h3>
-                <p>Created for the Homestead High School Golf Team (IN) to help make live scoring more accessible.</p>
-            </div>
-        </div>
-
-
-        <div class="us-container">
-            <div class="us">
-                <img src="{{ url_for('static', filename='logo_graphics/us.png') }}">
-                <h3>Us</h3>
-                <p>Maxwell Klema - Co-founder and front-end  - Married to CSS</p><br>
-                <p>Grayson Welch - Co-founder and back-end - The Physicist</p><br>
-                <p>Dominic DeLuca - Co-founder and back-end - The Secret Weapon</p>
+                <p>Created for the Homestead High School Golf Team (IN) to help make live scoring more accessible. The name 'BigBlue.golf' comes from the name of the rivalry tournament every year between Homestead and Carroll called the 'Big Blue Cup.'</p>
             </div>
         </div>
 
         <div class="us-container">
             <div class="us">
-                <img src="{{ url_for('static', filename='logo_graphics/megaphone.png') }}" style="width: 100px; height: 100px; margin-bottom: 15px;">
+                <img id="megaphone" src="{{ url_for('static', filename='logo_graphics/megaphone.png') }}" style="width: 100px; height: 100px; margin-bottom: 15px;">
                 <h3>In The News</h3>
                 <p><a target="_blank" href="https://www.journalgazette.net/local/schools/student-spotlight-homestead-high-school-student-shines-with-robotics-work/article_8917d97a-f33c-11ed-b122-53c683a4ba1f.html" style="font-size: 12px; color: #2176E8;">[Dominic/Journal Gazette - 5/21/23]</a></p><br>
                 <p></p><br>
@@ -50,19 +39,38 @@
             </div>
         </div>
 
-        <div class="contact-container">
-            <div class="contact">
+        <div class="us-container">
+            <div class="us">
+                <img id="bio-picture" src="{{ url_for('static', filename='logo_graphics/actual_photos/max_photo.jpeg') }}" alt="">
+                <h3>Maxwell Klema</h3>
+                <p>Maxwell Klema (Co-Founder) is BigBlue's lead frontend developer while also working in some of the backend development for the site. His philosophy is that a product is only as great as its looks and usability. Every pixel matters to him. Max has experience working on real frontend and design projects for clients by interning for a company called CodeClouds during his senior year in high school. When not working on the site, Max enjoys working on other projects, working, riding his bike, golfing, or listening to lofi music on Spotify.</p><br>
+                <p><i>max@bigblue.golf</i></p>
+            </div>
+        </div>
+
+        <div class="us-container">
+            <div class="us">
+                <img id="bio-picture" src="{{ url_for('static', filename='logo_graphics/actual_photos/grayson_photo.jpg') }}" alt="">
                 <h3>Grayson Welch</h3>
                 <p>Grayson Welch (Co-Founder) is one of the senior developers here at BigBlue.golf. He loves to code solutions to problems and automate the mundane. His expertise is in backend development, focusing on database storage, email servers and website routing. When he is not working on BigBlue, he can be found working on physics problems of his own creation, writing music or running an insane amount of miles!</p><br>
                 <p><i>graysonwelch@bigblue.golf</i></p>
             </div>
         </div>
 
-        <div class="contact-container">
-            <div class="contact">
+        <div class="us-container">
+            <div class="us">
                 <h3>Dominic Deluca</h3>
                 <p>Another one of BigBlue.golf’s experienced backend developers, Dominic Deluca (Co-Founder) had the original idea for BigBlue. He is the company's idea man, giving our team the inspiration they need in a long night of coding. Growing up on a golf course, Deluca has had experience working and playing the game. He knows what golfers want and desire, giving his ideas a down to earth quality. When not working on BigBlue, he can be found golfing, improvising on the trombone and piano and hanging out with friends.</p><br>
                 <p><i>dom@bigblue.golf</i></p>
+            </div>
+        </div>
+
+        <div class="us-container">
+            <div class="us">
+                <img id="bio-picture" src="{{ url_for('static', filename='logo_graphics/actual_photos/henry_photo.jpeg') }}" alt="">
+                <h3>Henry Schwartz</h3>
+                <p></p><br>
+                <p><i>email</i></p>
             </div>
         </div>
 

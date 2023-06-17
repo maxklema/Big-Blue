@@ -331,17 +331,22 @@ def edit_profile():
 
 @app.route("/entering_match/<match_code>")
 def entering_match(match_code):
-    found_match = match.query.filter_by(match_code=match_code).first()
     try:
-        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+        found_match = match.query.filter_by(match_code=match_code).first()
+        try:
+            found_user = users.query.filter_by(username=session['active_user'][0]).first()
+        except:
+            found_user = ""
+        with open("static/score_files/" + str(found_match._id) + ".json", "r") as file:
+            file.seek(0)
+            data = json.load(file)
+            try:
+                if found_user != "" and found_user.username in data["shared_coaches"]:
+                    return redirect(url_for("active_match_view", json_data_input=found_match._id))
+            except:
+                return render_template("player-or-spectator.html", data=found_user, match_data=found_match)
     except:
-        found_user = ""
-    with open("static/score_files/" + str(found_match._id) + ".json", "r") as file:
-        file.seek(0)
-        data = json.load(file)
-
-        if found_user != "" and found_user.username in data["shared_coaches"]:
-            return redirect(url_for("active_match_view", json_data_input=found_match._id))
+        return redirect(url_for("error", msg="Sorry, this match existed at one point. But the data has since been deleted."))
     return render_template("player-or-spectator.html", data=found_user, match_data=found_match)
 
 
@@ -1034,13 +1039,16 @@ def spectator_match_view(json_data_input):
         found_course = course.query.filter_by(created_by=match_owner).first()
         match_location = found_course.city
     except:
-        found_match = match_archive.query.filter_by(_id=json_data_input).first()
-        match_owner = found_match.created_by
-        match_date = found_match.start_time
-        found_match_owner = users.query.filter_by(username=match_owner).first()
-        match_course = found_match.match_course
-        found_course = course.query.filter_by(created_by=match_owner).first()
-        match_location = found_course.city
+        try:
+            found_match = match_archive.query.filter_by(_id=json_data_input).first()
+            match_owner = found_match.created_by
+            match_date = found_match.start_time
+            found_match_owner = users.query.filter_by(username=match_owner).first()
+            match_course = found_match.match_course
+            found_course = course.query.filter_by(created_by=match_owner).first()
+            match_location = found_course.city
+        except:
+            return redirect(url_for('error', msg='This match does not exist!'))
     try:
         json_data = Scoring.return_data(json_data_input)
         try:

@@ -1,0 +1,232 @@
+{
+   "players": {
+      "Lancz%20and%20Baker": {
+         "team": "Homestead",
+         "opponent": "Sellers%20and%20Beaty",
+         "scores": {
+            "1": "3",
+            "2": "4",
+            "3": "4",
+            "4": "4",
+            "5": "4",
+            "6": "4",
+            "7": "3",
+            "8": "5",
+            "9": "5"
+         }
+      },
+      "DeLuca%20and%20Parker": {
+         "team": "Homestead",
+         "opponent": "Campbell%20And%20Scheele",
+         "scores": {
+            "1": "5",
+            "2": "5",
+            "3": "4",
+            "4": "3",
+            "5": "3",
+            "6": "3",
+            "7": "3",
+            "8": "4",
+            "9": "6"
+         }
+      },
+      "Burda%20and%20Faust": {
+         "team": "Homestead",
+         "opponent": "Meyers%20and%20Hupe",
+         "scores": {
+            "1": "3",
+            "2": "4",
+            "3": "4",
+            "4": "4",
+            "5": "3",
+            "6": "4",
+            "7": "4",
+            "8": "4",
+            "9": "5"
+         }
+      },
+      "Campbell%20And%20Scheele": {
+         "team": "Carroll",
+         "opponent": "DeLuca%20and%20Parker",
+         "scores": {
+            "1": "4",
+            "2": "4",
+            "3": "4",
+            "4": "4",
+            "5": "3",
+            "6": "4",
+            "7": "3",
+            "8": "3",
+            "9": "5"
+         }
+      },
+      "Sellers%20and%20Beaty": {
+         "team": "Carroll",
+         "opponent": "Lancz%20and%20Baker",
+         "scores": {
+            "1": "4",
+            "2": "4",
+            "3": "4",
+            "4": "5",
+            "5": "3",
+            "6": "5",
+            "7": "3",
+            "8": "4",
+            "9": "6"
+         }
+      },
+      "Drummond%20and%20Cabe": {
+         "team": "Homestead",
+         "opponent": "Le%20and%20Newman",
+         "scores": {
+            "1": "4",
+            "2": "3",
+            "3": "4",
+            "4": "4",
+            "5": "3",
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0
+         }
+      },
+      "Meyers%20and%20Hupe": {
+         "team": "Carroll",
+         "opponent": "Burda%20and%20Faust",
+         "scores": {
+            "1": "4",
+            "2": "4",
+            "3": "5",
+            "4": "4",
+            "5": "2",
+            "6": "4",
+            "7": "3",
+            "8": "4",
+            "9": "6"
+         }
+      },
+      "Colglazier%20and%20Spurgeon": {
+         "team": "Homestead",
+         "opponent": "Dimberio%20and%20Knitter",
+         "scores": {
+            "1": "4",
+            "2": "5",
+            "3": "5",
+            "4": "4",
+            "5": "4",
+            "6": "5",
+            "7": "4",
+            "8": 0,
+            "9": 0
+         }
+      },
+      "Dimberio%20and%20Knitter": {
+         "team": "Carroll",
+         "opponent": "Colglazier%20and%20Spurgeon",
+         "scores": {
+            "1": "3",
+            "2": "4",
+            "3": "5",
+            "4": "5",
+            "5": "3",
+            "6": "3",
+            "7": "3",
+            "8": 0,
+            "9": 0
+         }
+      },
+      "Le%20and%20Newman": {
+         "team": "Carroll",
+         "opponent": "Drummond%20and%20Cabe",
+         "scores": {
+            "1": "5",
+            "2": "5",
+            "3": "5",
+            "4": "5",
+            "5": "4",
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0
+         }
+      }
+   },
+   "match_info": {
+      "par1": 4,
+      "par2": 4,
+      "par3": 5,
+      "par4": 4,
+      "par5": 3,
+      "par6": 4,
+      "par7": 3,
+      "par8": 4,
+      "par9": 5,
+      "par10": "",
+      "par11": "",
+      "par12": "",
+      "par13": "",
+      "par14": "",
+      "par15": "",
+      "par16": "",
+      "par17": "",
+      "par18": "",
+      "match_code": "431525",
+      "match_password": "Max",
+      "number_holes": "9",
+      "match_name": "Big Blue Cup - Fourball",
+      "start_time": "2023-05-18",
+      "end_time": "2023-05-18",
+      "home_team": "Homestead",
+      "away_team": "Carroll",
+      "match_type": "Teams",
+      "gamemode": "Match Play",
+      "id": 49
+   },
+   "lobby": [
+      [
+         "DeLuca and Parker",
+         "Homestead"
+      ],
+      [
+         "Lancz and Baker",
+         "Homestead"
+      ],
+      [
+         "Burda and Faust",
+         "Homestead"
+      ],
+      [
+         "Sam Campbell ",
+         "Carroll"
+      ],
+      [
+         "Drummond and Cabe",
+         "Homestead"
+      ],
+      [
+         "Sellers and Beaty",
+         "Carroll"
+      ],
+      [
+         "Campbell And Scheele",
+         "Carroll"
+      ],
+      [
+         "Meyers and Hupe",
+         "Carroll"
+      ],
+      [
+         "Colglazier and Spurgeon",
+         "Homestead"
+      ],
+      [
+         "Dimberio and Knitter",
+         "Carroll"
+      ],
+      [
+         "Le and Newman",
+         "Carroll"
+      ]
+   ],
+   "message": ""
+}

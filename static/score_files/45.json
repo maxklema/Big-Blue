@@ -1,0 +1,152 @@
+{
+   "players": {
+      "Cabe%20and%20Burda": {
+         "team": "Spartans",
+         "opponent": "Baker%20Parker%20",
+         "scores": {
+            "1": "5",
+            "2": "4",
+            "3": "6",
+            "4": "9",
+            "5": "3",
+            "6": "6",
+            "7": 0,
+            "8": 0,
+            "9": 0
+         }
+      },
+      "Willis%20and%20Parrish": {
+         "team": "Spartans",
+         "opponent": "DeLuca%20and%20Spurgeon",
+         "scores": {
+            "1": "4",
+            "2": "5",
+            "3": "6",
+            "4": "4",
+            "5": "3",
+            "6": "6",
+            "7": "4",
+            "8": "5",
+            "9": "6"
+         }
+      },
+      "Baker%20Parker%20": {
+         "team": "Homestead",
+         "opponent": "Cabe%20and%20Burda",
+         "scores": {
+            "1": "4",
+            "2": "4",
+            "3": "5",
+            "4": "3",
+            "5": "2",
+            "6": "5",
+            "7": 0,
+            "8": 0,
+            "9": 0
+         }
+      },
+      "ColglazierLancz": {
+         "team": "Spartans",
+         "opponent": "Drummond%20and%20Faust",
+         "scores": {
+            "1": "4",
+            "2": "4",
+            "3": "5",
+            "4": "4",
+            "5": "4",
+            "6": "4",
+            "7": "3",
+            "8": 0,
+            "9": 0
+         }
+      },
+      "DeLuca%20and%20Spurgeon": {
+         "team": "Homestead",
+         "opponent": "Willis%20and%20Parrish",
+         "scores": {
+            "1": "6",
+            "2": "5",
+            "3": "5",
+            "4": "4",
+            "5": "4",
+            "6": "5",
+            "7": "3",
+            "8": "5",
+            "9": "4"
+         }
+      },
+      "Drummond%20and%20Faust": {
+         "team": "Homestead",
+         "opponent": "ColglazierLancz",
+         "scores": {
+            "1": "4",
+            "2": "5",
+            "3": "7",
+            "4": "3",
+            "5": "4",
+            "6": "5",
+            "7": "5",
+            "8": 0,
+            "9": 0
+         }
+      }
+   },
+   "match_info": {
+      "par1": 4,
+      "par2": 4,
+      "par3": 5,
+      "par4": 4,
+      "par5": 3,
+      "par6": 4,
+      "par7": 3,
+      "par8": 4,
+      "par9": 5,
+      "par10": "",
+      "par11": "",
+      "par12": "",
+      "par13": "",
+      "par14": "",
+      "par15": "",
+      "par16": "",
+      "par17": "",
+      "par18": "",
+      "match_code": "963739",
+      "match_password": "alt",
+      "number_holes": "9",
+      "match_name": "Foursomes Practice",
+      "start_time": "2023-05-16",
+      "end_time": "2023-05-16",
+      "home_team": "Homestead",
+      "away_team": "Spartans",
+      "match_type": "Teams",
+      "gamemode": "Match Play",
+      "id": 45
+   },
+   "lobby": [
+      [
+         "DeLuca and Spurgeon",
+         "Homestead"
+      ],
+      [
+         "Drummond and Faust",
+         "Homestead"
+      ],
+      [
+         "Cabe and Burda",
+         "Spartans"
+      ],
+      [
+         "Willis and Parrish",
+         "Spartans"
+      ],
+      [
+         "Baker Parker ",
+         "Homestead"
+      ],
+      [
+         "Drummond and Faust",
+         "Homestead"
+      ]
+   ],
+   "message": ""
+}

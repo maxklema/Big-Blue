@@ -19,24 +19,21 @@
       "par16": 3,
       "par17": 4,
       "par18": 5,
-      "match_code": "726690",
+      "match_code": "579209",
       "match_password": "password",
       "number_holes": "18",
-      "match_name": "Shared Coaches Test",
+      "match_name": "Match Sharing Test",
       "start_time": "2023-06-07",
       "end_time": "2023-06-07",
       "home_team": "Homestead",
-      "away_team": "Carroll",
+      "away_team": "Spartans",
       "match_type": "Teams",
-      "gamemode": "Stroke Play",
-      "id": 59
+      "gamemode": "Match Play",
+      "id": 56
    },
    "lobby": [],
    "message": "",
    "shared_coaches": [
-      "janedoe",
-      "bigblue",
-      "bigblue",
       "bigblue"
    ]
 }

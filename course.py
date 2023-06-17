@@ -1,4 +1,4 @@
-class Course:
+'''class Course:
     def __init__(self, name, address, num_holes, tees, pars_from_tees, handicaps_from_tees, course_ratings_from_tee, slope_ratings_from_tees, Id, distances_from_tees=[]):
         self.name = name
         self.address = address
@@ -26,4 +26,4 @@ class Course:
         
 c = Course("Example Course", "11 Main Street", 18, ["red", "green"], [[4,4,5,4,3,4,3,4,5,4,4,5,4,3,4,3,4,5], [4,4,5,4,3,4,3,4,5,4,4,5,4,3,4,3,5,5]], [[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,18,17]], [70, 75], [112, 120], 1)
 
-print(c.get_course_info("green"))
+print(c.get_course_info("green"))'''

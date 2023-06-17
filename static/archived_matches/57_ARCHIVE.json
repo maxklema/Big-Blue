@@ -19,18 +19,19 @@
       "par16": 3,
       "par17": 4,
       "par18": 5,
-      "match_code": "119148",
+      "match_code": "609875",
       "match_password": "password",
       "number_holes": "18",
-      "match_name": "First Match",
-      "start_time": "2023-02-27",
-      "end_time": "2023-02-27",
-      "home_team": "n/a",
-      "away_team": "n/a",
-      "match_type": "Singles",
-      "gamemode": "Stroke Play",
-      "id": 20
+      "match_name": "Match Sharing Test",
+      "start_time": "2023-06-07",
+      "end_time": "2023-06-07",
+      "home_team": "Homestead",
+      "away_team": "Spartans",
+      "match_type": "Teams",
+      "gamemode": "Match Play",
+      "id": 57
    },
    "lobby": [],
-   "message": ""
+   "message": "",
+   "shared_coaches": []
 }
