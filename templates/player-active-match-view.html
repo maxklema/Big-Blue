@@ -128,35 +128,37 @@ end match (side)
                                             <h3 id="away-{{player}}-name">{{playerdata['players'][player]['opponent'] | replace('%20', ' ')}}</h3>
                                             <h5 class="team_name_header" id="opponent_team_header">{{playerdata['match_info']['away_team']}} • <span id="away-{{player}}-golf-claps">{{playerdata['players'][opponent]['golf_clap']}} Claps</span></h5>
                                         </div>
-                                        <div>
-                                            <button id="golf-clap-button" onclick="addGolfClapAway({{playerdata['match_info']['id']}}, '{{player}}')"><img src="{{ url_for('static', filename='logo_graphics/golf_clap_static.png') }}" alt=""></button>
-                                            <script>
-                                               
-                                               function addGolfClapAway(filename, player) {
-                                                    var playerName = document.getElementById('away-' + player + '-name').innerHTML;
-    
-                                                    fetch(`/golf_clap/${filename}/${playerName}`)
-                                                        .then(response => {
-                                                        if (response.ok) {
-                                                            let current_golf_claps_innerHTML = document.getElementById('away-' + player + '-golf-claps').innerHTML
-                                                            const myArray = current_golf_claps_innerHTML.split(" ")
-                                                            let current_golf_claps = myArray[0]
-                                                            current_golf_claps = parseInt(current_golf_claps)
-                                                            current_golf_claps += 1
-                                                            document.getElementById('away-' + player + '-golf-claps').innerHTML = current_golf_claps + " Claps";
-                                                            console.log(`Golf clap added to player: ${player}`);
-                                                            // Perform any additional actions after a successful response
-                                                        } else {
-                                                            console.error(`Failed to add golf clap to player: ${player}`);
+                                        {% if active_player != opponent.replace('%20', ' ') %}
+                                            <div>
+                                                <button id="golf-clap-button" onclick="addGolfClapAway({{playerdata['match_info']['id']}}, '{{player}}')"><img src="{{ url_for('static', filename='logo_graphics/golf_clap_static.png') }}" alt=""></button>
+                                                <script>
+                                                
+                                                function addGolfClapAway(filename, player) {
+                                                        var playerName = document.getElementById('away-' + player + '-name').innerHTML;
+        
+                                                        fetch(`/golf_clap/${filename}/${playerName}`)
+                                                            .then(response => {
+                                                            if (response.ok) {
+                                                                let current_golf_claps_innerHTML = document.getElementById('away-' + player + '-golf-claps').innerHTML
+                                                                const myArray = current_golf_claps_innerHTML.split(" ")
+                                                                let current_golf_claps = myArray[0]
+                                                                current_golf_claps = parseInt(current_golf_claps)
+                                                                current_golf_claps += 1
+                                                                document.getElementById('away-' + player + '-golf-claps').innerHTML = current_golf_claps + " Claps";
+                                                                console.log(`Golf clap added to player: ${player}`);
+                                                                // Perform any additional actions after a successful response
+                                                            } else {
+                                                                console.error(`Failed to add golf clap to player: ${player}`);
+                                                            }
+                                                            })
+                                                            .catch(error => {
+                                                            console.error(`Error adding golf clap: ${error}`);
+                                                            });
                                                         }
-                                                        })
-                                                        .catch(error => {
-                                                        console.error(`Error adding golf clap: ${error}`);
-                                                        });
-                                                    }
-    
-                                            </script>
-                                        </div>
+        
+                                                </script>
+                                            </div>
+                                        {% endif %}
                                         
                                     </div>
                                     
@@ -290,6 +292,11 @@ end match (side)
                                                         });
                                                     }
                                             </script>
+                                        {% else %}
+                                            <div class="clap-display">
+                                                <h5 id="golf_claps_{{player}}">{{playerdata['players'][player]['golf_clap']}} Claps</h5>
+                                            </div>
+                                    
                                         {% endif %}
                                     
                                     {% else %}
@@ -323,6 +330,11 @@ end match (side)
                                                         });
                                                     }
                                             </script>
+                                        {% else %}
+                                            <div class="clap-display">
+                                                <h5 id="golf_claps_{{player}}">{{playerdata['players'][player]['golf_clap']}} Claps</h5>
+                                                
+                                            </div>
                                         {% endif %}
                                     {% endif %}
                                 
