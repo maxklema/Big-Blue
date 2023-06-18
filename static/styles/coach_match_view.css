@@ -351,6 +351,10 @@ html, body {
     font-family: bigblueregular;
 }
 
+.team_name_header span {
+    font-family: bigblueregular;
+}
+
 #opponent_team_header {
     text-align: right;
 }
@@ -414,6 +418,10 @@ html, body {
 .clap-display {
     display: flex;
     align-items: center;
+}
+
+.clap-display h5 {
+    font-family: bigBlueRegular;
 }
 
 #team_wins_hole_button-away {
