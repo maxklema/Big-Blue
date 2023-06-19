@@ -1,0 +1,107 @@
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}  
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
+{% block content %}
+<!--
+
+
+    numberholes
+    course-name
+    city
+    holeparx (x=hole number)
+    <form action="/create_course" method="post">
+-->
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2TLMVLX5EB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2TLMVLX5EB');
+</script>
+
+    <title>Add Course New | Big Blue</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/create_course_new.css') }}">
+
+    <body>
+        <div class="form-container">
+            <form action="" method="">
+                <img id="form-graphic" src="{{ url_for('static', filename='logo_graphics/golf_green.png') }}" alt="">
+                <h3 id="form-title">Add a New Course</h3>
+                    {% if message %}
+                        <h5 id="error">{{message}}</h5>
+                        <script>
+                            if (document.getElementById("error").innerHTML == "Course created sucsessfully!"){
+                                document.getElementById("error").style.color = "#2176e8";
+                            }
+                        </script>   
+                    {% endif %}
+                <p id="form-description">BigBlue's Course Creation Form allows you to add as much information, or as little information to create a course. Wondering if the course already exists? Search for it <span><a href="/">here</a></span> and add it to your course dashboard.</p>
+                <div class="row-one">
+                    <div>
+                        <label for="number-holes">Number of Holes</label><br>
+                        <select onfocusout="hideparholes()" name="numberholes" id="number-holes">
+                            <option name="numberholes" value="18">18</option>
+                            <option name="numberholes" value="9">9</option>
+                        </select>
+                    </div>
+                    <div class="responsive-one">
+                        <label for="course-name">Course Name</label><br>
+                        <input placeholder="EX: Chestnut Hills" maxlength="30" type="text" name="course-name" id="course-name" required>
+                    </div>
+                </div>
+                <div class="row-two">
+                    <div>
+                        <label for="course-location">City or Town</label><br>
+                        <input placeholder="EX: Fort Wayne, Indiana" maxlength="40" type="text" name="course-location" id="course-location" required>
+                    </div>
+                </div>
+
+                <div id="golfTeeContainer">
+                   
+                </div>
+
+                <button id="add-new-tee" type="button" onclick="addGolfTee();">+ Add New Tee</button>
+
+                
+
+
+
+
+
+
+            </form>
+
+            <script src="{{ url_for('static', filename='Javascript_Files/create_course_new.js') }}"></script>
+
+        </div>
+
+    </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
