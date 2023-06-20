@@ -296,6 +296,10 @@ html, body {
     margin-right: 50px;
 }
 
+.page-container-parent {
+    margin-bottom: 50px;
+}
+
 .card-header-info {
     display: flex;
     flex-direction: column;
@@ -1130,7 +1134,7 @@ input::-webkit-inner-spin-button {
 
 }
 
-@media (max-width: 850px){
+@media (max-width: 1200px){
     header .navigation {
         display: none;
     }
@@ -1153,5 +1157,6 @@ input::-webkit-inner-spin-button {
         padding: 8px 40px;
     }
 }
+
 
 

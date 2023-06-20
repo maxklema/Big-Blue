@@ -290,7 +290,6 @@ input[type=number]{
 
 .main-container {
     margin-top: 5%;
-    margin-bottom: 5%;
     display: flex;
     justify-content: center;
 }
@@ -631,7 +630,7 @@ input[type=number]{
 
 }
 
-@media (max-width: 850px){
+@media (max-width: 1200px){
     header .navigation {
         display: none;
     }

@@ -278,7 +278,6 @@ html, body {
 .main-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 5%;
 }
 
 #no-results {
@@ -423,7 +422,7 @@ html, body {
 
 }
 
-@media (max-width: 850px){
+@media (max-width: 1200px){
     header .navigation {
         display: none;
     }
@@ -438,9 +437,6 @@ html, body {
     #hamburger-icon {
         display: block;
     }
-    #searchbar {
-        display: none;
-    }
 }
 
 
@@ -449,6 +445,7 @@ html, body {
         padding: 8px 40px;
     }
 }
+
 
 @media (max-width: 1200px){
     .grid-container{

@@ -291,7 +291,6 @@ input[type=number] {
     display: flex;
     justify-content: center;
     margin-top: 5%;
-    margin-bottom: 5%;
 }
 
 .form-container form {
@@ -731,8 +730,8 @@ input[type=number] {
     }
 }
 
-@media (max-width: 850px){
-    header .navigation { 
+@media (max-width: 1200px){
+    header .navigation {
         display: none;
     }
 

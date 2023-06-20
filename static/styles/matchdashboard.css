@@ -613,7 +613,7 @@ html, body {
     }
 }
 
-@media (max-width: 850px){
+@media (max-width: 1200px){
     header .navigation {
         display: none;
     }
@@ -636,6 +636,7 @@ html, body {
         padding: 8px 40px;
     }
 }
+
 
 
 

@@ -528,7 +528,6 @@ body p {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    margin-bottom: 5%;
 }
 
 .contact {
@@ -688,7 +687,7 @@ body p {
     background-color: white;
 }
 
-@media (max-width: 850px){
+@media (max-width: 1200px){
     header .navigation {
         display: none;
     }
@@ -703,27 +702,11 @@ body p {
     #hamburger-icon {
         display: block;
     }
-    #searchbar {
-        display: none;
-    }
 }
 
 
 @media (max-width: 600px){
     header {
         padding: 8px 40px;
-    }
-}
-
-@media (max-width: 1200px){
-    #searchbar {
-        width: 200px;
-    }
-    
-}
-
-@media (max-width: 1000px){
-    header {
-        padding: 8px 33px;
     }
 }

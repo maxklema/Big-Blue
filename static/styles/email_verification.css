@@ -375,3 +375,27 @@ html, body {
     color: #2176e8;
     font-family: bigBlueSemiBold;
 }
+
+@media (max-width: 1200px){
+    header .navigation {
+        display: none;
+    }
+
+    .mobile-navigation {
+        display: block;
+    }
+    #menu-button {
+        visibility: visible;
+        display: block;
+    }
+    #hamburger-icon {
+        display: block;
+    }
+}
+
+
+@media (max-width: 600px){
+    header {
+        padding: 8px 40px;
+    }
+}
