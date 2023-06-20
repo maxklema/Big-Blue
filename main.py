@@ -653,6 +653,7 @@ def email_verification(email):
                 file.seek(0, 0)
                 json.dump(data, file, indent=3)
                 file.truncate()
+            #might need a else statement here
         return redirect(url_for('chooseprofilepicture'))
     try:
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
@@ -660,8 +661,39 @@ def email_verification(email):
         found_user = ""
     return render_template("email_verification.html", data=found_user, email=email)
 
+@app.route("/reset_password/<email>/<name>")
+def reset_password(email, name):
+    with open('tokens.json', "r+") as file:
+        data = json.load(file)
+        data[emails1.send_reset_password_email(email, name)] = [email, name]
+        file.seek(0, 0)
+        json.dump(data, file, indent=3)
+    return redirect(url_for('password_reset2', email=email))
 
+@app.route("/password_reset2/<email>", methods=["POST", "GET"])
+def password_reset2(email):
+    if request.method == "POST":
+        form_token = request.form['token-input']
+        with open("tokens.json", "r+") as file:
+            data = json.load(file)
+            if form_token in data:
 
+                try:
+                    found_user = users.query.filter_by(email=email).first()
+                    found_user.password = hashingalg.hashPassword(request.form['new-password-input'])
+                    db.session.commit()
+                except:
+                    return redirect(url_for("error", msg="Your account was not found. Please try again or contact support@bigblue.golf."))
+
+                del data[form_token]
+                file.seek(0, 0)
+                json.dump(data, file, indent=3)
+                file.truncate()
+                return redirect(url_for('index'))
+            else:
+                return redirect(url_for('error', msg='Sorry, your token was not found. Please go to the dashboard and try again. If all else fails, please contact support@bigblue.golf.'))
+    else:
+        return render_template("reset_password.html")
 
 @app.route("/edit_match/<match_to_edit>", methods=["POST", "GET"])
 def edit_match(match_to_edit):
