@@ -281,7 +281,6 @@ html, body {
     display: flex;
     margin-top: 5%;
     justify-content: center;
-    margin-bottom: 5% !important;
 }
 
 .suggested-users {

@@ -14,6 +14,25 @@ function addGolfTee() {
     //new container is that div from above
     container = document.getElementById("tee-" + (tee_name_counter));
 
+    //adding tee name and delete option
+    var tee_name_and_delete_option = document.createElement("div");
+    tee_name_and_delete_option.id = "tee-name-and-delete-option" + (tee_name_counter);
+    container.appendChild(tee_name_and_delete_option);
+
+    container = document.getElementById("tee-name-and-delete-option" + (tee_name_counter))
+
+    var tee_name_header = document.createElement("h3");
+    tee_name_header.innerHTML = "Tee " + (tee_name_counter);
+    var delete_tee_button = document.createElement("button");
+    delete_tee_button.type = "button";
+    delete_tee_button.onclick = "deleteGolfTee();";
+    delete_tee_button.innerHTML = "Delete Tee " + (tee_name_counter);
+
+    container.appendChild(tee_name_header);
+    container.appendChild(delete_tee_button);
+
+    container = document.getElementById("tee-" + (tee_name_counter));
+
     //creates new tee name div
     var actual_name_of_tee_div = document.createElement("div");
     actual_name_of_tee_div.id="actual-tee-name-" + (tee_name_counter);

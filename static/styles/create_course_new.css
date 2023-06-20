@@ -323,7 +323,6 @@ input[type=number] {
     background-color: white;
     padding: 20px 30px;
     border-radius: 5px;
-    margin-bottom: 5%;
 }
 
 #form-title {
@@ -441,6 +440,30 @@ div[id^="Tee-"] {
     margin-bottom: 20px;
     flex-direction: row;
     justify-content: space-between;
+}
+
+div[id^="tee-name-and-delete-option"] {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+div[id^="tee-name-and-delete-option"] h3 {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+div[id^="tee-name-and-delete-option"] button {
+    background-color: #ca3e3e;
+    border: 0px solid black;
+    color: white;
+    font-size: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
 }
 
 
