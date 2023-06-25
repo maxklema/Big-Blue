@@ -674,6 +674,7 @@ def reset_password(email, name):
 def password_reset2(email):
     if request.method == "POST":
         form_token = request.form['token-input']
+        found_user = ""
         with open("tokens.json", "r+") as file:
             data = json.load(file)
             if form_token in data:
@@ -691,9 +692,18 @@ def password_reset2(email):
                 file.truncate()
                 return redirect(url_for('index'))
             else:
-                return redirect(url_for('error', msg='Sorry, your token was not found. Please go to the dashboard and try again. If all else fails, please contact support@bigblue.golf.'))
+                return render_template("reset_password.html", data=found_user, message="Invalid Token. Please verify the token you entered matches the one emailed to you. If there an issue, contact support at support@bigblue.golf.")
     else:
-        return render_template("reset_password.html")
+        return render_template("reset_password.html", data=found_user, message="We have sent a reset password token to your email.")
+
+@app.route("/password_changed")
+def password_changed():
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
+    return render_template("password_change_successful.html", data=found_user)
+
 
 @app.route("/edit_match/<match_to_edit>", methods=["POST", "GET"])
 def edit_match(match_to_edit):

@@ -58,7 +58,7 @@
                         <input maxlength="25" onfocusout="checkTeam()" class="inputbox" type="text" name="team" id="team" value="{{data.team}}"><br>
                         <label for="bio">Bio</label><br>
                         <textarea maxlength="150" onfocusout="checkBio()" name="bio" id="bio">{{data.bio}}</textarea>
-                        <a href="/reset_password/{{data.email}}/{{data.name}}">Change your password</a><br>
+                        <a id="reset-password" href="/reset_password/{{data.email}}/{{data.name}}">Change your password</a><br>
 
                         <input type="submit" onclick="return validateForm()" value="Save Changes" id="form-submit">
                     </form>
