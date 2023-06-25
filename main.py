@@ -700,6 +700,34 @@ def password_reset2(email):
     else:
         return render_template("reset_password.html", data=found_user, message="We have sent a reset password token to your email.")
 
+@app.route("/forgot_password")
+def forgot_password():
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
+    return render_template("forgot_password.html", data=found_user)
+
+@app.route("/reset_password_with_username/<user>", methods=["POST", "GET"])
+def reset_password_with_username(user):
+    #get the user's email from the username IMPORTANT
+    found_user = ""
+    found_email = ""
+    try:
+        found_user = users.query.filter_by(username=user).first()
+        found_email = found_user.email
+    except:
+        found_user = ""
+        return render_template("forgot_password.html", data=found_user, message="Username not found.")
+    
+    found_email = found_user.email
+
+    print(found_email)
+    return redirect(url_for('reset_password', email=found_email, name=user))
+    
+
+
+
 @app.route("/password_changed")
 def password_changed():
     try:

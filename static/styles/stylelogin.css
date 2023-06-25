@@ -311,8 +311,8 @@ html, body {
     height: 40px;
     width: 300px;
     padding: 5px;
+    margin-bottom: 3px;
     font-size: 20px;
-    margin-bottom: 20px;
     border: 0.25px solid black;
     background-color: white;
     font-family: bigBlueMedium;
@@ -339,8 +339,8 @@ html, body {
 
 #form-container form img {
     background-color: white;
-    height: 73.5px;
-    width: 45px;
+    max-height: 50px;
+    max-width: 50px;
     margin-right: auto;
     margin-left: auto;
     display: block;
@@ -379,6 +379,13 @@ html, body {
     text-align: center;
     color: #2176e8;
     font-family: bigBlueSemiBold;
+}
+
+#forgot_password {
+    margin-bottom: 20px !important;
+    color: #2176e8;
+    font-size: 14px;
+    font-family: bigBlueMedium;
 }
 
 @media (max-width: 1200px){

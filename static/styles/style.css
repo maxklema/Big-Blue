@@ -702,6 +702,10 @@ body p {
     #hamburger-icon {
         display: block;
     }
+    .tos-style-container {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
 }
 
 
@@ -709,4 +713,9 @@ body p {
     header {
         padding: 8px 40px;
     }
+    .tos-style-container {
+        margin-left: 3%;
+        margin-right: 3%;
+    }
 }
+
