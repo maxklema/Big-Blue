@@ -716,7 +716,7 @@ def resend_password_email(email):
                 target_token = token
                 break
 
-        #sets username to value listed under the target_key (token))
+        #sets username to value listed under the target_key (token)
         username = ""
         try:
             username = data[target_token][1]
