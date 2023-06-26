@@ -135,25 +135,32 @@
                 <!--You need to write match[0] before accessing any of the json attributes
                 This is because it is in a tuple and needs to be accessed first-->
                 <div class="recent-matches">
-                    <h3>Your Recent Matches</h3>
-                    
-                    {% for match in recent_matches[:2] %}
-                        <a href="/spectator_match_view/{{match[0]['match_info']['id']}}" class="recent-match-container">
-                            
-                            <div class="reload-icon">
-                                <h1>⟲</h1>
-                            </div>
-                            <div class="past-match-info">
-                                <h4>{{match[0]["match_info"]["match_name"]}}</h4> <!--Json data from archive!-->
-                                <p color="blue">{{match[1]}}</p> <!--Time that the match ended-->
-                            </div>
+                   
+                    {% if recent_matches|length != 0 %}
+                        <h3>Your Recent Matches</h3>
+                            {% for match in recent_matches[:2] %}
+                                <a href="/spectator_match_view/{{match[0]['match_info']['id']}}" class="recent-match-container">
+                                    
+                                    <div class="reload-icon">
+                                        <h1>⟲</h1>
+                                    </div>
+                                    <div class="past-match-info">
+                                        <h4>{{match[0]["match_info"]["match_name"]}}</h4> <!--Json data from archive!-->
+                                        <p color="blue">{{match[1]}}</p> <!--Time that the match ended-->
+                                    </div>
+                                        
+                                    
+                                </a>
                                 
-                            
-                        </a>
-                        
-                        
-                        
-                    {% endfor %}
+                                
+                                
+                            {% endfor %}
+
+                    {% else %}
+                        <h3>Your Recent Matches</h3>
+                        <img id="no_recent_matches_graphic" src="{{ url_for('static', filename='logo_graphics/no_recent_matches_graphic.png') }}" alt="">
+                        <h5 id="no_matches_yet">no recent matches yet</h5>
+                    {% endif %}
                 </div>
 
 

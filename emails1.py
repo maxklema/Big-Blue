@@ -24,6 +24,7 @@ def send_validation_email(email: str, username1: str):
     return token
 
 def send_reset_password_email(email: str, name: str):
+    name.replace("%20", "")
     token = token_generator()
     send_email(email, "Change BigBlue.golf Password", "Hello " + name + ". Please see the bottom of this email for your change password token. If you did not request to change you password, please ignore this email. \n\nPASSWORD RESET TOKEN: " + token + "\n\nThanks,\n\nThe BigBlue.golf Team.")
     return token

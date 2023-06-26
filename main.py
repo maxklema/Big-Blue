@@ -661,6 +661,9 @@ def email_verification(email):
         found_user = ""
     return render_template("email_verification.html", data=found_user, email=email)
 
+
+
+
 @app.route("/reset_password/<email>/<name>")
 def reset_password(email, name):
     with open('tokens.json', "r+") as file:
@@ -696,9 +699,46 @@ def password_reset2(email):
                 file.truncate()
                 return redirect(url_for('password_changed'))
             else:
-                return render_template("reset_password.html", data=found_user, message="Invalid Token. Please verify the token you entered matches the one emailed to you. If there an issue, contact support at support@bigblue.golf.")
+                return render_template("reset_password.html", data=found_user, email=email, message="Invalid Token. Please verify the token you entered matches the one emailed to you. If there an issue, contact support at support@bigblue.golf.")
     else:
-        return render_template("reset_password.html", data=found_user, message="We have sent a reset password token to your email.")
+        return render_template("reset_password.html", data=found_user, message="We have sent a reset password token to your email.", email=email)
+
+@app.route("/resend_password_reset_email/<email>")
+def resend_password_email(email):
+    found_user = ""
+    with open('tokens.json', "r+") as file:
+        data = json.load(file)
+        target_email = email
+    
+        #gets token from email value
+        for token, value in data.items():
+            if isinstance(value, list) and target_email in value:
+                target_token = token
+                break
+
+        #sets username to value listed under the target_key (token)
+        username = ""
+        try:
+            username = data[target_token][1]
+        except:
+            return render_template("reset_password.html", data=found_user, email=email, message="Something went wrong. Please verify the token you entered matches the one emailed to you. If there an issue, contact support at support@bigblue.golf.")
+
+
+        new_token = emails1.send_reset_password_email(email, username)
+
+        #renames token to new_token
+        if target_token in data:
+            data[new_token] = data.pop(target_token)
+        
+        file.seek(0, 0)
+        json.dump(data, file, indent=3)
+
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
+    return render_template("reset_password.html", data=found_user, email=email)
+
 
 @app.route("/forgot_password")
 def forgot_password():

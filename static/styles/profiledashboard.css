@@ -646,6 +646,22 @@ html, body {
     background-color: #2176e8;
 }
 
+#no_recent_matches_graphic {
+    margin-top: 10px;
+    max-height: 100px;
+    max-width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#no_matches_yet {
+    color: #A6A6A6;
+    font-size: 13px;
+    margin-top: 3px;
+    text-align: center;
+}
+
 @media (max-width: 1121px){
     .main-container {
         display: flex;
@@ -918,6 +934,8 @@ html, body {
         padding: 8px 40px;
     }
 }
+
+
 
 
 
