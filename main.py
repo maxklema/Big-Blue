@@ -1096,25 +1096,6 @@ def active_match_view(json_data_input):
     else:
         return redirect(url_for('error', userdata=found_user, msg="You do not have access to this site!"))
 
-@app.route("/create_course_new", methods=['GET', 'POST'])
-def create_course_new():
-    if 'active_user' in session:
-        found_user = users.query.filter_by(username=session['active_user'][0]).first()
-        if request.method =="POST":
-
-            if session['active_user'][2] == 'coach':
-
-                return redirect(url_for("course_dashboard"))
-
-            elif session['active_user'][2] == 'player':
-
-                return redirect(url_for("course_dashboard"))
-
-        return render_template("create_course_new.html", data=found_user)
-    else:
-        return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
-
-
 @app.route("/create_course", methods=['GET', 'POST'])
 def create_course():
     if 'active_user' in session:

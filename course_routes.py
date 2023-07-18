@@ -2,10 +2,29 @@ from setup import *
 
 
 def list_to_string(list_one: list):
-    print(list_one)
     return str(list_one)
 
+def string_to_list(string_one: string):
+    return str.split(',')
+@app.route("/create_course_new", methods=['GET', 'POST'])
+def create_course_new():
+    if 'active_user' in session:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+        if request.method =="POST":
 
+            if session['active_user'][2] == 'coach':
+
+                return redirect(url_for("course_dashboard"))
+
+            elif session['active_user'][2] == 'player':
+
+                return redirect(url_for("course_dashboard"))
+
+        return render_template("create_course_new.html", data=found_user)
+    else:
+        return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
+
+        
 @app.route('/create_new_course_submit', methods=['POST', 'GET'])
 def create_new_course_submit():
     if 'active_user' in session:
@@ -28,10 +47,6 @@ def create_new_course_submit():
                     tee_names_list.append(request.form['Tee-'+str(i)+'-name-input'])
                     tee_slope_list.append(request.form['tee-'+str(i)+'-slope-rating'])
                     tee_course_list.append(request.form['tee-'+str(i)+'-course-rating'])
-                    print("LIST CHECK")
-                    print(tee_names_list)
-                    print(tee_slope_list)
-                    print(tee_course_list)
                     par_list = []
                     yardage_list = []
                     handicap_list = []
