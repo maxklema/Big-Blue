@@ -6,6 +6,7 @@ def list_to_string(list_one: list):
 
 def string_to_list(string_one: string):
     return str.split(',')
+
 @app.route("/create_course_new", methods=['GET', 'POST'])
 def create_course_new():
     if 'active_user' in session:
@@ -24,7 +25,7 @@ def create_course_new():
     else:
         return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
 
-        
+
 @app.route('/create_new_course_submit', methods=['POST', 'GET'])
 def create_new_course_submit():
     if 'active_user' in session:
