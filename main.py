@@ -350,7 +350,7 @@ def get_user_profile(user):
 @app.route("/create_round", methods=['GET', 'POST'])
 def create_round():
     found_user = users.query.filter_by(username=session['active_user'][0]).first()
-    found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
+    found_course = New_Courses.query.filter_by(created_by=session['active_user'][0]).all()
     if 'active_user' in session and session['active_user'][2] == "player":
         if request.method == "POST":
             try:
@@ -368,7 +368,7 @@ def create_round():
 @app.route("/create_match", methods=['GET', 'POST'])
 def create_match():
     found_user = users.query.filter_by(username=session['active_user'][0]).first()
-    found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
+    found_course = New_Courses.query.filter_by(created_by=session['active_user'][0]).all()
     if 'active_user' in session and session['active_user'][2] == "coach":
         if request.method == "POST":
             for item in request.form:
@@ -579,7 +579,7 @@ def password_changed():
 
 @app.route("/edit_match/<match_to_edit>", methods=["POST", "GET"])
 def edit_match(match_to_edit):
-    found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
+    found_course = New_Courses.query.filter_by(created_by=session['active_user'][0]).all()
     found_match = match.query.filter_by(_id=match_to_edit).first()
     if found_match.match_live == 1:
         return redirect(url_for('error', msg="You cannot edit match details of matches that are live!"))
@@ -643,7 +643,7 @@ def remove_shared_coach_route(filename, coach):
 
 @app.route("/edit_course/<course_to_edit>", methods=["POST", "GET"])
 def edit_course(course_to_edit):
-    found_course = course.query.filter_by(_id=course_to_edit).first()
+    found_course = New_Courses.query.filter_by(_id=course_to_edit).first()
     if 'active_user' in session and session['active_user'][0] == found_course.created_by:
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         if request.method == "POST":
@@ -719,7 +719,7 @@ def delete_match(match_to_delete):
 
 @app.route("/delete_course/<course_to_delete>")
 def delete_course(course_to_delete):
-    found_course = course.query.filter_by(_id=course_to_delete).first()
+    found_course = New_Courses.query.filter_by(_id=course_to_delete).first()
     if 'active_user' in session and session['active_user'][0] == found_course.created_by:
         db.session.delete(found_course)
         db.session.commit()
@@ -856,7 +856,7 @@ def send_email_notification(password):
 @app.route("/dashboard")
 def dashboard():
     if 'active_user' in session and session['active_user'][2]:
-        found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
+        found_course = New_Courses.query.filter_by(created_by=session['active_user'][0]).all()
         found_match = match.query.filter_by(created_by=session['active_user'][0]).all()
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         return render_template("dashboard.html", course_data=found_course, data=found_user, match_data=found_match)
@@ -865,7 +865,7 @@ def dashboard():
 @app.route("/course_dashboard")
 def course_dashboard():
     if 'active_user' in session:
-        found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
+        found_course = New_Courses.query.filter_by(created_by=session['active_user'][0]).all()
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
         return render_template("course_dashboard.html", data=found_user, course_data=found_course)
     return redirect(url_for('error', msg="You do not have access to this site."))
@@ -873,7 +873,7 @@ def course_dashboard():
 @app.route('/start_match/<match_id>/<course_id>')
 def start_match(match_id, course_id):
     found_match = match.query.filter_by(_id=match_id).first()
-    found_course = course.query.filter_by(_id=course_id).first()
+    found_course = New_Courses.query.filter_by(_id=course_id).first()
     found_user = users.query.filter_by(username=session['active_user'][0]).first()
     print(session['active_user'][0], found_match.created_by)
     if found_match.match_live == 1:
@@ -950,8 +950,8 @@ def spectator_match_view(json_data_input):
         match_date = found_match.start_time
         found_match_owner = users.query.filter_by(username=match_owner).first()
         match_course = found_match.match_course
-        found_course = course.query.filter_by(created_by=match_owner).first()
-        match_location = found_course.city
+        found_course = New_Courses.query.filter_by(created_by=match_owner).first()
+        match_location = found_course.address
     except:
         try:
             found_match = match_archive.query.filter_by(_id=json_data_input).first()
@@ -959,10 +959,10 @@ def spectator_match_view(json_data_input):
             match_date = found_match.start_time
             found_match_owner = users.query.filter_by(username=match_owner).first()
             match_course = found_match.match_course
-            found_course = course.query.filter_by(created_by=match_owner).first()
-            match_location = found_course.city
+            found_course = New_Courses.query.filter_by(created_by=match_owner).first()
+            match_location = found_course.address
         except:
-            return redirect(url_for('error', msg='This match does not exist!'))
+            return redirect(url_for('error', msg='This match does not exist! 1'))
     try:
         json_data = Scoring.return_data(json_data_input)
         try:
@@ -995,7 +995,7 @@ def spectator_match_view(json_data_input):
                     scores = Scoring.calc_match_results(json_data['match_info']['id'])
             return render_template("spectator-active-match-view.html", date=match_date, course=match_course, city=match_location, data1=found_match_owner, data=found_user, playerdata=json_data, scoring_data = scores)
         except:
-            return redirect(url_for('error', msg='This match does not exist!'))
+            return redirect(url_for('error', msg='This match does not exist! 2'))
 
 
 @app.route("/player_match_view/<json_data_input>", methods=['GET', 'POST'])
@@ -1008,7 +1008,7 @@ def player_match_view(json_data_input):
             match_date = found_match.start_time
             found_match_owner = users.query.filter_by(username=match_owner).first()
             match_course = found_match.match_course
-            found_course = course.query.filter_by(created_by=match_owner).first()
+            found_course = New_Courses.query.filter_by(created_by=match_owner).first()
             match_location = found_course.city
         except:
             found_match = match_archive.query.filter_by(_id=json_data_input).first()
@@ -1016,7 +1016,7 @@ def player_match_view(json_data_input):
             match_date = found_match.start_time
             found_match_owner = users.query.filter_by(username=match_owner).first()
             match_course = found_match.match_course
-            found_course = course.query.filter_by(created_by=match_owner).first()
+            found_course = New_Courses.query.filter_by(created_by=match_owner).first()
             match_location = found_course.city
         try:
             json_data = Scoring.return_data(json_data_input)
@@ -1055,7 +1055,7 @@ def active_match_view(json_data_input):
         match_date = found_match.start_time
         found_match_owner = users.query.filter_by(username=match_owner).first()
         match_course = found_match.match_course
-        found_course = course.query.filter_by(created_by=match_owner).first()
+        found_course = New_Courses.query.filter_by(created_by=match_owner).first()
         match_location = found_course.city
     except:
         found_match = match_archive.query.filter_by(_id=json_data_input).first()
@@ -1063,7 +1063,7 @@ def active_match_view(json_data_input):
         match_date = found_match.start_time
         found_match_owner = users.query.filter_by(username=match_owner).first()
         match_course = found_match.match_course
-        found_course = course.query.filter_by(created_by=match_owner).first()
+        found_course = New_Courses.query.filter_by(created_by=match_owner).first()
         match_location = found_course.city
     try:
         json_data = Scoring.return_data(json_data_input)
@@ -1112,7 +1112,7 @@ def create_course():
                 course_entry = course(request.form["course-name"], request.form["numberholes"], 0.0, 0.0, request.form["holepar1"], '', request.form["holepar2"], '', request.form["holepar3"], '', request.form["holepar4"], '', request.form["holepar5"], '', request.form["holepar6"], '', request.form["holepar7"], '', request.form["holepar8"], '', request.form["holepar9"], '', request.form["holepar10"], '', request.form["holepar11"], '', request.form["holepar12"], '', request.form["holepar13"], '', request.form["holepar14"], '', request.form["holepar15"], '', request.form["holepar16"], '', request.form["holepar17"], '', request.form["holepar18"], '', request.form['city'], '', session['active_user'][0])
                 db.session.add(course_entry)
                 db.session.commit()
-                found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
+                found_course = New_Courses.query.filter_by(created_by=session['active_user'][0]).all()
 
                 return redirect(url_for("course_dashboard"))
 
@@ -1126,7 +1126,7 @@ def create_course():
                 course_entry = course(request.form["course-name"], request.form["numberholes"], request.form['course_rating'], request.form['slope_rating'], request.form["holepar1"], request.form['handicap_one'], request.form["holepar2"], request.form['handicap_two'], request.form["holepar3"], request.form['handicap_three'], request.form["holepar4"], request.form['handicap_four'], request.form["holepar5"], request.form['handicap_five'], request.form["holepar6"], request.form['handicap_six'], request.form["holepar7"], request.form['handicap_seven'], request.form["holepar8"], request.form['handicap_eight'], request.form["holepar9"], request.form['handicap_nine'], request.form["holepar10"], request.form['handicap_ten'], request.form["holepar11"], request.form['handicap_eleven'], request.form["holepar12"], request.form['handicap_twelve'], request.form["holepar13"], request.form['handicap_thirteen'], request.form["holepar14"], request.form['handicap_fourteen'], request.form["holepar15"], request.form['handicap_fifteen'], request.form["holepar16"], request.form['handicap_sixteen'], request.form["holepar17"], request.form['handicap_seventeen'], request.form["holepar18"], request.form['handicap_eighteen'], request.form['city'], '', session['active_user'][0])
                 db.session.add(course_entry)
                 db.session.commit()
-                found_course = course.query.filter_by(created_by=session['active_user'][0]).all()
+                found_course = New_Courses.query.filter_by(created_by=session['active_user'][0]).all()
 
                 return redirect(url_for("course_dashboard"))
 

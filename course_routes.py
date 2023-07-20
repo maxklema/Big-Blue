@@ -1,11 +1,41 @@
 from setup import *
 
-
 def list_to_string(list_one: list):
     return str(list_one)
 
 def string_to_list(string_one: string):
     return str.split(',')
+'''
+def delete():
+    New_Courses.query.delete()
+    db.session.commit()
+
+def transfer_matches():
+    courses = course.query.all()
+    new_courses_list = []
+
+    for thing in courses:
+        c = New_Courses(thing.course_name, thing.created_by, thing.city, thing.course_holes, "['main']","[["+str(thing.par1)+","+str(thing.par2)+","+str(thing.par3)+","+str(thing.par4)+","+str(thing.par5)+","+str(thing.par6)+","+str(thing.par7)+","+str(thing.par8)+","+str(thing.par9)+","+str(thing.par10)+","+str(thing.par11)+","+str(thing.par12)+","+str(thing.par13)+","+str(thing.par14)+","+str(thing.par15)+","+str(thing.par16)+","+str(thing.par17)+","+str(thing.par18)+"]]",None, None, None, None)
+        new_courses_list.append(c)
+    
+    for item in new_courses_list:
+        db.session.add(item)
+    
+    db.session.commit()
+
+def add_column():
+    with app.app_context():
+        alter_query = text('ALTER TABLE new__courses ADD COLUMN created_by VARCHAR(255);')
+        db.session.execute(alter_query)
+        db.session.commit()
+
+
+@app.route("/test")
+def test():
+    delete()
+    transfer_matches()
+    return 'Working',200
+'''
 
 @app.route("/create_course_new", methods=['GET', 'POST'])
 def create_course_new():
@@ -24,7 +54,6 @@ def create_course_new():
         return render_template("create_course_new.html", data=found_user)
     else:
         return redirect(url_for("error", msg='Sorry, you do not have access to this site.'))
-
 
 @app.route('/create_new_course_submit', methods=['POST', 'GET'])
 def create_new_course_submit():
@@ -73,9 +102,3 @@ def create_new_course_submit():
             return rediret(url_for("error", msg="Sorry, something went wrong. Please try again."))
     else:
         return rediret(url_for("error", msg="Sorry, you do not have permission to access this page."))
-
-
-
-
-            
-

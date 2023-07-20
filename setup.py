@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
 from flask_socketio import SocketIO
 from datetime import timedelta, datetime
 from werkzeug.utils import secure_filename

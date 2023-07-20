@@ -3,6 +3,7 @@ from setup import *
 class New_Courses(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column(db.String(75))
+    created_by = db.Column(db.String)
     address = db.Column(db.String(75))
     holes = db.Column(db.String(3))
     tees = db.Column(db.String)
@@ -12,8 +13,9 @@ class New_Courses(db.Model):
     slope_ratings = db.Column(db.String)
     distances = db.Column(db.String)
 
-    def __init__(self, name, address, num_holes, tees, pars_from_tees, handicaps_from_tees, course_ratings_from_tee, slope_ratings_from_tees, distances_from_tees):
+    def __init__(self, name, created_by, address, num_holes, tees, pars_from_tees, handicaps_from_tees, course_ratings_from_tee, slope_ratings_from_tees, distances_from_tees):
         self.name = name
+        self.created_by = created_by
         self.address = address
         self.holes = num_holes
         self.tees = tees
