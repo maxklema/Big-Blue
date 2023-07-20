@@ -24,7 +24,7 @@
 
     <div class="search-bar-container">
         <form id="search-box-form" action="/search/" method="post">
-            <input id="searchbox" name="searchbar" type="text" placeholder="Find Users"></input>
+            <input id="searchbox" name="searchbar" type="text" placeholder="type users, courses"></input>
             <input type="submit" name="search-button" id="search-button" value="Search">
         </form>
     </div>
@@ -41,13 +41,77 @@
         }
     </script>
 
+{% if search_query_courses.count() == 0 %}
+
+    <h2 id="results"><span> <h1 id="user-header">Courses</h1></span>{{query_length}} courses with "{{keyword}}"</h2>
+    <div class="main-container">
+        <img id="no-results" src="{{ url_for('static', filename='logo_graphics/no-search-results.png') }}" alt="">
+    </div>
+
+{% else %}
+    {% set query_length = search_query_courses.count() %}
+    <h2 id="results"><span> <h1 id="user-header">Courses</h1></span>{{query_length}} courses with "{{keyword}}"</h2>
+    <div class="main-container">
+        <div class="grid-container">
+            {% for i in search_query_courses %}
+                <a href="" id="profile-card">
+                    <div class="profile-pic-and-name-container">
+                        <div class="profile-pic-container">
+                            <img id="ppic-course" src="{{ url_for('static', filename='logo_graphics/golf_hole_search_results.png') }}" alt="">
+                        </div>
+                        <div>
+                            <div class="name-and-verification">
+                                <h4 id="suggested-name">{{i.name}}</h4>
+                            </div>
+                            <h5 id="suggested-username">Added by @user</h5>
+                        </div>
+                    </div>
+                    <div class="team">
+                        {% set arrays = ((i.pars).replace("[", "")) %}
+                        {% set arrays = ((arrays).replace("]", "")) %}
+                        {% set arrays = ((arrays).replace("'", "")) %}
+                        {% set arrays = ((arrays).replace(" ", "")) %}
+                        {% set arrays = ((arrays).replace(",", "")) %}
+
+                        {% set total_sum = 0 %}
+                        {% for f in arrays %}
+                            {% set digit = f | int %}
+                            {% set total_sum = digit + total_sum %}
+                        {% endfor %}
+    
+                        <img src="{{ url_for('static', filename='logo_graphics/info_icon.png') }}" alt="">
+                        <p>Par {{ total_sum }}</p>
+                    </div>
+                    <div class="team">
+                        <img src="{{ url_for('static', filename='logo_graphics/golf_cart_search_result.png') }}" alt="">
+                        <p>{{ i.holes }} Holes • {{ (i.tees).split(',') | length }} Tee(s)</p>
+                    </div>
+                    <div class="team">
+                        <img src="{{ url_for('static', filename='logo_graphics/location-pin.png') }}" alt="">
+                        <p>{{ i.address|truncate(20) }}</p>
+                    </div>
+                
+                    
+                </a>    
+            {% endfor %}
+        </div>
+        
+    </div>
+
+{% endif %}
+
+
+
+
+
 {% if search_query.count() == 0 %}
+    <h2 id="results"><span> <h1 id="user-header">Users</h1></span>{{query_length}} users with "{{keyword}}"</h2>
     <div class="main-container">
         <img id="no-results" src="{{ url_for('static', filename='logo_graphics/no-search-results.png') }}" alt="">
     </div>
 {% else %}
     {% set query_length = search_query.count() %}
-    <h2 id="results">{{query_length}} Results for "{{keyword}}"</h2>
+    <h2 id="results"><span> <h1 id="user-header">Users</h1></span>{{query_length}} users with "{{keyword}}"</h2>
     <div class="main-container">
         <div class="grid-container">
             {% for i in search_query %}

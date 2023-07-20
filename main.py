@@ -1245,12 +1245,20 @@ def search(searchbar):
     keyword = searchbar
     if (searchbar == ""):
         keyword = "404"
+
     search_query = db.session.query(users).filter(
         db.or_(
             users.username.like(f"%{keyword}%"),
             users.name.like(f"%{keyword}%")
-        )).limit(100)
-    return render_template("search_results.html", keyword=keyword, search_query=search_query, data=found_user)
+        )).limit(10)
+
+    search_query_courses = db.session.query(New_Courses).filter(
+        db.or_(
+            New_Courses.name.like(f"%{keyword}%"),
+            New_Courses.address.like(f"%{keyword}%")
+        )
+    ).limit(10)
+    return render_template("search_results.html", keyword=keyword, search_query=search_query, search_query_courses=search_query_courses, data=found_user)
     
 @app.route("/golf_clap/<filename>/<player>")
 def golf_clap(filename, player):
