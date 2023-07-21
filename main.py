@@ -1237,6 +1237,7 @@ def lowest_team_score(filename):
 
 @app.route("/search/<searchbar>", methods=["GET", "POST"])
 def search(searchbar):
+
     found_user = ""
     try:
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
@@ -1258,7 +1259,19 @@ def search(searchbar):
             New_Courses.address.like(f"%{keyword}%")
         )
     ).limit(10)
-    return render_template("search_results.html", keyword=keyword, search_query=search_query, search_query_courses=search_query_courses, data=found_user)
+
+
+
+    query_results_par_list = []
+
+    for i in search_query_courses:
+        par_sum = 0
+        par_array = ast.literal_eval(i.pars)
+        for par in par_array[0]:
+            par_sum += int(par)
+        query_results_par_list.append(par_sum)
+
+    return render_template("search_results.html", query_results_par_list=query_results_par_list, keyword=keyword, search_query=search_query, search_query_courses=search_query_courses, data=found_user)
     
 @app.route("/golf_clap/<filename>/<player>")
 def golf_clap(filename, player):

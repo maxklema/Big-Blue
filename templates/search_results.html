@@ -41,46 +41,43 @@
         }
     </script>
 
-{% if search_query_courses.count() == 0 %}
 
-    <h2 id="results"><span> <h1 id="user-header">Courses</h1></span>{{query_length}} courses with "{{keyword}}"</h2>
-    <div class="main-container">
-        <img id="no-results" src="{{ url_for('static', filename='logo_graphics/no-search-results.png') }}" alt="">
+
+{% if search_query.count() == 0 and search_query_courses.count() == 0 %}
+    <div class="no-results-container">
+        <div>
+            <img id="no-results" src="{{ url_for('static', filename='logo_graphics/magnifying_glass.png') }}" alt="">
+            <p>No Results Found</p>
+        </div>
     </div>
+{% endif %}
 
-{% else %}
-    {% set query_length = search_query_courses.count() %}
-    <h2 id="results"><span> <h1 id="user-header">Courses</h1></span>{{query_length}} courses with "{{keyword}}"</h2>
+
+{% if search_query_courses.count() == 0 and search_query.count() != 0%}
+
+
+{% elif search_query_courses.count() != 0 %}
+    {% set query_length_courses = search_query_courses.count() %}
+    <h2 id="results"><span> <h1 id="user-header">Courses</h1></span>{{query_length_courses}} courses with "{{keyword}}"</h2>
     <div class="main-container">
         <div class="grid-container">
             {% for i in search_query_courses %}
-                <a href="" id="profile-card">
+                <a href="" id="course-card">
+                    <div class="course-cover-image">
+                        <img src="{{ url_for('static', filename='logo_graphics/golf-course-cover-photo.jpg') }}" alt="">
+                    </div>
                     <div class="profile-pic-and-name-container">
-                        <div class="profile-pic-container">
-                            <img id="ppic-course" src="{{ url_for('static', filename='logo_graphics/golf_hole_search_results.png') }}" alt="">
-                        </div>
                         <div>
                             <div class="name-and-verification">
                                 <h4 id="suggested-name">{{i.name}}</h4>
                             </div>
-                            <h5 id="suggested-username">Added by @user</h5>
+                            <h5 id="suggested-username">Added by @{{i.created_by}}</h5>
                         </div>
                     </div>
                     <div class="team">
-                        {% set arrays = ((i.pars).replace("[", "")) %}
-                        {% set arrays = ((arrays).replace("]", "")) %}
-                        {% set arrays = ((arrays).replace("'", "")) %}
-                        {% set arrays = ((arrays).replace(" ", "")) %}
-                        {% set arrays = ((arrays).replace(",", "")) %}
-
-                        {% set total_sum = 0 %}
-                        {% for f in arrays %}
-                            {% set digit = f | int %}
-                            {% set total_sum = digit + total_sum %}
-                        {% endfor %}
-    
+                        
                         <img src="{{ url_for('static', filename='logo_graphics/info_icon.png') }}" alt="">
-                        <p>Par {{ total_sum }}</p>
+                        <p>Par {{ query_results_par_list[loop.index0] }}</p>
                     </div>
                     <div class="team">
                         <img src="{{ url_for('static', filename='logo_graphics/golf_cart_search_result.png') }}" alt="">
@@ -104,12 +101,9 @@
 
 
 
-{% if search_query.count() == 0 %}
-    <h2 id="results"><span> <h1 id="user-header">Users</h1></span>{{query_length}} users with "{{keyword}}"</h2>
-    <div class="main-container">
-        <img id="no-results" src="{{ url_for('static', filename='logo_graphics/no-search-results.png') }}" alt="">
-    </div>
-{% else %}
+{% if search_query.count() == 0 and search_query_courses.count() != 0%}
+   
+{% elif search_query.count() != 0 %}
     {% set query_length = search_query.count() %}
     <h2 id="results"><span> <h1 id="user-header">Users</h1></span>{{query_length}} users with "{{keyword}}"</h2>
     <div class="main-container">
@@ -144,6 +138,8 @@
         
     </div>
 {% endif %}
+
+
 
 
 

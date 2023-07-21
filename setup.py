@@ -14,6 +14,7 @@ import sqlite3
 import emails1
 import sys
 import re # THIS IS REGEX
+import ast
 from random import randint
 from scoring import Scoring
 
