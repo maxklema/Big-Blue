@@ -17,13 +17,13 @@
   gtag('config', 'G-2TLMVLX5EB');
 </script>
 
-<title>Course Profile | Big Blue</title> <!-- Change to Course Name Eventually -->
+<title>{{course_data.name}} | Big Blue</title> <!-- Change to Course Name Eventually -->
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/course-profile.css') }}">  
 
 <div class="main-container">
     <div class="tee-container">
         <div class="basic-tee-information">
-            <h3 id="course-name">Golf Course Name - Statistics/Information</h3>
+            <h3 id="course-name">{{course_data.name}} - Statistics/Information</h3>
             <p>Note: This is crowdsourced data and may not be accurate</p>
             <hr>
         </div>
@@ -275,13 +275,13 @@
                 <img src="{{ url_for('static', filename='logo_graphics/golf-course-cover-photo.jpg') }}" alt="">
             </div>
             <div class="basic-course-info">
-                <h3 id="course-name">Golf Course Name</h3>
-                <p>added by @user123123213213</p>
+                <h3 id="course-name">{{course_data.name}}</h3>
+                <p>added by <span><a href="/profile/{{course_data.created_by}}">@{{course_data.created_by}}</a></span></p>
                 <hr>
             </div>
             <div class="more-specific-course-information">
                 <h5>Address</h5>
-                <p>123 Illinois Rd Fort Wayne</p>
+                <p>{{course_data.address}}</p>
             </div>
             <div class="more-specific-course-information">
                 <h5>Par</h5>
@@ -289,16 +289,23 @@
             </div>
             <div class="more-specific-course-information">
                 <h5>Hole Count</h5>
-                <p>18</p>
+                <p>{{course_data.holes}}</p>
             </div>
             <div class="more-specific-course-information">
                 <h5>Number of Tees</h5>
-                <p>4</p>
+                <p>{{ (course_data.tees).split(',') | length }}</p>
             </div>
             <div class="more-specific-course-information">
                 <h5>Tee Names</h5>
-                <p>Blue, Red, Orange, Gold</p>
+                {% set tee_names = (course_data.tees).split(',') %}
+                {% set tee_names = tee_names | replace("[", "") %}
+                {% set tee_names = tee_names | replace("]", "") %}
+                {% set tee_names = tee_names | replace("'", "") %}
+                {% set tee_names = tee_names | replace('"', '') %}
+                {% set tee_names = tee_names | replace(",", ", ") %}
+                <p>{{ tee_names }}</p>
             </div>
+            <a href="#" id="add-course-button" >Add Course to Profile</a>
     
     
         </div>

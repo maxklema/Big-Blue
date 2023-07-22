@@ -103,12 +103,20 @@ def create_new_course_submit():
     else:
         return rediret(url_for("error", msg="Sorry, you do not have permission to access this page."))
 
+'''@app.route("/db_update")
+def db_update():
+    found_course = New_Courses.query.filter_by(_id=1).first()
+    found_course.tees = "['Red', 'Gold']"
+    db.session.commit()
+    return "DONE"'''
+
 
 @app.route("/course_profile/<course_id>")
 def course_profile(course_id):
     found_user = ""
+    found_course = New_Courses.query.filter_by(_id=course_id).first()
     try:
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
     except:
         found_user = ""
-    return render_template("course_profile.html", data=found_user)
+    return render_template("course_profile.html", data=found_user, course_data=found_course)

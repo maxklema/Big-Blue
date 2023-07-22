@@ -294,7 +294,7 @@ html, body {
 .general-stats-container {
     width: 300px;
     min-height: 320px;
-    max-height: 360px;
+    max-height: 460px;
     background-color: white;
     border-radius: 5px;
     padding: 10px 20px;
@@ -323,6 +323,14 @@ html, body {
     text-align: left;
     margin-top: 5px;
 
+}
+
+.basic-course-info p span a {
+    font-size: 14px;
+    color: grey;
+    font-family: bigBlueRegular;
+    margin-bottom: 5px;
+    text-decoration: none;
 }
 
 .basic-course-info p {
@@ -415,6 +423,26 @@ caption {
     margin-right: auto;
     display: block;
     margin-bottom: 5px;
+}
+
+#add-course-button {
+    margin-top: 10px;
+    text-align: center;
+    color: white;
+    background: #2176e8;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 7px 10px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#add-course-button:hover {
+    background: #1b6cd7;
 }
 
 
