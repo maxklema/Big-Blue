@@ -1,0 +1,358 @@
+{% if data.rank == 'coach' %}
+    {% extends "indexcontentcoachlogin.html" %}   
+{% elif data.rank == 'player' %}
+    {% extends "indexcontentplayerlogin.html" %}  
+{% else %}
+    {% extends "indexcontent.html" %}
+{% endif %}
+{% block content %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2TLMVLX5EB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2TLMVLX5EB');
+</script>
+
+<title>Course Profile | Big Blue</title> <!-- Change to Course Name Eventually -->
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/course-profile.css') }}">  
+
+<div class="main-container">
+    <div class="tee-container">
+        <div class="basic-tee-information">
+            <h3 id="course-name">Golf Course Name - Statistics/Information</h3>
+            <p>Note: This is crowdsourced data and may not be accurate</p>
+            <hr>
+        </div>
+        <div class="par-div">
+            <h4 id="tee-information-header">Pars</h4>
+            <table>
+                <tr>
+                    <th>Hole</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                    <th>11</th>
+                    <th>12</th>
+                    <th>13</th>
+                    <th>14</th>
+                    <th>15</th>
+                    <th>16</th>
+                    <th>17</th>
+                    <th>18</th>
+                </tr>
+                <tr>
+                    <td>Red Tee</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>Blue Tee</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>Red Tee</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                </tr>
+                
+            </table>
+        </div>
+
+        <div class="yardage-div">
+            <h4>Yardages</h4>
+            <table>
+                <tr>
+                    <th>Hole</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                    <th>11</th>
+                    <th>12</th>
+                    <th>13</th>
+                    <th>14</th>
+                    <th>15</th>
+                    <th>16</th>
+                    <th>17</th>
+                    <th>18</th>
+                </tr>
+                <tr>
+                    <td>Red Tee</td>
+                    <td>434</td>
+                    <td>332</td>
+                    <td>542</td>
+                    <td>434</td>
+                    <td>316</td>
+                    <td>532</td>
+                    <td>483</td>
+                    <td>335</td>
+                    <td>512</td>
+                    <td>496</td>
+                    <td>357</td>
+                    <td>524</td>
+                    <td>485</td>
+                    <td>312</td>
+                    <td>545</td>
+                    <td>423</td>
+                    <td>311</td>
+                    <td>501</td>
+                </tr>
+                <tr>
+                    <td>Blue Tee</td>
+                    <td>434</td>
+                    <td>332</td>
+                    <td>542</td>
+                    <td>434</td>
+                    <td>316</td>
+                    <td>532</td>
+                    <td>483</td>
+                    <td>335</td>
+                    <td>512</td>
+                    <td>496</td>
+                    <td>357</td>
+                    <td>524</td>
+                    <td>485</td>
+                    <td>312</td>
+                    <td>545</td>
+                    <td>423</td>
+                    <td>311</td>
+                    <td>501</td>
+                </tr>
+                
+                
+            </table>
+        </div>
+
+        <div class="handicap-div">
+            <h4>Handicaps</h4>
+            <table>
+                <tr>
+                    <th>Hole</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                    <th>11</th>
+                    <th>12</th>
+                    <th>13</th>
+                    <th>14</th>
+                    <th>15</th>
+                    <th>16</th>
+                    <th>17</th>
+                    <th>18</th>
+                </tr>
+                <tr>
+                    <td>Red Tee</td>
+                    <td>4</td>
+                    <td>33</td>
+                    <td>5</td>
+                    <td>43</td>
+                    <td>31</td>
+                    <td>52</td>
+                    <td>48</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>9</td>
+                    <td>7</td>
+                    <td>52</td>
+                    <td>85</td>
+                    <td>32</td>
+                    <td>5</td>
+                    <td>23</td>
+                    <td>11</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Blue Tee</td>
+                    <td>4</td>
+                    <td>33</td>
+                    <td>5</td>
+                    <td>43</td>
+                    <td>31</td>
+                    <td>52</td>
+                    <td>48</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>9</td>
+                    <td>7</td>
+                    <td>52</td>
+                    <td>85</td>
+                    <td>32</td>
+                    <td>5</td>
+                    <td>23</td>
+                    <td>11</td>
+                    <td>1</td>
+                </tr>
+                
+                
+            </table>
+        </div>
+        
+
+    
+    
+    
+    
+    
+    
+    
+    </div>
+    <div>
+        <div class="general-stats-container">
+            <div class="course-cover-image">
+                <img src="{{ url_for('static', filename='logo_graphics/golf-course-cover-photo.jpg') }}" alt="">
+            </div>
+            <div class="basic-course-info">
+                <h3 id="course-name">Golf Course Name</h3>
+                <p>added by @user123123213213</p>
+                <hr>
+            </div>
+            <div class="more-specific-course-information">
+                <h5>Address</h5>
+                <p>123 Illinois Rd Fort Wayne</p>
+            </div>
+            <div class="more-specific-course-information">
+                <h5>Par</h5>
+                <p>72</p>
+            </div>
+            <div class="more-specific-course-information">
+                <h5>Hole Count</h5>
+                <p>18</p>
+            </div>
+            <div class="more-specific-course-information">
+                <h5>Number of Tees</h5>
+                <p>4</p>
+            </div>
+            <div class="more-specific-course-information">
+                <h5>Tee Names</h5>
+                <p>Blue, Red, Orange, Gold</p>
+            </div>
+    
+    
+        </div>
+
+        <div class="course-rating-container">
+            <div class="courserating-cover-image">
+                <img src="{{ url_for('static', filename='logo_graphics/wave_graphic.png') }}" alt="">
+            </div>
+            <div class="basic-course-info">
+                <h3 id="course-name">Course Ratings</h3>
+                <p>Used to calculate handicap</p>
+                <hr>
+            </div>
+            <div class="more-specific-course-information">
+                <h5>Red Tee</h5>
+                <p>73.3/144</p>
+            </div>
+            <div class="more-specific-course-information">
+                <h5>Blue Tee</h5>
+                <p>75.3/137</p>
+            </div>
+            <div class="more-specific-course-information">
+                <h5>White Tee</h5>
+                <p>78.4/148</p>
+            </div>
+            <div class="more-specific-course-information">
+                <h5>Gold Tee</h5>
+                <p>79.1/141</p>
+            </div>
+           
+    
+    
+        </div>
+
+    </div>
+    
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

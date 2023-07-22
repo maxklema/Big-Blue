@@ -102,3 +102,13 @@ def create_new_course_submit():
             return rediret(url_for("error", msg="Sorry, something went wrong. Please try again."))
     else:
         return rediret(url_for("error", msg="Sorry, you do not have permission to access this page."))
+
+
+@app.route("/course_profile/<course_id>")
+def course_profile(course_id):
+    found_user = ""
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        found_user = ""
+    return render_template("course_profile.html", data=found_user)

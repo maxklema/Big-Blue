@@ -1,0 +1,422 @@
+@font-face {
+    font-family: bigBlueBold;
+    src: url(font/Poppins-Bold.ttf);
+}
+
+@font-face {
+    font-family: bigBlueRegular;
+    src: url(font/Poppins-Regular.ttf);
+}
+
+@font-face {
+    font-family: bigBlueMedium;
+    src: url(font/Poppins-Medium.ttf);
+}
+
+@font-face {
+    font-family: bigBlueSemiBold;
+    src: url(font/Poppins-SemiBold.ttf);
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: bigBlueBold;
+}
+
+footer {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap !important;
+}
+
+footer div {
+    max-width: 1500px;
+    margin-bottom: 1%;
+}
+
+footer div hr {
+    margin-bottom: 3%;
+}
+
+footer div div {
+    margin-top: 2%;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap !important;
+    border-top: 1px solid rgb(185, 185, 185);
+    
+    
+}
+
+footer div div div {
+    border-top: 0px;
+}
+
+footer div div a{
+    text-decoration: none;
+    color: #3185f3;
+    font-size: 13px;
+    font-family: bigBlueRegular;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-top: 0px;
+
+}
+
+footer div div div p {
+    font-size: 13px;
+    color: #808080;
+    font-family: bigBlueRegular;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-top: 0px;
+}
+
+#twitter_href {
+    margin-right: 0px;
+}
+
+#basic-golfer-image {
+    max-height: 30px;
+    max-width: 30px;
+}
+
+#footer-divider {
+    height: 1px;
+    border: none;
+    background-color: rgb(194, 194, 194);
+}
+
+
+@media (max-width: 1000px){
+    footer div div {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .big-blue-copyright {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+}
+
+
+header {
+    top: 0;
+    left: 0;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    background-image: linear-gradient(to right, #3185f3, #0c4999);
+    z-index: 10;
+    padding: 8px 100px;
+}
+
+header .logo {
+    max-width: 180px;
+    max-height: 180px;
+    position: relative;
+    background-color: transparent;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+header a {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+header div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#searchbar {
+    margin-left: 10px;
+    width: 400px;
+    height: 35px;
+    border: none;
+    padding: 5px 35px;
+    font-family: bigBlueRegular;
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: white;
+    opacity: .8;
+    background-image: url(../logo_graphics/searchicon.png);
+    background-size: 17px;
+    background-repeat: no-repeat;
+    background-position: 9px 9px;
+
+
+}
+
+.mobile-hrefs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999999;
+    opacity: 0.98;
+    background-color: #3185f3;
+    display: none;
+    transition: display 3.5s ease-in-out;
+}
+
+
+.mobile-hrefs .content-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 150px;
+}
+
+
+.mobile-hrefs .content-container a {
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+    text-align: center;
+}
+
+.mobile-hrefs .content-container a img {
+    height: 100px;
+    width: 100px;
+    margin-top: 20px;
+    object-fit: cover;
+}
+
+.close-button-container {
+    display: flex;
+    justify-content: right;
+    padding: 20px 20px;
+}
+
+.close-button-container button {
+    background-color: transparent;
+    color: white;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    cursor: pointer;
+    border: none;
+
+}
+
+.navigation li a img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin-left: -15px;
+    align-items: center;
+    margin-top: 6px;
+    object-fit: cover;
+}
+
+header .navigation {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-image: transparent;
+    border: none;
+    text-decoration: none;
+    font-family: bigBlueMedium;
+    align-items: center;
+}
+
+header .mobile-navigation {
+    display: none;
+}
+
+#menu-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+}
+
+header .navigation li {
+    list-style: none;
+    margin: 0px 15px;
+    border: none;
+    text-decoration: none;
+    background-color: transparent;
+    font-family: bigBlueMedium;
+    align-items: center;
+}
+
+header .navigation li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    border: none;
+    background-color: transparent;
+    font-family: bigBlueMedium;
+}
+
+header .navigation li a:hover {
+    color: #F0F0FF;
+    
+
+}
+
+
+html, body {
+    height: 100%;
+    background-color: #eeeeee;
+}
+
+.main-container {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.tee-container {
+    width: 800px;
+    max-height: 5000px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-right: 20px;
+}
+
+.general-stats-container {
+    width: 300px;
+    min-height: 320px;
+    max-height: 360px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.course-rating-container {
+    margin-top: 20px;
+    width: 300px;
+    min-height: 200px;
+    max-height: 300px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.course-cover-image img {
+    width: 300px;
+    max-height: 100px;
+    object-fit: cover;
+    margin-left: -20px;
+    margin-top: -10px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+#course-name {
+    text-align: left;
+    margin-top: 5px;
+
+}
+
+.basic-course-info p {
+    font-size: 14px;
+    color: grey;
+    font-family: bigBlueRegular;
+    margin-bottom: 5px;
+}
+
+.more-specific-course-information {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.more-specific-course-information p {
+    font-size: 13px;
+    color: black;
+    font-family: bigBlueRegular;
+    margin-left: 20px;
+}
+
+.basic-tee-information p{
+    font-size: 14px;
+    color: grey;
+    font-family: bigBlueRegular;
+    margin-bottom: 5px;
+}
+
+
+.par-div {
+    margin-top: 20px;
+}
+
+.yardage-div {
+    margin-top: 20px;
+}
+
+.handicap-div {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    
+}
+
+th, td {
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #e3e3e3;
+}
+
+th {
+    background-color: #e4e3e3;
+    font-family: bigBlueSemiBold;
+}
+
+td {
+    font-family: bigBlueRegular;
+}
+
+tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+caption {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+#tee-information-header {
+    margin-bottom: 3px;
+}
+
+.courserating-cover-image img {
+    width: 30px;
+    max-height: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+
+
