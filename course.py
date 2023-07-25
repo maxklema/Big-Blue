@@ -12,8 +12,9 @@ class New_Courses(db.Model):
     course_ratings = db.Column(db.String)
     slope_ratings = db.Column(db.String)
     distances = db.Column(db.String)
+    verified = db.Column(db.Integer)
 
-    def __init__(self, name, created_by, address, num_holes, tees, pars_from_tees, handicaps_from_tees, course_ratings_from_tee, slope_ratings_from_tees, distances_from_tees):
+    def __init__(self, name, created_by, address, num_holes, tees, pars_from_tees, handicaps_from_tees, course_ratings_from_tee, slope_ratings_from_tees, distances_from_tees, verified):
         self.name = name
         self.created_by = created_by
         self.address = address
@@ -24,6 +25,7 @@ class New_Courses(db.Model):
         self.course_ratings = course_ratings_from_tee
         self.slope_ratings = slope_ratings_from_tees
         self.distances = distances_from_tees
+        self.verified = verified
 
     def get_course_info(self, tee_name):
         index = -1

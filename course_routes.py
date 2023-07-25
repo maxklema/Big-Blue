@@ -3,8 +3,6 @@ from setup import *
 def list_to_string(list_one: list):
     return str(list_one)
 
-def string_to_list(string_one: string):
-    return str.split(',')
 '''
 def delete():
     New_Courses.query.delete()
@@ -93,7 +91,7 @@ def create_new_course_submit():
                 except:
                     break
                     
-            c = New_Courses(course_name, address, number_of_holes, list_to_string(tee_names_list), list_to_string(tee_par_list), list_to_string(tee_handicap_list), list_to_string(tee_course_list), list_to_string(tee_slope_list), list_to_string(tee_yardage_list))
+            c = New_Courses(course_name, session['active_user'][0], address, number_of_holes, list_to_string(tee_names_list), list_to_string(tee_par_list), list_to_string(tee_handicap_list), list_to_string(tee_course_list), list_to_string(tee_slope_list), list_to_string(tee_yardage_list), 0)
             db.session.add(c)
             db.session.commit()
 
@@ -103,12 +101,17 @@ def create_new_course_submit():
     else:
         return rediret(url_for("error", msg="Sorry, you do not have permission to access this page."))
 
-'''@app.route("/db_update")
+@app.route("/db_update")
 def db_update():
-    found_course = New_Courses.query.filter_by(_id=1).first()
-    found_course.tees = "['Red', 'Gold']"
+    active_user_db = users.query.filter_by(username=session['active_user'][0]).first()
+    active_user_db.favored_courses = '[1, 5]'
     db.session.commit()
-    return "DONE"'''
+
+    #with app.app_context():
+        #alter_query = text('ALTER TABLE users ADD COLUMN favored_courses VARCHAR(255);')
+        #db.session.execute(alter_query)
+        #db.session.commit()
+    return "DONE",200
 
 
 @app.route("/course_profile/<course_id>")
@@ -120,3 +123,20 @@ def course_profile(course_id):
     except:
         found_user = ""
     return render_template("course_profile.html", data=found_user, course_data=found_course)
+
+@app.route("/add_favorite_course/<course_id>", methods=['POST','GET'])
+def add_favorite_course(course_id):
+    if 'active_user' in session:
+        active_user_db = users.query.filter_by(username=session['active_user'][0]).first()
+        favored_courses = string_to_list(active_user_db.favored_courses)
+        if favored_courses != None:
+            if int(course_id) not in favored_courses:
+                favored_courses.append(int(course_id))
+        else:
+            favored_courses = [course_id]
+        active_user_db.favored_courses = str(favored_courses)
+        db.session.commit()
+        return redirect(url_for('course_profile', course_id=course_id))
+    else:
+        return redirect(url_for('error', msg='You must be logged in to add a course to your profile.'))
+    

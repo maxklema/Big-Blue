@@ -1,5 +1,4 @@
 from setup import *
-
             
 def archive_match(filename):
     with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "a+") as file:

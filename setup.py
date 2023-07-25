@@ -59,8 +59,9 @@ class users(db.Model):
     banner = db.Column(db.String)
     first_login = db.Column(db.DateTime, default="2022-06-03 03:15:12.433675")
     last_login = db.Column(db.DateTime, default="2022-06-03 03:15:12.433675")
+    favored_courses = db.Column(db.String)
 
-    def __init__(self, name, username, password, email, rank, gender, bio, team, verified, pic, banner, first_login, last_login):
+    def __init__(self, name, username, password, email, rank, gender, bio, team, verified, pic, banner, first_login, last_login, favored_courses):
         self.name = name
         self.username = username
         self.password = password
@@ -74,6 +75,7 @@ class users(db.Model):
         self.banner = banner
         self.first_login = first_login
         self.last_login = last_login
+        self.favored_courses = favored_courses
 
 class course(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -196,6 +198,10 @@ class match(db.Model):
         self.total_players = total_players
         self.created_by = created_by
         self.match_live = match_live
+
+def string_to_list(string: str) -> list:
+    thing = ast.literal_eval(""+string+"")
+    return thing
 
 from course import New_Courses
 from course_routes import *
