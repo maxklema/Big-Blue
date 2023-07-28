@@ -23,59 +23,37 @@
 
     <body>
         
-        <div class="form-container">
-            <form action="/joincode" method="post">
-                <label for="joincode-box">Enter Join Code</label><br>
-                <input placeholder="094x3a" type="text" id="joincode-box" name="code_entry"></input><br>
-                <input type="submit" value="Join Match" name="submit-joincode" id="joincode-submit-button">
-            </form>
-        </div>
+        <div class="hero-section">
 
-
-        <div class="Login-or-create-account-div">
-            <p>Have an existing account? <a id="hyperlink" href="/login">Login</a></p>
-        </div>
-
-        <div class="coaches-card-container">
-            <div class="coaches-card">
-                <img src="{{ url_for('static', filename='logo_graphics/coach-whistle.png') }}">
-                <h3>Big Blue for Players & Coaches</h3>
-                <p>Big Blue is made for coaches and players. Whether you want to set up your own live scoring matches with our easy to use platform, or build your athletic profile, Big Blue is the right place for you.</p>
-                <a href="/create_account"><button>Create Account</button></a>
-            </div>
-        </div>
-
-        <div class="coaches-card-container">
-            <div class="coaches-card">
-                <img id="bigblueshirt" src="{{ url_for('static', filename='logo_graphics/bigblueshirt.png') }}">
-                <h3>Want a BigBlue.golf Shirt?</h3>
-                <p>Email max@bigblue.golf</p>
-            </div>
-        </div>
-
-
-        <div class="coaches-card-container">
-            <div class="coaches-card">
-                <img src="{{ url_for('static', filename='logo_graphics/twitter_graphic.png') }}">
-                <h3>Follow us on Twitter!</h3>
-                <p>We post everything on Twitter, including updates, outages, bugs, patches, and occasional controversial political tweets - just kidding!</p>
-                <a href="https://twitter.com/bigbluegolfapp" target="_blank"><button>Follow us!</button></a>
-            </div>
-        </div>
-
-        <div class="about-us-card">
-            <div class="about-us-index-container">
-                <img src="{{ url_for('static', filename='logo_graphics/friends.png') }}" alt="">
-                <h3>Made by Golfers, for Golfers & Coaches</h3>
-                <p>Created by three high school golfers, we understand the value that live scoring brings. Other live scoring sites are expensive, look ugly, and are hard to use. We fixed all of these problems, making Big Blue easy and FREE to use!</p>
-                <a href="/about"><button>Learn More</button></a>
-
+            <div class="hero-section-text">
+                <h2>Live Scoring Made Accessible</h2>
+                <p>We make it easy to set up golf matches for players and spectators that enable live scoring. Sign up, make a match, share the code, and we will do the rest.</p>
             </div>
 
+            <div class="hero-section-cta">
+
+                <div>
+                    <div class="form-container">
+                        <form action="/joincode" method="post">
+                            <label for="joincode-box">Enter Join Code</label><br>
+                            <input placeholder="094x3a" type="text" id="joincode-box" name="code_entry"></input><br>
+                            <input type="submit" value="Join Match" name="submit-joincode" id="joincode-submit-button">
+                        </form>
+                    </div>
+            
+            
+                    <div class="Login-or-create-account-div">
+                        <p>Have an existing account? <a id="hyperlink" href="/login">Login</a></p>
+                    </div>
+    
+                </div>
 
 
+            </div>
         </div>
+       
 
+     
         
         
 
