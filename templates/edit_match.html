@@ -131,7 +131,7 @@
                     <label for="coursename">Course Name</label><br>
                     <select name="coursename" id="coursename">
                         {% for item in course_data[::1] %}
-                            <option name="coursename" value="{{item.course_name}}">{{item.course_name}}</option>
+                            <option name="coursename" value="{{item.name}}">{{item.name}}</option>
                         {% endfor %}
                     </select>
                 </div>

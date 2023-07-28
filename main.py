@@ -889,7 +889,7 @@ def start_match(match_id, course_id):
             found_match._id, 
             found_match.match_code,
             found_match.match_password,
-            found_course.course_holes, 
+            found_course.holes, 
             found_match.match_name, 
             found_match.start_time, 
             found_match.end_time, 
