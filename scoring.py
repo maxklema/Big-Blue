@@ -65,7 +65,7 @@ class Scoring():
             file.seek(0)
             data = json.load(file)
             try:
-                player = player.replace(' ', '%20')
+                player = player.replace('%20', ' ')
                 try:
                     del data["players"][player]
                 except:
@@ -96,6 +96,7 @@ class Scoring():
                 
             data["players"][player] = {"team": team, "opponent": "","scores":holes,"golf_clap":0,"starting_hole":starting_hole}
 
+            player = player.replace('%20', ' ')
             for waiting in data["lobby"]:
                 if waiting[0] == player:
                     data["lobby"].remove(waiting)
@@ -363,67 +364,49 @@ class Scoring():
                 file.seek(0)
                 data = json.load(file)
                 player_score = data["players"][player]["scores"]
-                last_hole = 0
                 current_score = 0
                 current_par = 0
-                starting_hole = -1
-                for y in range(1, int(data["match_info"]["number_holes"])+1):
-                    if player_score[str(y)] != 0 and starting_hole == -1:
-                        starting_hole = y
-                        break
-                if starting_hole == -1:
-                    starting_hole = 1
-                for i in range(starting_hole, int(data["match_info"]["number_holes"])+1):
-                    if (player_score[str(i)] != 0):
-                        last_hole+=1
+                holes_complete = 0
+                
+                for i in range(int(data["match_info"]["number_holes"])+1):
+                    if (player_score[str(i)] != 0 and player_score[str(i)] != "0"):
+                        holes_complete+=1
                         current_score += int(player_score[str(i)])
                         current_par += data["match_info"]["par" + str(i)]
-                    else:
-                        break
-                
-                for k in range(1,starting_hole):
-                    if (player_score[str(k)] != 0):
-                        last_hole+=1
-                        current_score += int(player_score[str(k)])
-                        current_par += data["match_info"]["par" + str(k)]
-                    else:
-                        break
 
                 absolute_relation = str(abs(current_score - current_par))
-                if last_hole == int(data["match_info"]["number_holes"]):
+                if holes_complete == int(data["match_info"]["number_holes"]):
                     return "F: " + str(current_score)
                 elif current_score > current_par:
-                    return "+" + absolute_relation + " thru " + str(last_hole)
+                    return "+" + absolute_relation + " thru " + str(holes_complete)
                 elif current_score < current_par:
-                    return "-" + absolute_relation + " thru " + str(last_hole)
+                    return "-" + absolute_relation + " thru " + str(holes_complete)
                 else:
-                    return "E" + " thru " + str(last_hole)
+                    return "E" + " thru " + str(holes_complete)
         except:
             with open("static/archived_matches/" + str(filename) + "_ARCHIVE.json", "r") as file:
                 file.seek(0)
                 data = json.load(file)
                 player_score = data["players"][player]["scores"]
-                last_hole = 0
                 current_score = 0
                 current_par = 0
-                for i in range(int(data["match_info"]["number_holes"])):
-                    if (player_score[str(i+1)] != 0):
-                        last_hole+=1
-                        current_score += int(player_score[str(i+1)])
-                        current_par += data["match_info"]["par" + str(i+1)]
-                    else:
-                        break
+                holes_complete = 0
+                
+                for i in range(int(data["match_info"]["number_holes"])+1):
+                    if (player_score[str(i)] != 0 and player_score[str(i)] != "0"):
+                        holes_complete+=1
+                        current_score += int(player_score[str(i)])
+                        current_par += data["match_info"]["par" + str(i)]
+
                 absolute_relation = str(abs(current_score - current_par))
-                if ((last_hole == int(data["match_info"]["number_holes"])) and (current_score < current_par)):
-                    return "F: " + str(current_score) + " (-" + absolute_relation + ")"
-                elif ((last_hole == int(data["match_info"]["number_holes"])) and (current_score > current_par)):
-                    return "F: " + str(current_score) + " (+" + absolute_relation + ")"
+                if holes_complete == int(data["match_info"]["number_holes"]):
+                    return "F: " + str(current_score)
                 elif current_score > current_par:
-                    return "+" + absolute_relation + " thru " + str(last_hole)
+                    return "+" + absolute_relation + " thru " + str(holes_complete)
                 elif current_score < current_par:
-                    return "-" + absolute_relation + " thru " + str(last_hole)
+                    return "-" + absolute_relation + " thru " + str(holes_complete)
                 else:
-                    return "E" + " thru " + str(last_hole)
+                    return "E" + " thru " + str(holes_complete)
     
     def return_data(filename):
         with open("static/score_files/" + str(filename) + ".json", "r") as file:

@@ -101,16 +101,14 @@ def create_new_course_submit():
     else:
         return rediret(url_for("error", msg="Sorry, you do not have permission to access this page."))
 
-@app.route("/db_update")
+@app.route("/db_update", methods=['POST'])
 def db_update():
-    active_user_db = users.query.filter_by(username=session['active_user'][0]).first()
-    active_user_db.favored_courses = '[1, 5]'
-    db.session.commit()
 
-    #with app.app_context():
-        #alter_query = text('ALTER TABLE users ADD COLUMN favored_courses VARCHAR(255);')
-        #db.session.execute(alter_query)
-        #db.session.commit()
+    with app.app_context():
+        alter_query = text(request.form['command'])
+        db.session.execute(alter_query)
+        db.session.commit()
+    
     return "DONE",200
 
 
