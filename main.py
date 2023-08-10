@@ -54,7 +54,10 @@ def verify_user(user: str, verified_input: int):
 
 def match_security(session_type: str, match_id: str) -> bool: #this is for all of the control routes
     found_match = match.query.filter_by(_id=match_id).first()
-    found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    try:
+        found_user = users.query.filter_by(username=session['active_user'][0]).first()
+    except:
+        return False
     user_verified = False
     with open("static/score_files/" + str(found_match._id) + ".json", "r") as file:
         file.seek(0)
