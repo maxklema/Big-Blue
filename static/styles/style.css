@@ -148,7 +148,7 @@ header div {
     font-family: bigBlueRegular;
     font-size: 18px;
     border-radius: 5px;
-    background-color: white;
+    background-color: #e7e7e7;
     opacity: .8;
     background-image: url(../logo_graphics/searchicon.png);
     background-size: 17px;
@@ -271,7 +271,7 @@ header .navigation li a:hover {
 
 html, body {
     height: 100%;
-    background-color: #eeeeee;
+    background-color: #ffffff;
 }
 
 .form-container {
@@ -362,9 +362,9 @@ body p {
 .hero-section {
     display: flex;
     justify-content: space-around;
-    background-image: url("../logo_graphics/hero-section-background.jpg");
+    background-image: url("../logo_graphics/hero_section_background.jpeg");
     background-size: cover;
-    background-position: center;
+    background-position-y: 35%;
     padding: 90px 80px;
     align-items: center;
 }
@@ -384,6 +384,119 @@ body p {
     font-family: bigBlueRegular;
     text-align: left;
     color: white;
+}
+
+.featured-matches {
+    background-image: url("../logo_graphics/home_page_background.png");
+    padding: 70px 60px;
+    align-items: center;
+    background-position-x: 60%;
+    background-position-y: 70%;
+}
+
+.featured-matches h1 {
+    text-align: center;
+    color:#2176e8;
+    font-size: 30px;
+}
+
+
+.featured-match-one {
+    width: 300px;
+    max-height: 800px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    text-decoration: none;
+    color: black;
+}
+
+.featured-matches-inner-parent {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 60px;
+}
+
+.course-cover-image img {
+    width: 300px;
+    max-height: 50px;
+    object-fit: cover;
+    margin-left: -20px !important;
+    margin-top: -20px !important;
+    border-radius: 5px 5px 0px 0px;
+    margin-bottom: 5px;
+}
+
+.profile-pic-and-name-container {
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    padding-bottom: 5px;
+    border-bottom: 0.5px solid grey;
+}
+
+#ppic {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin: auto;
+    object-fit: cover;
+}
+
+#ppic-course {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    object-fit: cover;
+}
+
+#checkmark {
+    width: 17px;
+    height: 17px;
+    margin-left: 5px;
+}
+
+.name-and-verification {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+}
+
+.profile-pic-container {
+    margin-right: 10px;
+}
+
+#suggested-username {
+    font-family: bigBlueRegular;
+}
+
+.card-bio-container {
+    font-family: bigBlueRegular;
+    margin-top: 3px;
+}
+
+.team {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.team img {
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+}
+
+.team p {
+    font-family: bigBlueMedium;
+
 }
 
 .Login-or-create-account-div {
