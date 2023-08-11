@@ -205,3 +205,4 @@ def string_to_list(string: str) -> list:
 
 from course import New_Courses
 from course_routes import *
+from admin import *
