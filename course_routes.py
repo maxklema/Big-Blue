@@ -120,7 +120,7 @@ def course_profile(course_id):
         found_user = users.query.filter_by(username=session['active_user'][0]).first()
     except:
         found_user = ""
-    return render_template("course_profile.html", data=found_user, course_data=found_course)
+    return render_template("course_profile.html", data=found_user, course_data=found_course, list_of_tees=get_tee_names(course_id))
 
 @app.route("/add_favorite_course/<course_id>", methods=['POST','GET'])
 def add_favorite_course(course_id):
@@ -138,3 +138,35 @@ def add_favorite_course(course_id):
     else:
         return redirect(url_for('error', msg='You must be logged in to add a course to your profile.'))
     
+@app.route('/get_tee_names/<course>')
+def get_tee_names(course):
+    found_course = New_Courses.query.filter_by(_id=int(course)).first()
+    tees = string_to_list(found_course.tees)
+    return tees
+
+@app.route('/get_course_par/<tee>/<hole>/<course>')
+def get_course_par(tee, hole, course):
+    found_course = New_Courses.query.filter_by(_id=int(course)).first()
+    pars = string_to_list(found_course.pars)
+    tees = string_to_list(found_course.tees)
+    return str(pars[tees.index(tee)][int(hole)])
+
+@app.route('/get_course_yardage/<tee>/<hole>/<course>')
+def get_course_yardage(tee, hole, course):
+    found_course = New_Courses.query.filter_by(_id=int(course)).first()
+    try:
+        pars = string_to_list(found_course.distances)
+        tees = string_to_list(found_course.tees)
+        return str(pars[tees.index(tee)][int(hole)])
+    except:
+        return ['n/a'],200
+
+@app.route('/get_course_handicaps/<tee>/<hole>/<course>')
+def get_course_handicaps(tee, hole, course):
+    found_course = New_Courses.query.filter_by(_id=int(course)).first()
+    try:
+        pars = string_to_list(found_course.hole_handicaps)
+        tees = string_to_list(found_course.tees)
+        return str(pars[tees.index(tee)][int(hole)])
+    except:
+        return ['n/a'],200

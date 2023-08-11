@@ -51,69 +51,18 @@
                     <th>17</th>
                     <th>18</th>
                 </tr>
-                <tr>
-                    <td>Red Tee</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Blue Tee</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Red Tee</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                </tr>
+                {% for tee in list_of_tees %}
+                    <tr>
+                        <td>{{tee}}</td>
+                        {% for i in range(0,18) %}
+                            <td id="target_{{tee}}_{{i}}"></td>
+                            <script>
+                                fetch('/get_course_par/{{tee}}/{{i}}/{{course_data._id}}').then(thing => 
+                                thing.json()).then(new1 => document.getElementById('target_{{tee}}_{{i}}').innerHTML = new1);
+                            </script>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
                 
             </table>
         </div>
@@ -142,50 +91,18 @@
                     <th>17</th>
                     <th>18</th>
                 </tr>
-                <tr>
-                    <td>Red Tee</td>
-                    <td>434</td>
-                    <td>332</td>
-                    <td>542</td>
-                    <td>434</td>
-                    <td>316</td>
-                    <td>532</td>
-                    <td>483</td>
-                    <td>335</td>
-                    <td>512</td>
-                    <td>496</td>
-                    <td>357</td>
-                    <td>524</td>
-                    <td>485</td>
-                    <td>312</td>
-                    <td>545</td>
-                    <td>423</td>
-                    <td>311</td>
-                    <td>501</td>
-                </tr>
-                <tr>
-                    <td>Blue Tee</td>
-                    <td>434</td>
-                    <td>332</td>
-                    <td>542</td>
-                    <td>434</td>
-                    <td>316</td>
-                    <td>532</td>
-                    <td>483</td>
-                    <td>335</td>
-                    <td>512</td>
-                    <td>496</td>
-                    <td>357</td>
-                    <td>524</td>
-                    <td>485</td>
-                    <td>312</td>
-                    <td>545</td>
-                    <td>423</td>
-                    <td>311</td>
-                    <td>501</td>
-                </tr>
-                
-                
+                {% for tee in list_of_tees %}
+                    <tr>
+                        <td>{{tee}}</td>
+                        {% for i in range(0,18) %}
+                            <td id="target2_{{tee}}_{{i}}"></td>
+                            <script>
+                                fetch('/get_course_yardage/{{tee}}/{{i}}/{{course_data._id}}').then(thing => 
+                                thing.json()).then(new1 => document.getElementById('target2_{{tee}}_{{i}}').innerHTML = new1);
+                            </script>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
             </table>
         </div>
 
@@ -213,50 +130,18 @@
                     <th>17</th>
                     <th>18</th>
                 </tr>
-                <tr>
-                    <td>Red Tee</td>
-                    <td>4</td>
-                    <td>33</td>
-                    <td>5</td>
-                    <td>43</td>
-                    <td>31</td>
-                    <td>52</td>
-                    <td>48</td>
-                    <td>5</td>
-                    <td>2</td>
-                    <td>9</td>
-                    <td>7</td>
-                    <td>52</td>
-                    <td>85</td>
-                    <td>32</td>
-                    <td>5</td>
-                    <td>23</td>
-                    <td>11</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>Blue Tee</td>
-                    <td>4</td>
-                    <td>33</td>
-                    <td>5</td>
-                    <td>43</td>
-                    <td>31</td>
-                    <td>52</td>
-                    <td>48</td>
-                    <td>5</td>
-                    <td>2</td>
-                    <td>9</td>
-                    <td>7</td>
-                    <td>52</td>
-                    <td>85</td>
-                    <td>32</td>
-                    <td>5</td>
-                    <td>23</td>
-                    <td>11</td>
-                    <td>1</td>
-                </tr>
-                
-                
+                {% for tee in list_of_tees %}
+                    <tr>
+                        <td>{{tee}}</td>
+                        {% for i in range(0,18) %}
+                            <td id="target3_{{tee}}_{{i}}"></td>
+                            <script>
+                                fetch('/get_course_handicaps/{{tee}}/{{i}}/{{course_data._id}}').then(thing => 
+                                thing.json()).then(new1 => document.getElementById('target3_{{tee}}_{{i}}').innerHTML = new1);
+                            </script>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
             </table>
         </div>
         
